@@ -19,15 +19,15 @@
       $checkout_date = new DateTime($chk_avail['checkout']);
   
       if($checkin_date == $checkout_date){
-        echo"<h3 class='text-center text-danger'>Invalid Dates Entered!</h3>";
+        echo"<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày nhận phòng và trả phòng không thể trùng nhau.</p></div>";
         exit;
       }
       else if($checkout_date < $checkin_date){
-        echo"<h3 class='text-center text-danger'>Invalid Dates Entered!</h3>";
+        echo"<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày trả phòng phải sau ngày nhận phòng.</p></div>";
         exit;
       }
       else if($checkin_date < $today_date){
-        echo"<h3 class='text-center text-danger'>Invalid Dates Entered!</h3>";
+        echo"<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày nhận phòng không thể trong quá khứ.</p></div>";
         exit;
       }
     }
@@ -40,10 +40,13 @@
     // facilities data decode
     $facility_list = json_decode($_GET['facility_list'],true);
 
-    // count no. of rooms and ouput variable to store room cards
-    $count_rooms = 0;
-    $output = "";
+    // Pagination parameters
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $limit = 10; // Items per page
+    $offset = ($page - 1) * $limit;
 
+    // Array to store filtered rooms
+    $filtered_rooms = array();
 
     // fetching settings table to check website is shutdown or not
     $settings_q = "SELECT * FROM `settings` WHERE `sr_no`=1";
@@ -84,12 +87,12 @@
           $fac_count++;
         }
 
-        $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-          $fac_row[name]
+        $facilities_data .="<span class='room-badge' aria-label='Tiện ích: $fac_row[name]'>
+          <i class='bi bi-check-circle'></i> $fac_row[name]
         </span>";
       }
 
-      if(count($facility_list['facilities'])!=$fac_count){
+      if(count($facility_list['facilities'])>0 && count($facility_list['facilities'])!=$fac_count){
         continue;
       }
 
@@ -102,8 +105,8 @@
 
       $features_data = "";
       while($fea_row = mysqli_fetch_assoc($fea_q)){
-        $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-          $fea_row[name]
+        $features_data .="<span class='room-badge' aria-label='Tính năng: $fea_row[name]'>
+          <i class='bi bi-check-circle'></i> $fea_row[name]
         </span>";
       }
 
@@ -128,55 +131,190 @@
           $login=1;
         }
 
-        $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-sm w-100 text-white custom-bg shadow-none mb-2'>Đặt ngay</button>";
+        $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='room-btn room-btn-primary' aria-label='Đặt phòng $room_data[name]'>
+          <i class='bi bi-calendar-check'></i> Đặt ngay
+        </button>";
       }
 
-      // print room card
-
-      $output.="
-        <div class='card mb-4 border-0 shadow'>
-          <div class='row g-0 p-3 align-items-center'>
-            <div class='col-md-5 mb-lg-0 mb-md-0 mb-3'>
-              <img src='$room_thumb' class='img-fluid rounded'>
-            </div>
-            <div class='col-md-5 px-lg-3 px-md-3 px-0'>
-              <h5 class='mb-3'>$room_data[name]</h5>
-              <div class='features mb-3'>
-                <h6 class='mb-1'>Không gian</h6>
-                $features_data
-              </div>
-              <div class='facilities mb-3'>
-                <h6 class='mb-1'>Tiện ích</h6>
-                $facilities_data
-              </div>
-              <div class='guests'>
-                <h6 class='mb-1'>Số lượng khách</h6>
-                <span class='badge rounded-pill bg-light text-dark text-wrap'>
-                  $room_data[adult] Người lớn
-                </span>
-                <span class='badge rounded-pill bg-light text-dark text-wrap'>
-                  $room_data[children] Trẻ em
-                </span>
-              </div>
-            </div>
-            <div class='col-md-2 mt-lg-0 mt-md-0 mt-4 text-center'>
-              <h6 class='mb-4'>$room_data[price] VND / đêm</h6>
-              $book_btn
-              <a href='room_details.php?id=$room_data[id]' class='btn btn-sm w-100 btn-outline-dark shadow-none'>Chi tiết</a>
-            </div>
-          </div>
-        </div>
-      ";
-
-      $count_rooms++;
+      // Add room to filtered array
+      $filtered_rooms[] = array(
+        'id' => $room_data['id'],
+        'name' => $room_data['name'],
+        'price' => $room_data['price'],
+        'adult' => $room_data['adult'],
+        'children' => $room_data['children'],
+        'thumb' => $room_thumb,
+        'features' => $features_data,
+        'facilities' => $facilities_data,
+        'book_btn' => $book_btn
+      );
     }
 
-    if($count_rooms>0){
-      echo $output;
+    // Calculate pagination
+    $total_rooms = count($filtered_rooms);
+    $total_pages = ceil($total_rooms / $limit);
+    
+    // Validate page number
+    if($page < 1) $page = 1;
+    if($page > $total_pages && $total_pages > 0) $page = $total_pages;
+
+    // Get rooms for current page
+    $paginated_rooms = array_slice($filtered_rooms, $offset, $limit);
+
+    // Generate HTML output
+    $output = "";
+    $rooms_html = "";
+
+    if(count($paginated_rooms) > 0){
+      foreach($paginated_rooms as $room_data)
+      {
+        // Format price
+        $formatted_price = number_format($room_data['price'], 0, ',', '.');
+
+        // Room detail URL
+        $room_detail_url = "room_details.php?id=" . $room_data['id'];
+
+        // Generate room card HTML
+        $rooms_html .= "
+          <article class='room-card-enhanced' itemscope itemtype='https://schema.org/HotelRoom'>
+            <div class='row g-0'>
+              <div class='col-md-5'>
+                <div class='room-image-wrapper'>
+                  <a href='$room_detail_url' aria-label='Xem chi tiết phòng {$room_data['name']}'>
+                    <img src='{$room_data['thumb']}' 
+                         alt='Hình ảnh phòng {$room_data['name']}' 
+                         class='img-fluid' 
+                         loading='lazy'
+                         itemprop='image'>
+                  </a>
+                  <div class='room-badge-overlay'>
+                    <div class='room-price-badge' itemprop='offers' itemscope itemtype='https://schema.org/Offer'>
+                      <meta itemprop='price' content='{$room_data['price']}'>
+                      <meta itemprop='priceCurrency' content='VND'>
+                      <span class='room-price-value'>$formatted_price</span>
+                      <span class='room-price-unit'>VNĐ/đêm</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='col-md-7'>
+                <div class='room-content-wrapper'>
+                  <h2 class='room-title' itemprop='name'>{$room_data['name']}</h2>
+                  
+                  <div class='room-info-section'>
+                    <div class='room-info-label'>
+                      <i class='bi bi-rulers'></i>
+                      <span>Không gian</span>
+                    </div>
+                    <div class='room-badges' itemprop='amenityFeature'>
+                      {$room_data['features']}
+                    </div>
+                  </div>
+
+                  <div class='room-info-section'>
+                    <div class='room-info-label'>
+                      <i class='bi bi-star'></i>
+                      <span>Tiện ích</span>
+                    </div>
+                    <div class='room-badges' itemprop='amenityFeature'>
+                      {$room_data['facilities']}
+                    </div>
+                  </div>
+
+                  <div class='room-info-section'>
+                    <div class='room-info-label'>
+                      <i class='bi bi-people'></i>
+                      <span>Số lượng khách</span>
+                    </div>
+                    <div class='room-badges'>
+                      <span class='room-badge' aria-label='{$room_data['adult']} người lớn'>
+                        <i class='bi bi-person'></i> {$room_data['adult']} Người lớn
+                      </span>
+                      <span class='room-badge' aria-label='{$room_data['children']} trẻ em'>
+                        <i class='bi bi-person-heart'></i> {$room_data['children']} Trẻ em
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class='room-actions'>
+                    {$room_data['book_btn']}
+                    <a href='$room_detail_url' class='room-btn room-btn-outline' aria-label='Xem chi tiết phòng {$room_data['name']}'>
+                      <i class='bi bi-info-circle'></i> Chi tiết
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ";
+      }
+
+      // Generate pagination HTML
+      $pagination_html = "";
+      if($total_pages > 1){
+        $pagination_html = "<div class='rooms-pagination-wrapper'><nav aria-label='Phân trang danh sách phòng'><ul class='pagination rooms-pagination'>";
+        
+        // Previous button
+        if($page > 1){
+          $prev_page = $page - 1;
+          $pagination_html .= "<li class='page-item'><a class='page-link' href='#' data-page='$prev_page' aria-label='Trang trước'><i class='bi bi-chevron-left'></i></a></li>";
+        } else {
+          $pagination_html .= "<li class='page-item disabled'><span class='page-link'><i class='bi bi-chevron-left'></i></span></li>";
+        }
+
+        // Page numbers
+        $start_page = max(1, $page - 2);
+        $end_page = min($total_pages, $page + 2);
+
+        if($start_page > 1){
+          $pagination_html .= "<li class='page-item'><a class='page-link' href='#' data-page='1'>1</a></li>";
+          if($start_page > 2){
+            $pagination_html .= "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+          }
+        }
+
+        for($i = $start_page; $i <= $end_page; $i++){
+          if($i == $page){
+            $pagination_html .= "<li class='page-item active'><span class='page-link'>$i</span></li>";
+          } else {
+            $pagination_html .= "<li class='page-item'><a class='page-link' href='#' data-page='$i'>$i</a></li>";
+          }
+        }
+
+        if($end_page < $total_pages){
+          if($end_page < $total_pages - 1){
+            $pagination_html .= "<li class='page-item disabled'><span class='page-link'>...</span></li>";
+          }
+          $pagination_html .= "<li class='page-item'><a class='page-link' href='#' data-page='$total_pages'>$total_pages</a></li>";
+        }
+
+        // Next button
+        if($page < $total_pages){
+          $next_page = $page + 1;
+          $pagination_html .= "<li class='page-item'><a class='page-link' href='#' data-page='$next_page' aria-label='Trang sau'><i class='bi bi-chevron-right'></i></a></li>";
+        } else {
+          $pagination_html .= "<li class='page-item disabled'><span class='page-link'><i class='bi bi-chevron-right'></i></span></li>";
+        }
+
+        $pagination_html .= "</ul></nav>";
+        
+        // Results info
+        $start_item = $offset + 1;
+        $end_item = min($offset + $limit, $total_rooms);
+        $pagination_html .= "<div class='pagination-info'><p class='text-muted mb-0'>Hiển thị $start_item - $end_item trong tổng số $total_rooms phòng</p></div>";
+        $pagination_html .= "</div>";
+      }
+
+      $output = $rooms_html . $pagination_html;
+    } else {
+      $output = "<div class='rooms-empty'>
+        <div class='rooms-empty-icon'>🔍</div>
+        <h3 class='rooms-empty-title'>Không tìm thấy phòng</h3>
+        <p class='rooms-empty-text'>Không có phòng nào phù hợp với tiêu chí tìm kiếm của bạn. Vui lòng thử lại với bộ lọc khác.</p>
+      </div>";
     }
-    else{
-      echo"<h3 class='text-center text-danger'>No rooms to show!</h3>";
-    }
+
+    echo $output;
 
   }
 
