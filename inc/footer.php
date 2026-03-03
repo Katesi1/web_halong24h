@@ -28,16 +28,25 @@
       <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
         <i class="bi bi-facebook me-1"></i> Facebook
       </a><br>
-      <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block text-dark text-decoration-none">
-        <i class="bi bi-instagram me-1"></i> Instagram
+      <a href="<?php echo $contact_r['zalo'] ?>" class="d-inline-block text-dark text-decoration-none">
+        <i class="bi bi-chat-dots-fill me-1"></i> Zalo
       </a><br>
     </div>
   </div>
 </div>
 
-<h6 class="text-center bg-dark text-white p-3 m-0">Đồ án môn học Lập Trình Web - NTTU</h6>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script>
+  // Inject contact data for floating widget
+  window.floatingContactData = {
+    phone: '+<?php echo $contact_r['pn1'] ?>',
+    facebook: '<?php echo $contact_r['fb'] ?>',
+    zalo: '<?php echo $contact_r['zalo'] ?>'
+  };
+</script>
+<script src="js/floating-contact.js"></script>
 
 <script>
   function alert(type, msg, position = 'body') {
