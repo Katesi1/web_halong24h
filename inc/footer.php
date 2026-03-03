@@ -199,11 +199,8 @@
   // });
 
   function checkLoginToBook(status, room_id) {
-    if (status) {
-      window.location.href = 'confirm_booking.php?id=' + room_id;
-    } else {
-      alert('error', 'Vui lòng đăng nhập để đặt phòng!');
-    }
+    // Cho phép đặt phòng mà không cần đăng nhập
+    window.location.href = 'confirm_booking.php?id=' + room_id;
   }
 
   setActive();
