@@ -59,8 +59,8 @@
           <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark fs-5 me-2">
             <i class="bi bi-facebook me-1"></i>
           </a>
-          <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block text-dark fs-5">
-            <i class="bi bi-instagram me-1"></i>
+          <a href="<?php echo $contact_r['zalo'] ?>" class="d-inline-block text-dark fs-5">
+            <i class="bi bi-chat-dots-fill me-1"></i>
           </a>
         </div>
       </div>

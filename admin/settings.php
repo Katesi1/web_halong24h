@@ -121,8 +121,8 @@
                     <span id="fb"></span>
                   </p>
                   <p class="card-text mb-1">
-                    <i class="bi bi-instagram me-1"></i>
-                    <span id="insta"></span>
+                    <i class="bi bi-chat-dots-fill me-1"></i>
+                    <span id="zalo"></span>
                   </p>
                   <p class="card-text">
                     <i class="bi bi-twitter me-1"></i>
@@ -179,8 +179,8 @@
                             <input type="text" name="fb" id="fb_inp" class="form-control shadow-none" required>
                           </div>
                           <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="bi bi-instagram"></i></span>
-                            <input type="text" name="insta" id="insta_inp" class="form-control shadow-none" required>
+                            <span class="input-group-text"><i class="bi bi-chat-dots-fill"></i></span>
+                            <input type="text" name="zalo" id="zalo_inp" class="form-control shadow-none" required>
                           </div>
                           <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi bi-twitter"></i></span>
