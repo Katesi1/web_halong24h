@@ -16,13 +16,10 @@
     /*
       Check room id from url is present or not
       Shutdown mode is active or not
-      User is logged in or not
+      Không yêu cầu đăng nhập để đặt phòng
     */
 
     if(!isset($_GET['id']) || $settings_r['shutdown']==true){
-      redirect('rooms.php');
-    }
-    else if(!(isset($_SESSION['login']) && $_SESSION['login']==true)){
       redirect('rooms.php');
     }
 
@@ -46,9 +43,18 @@
       "available" => false,
     ];
 
-
-    $user_res = select("SELECT * FROM `user_cred` WHERE `id`=? LIMIT 1", [$_SESSION['uId']], "i");
-    $user_data = mysqli_fetch_assoc($user_res);
+    // Lấy thông tin user nếu đã đăng nhập, nếu không thì để trống
+    $user_data = [
+      'name' => '',
+      'phonenum' => ''
+    ];
+    
+    if(isset($_SESSION['login']) && $_SESSION['login']==true && isset($_SESSION['uId'])){
+      $user_res = select("SELECT * FROM `user_cred` WHERE `id`=? LIMIT 1", [$_SESSION['uId']], "i");
+      if(mysqli_num_rows($user_res) > 0){
+        $user_data = mysqli_fetch_assoc($user_res);
+      }
+    }
 
   ?>
   
@@ -104,10 +110,6 @@
                   <label class="form-label">Số điện thoại</label>
                   <input name="phonenum" type="number" value="<?php echo $user_data['phonenum'] ?>" class="form-control shadow-none" required>
                 </div>
-                <div class="col-md-12 mb-3">
-                  <label class="form-label">Địa chỉ</label>
-                  <textarea name="address" class="form-control shadow-none" rows="1" required><?php echo $user_data['address'] ?></textarea>
-                </div>
                 <div class="col-md-6 mb-3">
                   <label class="form-label">Nhận phòng</label>
                   <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none" required>
@@ -124,7 +126,7 @@
 
                   <h6 class="mb-3 text-danger" id="pay_info">Chọn ngày nhận phòng và trả phòng!</h6>
 
-                  <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Thanh toán</button>
+                  <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Xác nhận đặt phòng</button>
                 </div>
               </div>
             </form>
@@ -182,7 +184,7 @@
             pay_info.innerText = "Room not available for this check-in date!";
           }
           else{
-            pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: "+data.payment+" VND";
+            pay_info.innerHTML = "Số đêm: "+data.days+" đêm<br>Tổng tiền: "+data.payment+" VND";
             pay_info.classList.replace('text-danger','text-dark');
             booking_form.elements['pay_now'].removeAttribute('disabled');
           }
