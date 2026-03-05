@@ -12,14 +12,23 @@
     $frm_data = filteration($_POST);
     $flag = 0;
 
-    $q1 = "INSERT INTO `rooms` (`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
-    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
+    $q1 = "INSERT INTO `rooms` (`name`, `room_type_id`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?,?)";
+    $values = [$frm_data['name'],$frm_data['room_type_id'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
 
-    if(insert($q1,$values,'siiiiis')){
+    if(insert($q1,$values,'siiiiiis')){
       $flag = 1;
     }
     
     $room_id = mysqli_insert_id($con);
+
+    if(isset($frm_data['bedroom_quantities'])){
+      $bq = (int)$frm_data['bedroom_quantities'];
+      update(
+        "UPDATE `rooms` SET `bedroom_quantities`=? WHERE `id`=?",
+        [$bq,$room_id],
+        'ii'
+      );
+    }
 
     $q2 = "INSERT INTO `room_facilities`(`room_id`, `facilities_id`) VALUES (?,?)";
     if($stmt = mysqli_prepare($con,$q2))
@@ -63,7 +72,10 @@
 
   if(isset($_POST['get_all_rooms']))
   {
-    $res = select("SELECT * FROM `rooms` WHERE `removed`=?",[0],'i');
+    $res = select("SELECT r.*, rt.name AS room_type_name 
+                   FROM `rooms` r 
+                   LEFT JOIN `room_types` rt ON r.room_type_id = rt.id 
+                   WHERE r.removed=?",[0],'i');
     $i=1;
 
     $data = "";
@@ -77,6 +89,11 @@
         $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>inactive</button>";
       }
 
+
+      $type_name = $row['room_type_name'] ? $row['room_type_name'] : 'N/A';
+      $bedrooms = isset($row['bedroom_quantities']) && $row['bedroom_quantities'] !== null
+        ? $row['bedroom_quantities']
+        : '-';
 
       $data.="
         <tr class='align-middle'>
@@ -93,6 +110,8 @@
           </td>
           <td>$row[price] VND</td>
           <td>$row[quantity]</td>
+          <td>$type_name</td>
+          <td>$bedrooms</td>
           <td>$status</td>
           <td>
             <button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-room'>
@@ -155,12 +174,31 @@
     $frm_data = filteration($_POST);
     $flag = 0;
 
-    $q1 = "UPDATE `rooms` SET `name`=?,`area`=?,`price`=?,`quantity`=?,
+    $q1 = "UPDATE `rooms` SET `name`=?,`room_type_id`=?,`area`=?,`price`=?,`quantity`=?,
       `adult`=?,`children`=?,`description`=? WHERE `id`=?";
-    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc'],$frm_data['room_id']];
+    $values = [
+      $frm_data['name'],
+      $frm_data['room_type_id'],
+      $frm_data['area'],
+      $frm_data['price'],
+      $frm_data['quantity'],
+      $frm_data['adult'],
+      $frm_data['children'],
+      $frm_data['desc'],
+      $frm_data['room_id']
+    ];
     
-    if(update($q1,$values,'siiiiisi')){
+    if(update($q1,$values,'siiiiiisi')){
       $flag = 1;
+    }
+
+    if(isset($frm_data['bedroom_quantities'])){
+      $bq = (int)$frm_data['bedroom_quantities'];
+      update(
+        "UPDATE `rooms` SET `bedroom_quantities`=? WHERE `id`=?",
+        [$bq,$frm_data['room_id']],
+        'ii'
+      );
     }
 
     $del_features = delete("DELETE FROM `room_features` WHERE `room_id`=?", [$frm_data['room_id']],'i');
