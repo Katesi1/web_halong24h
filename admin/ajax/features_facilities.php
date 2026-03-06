@@ -4,6 +4,55 @@
   require('../inc/essentials.php');
   adminLogin();
 
+  if(isset($_POST['add_room_type']))
+  {
+    $frm_data = filteration($_POST);
+
+    $q = "INSERT INTO `room_types`(`name`) VALUES (?)";
+    $values = [$frm_data['name']];
+    $res = insert($q,$values,'s');
+    echo $res;
+  }
+
+  if(isset($_POST['get_room_types']))
+  {
+    $res = selectAll('room_types');
+    $i=1;
+
+    while($row = mysqli_fetch_assoc($res))
+    {
+      echo <<<data
+        <tr>
+          <td>$i</td>
+          <td>$row[name]</td>
+          <td>
+            <button type="button" onclick="rem_room_type($row[id])" class="btn btn-danger btn-sm shadow-none">
+              <i class="bi bi-trash"></i> Xoá
+            </button>
+          </td>
+        </tr>
+      data;
+      $i++;
+    }
+  }
+
+  if(isset($_POST['rem_room_type']))
+  {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['rem_room_type']];
+
+    $check_q = select('SELECT * FROM `rooms` WHERE `room_type_id`=?',[$frm_data['rem_room_type']],'i');
+
+    if(mysqli_num_rows($check_q)==0){
+      $q = "DELETE FROM `room_types` WHERE `id`=?";
+      $res = delete($q,$values,'i');
+      echo $res;
+    }
+    else{
+      echo 'room_added';
+    }
+  }
+
   if(isset($_POST['add_feature']))
   {
     $frm_data = filteration($_POST);

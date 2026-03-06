@@ -1,5 +1,11 @@
 let feature_s_form = document.getElementById('feature_s_form');
 let facility_s_form = document.getElementById('facility_s_form');
+let room_type_s_form = document.getElementById('room_type_s_form');
+
+room_type_s_form.addEventListener('submit',function(e){
+  e.preventDefault();
+  add_room_type();
+});
 
 feature_s_form.addEventListener('submit',function(e){
   e.preventDefault();
@@ -33,6 +39,33 @@ function add_feature()
   xhr.send(data);
 }
 
+function add_room_type()
+{
+  let data = new FormData();
+  data.append('name',room_type_s_form.elements['roomtype_name'].value);
+  data.append('add_room_type','');
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST","ajax/features_facilities.php",true);
+
+  xhr.onload = function(){
+    var myModal = document.getElementById('room-type-s');
+    var modal = bootstrap.Modal.getInstance(myModal);
+    modal.hide();
+
+    if(this.responseText == 1){
+      alert('success','New room type added!');
+      room_type_s_form.reset();
+      get_room_types();
+    }
+    else{
+      alert('error','Server Down!');
+    }
+  }
+
+  xhr.send(data);
+}
+
 function get_features()
 {
   let xhr = new XMLHttpRequest();
@@ -44,6 +77,19 @@ function get_features()
   }
 
   xhr.send('get_features');
+}
+
+function get_room_types()
+{
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST","ajax/features_facilities.php",true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+  xhr.onload = function(){
+    document.getElementById('room-type-data').innerHTML = this.responseText;
+  }
+
+  xhr.send('get_room_types');
 }
 
 function rem_feature(val)
@@ -143,7 +189,30 @@ function rem_facility(val)
   xhr.send('rem_facility='+val);
 }
 
+function rem_room_type(val)
+{
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST","ajax/features_facilities.php",true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+  xhr.onload = function(){
+    if(this.responseText==1){
+      alert('success','Room type removed!');
+      get_room_types();
+    }
+    else if(this.responseText == 'room_added'){
+      alert('error','Room type is added in room!');
+    }
+    else{
+      alert('error','Server down!');
+    }
+  }
+
+  xhr.send('rem_room_type='+val);
+}
+
 window.onload = function(){
+  get_room_types();
   get_features();
   get_facilities();
 }
