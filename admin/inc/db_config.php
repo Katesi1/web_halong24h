@@ -3,7 +3,7 @@
 $hname = 'localhost';
 $uname = 'root';
 $pass = '';
-$db = 'hotel_manager';
+$db = 'halong24h_full';
 
 $con = mysqli_connect($hname, $uname, $pass, $db);
 

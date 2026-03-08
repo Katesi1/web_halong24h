@@ -10,9 +10,10 @@
       <h5 class="mb-3">Liên kết</h5>
       <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none">Trang chủ</a> <br>
       <a href="rooms.php" class="d-inline-block mb-2 text-dark text-decoration-none">Danh sách phòng</a> <br>
-      <a href="facilities.php" class="d-inline-block mb-2 text-dark text-decoration-none">Tiện ích</a> <br>
-      <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Liên hệ</a> <br>
-      <a href="about.php" class="d-inline-block mb-2 text-dark text-decoration-none">Về chúng tôi</a>
+      <a href="services.php" class="d-inline-block mb-2 text-dark text-decoration-none">Dịch Vụ</a> <br>
+      <a href="specialties.php" class="d-inline-block mb-2 text-dark text-decoration-none">Đặc sản Hạ Long</a> <br>
+      <a href="blog.php" class="d-inline-block mb-2 text-dark text-decoration-none">Blog cẩm nang</a> <br>
+      <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Liên hệ</a>
     </div>
     <div class="col-lg-4 p-4">
       <h5 class="mb-3">Theo dõi chúng tôi</h5>

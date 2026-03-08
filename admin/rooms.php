@@ -12,7 +12,7 @@
   <title>Trang quản lý - Danh sách phòng</title>
   <?php require('inc/links.php'); ?>
 </head>
-<body class="bg-light">
+<body>
 
   <?php require('inc/header.php'); ?>
 
@@ -25,25 +25,25 @@
           <div class="card-body">
 
             <div class="text-end mb-4">
-              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
-                <i class="bi bi-plus-square"></i> Thêm
+              <button type="button" class="btn custom-bg text-white shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
+                <i class="bi bi-plus-square"></i> Thêm phòng
               </button>
             </div>
 
             <div class="table-responsive-lg" style="height: 450px; overflow-y: scroll;">
               <table class="table table-hover border text-center">
                 <thead>
-                  <tr class="bg-dark text-light">
+                  <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Area</th>
-                    <th scope="col">Guests</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Room Type</th>
-                    <th scope="col">Bedrooms</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Tên phòng</th>
+                    <th scope="col">Loại hình</th>
+                    <th scope="col">Loại phòng</th>
+                    <th scope="col">Diện tích</th>
+                    <th scope="col">Khách</th>
+                    <th scope="col">Giá/đêm</th>
+                    <th scope="col">Phòng ngủ</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Hành động</th>
                   </tr>
                 </thead>
                 <tbody id="room-data">                 
@@ -93,20 +93,16 @@
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Giá</label>
-                <input type="number" min="1" name="price" class="form-control shadow-none" required>
+                <label class="form-label fw-bold">Giá/đêm (VNĐ)</label>
+                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="0 = Liên hệ">
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Số lượng</label>
-                <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Người lớn (Tối đa.)</label>
+                <label class="form-label fw-bold">Người lớn (Tiêu chuẩn)</label>
                 <input type="number" min="1" name="adult" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Trẻ em (Tối đa.)</label>
-                <input type="number" min="1" name="children" class="form-control shadow-none" required>
+                <label class="form-label fw-bold">Trẻ em (Tiêu chuẩn)</label>
+                <input type="number" min="0" name="children" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Số phòng ngủ</label>
@@ -208,20 +204,16 @@
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Giá phòng</label>
-                <input type="number" min="1" name="price" class="form-control shadow-none" required>
+                <label class="form-label fw-bold">Giá/đêm (VNĐ)</label>
+                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="0 = Liên hệ">
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Số lượng</label>
-                <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Người lớn (Tối đa.)</label>
+                <label class="form-label fw-bold">Người lớn (Tiêu chuẩn)</label>
                 <input type="number" min="1" name="adult" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Trẻ em (Tối đa.)</label>
-                <input type="number" min="1" name="children" class="form-control shadow-none" required>
+                <label class="form-label fw-bold">Trẻ em (Tiêu chuẩn)</label>
+                <input type="number" min="0" name="children" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Số phòng ngủ</label>
@@ -230,7 +222,7 @@
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Không gian</label>
                 <div class="row">
-                  <?php 
+                  <?php
                     $res = selectAll('features');
                     while($opt = mysqli_fetch_assoc($res)){
                       if($opt['name'] == 'Phòng Ngủ'){

@@ -12,7 +12,7 @@
   <title>Trang quản lý - Người dùng</title>
   <?php require('inc/links.php'); ?>
 </head>
-<body class="bg-light">
+<body>
 
   <?php require('inc/header.php'); ?>
 

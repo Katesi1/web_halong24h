@@ -13,13 +13,16 @@
           <a class="nav-link me-2" href="rooms.php">Danh sách phòng</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="facilities.php">Tiện ích</a>
+          <a class="nav-link me-2" href="services.php">Dịch Vụ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="specialties.php">Đặc sản Hạ Long</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="blog.php">Blog cẩm nang</a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-2" href="contact.php">Liên hệ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.php">Về chúng tôi</a>
         </li>
       </ul>
       <div class="d-flex">
