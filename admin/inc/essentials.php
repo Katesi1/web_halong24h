@@ -48,18 +48,22 @@ function alert($type, $msg)
 function uploadImage($image, $folder)
 {
   $valid_mime = ['image/jpeg', 'image/png', 'image/webp'];
-  $img_mime = $image['type'];
+
+  // Check MIME từ nội dung file thực tế, không tin browser
+  $img_mime = mime_content_type($image['tmp_name']);
 
   if (!in_array($img_mime, $valid_mime)) {
-    return 'Không hỗ trợ định dạng này!';
-  } else if (($image['size'] / (1024 * 1024)) > 2) {
-    return 'Vui lòng chọn hình ảnh dưới 2MB!';
+    return 'inv_img';
+  } else if (($image['size'] / (1024 * 1024)) > 10) {
+    return 'inv_size';
   } else {
-    $img_path = UPLOAD_IMAGE_PATH . $folder . basename($image['name']);
+    $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $safe_name = 'IMG_' . time() . '_' . random_int(1000, 9999) . '.' . strtolower($ext);
+    $img_path = UPLOAD_IMAGE_PATH . $folder . $safe_name;
     if (move_uploaded_file($image['tmp_name'], $img_path)) {
-      return basename($image['name']);
+      return $safe_name;
     } else {
-      return 'Tải lên hình ảnh thất bại!';
+      return 'upd_failed';
     }
   }
 }

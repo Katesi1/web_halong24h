@@ -16,6 +16,8 @@
                         ? (int)$_GET['property_type'] : 0;
     $room_type_id     = isset($_GET['room_type'])     && $_GET['room_type'] !== ''
                         ? (int)$_GET['room_type']     : 0;
+    $feature_id       = isset($_GET['view_type'])     && $_GET['view_type'] !== ''
+                        ? (int)$_GET['view_type']     : 0;
 
     // === Date validation ===
     if($chk_avail['checkin'] != '' && $chk_avail['checkout'] != '')
@@ -44,7 +46,7 @@
 
     // === Pagination ===
     $page   = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-    $limit  = 9;
+    $limit  = 5;
     $offset = ($page - 1) * $limit;
 
     // === Settings ===
@@ -75,15 +77,18 @@
       $params[] = $room_type_id;
       $types   .= "i";
     }
+    if($feature_id > 0){
+      $where   .= " AND r.id IN (SELECT room_id FROM `room_features` WHERE features_id=?)";
+      $params[] = $feature_id;
+      $types   .= "i";
+    }
 
     $sql = "SELECT r.*, pt.name AS type_name, pt.slug AS type_slug,
-                   rt.name AS room_type_name, b.name AS building_name,
-                   vt.name AS view_name, vt.icon AS view_icon
+                   rt.name AS room_type_name, b.name AS building_name
             FROM `rooms` r
             LEFT JOIN `property_types` pt ON r.property_type_id = pt.id
             LEFT JOIN `room_types`     rt ON r.room_type_id     = rt.id
             LEFT JOIN `buildings`       b ON r.building_id      = b.id
-            LEFT JOIN `view_types`     vt ON r.view_type_id     = vt.id
             $where
             ORDER BY r.property_type_id ASC, r.id ASC";
 
@@ -121,15 +126,15 @@
       }
       if(count($facility_list['facilities']) > 0 && count($facility_list['facilities']) != $fac_count){ continue; }
 
-      // === Features (legacy) ===
+      // === Features (Không gian) ===
       $fea_q = mysqli_query($con,
-        "SELECT f.name FROM `features` f
+        "SELECT f.id, f.name FROM `features` f
          INNER JOIN `room_features` rfea ON f.id = rfea.features_id
          WHERE rfea.room_id = '{$room_data['id']}'"
       );
       $features_data = "";
       while($fea_row = mysqli_fetch_assoc($fea_q)){
-        $features_data .= "<span class='room-badge'><i class='bi bi-check-circle'></i> {$fea_row['name']}</span>";
+        $features_data .= "<span class='view-badge'><i class='bi bi-check-circle'></i> {$fea_row['name']}</span>";
       }
 
       // === Thumbnail ===
@@ -156,12 +161,6 @@
         $type_badge  = "<span class='property-type-badge {$badge_class}'>{$room_data['type_name']}</span>";
       }
 
-      // === View badge ===
-      $view_badge = "";
-      if(!empty($room_data['view_name'])){
-        $view_badge = "<span class='view-badge'><i class='bi bi-eye'></i> {$room_data['view_name']}</span>";
-      }
-
       // === Building ===
       $building_info = !empty($room_data['building_name']) ? $room_data['building_name'] : '';
 
@@ -177,7 +176,7 @@
 
       $filtered_rooms[] = compact(
         'room_data','features_data','facilities_data',
-        'room_thumb','book_btn','type_badge','view_badge',
+        'room_thumb','book_btn','type_badge',
         'building_info','formatted_price','rt_badge'
       );
     }
@@ -230,15 +229,9 @@
 
                   <div class='room-tags-row'>
                     {$r['rt_badge']}
-                    {$r['view_badge']}
                     $bedroom_info
+                    {$r['features_data']}
                   </div>
-
-                  " . (!empty($r['features_data']) ? "
-                  <div class='room-info-section'>
-                    <div class='room-info-label'><i class='bi bi-rulers'></i><span>Không gian</span></div>
-                    <div class='room-badges'>{$r['features_data']}</div>
-                  </div>" : "") . "
 
                   " . (!empty($r['facilities_data']) ? "
                   <div class='room-info-section'>

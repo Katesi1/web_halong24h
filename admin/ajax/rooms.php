@@ -288,27 +288,30 @@
   if(isset($_POST['get_room_images']))
   {
     $frm_data = filteration($_POST);
-    $res = select("SELECT * FROM `room_images` WHERE `room_id`=?",[$frm_data['get_room_images']],'i');
+    $res = select("SELECT * FROM `room_images` WHERE `room_id`=? ORDER BY `thumb` DESC, `sr_no` ASC",[$frm_data['get_room_images']],'i');
 
     $path = ROOMS_IMG_PATH;
 
     while($row = mysqli_fetch_assoc($res))
     {
       if($row['thumb']==1){
+        $type_label = "<span class='badge bg-success'><i class='bi bi-star-fill'></i> Ảnh chính (Card)</span>";
         $thumb_btn = "<i class='bi bi-check-lg text-light bg-success px-2 py-1 rounded fs-5'></i>";
       }
       else{
-        $thumb_btn = "<button onclick='thumb_image($row[sr_no],$row[room_id])' class='btn btn-secondary shadow-none'>
-          <i class='bi bi-check-lg'></i>
+        $type_label = "<span class='badge bg-secondary'>Ảnh chi tiết</span>";
+        $thumb_btn = "<button onclick='thumb_image($row[sr_no],$row[room_id])' class='btn btn-outline-primary btn-sm shadow-none' title='Đặt làm ảnh chính'>
+          <i class='bi bi-star'></i>
         </button>";
       }
 
       echo<<<data
         <tr class='align-middle'>
-          <td><img src='$path$row[image]' class='img-fluid'></td>
+          <td><img src='$path$row[image]' class='img-fluid' style='max-height:120px;object-fit:cover;border-radius:6px;'></td>
+          <td>$type_label</td>
           <td>$thumb_btn</td>
           <td>
-            <button onclick='rem_image($row[sr_no],$row[room_id])' class='btn btn-danger shadow-none'>
+            <button onclick='rem_image($row[sr_no],$row[room_id])' class='btn btn-danger btn-sm shadow-none'>
               <i class='bi bi-trash'></i>
             </button>
           </td>

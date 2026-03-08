@@ -158,9 +158,9 @@
   $prop_types   = [];
   while($r = mysqli_fetch_assoc($prop_types_q)) $prop_types[] = $r;
 
-  $view_types_q = selectAll('view_types');
-  $view_types   = [];
-  while($r = mysqli_fetch_assoc($view_types_q)) $view_types[] = $r;
+  $features_q = selectAll('features');
+  $features   = [];
+  while($r = mysqli_fetch_assoc($features_q)) $features[] = $r;
   ?>
 
   <!-- Breadcrumbs -->
@@ -236,10 +236,10 @@
                     </button>
                   </h5>
                   <div class="view-pills">
-                    <?php foreach($view_types as $vt): ?>
-                    <button class="view-pill" data-view="<?php echo $vt['id']; ?>"
-                      onclick="setViewType(<?php echo $vt['id']; ?>, this)">
-                      <?php echo $vt['name']; ?>
+                    <?php foreach($features as $ft): ?>
+                    <button class="view-pill" data-view="<?php echo $ft['id']; ?>"
+                      onclick="setViewType(<?php echo $ft['id']; ?>, this)">
+                      <?php echo $ft['name']; ?>
                     </button>
                     <?php endforeach; ?>
                   </div>
@@ -471,6 +471,7 @@
         + `&facility_list=${encodeURIComponent(facility_list)}`
         + `&property_type=${selectedPropType}`
         + `&room_type=${selectedRoomType}`
+        + `&view_type=${selectedViewType}`
         + `&page=${page}`;
 
       roomsData.innerHTML = `<div class="rooms-loader" role="status">

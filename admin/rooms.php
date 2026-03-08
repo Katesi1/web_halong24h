@@ -105,11 +105,11 @@
               </div>
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Ảnh phòng</label>
-                <input type="file" name="room_image" accept=".jpg,.jpeg,.png,.webp" class="form-control shadow-none">
-                <small class="text-muted">JPG, PNG, WEBP — tối đa 2MB (không bắt buộc)</small>
+                <input type="file" name="room_image" accept=".jpg,.jpeg,.png,.webp,.heic,.heif" class="form-control shadow-none">
+                <small class="text-muted">JPG, PNG, WEBP, HEIC — tối đa 10MB (HEIC sẽ tự động convert sang JPG)</small>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Không gian</label>
+                <label class="form-label fw-bold">View</label>
                 <div class="row">
                   <?php
                     $res = selectAll('features');
@@ -217,7 +217,7 @@
                 <input type="number" min="0" name="children" class="form-control shadow-none" required>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Không gian</label>
+                <label class="form-label fw-bold">View</label>
                 <div class="row">
                   <?php
                     $res = selectAll('features');
@@ -281,22 +281,29 @@
           <div id="image-alert"></div>
           <div class="border-bottom border-3 pb-3 mb-3">
             <form id="add_image_form">
-              <label class="form-label fw-bold">Add Image</label>
-              <input type="file" name="image" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none mb-3" required>
-              <button class="btn custom-bg text-white shadow-none">ADD</button>
+              <label class="form-label fw-bold">Thêm ảnh</label>
+              <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp,.heic,.heif" class="form-control shadow-none mb-3" required>
+              <small class="text-muted">HEIC sẽ tự động convert sang JPG</small>
+              <button class="btn custom-bg text-white shadow-none">Tải lên</button>
               <input type="hidden" name="room_id">
             </form>
+          </div>
+          <div class="alert alert-info py-2 small mb-3">
+            <i class="bi bi-info-circle"></i>
+            <strong>Ảnh chính</strong> = hiển thị trên card danh sách phòng. Các ảnh còn lại hiển thị ở trang chi tiết.
+            Nhấn <span class="badge bg-secondary"><i class="bi bi-star"></i></span> để chọn ảnh chính.
           </div>
           <div class="table-responsive-lg" style="height: 350px; overflow-y: scroll;">
             <table class="table table-hover border text-start">
               <thead>
                 <tr class="bg-dark text-light sticky-top">
-                  <th scope="col" width="60%">Image</th>
-                  <th scope="col">Thumb</th>
-                  <th scope="col">Delete</th>
+                  <th scope="col" width="55%">Ảnh</th>
+                  <th scope="col">Loại</th>
+                  <th scope="col">Chọn chính</th>
+                  <th scope="col">Xoá</th>
                 </tr>
               </thead>
-              <tbody id="room-image-data">                 
+              <tbody id="room-image-data">
               </tbody>
             </table>
           </div>
@@ -308,6 +315,27 @@
 
   <?php require('inc/scripts.php'); ?>
 
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script>
+    async function convertHeicIfNeeded(file) {
+      if (!file) return file;
+      const name = file.name.toLowerCase();
+      if (!name.endsWith('.heic') && !name.endsWith('.heif')) return file;
+
+      // Show loading
+      const btn = document.activeElement;
+      const origText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang convert HEIC...';
+
+      try {
+        const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.8 });
+        const newName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+        return new File([blob], newName, { type: 'image/jpeg' });
+      } finally {
+        if (btn) btn.innerHTML = origText;
+      }
+    }
+  </script>
   <script src="scripts/rooms.js"></script>
 
 </body>

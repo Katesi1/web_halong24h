@@ -5,7 +5,7 @@ add_room_form.addEventListener("submit", function (e) {
   add_room();
 });
 
-function add_room() {
+async function add_room() {
   let data = new FormData();
   data.append("add_room", "");
   data.append("name", add_room_form.elements["name"].value);
@@ -32,7 +32,7 @@ function add_room() {
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "ajax/rooms.php", true);
 
-  xhr.onload = function () {
+  xhr.onload = async function () {
     var room_id = parseInt(this.responseText);
 
     var myModal = document.getElementById("add-room");
@@ -42,6 +42,15 @@ function add_room() {
     if (room_id > 0) {
       var imageFile = add_room_form.elements["room_image"].files[0];
       if (imageFile) {
+        try {
+          imageFile = await convertHeicIfNeeded(imageFile);
+        } catch (e) {
+          alert("error", "Không thể convert ảnh HEIC. Vui lòng chọn JPG/PNG/WEBP.");
+          add_room_form.reset();
+          get_all_rooms();
+          return;
+        }
+
         var imgData = new FormData();
         imgData.append("add_image", "");
         imgData.append("room_id", room_id);
@@ -195,9 +204,18 @@ add_image_form.addEventListener("submit", function (e) {
   add_image();
 });
 
-function add_image() {
+async function add_image() {
+  let imageFile = add_image_form.elements["image"].files[0];
+
+  try {
+    imageFile = await convertHeicIfNeeded(imageFile);
+  } catch (e) {
+    alert("error", "Không thể convert ảnh HEIC. Vui lòng chọn JPG/PNG/WEBP.", "image-alert");
+    return;
+  }
+
   let data = new FormData();
-  data.append("image", add_image_form.elements["image"].files[0]);
+  data.append("image", imageFile);
   data.append("room_id", add_image_form.elements["room_id"].value);
   data.append("add_image", "");
 
@@ -206,17 +224,13 @@ function add_image() {
 
   xhr.onload = function () {
     if (this.responseText == "inv_img") {
-      alert(
-        "error",
-        "Only JPG, WEBP or PNG images are allowed!",
-        "image-alert",
-      );
+      alert("error", "Chỉ chấp nhận JPG, PNG, WEBP!", "image-alert");
     } else if (this.responseText == "inv_size") {
-      alert("error", "Image should be less than 2MB!", "image-alert");
+      alert("error", "Ảnh phải nhỏ hơn 2MB!", "image-alert");
     } else if (this.responseText == "upd_failed") {
-      alert("error", "Image upload failed. Server Down!", "image-alert");
+      alert("error", "Tải ảnh thất bại!", "image-alert");
     } else {
-      alert("success", "New image added!", "image-alert");
+      alert("success", "Thêm ảnh thành công!", "image-alert");
       room_images(
         add_image_form.elements["room_id"].value,
         document.querySelector("#room-images .modal-title").innerText,

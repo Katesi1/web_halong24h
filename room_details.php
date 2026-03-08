@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <div class="col-lg-7 col-md-12 px-4">
+      <div class="col-lg-6 col-md-12 px-4">
         <?php
           $fallback_img = ROOMS_IMG_PATH."thumbnail.jpg";
           $img_q = mysqli_query($con,"SELECT * FROM `room_images` WHERE `room_id`='$room_data[id]' ORDER BY `thumb` DESC, `sort_order` ASC");
@@ -50,211 +50,471 @@
             }
           }
           $main_img = count($all_images) > 0 ? ROOMS_IMG_PATH.$all_images[0]['image'] : $fallback_img;
+          $total_images = count($all_images);
+          $thumbs_per_page = 8; // 4 per row x 2 rows
         ?>
 
-        <!-- Ảnh chính -->
-        <div class="mb-3">
-          <img id="mainRoomImage" src="<?php echo $main_img; ?>" class="w-100 rounded-3" style="aspect-ratio:4/3;object-fit:cover;cursor:zoom-in;" alt="<?php echo $room_data['name']; ?>">
+        <style>
+          .img-zoom-container { position: relative; overflow: hidden; border-radius: 12px; }
+          .img-zoom-container img { cursor: crosshair; display: block; }
+          .img-zoom-result {
+            display: none;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 12px;
+            background-repeat: no-repeat;
+            z-index: 100;
+            pointer-events: none;
+          }
+          @media (max-width: 991px) {
+            .img-zoom-result { display: none !important; }
+            .img-zoom-container img { cursor: default; }
+          }
+
+          .thumb-carousel { position: relative; }
+          .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+          }
+          .thumb-grid img {
+            width: 100%; aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            opacity: .6;
+            transition: opacity .2s, border-color .2s, transform .15s;
+          }
+          .thumb-grid img:hover { opacity: .85; transform: scale(1.03); }
+          .thumb-grid img.active { opacity: 1; border-color: var(--teal); }
+          .thumb-nav {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0,0,0,.5);
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background .2s;
+            font-size: 14px;
+            padding: 0;
+          }
+          .thumb-nav:hover { background: rgba(0,0,0,.75); }
+          .thumb-nav.prev { left: -14px; }
+          .thumb-nav.next { right: -14px; }
+          .thumb-nav:disabled { opacity: .3; cursor: default; }
+          .thumb-counter {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+          }
+
+          .room-info-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(0,0,0,.07);
+          }
+          .room-price-header {
+            background: linear-gradient(135deg, var(--teal), #1B4332);
+            color: #fff;
+            padding: 20px 24px;
+          }
+          .room-price-header .price-amount {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+          }
+          .room-price-header .price-unit {
+            font-size: 14px;
+            opacity: .8;
+            font-weight: 400;
+          }
+          .room-price-header .rating-stars {
+            margin-top: 6px;
+          }
+          .room-info-body { padding: 20px 24px; }
+          .info-section {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+          }
+          .info-section:last-child { border-bottom: none; }
+          .info-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #888;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+          .info-section-title i { font-size: 14px; color: var(--teal); }
+          .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: #333;
+            margin: 0 6px 6px 0;
+            transition: background .15s;
+          }
+          .info-badge i { color: var(--teal); font-size: 13px; }
+          .info-badge:hover { background: #f0f1f2; }
+          .info-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 6px;
+          }
+          .info-stat-icon {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: rgba(45,106,79,.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--teal);
+            font-size: 16px;
+            flex-shrink: 0;
+          }
+          .info-stat-text { font-size: 14px; color: #333; }
+          .info-stat-text span { font-weight: 600; }
+          .btn-book {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--teal), #1B4332);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .15s, box-shadow .15s;
+            margin-top: 6px;
+          }
+          .btn-book:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(45,106,79,.3);
+            color: #fff;
+          }
+          .btn-book i { margin-right: 6px; }
+        </style>
+
+        <div class="img-zoom-container mb-3">
+          <img id="mainRoomImage" src="<?php echo $main_img; ?>" class="w-100" style="aspect-ratio:4/3;object-fit:cover;" alt="<?php echo $room_data['name']; ?>">
+          <div id="zoomResult" class="img-zoom-result"></div>
         </div>
 
-        <!-- Thumbnails -->
-        <?php if(count($all_images) > 1): ?>
-        <div class="d-flex gap-2 flex-wrap">
-          <?php foreach($all_images as $idx => $img):
-            $src = ROOMS_IMG_PATH.$img['image'];
-            $active_border = $idx === 0 ? 'border-2 border-dark' : 'border';
-          ?>
-          <img src="<?php echo $src; ?>"
-               class="rounded-2 thumb-preview <?php echo $active_border; ?>"
-               style="width:80px;height:60px;object-fit:cover;cursor:pointer;opacity:<?php echo $idx===0?'1':'.65'; ?>;transition:opacity .2s,border-color .2s;"
-               onclick="switchMainImage(this,'<?php echo $src; ?>')"
-               alt="">
-          <?php endforeach; ?>
+        <?php if($total_images > 1): ?>
+        <div class="thumb-carousel">
+          <?php if($total_images > $thumbs_per_page): ?>
+          <button class="thumb-nav prev" id="thumbPrev" disabled onclick="changeThumbPage(-1)">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="thumb-nav next" id="thumbNext" onclick="changeThumbPage(1)">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+          <?php endif; ?>
+
+          <div class="thumb-grid" id="thumbGrid">
+            <?php foreach($all_images as $idx => $img):
+              $src = ROOMS_IMG_PATH.$img['image'];
+            ?>
+            <img src="<?php echo $src; ?>"
+                 class="thumb-preview <?php echo $idx === 0 ? 'active' : ''; ?>"
+                 data-src="<?php echo $src; ?>"
+                 onclick="switchMainImage(this)"
+                 alt="">
+            <?php endforeach; ?>
+          </div>
+
+          <?php if($total_images > $thumbs_per_page): ?>
+          <div class="thumb-counter">
+            <span id="thumbPageInfo">1 / <?php echo ceil($total_images / $thumbs_per_page); ?></span>
+          </div>
+          <?php endif; ?>
         </div>
         <?php endif; ?>
 
         <script>
-        function switchMainImage(el, src){
-          document.getElementById('mainRoomImage').src = src;
-          document.querySelectorAll('.thumb-preview').forEach(function(t){
-            t.style.opacity = '.65';
-            t.classList.remove('border-dark','border-2');
-            t.classList.add('border');
+        var thumbsPerPage = <?php echo $thumbs_per_page; ?>;
+        var currentThumbPage = 0;
+        var allThumbs = document.querySelectorAll('.thumb-preview');
+        var totalThumbPages = Math.ceil(allThumbs.length / thumbsPerPage);
+
+        function showThumbPage(page) {
+          var start = page * thumbsPerPage;
+          var end = start + thumbsPerPage;
+          allThumbs.forEach(function(t, i) {
+            t.style.display = (i >= start && i < end) ? 'block' : 'none';
           });
-          el.style.opacity = '1';
-          el.classList.remove('border');
-          el.classList.add('border-2','border-dark');
+          var prevBtn = document.getElementById('thumbPrev');
+          var nextBtn = document.getElementById('thumbNext');
+          var info = document.getElementById('thumbPageInfo');
+          if (prevBtn) prevBtn.disabled = page === 0;
+          if (nextBtn) nextBtn.disabled = page >= totalThumbPages - 1;
+          if (info) info.textContent = (page + 1) + ' / ' + totalThumbPages;
         }
+
+        function changeThumbPage(dir) {
+          currentThumbPage += dir;
+          if (currentThumbPage < 0) currentThumbPage = 0;
+          if (currentThumbPage >= totalThumbPages) currentThumbPage = totalThumbPages - 1;
+          showThumbPage(currentThumbPage);
+        }
+
+        if (allThumbs.length > 0) showThumbPage(0);
+
+        function switchMainImage(el) {
+          document.getElementById('mainRoomImage').src = el.dataset.src;
+          allThumbs.forEach(function(t) { t.classList.remove('active'); });
+          el.classList.add('active');
+        }
+
+        (function(){
+          var img = document.getElementById('mainRoomImage');
+          var result = document.getElementById('zoomResult');
+          var zoomLevel = 2.5;
+
+          img.addEventListener('mouseenter', function(){
+            if (window.innerWidth <= 991) return;
+            result.style.backgroundImage = 'url(' + img.src + ')';
+            result.style.backgroundSize = (img.offsetWidth * zoomLevel) + 'px ' + (img.offsetHeight * zoomLevel) + 'px';
+            result.style.display = 'block';
+          });
+
+          img.addEventListener('mousemove', function(e){
+            if (window.innerWidth <= 991) return;
+            var rect = img.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var px = x / img.offsetWidth;
+            var py = y / img.offsetHeight;
+            var bgW = img.offsetWidth * zoomLevel;
+            var bgH = img.offsetHeight * zoomLevel;
+            var bgX = -(px * bgW - img.offsetWidth / 2);
+            var bgY = -(py * bgH - img.offsetHeight / 2);
+            bgX = Math.min(0, Math.max(bgX, img.offsetWidth - bgW));
+            bgY = Math.min(0, Math.max(bgY, img.offsetHeight - bgH));
+            result.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+          });
+
+          img.addEventListener('mouseleave', function(){
+            result.style.display = 'none';
+          });
+        })();
         </script>
       </div>
 
-      <div class="col-lg-5 col-md-12 px-4">
-        <div class="card mb-4 border-0 shadow-sm rounded-3">
-          <div class="card-body">
-            <?php 
+      <div class="col-lg-6 col-md-12 px-4">
+        <div class="card room-info-card mb-4">
+          <?php
+            // Price & Rating
+            $formatted_price = $room_data['price'] > 0
+              ? number_format($room_data['price'], 0, ',', '.')
+              : 'Liên hệ';
 
-              echo<<<price
-                <h4>$room_data[price] VND / đêm</h4>
-              price;
+            $rating_q = "SELECT AVG(rating) AS `avg_rating`, COUNT(*) AS `total` FROM `rating_review`
+              WHERE `room_id`='$room_data[id]'";
+            $rating_res = mysqli_query($con, $rating_q);
+            $rating_fetch = mysqli_fetch_assoc($rating_res);
 
-              $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
-                WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
-  
-              $rating_res = mysqli_query($con,$rating_q);
-              $rating_fetch = mysqli_fetch_assoc($rating_res);
-    
-              $rating_data = "";
-    
-              if($rating_fetch['avg_rating']!=NULL)
-              {
-                for($i=0; $i < $rating_fetch['avg_rating']; $i++){
-                  $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+            $rating_stars = "";
+            $rating_text = "";
+            if($rating_fetch['avg_rating'] != NULL){
+              $avg = round($rating_fetch['avg_rating'], 1);
+              for($i = 0; $i < 5; $i++){
+                if($i < floor($avg)){
+                  $rating_stars .= "<i class='bi bi-star-fill'></i> ";
+                } else if($i < $avg){
+                  $rating_stars .= "<i class='bi bi-star-half'></i> ";
+                } else {
+                  $rating_stars .= "<i class='bi bi-star'></i> ";
                 }
               }
+              $rating_text = "<span style='font-size:13px;opacity:.8;margin-left:4px;'>$avg ({$rating_fetch['total']} đánh giá)</span>";
+            }
+          ?>
+          <div class="room-price-header">
+            <div class="price-amount">
+              <?php echo $formatted_price; ?>
+              <?php if($room_data['price'] > 0): ?>
+                <span class="price-unit">VND / đêm</span>
+              <?php endif; ?>
+            </div>
+            <?php if($rating_stars): ?>
+            <div class="rating-stars">
+              <?php echo $rating_stars . $rating_text; ?>
+            </div>
+            <?php endif; ?>
+          </div>
 
-              echo<<<rating
-                <div class="mb-3">
-                  $rating_data
-                </div>
-              rating;
-
+          <div class="room-info-body">
+            <?php
+              // Features (View)
               $fea_q = mysqli_query($con,"SELECT f.name FROM `features` f
                 INNER JOIN `room_features` rfea ON f.id = rfea.features_id
                 WHERE rfea.room_id = '$room_data[id]'");
 
               $feature_icons = [
-                'Phòng Ngủ'  => 'fa-bed',
-                'Ban Công'   => 'fa-door-open',
-                'Nhà Bếp'   => 'fa-utensils',
-                'Ghế Sofa'  => 'fa-couch',
-                'View Biển' => 'fa-water',
-                'View Phố'  => 'fa-city',
-                'Sân Vườn'  => 'fa-tree',
-                'Bể Bơi'    => 'fa-person-swimming',
+                'Phòng Ngủ'  => 'bi-house-door',
+                'Ban Công'   => 'bi-door-open',
+                'Nhà Bếp'   => 'bi-cup-hot',
+                'Ghế Sofa'  => 'bi-lamp',
+                'View Biển'  => 'bi-water',
+                'View Phố'   => 'bi-buildings',
+                'Sân Vườn'   => 'bi-tree',
+                'Bể Bơi'    => 'bi-droplet-half',
               ];
 
               $features_data = "";
               while($fea_row = mysqli_fetch_assoc($fea_q)){
-                $ico_class = $feature_icons[$fea_row['name']] ?? 'fa-circle-check';
-                $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1 px-3 py-2'>
-                  <i class='fa-solid {$ico_class} me-1'></i>{$fea_row['name']}
-                </span>";
+                $ico = $feature_icons[$fea_row['name']] ?? 'bi-check-circle';
+                $features_data .= "<span class='info-badge'><i class='bi {$ico}'></i>{$fea_row['name']}</span>";
               }
 
-              echo<<<features
-                <div class="mb-3">
-                  <h6 class="mb-1">Không gian</h6>
-                  $features_data
-                </div>
-              features;
+              if($features_data):
+            ?>
+            <div class="info-section">
+              <div class="info-section-title"><i class="bi bi-eye"></i> View</div>
+              <div><?php echo $features_data; ?></div>
+            </div>
+            <?php endif; ?>
 
+            <?php
+              // Facilities
               $fac_q = mysqli_query($con,"SELECT f.name, f.icon FROM `facilities` f
                 INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id
                 WHERE rfac.room_id = '$room_data[id]'");
 
               $facilities_data = "";
               while($fac_row = mysqli_fetch_assoc($fac_q)){
-                $icon = $fac_row['icon'] ? "<i class='fa-solid {$fac_row['icon']} me-1'></i>" : "";
-                $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1 px-3 py-2'>
-                  {$icon}{$fac_row['name']}
-                </span>";
+                $icon = $fac_row['icon'] ? "<i class='bi {$fac_row['icon']}'></i>" : "<i class='bi bi-check-circle'></i>";
+                $facilities_data .= "<span class='info-badge'>{$icon}{$fac_row['name']}</span>";
               }
 
-              echo<<<facilities
-                <div class="mb-3">
-                  <h6 class="mb-1">Tiện ích</h6>
-                  $facilities_data
-                </div>
-              facilities;
-
-              echo<<<guests
-                <div class="mb-3">
-                  <h6 class="mb-1">Guests</h6>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    $room_data[adult] Người lớn
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    $room_data[children] Trẻ em
-                  </span>
-                </div>
-              guests;
-
-              echo<<<area
-                <div class="mb-3">
-                  <h6 class="mb-1">Area</h6>
-                  <span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-                    $room_data[area] m2
-                  </span>
-                </div>
-              area;
-
-              if(!$settings_r['shutdown']){
-                $login=0;
-                if(isset($_SESSION['login']) && $_SESSION['login']==true){
-                  $login=1;
-                }
-                echo<<<book
-                  <button onclick='checkLoginToBook($login,$room_data[id])' class="btn w-100 text-white custom-bg shadow-none mb-1">Đặt ngay</button>
-                book;
-              }
-
+              if($facilities_data):
             ?>
+            <div class="info-section">
+              <div class="info-section-title"><i class="bi bi-star"></i> Tiện ích</div>
+              <div><?php echo $facilities_data; ?></div>
+            </div>
+            <?php endif; ?>
+
+            <div class="info-section">
+              <div class="info-section-title"><i class="bi bi-people"></i> Sức chứa</div>
+              <div class="info-stat">
+                <div class="info-stat-icon"><i class="bi bi-person"></i></div>
+                <div class="info-stat-text"><span><?php echo $room_data['adult']; ?></span> Người lớn</div>
+              </div>
+              <div class="info-stat">
+                <div class="info-stat-icon"><i class="bi bi-person-heart"></i></div>
+                <div class="info-stat-text"><span><?php echo $room_data['children']; ?></span> Trẻ em</div>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-section-title"><i class="bi bi-arrows-fullscreen"></i> Diện tích</div>
+              <div class="info-stat">
+                <div class="info-stat-icon"><i class="bi bi-aspect-ratio"></i></div>
+                <div class="info-stat-text"><span><?php echo $room_data['area']; ?></span> m&sup2;</div>
+              </div>
+            </div>
+
+            <?php
+              if(!$settings_r['shutdown']){
+                $login = 0;
+                if(isset($_SESSION['login']) && $_SESSION['login'] == true){
+                  $login = 1;
+                }
+            ?>
+            <div style="padding-top: 14px;">
+              <button onclick="checkLoginToBook(<?php echo $login; ?>,<?php echo $room_data['id']; ?>)" class="btn-book">
+                <i class="bi bi-calendar-check"></i> Đặt ngay
+              </button>
+            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
 
       <div class="col-12 mt-4 px-4">
-        <div class="mb-5">
-          <h5 class="fw-bold h-font">Mô tả</h5>
-          <p>
-            <?php echo $room_data['description'] ?>
-          </p>
+        <div class="card border-0 shadow-sm rounded-3 mb-4">
+          <div class="card-body p-4">
+            <h5 class="fw-bold h-font mb-3"><i class="bi bi-file-text me-2" style="color:var(--teal);"></i>Mô tả</h5>
+            <p class="text-secondary mb-0" style="line-height:1.8;">
+              <?php echo nl2br($room_data['description']); ?>
+            </p>
+          </div>
         </div>
 
-        <div>
-          <h5 class="fw-bold h-font mb-3">Trải nghiệm khách hàng</h5>
+        <div class="card border-0 shadow-sm rounded-3 mb-5">
+          <div class="card-body p-4">
+            <h5 class="fw-bold h-font mb-3"><i class="bi bi-chat-left-quote me-2" style="color:var(--teal);"></i>Trải nghiệm khách hàng</h5>
 
-          <?php
-            $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
-              INNER JOIN `user_cred` uc ON rr.user_id = uc.id
-              INNER JOIN `rooms` r ON rr.room_id = r.id
-              WHERE rr.room_id = '$room_data[id]'
-              ORDER BY `sr_no` DESC LIMIT 15";
+            <?php
+              $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
+                INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+                INNER JOIN `rooms` r ON rr.room_id = r.id
+                WHERE rr.room_id = '$room_data[id]'
+                ORDER BY `sr_no` DESC LIMIT 15";
 
-            $review_res = mysqli_query($con,$review_q);
-            $img_path = USERS_IMG_PATH;
+              $review_res = mysqli_query($con,$review_q);
+              $img_path = USERS_IMG_PATH;
 
-            if(mysqli_num_rows($review_res)==0){
-              echo 'No reviews yet!';
-            }
-            else
-            {
-              while($row = mysqli_fetch_assoc($review_res))
-              {
-                $stars = "<i class='bi bi-star-fill text-warning'></i> ";
-                for($i=1; $i<$row['rating']; $i++){
-                  $stars .= " <i class='bi bi-star-fill text-warning'></i>";
-                }
-
-                echo<<<reviews
-                  <div class="mb-4">
-                    <div class="d-flex align-items-center mb-2">
-                      <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
-                      <h6 class="m-0 ms-2">$row[uname]</h6>
-                    </div>
-                    <p class="mb-1">
-                      $row[review]
-                    </p>
-                    <div>
-                      $stars
-                    </div>
-                  </div>
-                reviews;
+              if(mysqli_num_rows($review_res)==0){
+                echo "<div class='text-center py-4'>
+                  <i class='bi bi-chat-dots' style='font-size:40px;color:#ddd;'></i>
+                  <p class='text-muted mt-2 mb-0'>Chưa có đánh giá nào</p>
+                </div>";
               }
-            }
-          ?>
+              else
+              {
+                while($row = mysqli_fetch_assoc($review_res))
+                {
+                  $stars = "";
+                  for($i = 0; $i < 5; $i++){
+                    if($i < $row['rating']){
+                      $stars .= "<i class='bi bi-star-fill text-warning'></i> ";
+                    } else {
+                      $stars .= "<i class='bi bi-star text-warning'></i> ";
+                    }
+                  }
 
-          
+                  echo<<<reviews
+                    <div class="d-flex gap-3 py-3" style="border-bottom:1px solid #f0f0f0;">
+                      <img src="$img_path$row[profile]" class="rounded-circle flex-shrink-0" loading="lazy" width="40" height="40" style="object-fit:cover;">
+                      <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                          <h6 class="m-0 fw-bold" style="font-size:14px;">$row[uname]</h6>
+                          <span style="font-size:12px;">$stars</span>
+                        </div>
+                        <p class="mb-0 text-secondary" style="font-size:14px;line-height:1.6;">
+                          $row[review]
+                        </p>
+                      </div>
+                    </div>
+                  reviews;
+                }
+              }
+            ?>
+          </div>
         </div>
       </div>
 
