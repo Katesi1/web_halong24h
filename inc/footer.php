@@ -88,22 +88,86 @@
     }
   }
 
+  // ===== Toggle hiện/ẩn mật khẩu =====
+  function togglePassVis(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const icon  = btn.querySelector('i');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('bi-eye-slash', 'bi-eye');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('bi-eye', 'bi-eye-slash');
+    }
+  }
+
+  // ===== Password strength checker =====
+  const PASS_REGEX = {
+    len:     { re: /.{8,}/,           id: 'rule-len'     },
+    upper:   { re: /[A-Z]/,           id: 'rule-upper'   },
+    lower:   { re: /[a-z]/,           id: 'rule-lower'   },
+    num:     { re: /[0-9]/,           id: 'rule-num'     },
+    special: { re: /[^A-Za-z0-9]/,   id: 'rule-special' },
+  };
+
+  const STRENGTH_LEVELS = [
+    { label: '',         color: '',        pct: 0   },
+    { label: 'Yếu',     color: '#e74c3c', pct: 20  },
+    { label: 'Yếu',     color: '#e74c3c', pct: 40  },
+    { label: 'Trung bình', color: '#f39c12', pct: 60 },
+    { label: 'Khá',     color: '#3498db', pct: 80  },
+    { label: 'Mạnh',    color: '#2D6A4F', pct: 100 },
+  ];
+
+  function checkPassStrength(val) {
+    let score = 0;
+    for (const key in PASS_REGEX) {
+      const ok = PASS_REGEX[key].re.test(val);
+      const li = document.getElementById(PASS_REGEX[key].id);
+      if (!li) continue;
+      li.classList.toggle('ok', ok);
+      li.querySelector('i').className = ok ? 'bi bi-check-circle-fill' : 'bi bi-x-circle-fill';
+      if (ok) score++;
+    }
+    const lvl = STRENGTH_LEVELS[score];
+    const fill  = document.getElementById('strength-fill');
+    const label = document.getElementById('strength-label');
+    if (fill)  { fill.style.width = lvl.pct + '%'; fill.style.background = lvl.color; }
+    if (label) { label.textContent = lvl.label; label.style.color = lvl.color; }
+    return score;
+  }
+
+  function isStrongPass(val) {
+    return Object.values(PASS_REGEX).every(r => r.re.test(val));
+  }
+
+  const regPassInput = document.getElementById('reg-pass');
+  if (regPassInput) {
+    regPassInput.addEventListener('input', () => checkPassStrength(regPassInput.value));
+  }
+
+  // ===== Register form =====
   let register_form = document.getElementById('register-form');
 
-  register_form.addEventListener('submit', (e) => {
+  if (register_form) register_form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let data = new FormData();
+    const passVal = register_form.elements['pass'].value;
+    if (!isStrongPass(passVal)) {
+      alert('error', 'Mật khẩu phải có ít nhất 8 ký tự gồm chữ hoa, thường, số và ký tự đặc biệt!');
+      return;
+    }
+    if (passVal !== register_form.elements['cpass'].value) {
+      alert('error', 'Mật khẩu xác nhận không khớp!');
+      return;
+    }
 
+    let data = new FormData();
     data.append('name', register_form.elements['name'].value);
     data.append('email', register_form.elements['email'].value);
     data.append('phonenum', register_form.elements['phonenum'].value);
-    data.append('address', register_form.elements['address'].value);
-    data.append('pincode', register_form.elements['pincode'].value);
-    data.append('dob', register_form.elements['dob'].value);
-    data.append('pass', register_form.elements['pass'].value);
+    data.append('pass', passVal);
     data.append('cpass', register_form.elements['cpass'].value);
-    data.append('profile', register_form.elements['profile'].files[0]);
     data.append('register', '');
 
     var myModal = document.getElementById('registerModal');
@@ -116,30 +180,26 @@
     xhr.onload = function() {
       if (this.responseText == 'pass_mismatch') {
         alert('error', "Mật khẩu không trùng khớp!");
+      } else if (this.responseText == 'pass_weak') {
+        alert('error', "Mật khẩu phải có ít nhất 8 ký tự gồm chữ hoa, thường, số và ký tự đặc biệt!");
       } else if (this.responseText == 'email_already') {
-        alert('error', "Email đã được đăng ký!");
+        alert('error', "Email này đã được đăng ký!");
       } else if (this.responseText == 'phone_already') {
-        alert('error', "Số điện thoại đã được đăng ký!");
-      } else if (this.responseText == 'inv_img') {
-        alert('error', "Chỉ hỗ trợ định dạng JPG, WEBP & PNG!");
-      } else if (this.responseText == 'upd_failed') {
-        alert('error', "Tải lên hình ảnh thất bại!");
-      } else if (this.responseText == 'mail_failed') {
-        alert('error', "Hệ thống đang bảo trì, không thể gửi email xác nhận!");
-      } else if (this.responseText == 'ins_failed') {
-        alert('error', "Đăng ký thất bại! Hệ thống đang bảo trì!");
-      } else {
-        alert('success', "Đăng ký thành công!");
+        alert('error', "Số điện thoại này đã được đăng ký!");
+      } else if (this.responseText == 'registration_failed') {
+        alert('error', "Đăng ký thất bại! Vui lòng thử lại.");
+      } else if (this.responseText == 'registration_success') {
+        alert('success', "Đăng ký thành công! Bạn có thể đăng nhập ngay.");
         register_form.reset();
       }
-    }
+    };
 
     xhr.send(data);
   });
 
   let login_form = document.getElementById('login-form');
 
-  login_form.addEventListener('submit', function(e) {
+  if (login_form) login_form.addEventListener('submit', function(e) {
     e.preventDefault();
     let data = new FormData(this);
     data.append('login', '');
@@ -149,10 +209,17 @@
       body: data
     }).then(response => response.text()).then(result => {
       if (result === 'login_success') {
-        alert('Đăng nhập thành công!');
-        window.location.href = 'index.php';
+        var myModal = document.getElementById('loginModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        if (modal) modal.hide();
+        alert('success', "Đăng nhập thành công!");
+        setTimeout(() => { window.location.reload(); }, 800);
+      } else if (result === 'invalid_password') {
+        alert('error', "Mật khẩu không chính xác!");
+      } else if (result === 'invalid_email_mob') {
+        alert('error', "Email hoặc số điện thoại không tồn tại!");
       } else {
-        alert('Đăng nhập thất bại: ' + result);
+        alert('error', "Đăng nhập thất bại! Vui lòng thử lại.");
       }
     });
   });
