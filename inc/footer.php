@@ -7,16 +7,16 @@
       </p>
     </div>
     <div class="col-lg-4 p-4">
-      <h5 class="mb-3">Liên kết</h5>
-      <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none">Trang chủ</a> <br>
-      <a href="rooms.php" class="d-inline-block mb-2 text-dark text-decoration-none">Danh sách phòng</a> <br>
-      <a href="services.php" class="d-inline-block mb-2 text-dark text-decoration-none">Dịch Vụ</a> <br>
-      <a href="specialties.php" class="d-inline-block mb-2 text-dark text-decoration-none">Đặc sản Hạ Long</a> <br>
-      <a href="blog.php" class="d-inline-block mb-2 text-dark text-decoration-none">Blog cẩm nang</a> <br>
-      <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Liên hệ</a>
+      <h5 class="mb-3"><?php _e('links') ?></h5>
+      <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_home') ?></a> <br>
+      <a href="rooms.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_rooms') ?></a> <br>
+      <a href="services.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_services') ?></a> <br>
+      <a href="specialties.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_specialties') ?></a> <br>
+      <a href="blog.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_blog') ?></a> <br>
+      <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none"><?php _e('nav_contact') ?></a>
     </div>
     <div class="col-lg-4 p-4">
-      <h5 class="mb-3">Theo dõi chúng tôi</h5>
+      <h5 class="mb-3"><?php _e('follow_us') ?></h5>
       <?php
       if ($contact_r['tw'] != '') {
         echo <<<data
@@ -112,11 +112,11 @@
 
   const STRENGTH_LEVELS = [
     { label: '',         color: '',        pct: 0   },
-    { label: 'Yếu',     color: '#e74c3c', pct: 20  },
-    { label: 'Yếu',     color: '#e74c3c', pct: 40  },
-    { label: 'Trung bình', color: '#f39c12', pct: 60 },
-    { label: 'Khá',     color: '#3498db', pct: 80  },
-    { label: 'Mạnh',    color: '#2D6A4F', pct: 100 },
+    { label: '<?php _e("strength_weak") ?>',     color: '#e74c3c', pct: 20  },
+    { label: '<?php _e("strength_weak") ?>',     color: '#e74c3c', pct: 40  },
+    { label: '<?php _e("strength_medium") ?>', color: '#f39c12', pct: 60 },
+    { label: '<?php _e("strength_good") ?>',     color: '#3498db', pct: 80  },
+    { label: '<?php _e("strength_strong") ?>',    color: '#2D6A4F', pct: 100 },
   ];
 
   function checkPassStrength(val) {
@@ -154,11 +154,11 @@
 
     const passVal = register_form.elements['pass'].value;
     if (!isStrongPass(passVal)) {
-      alert('error', 'Mật khẩu phải có ít nhất 8 ký tự gồm chữ hoa, thường, số và ký tự đặc biệt!');
+      alert('error', '<?php _e("pass_weak_msg") ?>');
       return;
     }
     if (passVal !== register_form.elements['cpass'].value) {
-      alert('error', 'Mật khẩu xác nhận không khớp!');
+      alert('error', '<?php _e("pass_mismatch") ?>');
       return;
     }
 
@@ -179,17 +179,17 @@
 
     xhr.onload = function() {
       if (this.responseText == 'pass_mismatch') {
-        alert('error', "Mật khẩu không trùng khớp!");
+        alert('error', "<?php _e('pass_mismatch') ?>");
       } else if (this.responseText == 'pass_weak') {
-        alert('error', "Mật khẩu phải có ít nhất 8 ký tự gồm chữ hoa, thường, số và ký tự đặc biệt!");
+        alert('error', "<?php _e('pass_weak_msg') ?>");
       } else if (this.responseText == 'email_already') {
-        alert('error', "Email này đã được đăng ký!");
+        alert('error', "<?php _e('email_already') ?>");
       } else if (this.responseText == 'phone_already') {
-        alert('error', "Số điện thoại này đã được đăng ký!");
+        alert('error', "<?php _e('phone_already') ?>");
       } else if (this.responseText == 'registration_failed') {
-        alert('error', "Đăng ký thất bại! Vui lòng thử lại.");
+        alert('error', "<?php _e('register_failed') ?>");
       } else if (this.responseText == 'registration_success') {
-        alert('success', "Đăng ký thành công! Bạn có thể đăng nhập ngay.");
+        alert('success', "<?php _e('register_success') ?>");
         register_form.reset();
       }
     };
@@ -212,14 +212,14 @@
         var myModal = document.getElementById('loginModal');
         var modal = bootstrap.Modal.getInstance(myModal);
         if (modal) modal.hide();
-        alert('success', "Đăng nhập thành công!");
+        alert('success', "<?php _e('login_success') ?>");
         setTimeout(() => { window.location.reload(); }, 800);
       } else if (result === 'invalid_password') {
-        alert('error', "Mật khẩu không chính xác!");
+        alert('error', "<?php _e('invalid_password') ?>");
       } else if (result === 'invalid_email_mob') {
-        alert('error', "Email hoặc số điện thoại không tồn tại!");
+        alert('error', "<?php _e('invalid_email_mob') ?>");
       } else {
-        alert('error', "Đăng nhập thất bại! Vui lòng thử lại.");
+        alert('error', "<?php _e('login_failed') ?>");
       }
     });
   });

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
 
-  <title><?php echo $settings_r['site_title'] ?> - Tìm kiếm Villa & Homestay Hạ Long</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('find_rooms') ?></title>
   <meta name="description" content="Khám phá Villa biển và Homestay cao cấp tại Hạ Long. Đặt phòng trực tuyến với giá tốt nhất.">
   <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="css/rooms.css">
@@ -167,8 +167,8 @@
   <nav aria-label="breadcrumb" class="breadcrumb-wrapper">
     <div class="container">
       <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Tìm phòng</li>
+        <li class="breadcrumb-item"><a href="index.php"><?php _e('home') ?></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?php _e('find_rooms') ?></li>
       </ol>
     </div>
   </nav>
@@ -177,8 +177,8 @@
   <header class="rooms-page-header">
     <div class="container">
       <div class="text-center">
-        <h1 class="h-font">Villa & Homestay Hạ Long</h1>
-        <p class="subtitle">Không gian nghỉ dưỡng đẳng cấp tại vịnh Hạ Long</p>
+        <h1 class="h-font"><?php _e('villa_homestay') ?></h1>
+        <p class="subtitle"><?php _e('rooms_page_subtitle') ?></p>
         <div class="h-line"></div>
       </div>
     </div>
@@ -189,28 +189,28 @@
     <div class="row">
 
       <!-- ===== FILTER SIDEBAR ===== -->
-      <aside class="col-lg-3 col-md-12 mb-lg-0 mb-4 ps-lg-4" aria-label="Bộ lọc">
+      <aside class="col-lg-3 col-md-12 mb-lg-0 mb-4 ps-lg-4" aria-label="<?php echo __('filter') ?>">
         <div class="filter-sidebar">
           <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid flex-lg-column align-items-stretch p-0">
 
               <div class="filter-section">
-                <h4 class="mb-0"><i class="bi bi-funnel"></i> Bộ lọc</h4>
+                <h4 class="mb-0"><i class="bi bi-funnel"></i> <?php _e('filter') ?></h4>
               </div>
               <button class="navbar-toggler shadow-none mx-3 mb-2" type="button"
                 data-bs-toggle="collapse" data-bs-target="#filterDropdown">
                 <span class="navbar-toggler-icon"></span>
-                <span class="ms-2">Hiển thị bộ lọc</span>
+                <span class="ms-2"><?php _e('show_filter') ?></span>
               </button>
 
               <div class="collapse navbar-collapse flex-column align-items-stretch" id="filterDropdown">
 
                 <!-- ===== Loại hình ===== -->
                 <section class="filter-section">
-                  <h5><i class="bi bi-house"></i> <span>Loại hình</span></h5>
+                  <h5><i class="bi bi-house"></i> <span><?php _e('property_type') ?></span></h5>
                   <div class="prop-tabs-wrapper">
                     <button class="prop-tab active" data-prop="0" onclick="setPropType(0, this)">
-                      <i class="bi bi-grid"></i> Tất cả
+                      <i class="bi bi-grid"></i> <?php _e('all') ?>
                     </button>
                     <?php foreach($prop_types as $pt): ?>
                     <button class="prop-tab" data-prop="<?php echo $pt['id']; ?>" onclick="setPropType(<?php echo $pt['id']; ?>, this)">
@@ -222,7 +222,7 @@
 
                   <!-- Loại phòng (thay đổi theo loại hình) -->
                   <div id="room-type-section" style="display:none;">
-                    <label class="form-label small text-muted mb-1">Loại phòng</label>
+                    <label class="form-label small text-muted mb-1"><?php _e('room_type') ?></label>
                     <div class="room-type-pills" id="room-type-pills"></div>
                   </div>
                 </section>
@@ -230,9 +230,9 @@
                 <!-- ===== View ===== -->
                 <section class="filter-section">
                   <h5>
-                    <i class="bi bi-eye"></i> <span>View</span>
+                    <i class="bi bi-eye"></i> <span><?php _e('view_filter') ?></span>
                     <button id="view_btn" onclick="viewClear()" class="btn shadow-none filter-clear-btn text-secondary d-none">
-                      <i class="bi bi-x-circle"></i> Làm mới
+                      <i class="bi bi-x-circle"></i> <?php _e('reset') ?>
                     </button>
                   </h5>
                   <div class="view-pills">
@@ -248,13 +248,13 @@
                 <!-- ===== Ngày nhận/trả phòng ===== -->
                 <section class="filter-section">
                   <h5>
-                    <i class="bi bi-calendar-check"></i> <span>Kiểm tra phòng trống</span>
+                    <i class="bi bi-calendar-check"></i> <span><?php _e('check_availability') ?></span>
                     <button id="chk_avail_btn" onclick="chk_avail_clear()" class="btn shadow-none filter-clear-btn text-secondary d-none">
-                      <i class="bi bi-x-circle"></i> Làm mới
+                      <i class="bi bi-x-circle"></i> <?php _e('reset') ?>
                     </button>
                   </h5>
                   <div class="date-input-wrapper mb-3">
-                    <label class="form-label"><i class="bi bi-calendar-event me-1"></i>Nhận phòng</label>
+                    <label class="form-label"><i class="bi bi-calendar-event me-1"></i><?php _e('checkin') ?></label>
                     <div class="date-input-container">
                       <i class="bi bi-calendar3 date-input-icon"></i>
                       <input type="date" class="form-control shadow-none date-input date-input-mobile"
@@ -262,11 +262,11 @@
                         min="<?php echo date('Y-m-d'); ?>">
                       <input type="text" class="form-control shadow-none date-input date-input-desktop"
                         value="<?php echo $checkin_default ?>" id="checkin"
-                        placeholder="Chọn ngày nhận phòng" readonly>
+                        placeholder="<?php echo __('select_checkin') ?>" readonly>
                     </div>
                   </div>
                   <div class="date-input-wrapper">
-                    <label class="form-label"><i class="bi bi-calendar-x me-1"></i>Trả phòng</label>
+                    <label class="form-label"><i class="bi bi-calendar-x me-1"></i><?php _e('checkout') ?></label>
                     <div class="date-input-container">
                       <i class="bi bi-calendar3 date-input-icon"></i>
                       <input type="date" class="form-control shadow-none date-input date-input-mobile"
@@ -274,7 +274,7 @@
                         min="<?php echo date('Y-m-d'); ?>">
                       <input type="text" class="form-control shadow-none date-input date-input-desktop"
                         value="<?php echo $checkout_default ?>" id="checkout"
-                        placeholder="Chọn ngày trả phòng" readonly>
+                        placeholder="<?php echo __('select_checkout') ?>" readonly>
                     </div>
                   </div>
                 </section>
@@ -282,19 +282,19 @@
                 <!-- ===== Số khách ===== -->
                 <section class="filter-section">
                   <h5>
-                    <i class="bi bi-people"></i> <span>Số lượng khách</span>
+                    <i class="bi bi-people"></i> <span><?php _e('guest_count') ?></span>
                     <button id="guests_btn" onclick="guests_clear()" class="btn shadow-none filter-clear-btn text-secondary d-none">
-                      <i class="bi bi-x-circle"></i> Reset
+                      <i class="bi bi-x-circle"></i> <?php _e('reset') ?>
                     </button>
                   </h5>
                   <div class="row g-2">
                     <div class="col-6">
-                      <label class="form-label">Người lớn</label>
+                      <label class="form-label"><?php _e('adults') ?></label>
                       <input type="number" min="1" id="adults" value="<?php echo $adult_default ?>"
                         oninput="guests_filter()" class="form-control shadow-none">
                     </div>
                     <div class="col-6">
-                      <label class="form-label">Trẻ em</label>
+                      <label class="form-label"><?php _e('children') ?></label>
                       <input type="number" min="0" id="children" value="<?php echo $children_default ?>"
                         oninput="guests_filter()" class="form-control shadow-none">
                     </div>
@@ -304,9 +304,9 @@
                 <!-- ===== Tiện ích ===== -->
                 <section class="filter-section">
                   <h5>
-                    <i class="bi bi-star"></i> <span>Tiện ích</span>
+                    <i class="bi bi-star"></i> <span><?php _e('facilities') ?></span>
                     <button id="facilities_btn" onclick="facilities_clear()" class="btn shadow-none filter-clear-btn text-secondary d-none">
-                      <i class="bi bi-x-circle"></i> Làm mới
+                      <i class="bi bi-x-circle"></i> <?php _e('reset') ?>
                     </button>
                   </h5>
                   <div class="facilities-list">
@@ -330,7 +330,7 @@
                 <!-- Reset tất cả -->
                 <section class="filter-section pt-0">
                   <button onclick="resetAllFilters()" class="btn btn-outline-secondary btn-sm w-100 shadow-none">
-                    <i class="bi bi-arrow-counterclockwise"></i> Xoá tất cả bộ lọc
+                    <i class="bi bi-arrow-counterclockwise"></i> <?php _e('clear_all_filters') ?>
                   </button>
                 </section>
 
@@ -407,7 +407,7 @@
       if(types.length === 0){ section.style.display = 'none'; pills.innerHTML = ''; return; }
       section.style.display = 'block';
 
-      let html = `<button class="room-type-pill active" data-rt="0" onclick="setRoomType(0,this)">Tất cả</button>`;
+      let html = `<button class="room-type-pill active" data-rt="0" onclick="setRoomType(0,this)"><?php _e('all') ?></button>`;
       types.forEach(rt => {
         html += `<button class="room-type-pill" data-rt="${rt.id}" onclick="setRoomType(${rt.id},this)">${rt.name}</button>`;
       });
@@ -475,8 +475,8 @@
         + `&page=${page}`;
 
       roomsData.innerHTML = `<div class="rooms-loader" role="status">
-        <div class="spinner-border text-info"><span class="visually-hidden">Đang tải...</span></div>
-        <p class="rooms-loader-text">Đang tải danh sách phòng...</p>
+        <div class="spinner-border text-info"><span class="visually-hidden"><?php _e('loading') ?></span></div>
+        <p class="rooms-loader-text"><?php _e('loading_rooms') ?></p>
       </div>`;
 
       const xhr = new XMLHttpRequest();
@@ -487,11 +487,11 @@
           attachPaginationListeners();
           roomsData.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
-          roomsData.innerHTML = `<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Lỗi tải dữ liệu</h3></div>`;
+          roomsData.innerHTML = `<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'><?php _e('error_loading') ?></h3></div>`;
         }
       };
       xhr.onerror = () => {
-        roomsData.innerHTML = `<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Lỗi kết nối</h3></div>`;
+        roomsData.innerHTML = `<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'><?php _e('connection_error') ?></h3></div>`;
       };
       xhr.send();
     }
@@ -566,8 +566,14 @@
     // ===== Flatpickr =====
     flatpickr.localize({
       firstDayOfWeek: 1,
-      weekdays: { shorthand:["CN","T2","T3","T4","T5","T6","T7"], longhand:["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"] },
-      months: { shorthand:["T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"], longhand:["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"] }
+      weekdays: {
+        shorthand: <?php echo json_encode(explode(',', __('fp_weekdays_short'))); ?>,
+        longhand: <?php echo json_encode(explode(',', __('fp_weekdays_long'))); ?>
+      },
+      months: {
+        shorthand: <?php echo json_encode(explode(',', __('fp_months_short'))); ?>,
+        longhand: <?php echo json_encode(explode(',', __('fp_months_long'))); ?>
+      }
     });
 
     function initDatePickers(){

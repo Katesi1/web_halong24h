@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Đặc Sản Hạ Long</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('specialties') ?></title>
   <style>
     .specialty-hero {
       background: linear-gradient(135deg, #7b3f00 0%, #c05e1b 50%, #e07b39 100%);
@@ -90,9 +90,9 @@
   <!-- Hero -->
   <div class="specialty-hero">
     <div class="container text-center">
-      <span class="section-badge"><i class="bi bi-egg-fried me-1"></i> Ẩm thực đặc sắc</span>
-      <h1 class="fw-bold display-5 mb-3">Đặc Sản Hạ Long</h1>
-      <p class="lead mb-0 opacity-75">Hạ Long không chỉ nổi tiếng với vịnh biển kỳ vĩ mà còn sở hữu nền ẩm thực hải sản phong phú, độc đáo hàng đầu Việt Nam</p>
+      <span class="section-badge"><i class="bi bi-egg-fried me-1"></i> <?php _e('specialty_cuisine') ?></span>
+      <h1 class="fw-bold display-5 mb-3"><?php _e('halong_specialties') ?></h1>
+      <p class="lead mb-0 opacity-75"><?php _e('specialties_hero_sub') ?></p>
     </div>
   </div>
 
@@ -100,32 +100,32 @@
   <div class="container my-5">
     <div class="row align-items-center g-4">
       <div class="col-lg-6">
-        <h2 class="fw-bold h-font mb-3">Hương Vị Biển Cả Đông Bắc</h2>
+        <h2 class="fw-bold h-font mb-3"><?php _e('ne_sea_flavors') ?></h2>
         <p class="text-muted lh-lg">Nằm bên bờ Vịnh Hạ Long — Di sản Thiên nhiên Thế giới được UNESCO công nhận — thành phố Hạ Long (Quảng Ninh) sở hữu nguồn hải sản dồi dào, tươi ngon quanh năm. Từ những loài đặc sản quý hiếm chỉ có tại vùng biển này đến các món ăn dân dã đậm đà bản sắc làng chài, ẩm thực Hạ Long luôn để lại ấn tượng sâu sắc trong lòng du khách.</p>
         <p class="text-muted lh-lg">Đặc điểm khí hậu biển ôn hòa cùng hệ sinh thái phong phú của vịnh tạo nên những loài hải sản có hương vị đặc trưng không thể lẫn với bất kỳ nơi nào khác tại Việt Nam.</p>
         <div class="row g-3 mt-2">
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
-              <span class="fw-semibold">Hải sản tươi sống</span>
+              <span class="fw-semibold"><?php _e('fresh_seafood') ?></span>
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
-              <span class="fw-semibold">Đặc sản vùng miền</span>
+              <span class="fw-semibold"><?php _e('regional_specialties') ?></span>
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
-              <span class="fw-semibold">Phong phú đa dạng</span>
+              <span class="fw-semibold"><?php _e('diverse_rich') ?></span>
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
-              <span class="fw-semibold">Giá cả hợp lý</span>
+              <span class="fw-semibold"><?php _e('reasonable_price') ?></span>
             </div>
           </div>
         </div>
@@ -168,9 +168,9 @@
   <!-- Các đặc sản chính -->
   <div class="bg-white py-5">
     <div class="container">
-      <h2 class="fw-bold h-font text-center mb-2">Những Đặc Sản Không Thể Bỏ Qua</h2>
+      <h2 class="fw-bold h-font text-center mb-2"><?php _e('must_try') ?></h2>
       <div class="h-line mb-2" style="height:3px;width:80px;background:#c05e1b;margin:0 auto;"></div>
-      <p class="text-center text-muted mb-5">Danh sách những món ăn đặc trưng bạn nhất định phải thử khi đến Hạ Long</p>
+      <p class="text-center text-muted mb-5"><?php _e('must_try_sub') ?></p>
 
       <div class="row g-4">
 
@@ -360,9 +360,9 @@
 
   <!-- Địa điểm ăn uống nổi tiếng -->
   <div class="container my-5">
-    <h2 class="fw-bold h-font text-center mb-2">Địa Điểm Ẩm Thực Nổi Tiếng</h2>
+    <h2 class="fw-bold h-font text-center mb-2"><?php _e('famous_places') ?></h2>
     <div class="h-line mb-2" style="height:3px;width:80px;background:#c05e1b;margin:0 auto;"></div>
-    <p class="text-center text-muted mb-5">Những nơi bạn không thể bỏ lỡ khi muốn thưởng thức đặc sản Hạ Long</p>
+    <p class="text-center text-muted mb-5"><?php _e('famous_places_sub') ?></p>
 
     <div class="row g-4">
       <div class="col-lg-6">
@@ -419,7 +419,7 @@
   <!-- Mẹo khi mua đặc sản -->
   <div class="container mb-5">
     <div class="tip-box p-4">
-      <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Mẹo khi mua đặc sản Hạ Long</h5>
+      <h5 class="fw-bold mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i><?php _e('buying_tips') ?></h5>
       <div class="row g-3">
         <div class="col-md-6">
           <div class="d-flex">

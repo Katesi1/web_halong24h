@@ -4,6 +4,7 @@
   require('../admin/inc/essentials.php');
 
   session_start();
+  require('../inc/lang.php');
 
   if(isset($_GET['fetch_rooms']))
   {
@@ -27,15 +28,15 @@
       $checkout_date = new DateTime($chk_avail['checkout']);
 
       if($checkin_date == $checkout_date){
-        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày nhận phòng và trả phòng không thể trùng nhau.</p></div>";
+        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>" . __('invalid_date') . "</h3><p class='rooms-empty-text'>" . __('checkin_out_same') . "</p></div>";
         exit;
       }
       if($checkout_date < $checkin_date){
-        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày trả phòng phải sau ngày nhận phòng.</p></div>";
+        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>" . __('invalid_date') . "</h3><p class='rooms-empty-text'>" . __('checkout_after_checkin') . "</p></div>";
         exit;
       }
       if($checkin_date < $today_date){
-        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>Ngày không hợp lệ</h3><p class='rooms-empty-text'>Ngày nhận phòng không thể trong quá khứ.</p></div>";
+        echo "<div class='rooms-empty'><div class='rooms-empty-icon'>⚠️</div><h3 class='rooms-empty-title'>" . __('invalid_date') . "</h3><p class='rooms-empty-text'>" . __('checkin_not_past') . "</p></div>";
         exit;
       }
     }
@@ -151,7 +152,7 @@
       $book_btn = "";
       if(!$settings_r['shutdown']){
         $login = (isset($_SESSION['login']) && $_SESSION['login'] == true) ? 1 : 0;
-        $book_btn = "<button onclick='checkLoginToBook($login,{$room_data['id']})' class='room-btn room-btn-primary'><i class='bi bi-calendar-check'></i> Đặt ngay</button>";
+        $book_btn = "<button onclick='checkLoginToBook($login,{$room_data['id']})' class='room-btn room-btn-primary'><i class='bi bi-calendar-check'></i> " . __('book_now') . "</button>";
       }
 
       // === Badge loại hình ===
@@ -166,8 +167,8 @@
 
       // === Formatted price ===
       $formatted_price = $room_data['price'] > 0
-        ? number_format($room_data['price'], 0, ',', '.') . ' VNĐ/đêm'
-        : 'Liên hệ';
+        ? number_format($room_data['price'], 0, ',', '.') . ' ' . __('vnd_per_night_short')
+        : __('contact_price');
 
       // === Room type badge ===
       $rt_badge = !empty($room_data['room_type_name'])
@@ -198,7 +199,8 @@
         $code_badge = !empty($rd['code']) ? "<span class='room-code'>#{$rd['code']}</span>" : "";
         $checkin_str = $rd['checkin_time'] ? date('H:i', strtotime($rd['checkin_time'])) : '14:00';
         $checkout_str = $rd['checkout_time'] ? date('H:i', strtotime($rd['checkout_time'])) : '12:00';
-        $bedroom_info = $rd['bedroom_count'] ? "<span class='room-badge'><i class='bi bi-door-open'></i> {$rd['bedroom_count']} PN</span>" : "";
+        $br_label = __('bedroom_short');
+        $bedroom_info = $rd['bedroom_count'] ? "<span class='room-badge'><i class='bi bi-door-open'></i> {$rd['bedroom_count']} $br_label</span>" : "";
 
         $rooms_html .= "
           <article class='room-card-enhanced' itemscope itemtype='https://schema.org/LodgingBusiness'>
@@ -206,7 +208,7 @@
               <div class='col-md-5'>
                 <div class='room-image-wrapper'>
                   <a href='$url'>
-                    <img src='{$r['room_thumb']}' alt='Hình ảnh {$rd['name']}' class='img-fluid' loading='lazy' itemprop='image'>
+                    <img src='{$r['room_thumb']}' alt='{$GLOBALS['_LANG']['image_of']} {$rd['name']}' class='img-fluid' loading='lazy' itemprop='image'>
                   </a>
                   <div class='room-badge-overlay'>
                     {$r['type_badge']}
@@ -235,16 +237,16 @@
 
                   " . (!empty($r['facilities_data']) ? "
                   <div class='room-info-section'>
-                    <div class='room-info-label'><i class='bi bi-star'></i><span>Tiện ích</span></div>
+                    <div class='room-info-label'><i class='bi bi-star'></i><span>" . __('amenities') . "</span></div>
                     <div class='room-badges'>{$r['facilities_data']}</div>
                   </div>" : "") . "
 
                   <div class='room-info-section'>
-                    <div class='room-info-label'><i class='bi bi-people'></i><span>Sức chứa</span></div>
+                    <div class='room-info-label'><i class='bi bi-people'></i><span>" . __('capacity') . "</span></div>
                     <div class='room-badges'>
-                      <span class='room-badge'><i class='bi bi-person'></i> {$rd['adult']} Người lớn</span>
-                      <span class='room-badge'><i class='bi bi-person-heart'></i> {$rd['children']} Trẻ em</span>
-                      " . ($rd['max_guests'] ? "<span class='room-badge'><i class='bi bi-people-fill'></i> Tối đa {$rd['max_guests']} khách</span>" : "") . "
+                      <span class='room-badge'><i class='bi bi-person'></i> {$rd['adult']} " . __('adults_label') . "</span>
+                      <span class='room-badge'><i class='bi bi-person-heart'></i> {$rd['children']} " . __('children_label') . "</span>
+                      " . ($rd['max_guests'] ? "<span class='room-badge'><i class='bi bi-people-fill'></i> " . __('max_guests') . " {$rd['max_guests']} " . __('guest_unit') . "</span>" : "") . "
                     </div>
                   </div>
 
@@ -255,7 +257,7 @@
 
                   <div class='room-actions'>
                     {$r['book_btn']}
-                    <a href='$url' class='room-btn room-btn-outline'><i class='bi bi-info-circle'></i> Chi tiết</a>
+                    <a href='$url' class='room-btn room-btn-outline'><i class='bi bi-info-circle'></i> " . __('details') . "</a>
                   </div>
                 </div>
               </div>
@@ -284,7 +286,7 @@
 
         $start_item = $offset + 1;
         $end_item   = min($offset + $limit, $total_rooms);
-        $pagination_html .= "</ul></nav><p class='text-muted small mt-2'>Hiển thị $start_item–$end_item / $total_rooms phòng</p></div>";
+        $pagination_html .= "</ul></nav><p class='text-muted small mt-2'>" . __('showing_rooms') . " $start_item–$end_item " . __('of_rooms') . " $total_rooms " . __('rooms_unit') . "</p></div>";
       }
 
       echo $rooms_html . $pagination_html;
@@ -293,8 +295,8 @@
     {
       echo "<div class='rooms-empty'>
         <div class='rooms-empty-icon'>🔍</div>
-        <h3 class='rooms-empty-title'>Không tìm thấy phòng</h3>
-        <p class='rooms-empty-text'>Không có phòng nào phù hợp. Thử thay đổi bộ lọc hoặc ngày.</p>
+        <h3 class='rooms-empty-title'>" . __('no_rooms_found') . "</h3>
+        <p class='rooms-empty-text'>" . __('no_rooms_desc') . "</p>
       </div>";
     }
   }

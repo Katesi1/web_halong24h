@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <?php require('inc/links.php'); ?>
   <link rel="stylesheet" href="css/homepage.css">
-  <title><?php echo $settings_r['site_title'] ?> - Trang chủ</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('home') ?></title>
 </head>
 
 <body class="bg-light">
@@ -43,7 +43,7 @@
       <div class="col-lg-12 availability-form-card p-4 p-lg-5">
         <h5 class="availability-form-title h-font">
           <i class="bi bi-calendar-check"></i>
-          Tiến hành đặt phòng
+          <?php _e('check_booking') ?>
         </h5>
         <form action="rooms.php">
           <div class="row align-items-end">
@@ -51,7 +51,7 @@
               <div class="form-field-wrapper">
                 <label class="form-label">
                   <i class="bi bi-calendar-event"></i>
-                  Nhận phòng
+                  <?php _e('checkin') ?>
                 </label>
                 <i class="bi bi-calendar3 form-field-icon"></i>
                 <input type="date" class="form-control shadow-none" name="checkin" placeholder="dd/mm/yyyy" required>
@@ -61,7 +61,7 @@
               <div class="form-field-wrapper">
                 <label class="form-label">
                   <i class="bi bi-calendar-x"></i>
-                  Trả phòng
+                  <?php _e('checkout') ?>
                 </label>
                 <i class="bi bi-calendar3 form-field-icon"></i>
                 <input type="date" class="form-control shadow-none" name="checkout" placeholder="dd/mm/yyyy" required>
@@ -71,7 +71,7 @@
               <div class="form-field-wrapper">
                 <label class="form-label">
                   <i class="bi bi-people"></i>
-                  Người lớn
+                  <?php _e('adults') ?>
                 </label>
                 <i class="bi bi-person form-field-icon"></i>
                 <select class="form-select shadow-none" name="adult">
@@ -87,7 +87,7 @@
               <div class="form-field-wrapper">
                 <label class="form-label">
                   <i class="bi bi-emoji-smile"></i>
-                  Trẻ em
+                  <?php _e('children') ?>
                 </label>
                 <i class="bi bi-person-heart form-field-icon"></i>
                 <select class="form-select shadow-none" name="children">
@@ -104,11 +104,11 @@
               <div class="form-field-wrapper">
                 <label class="form-label" style="opacity: 0; visibility: hidden;">
                   <i class="bi bi-search"></i>
-                  Tìm kiếm
+                  <?php _e('search') ?>
                 </label>
                 <button type="submit" class="availability-search-btn text-white w-100">
                   <i class="bi bi-search"></i>
-                  Tìm kiếm
+                  <?php _e('search') ?>
                 </button>
               </div>
             </div>
@@ -122,8 +122,8 @@
   <section class="rooms-section py-5" aria-label="Danh sách phòng">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font">Danh sách phòng</h2>
-        <p class="text-muted mb-0">Khám phá các phòng nghỉ tiện nghi và thoải mái của chúng tôi</p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('rooms_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('rooms_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
@@ -165,7 +165,7 @@
           }
           if ($total_fac > $max_show) {
             $remaining = $total_fac - $max_show;
-            $facilities_html .= "<span class='room-badge room-badge-more'>+{$remaining} tiện ích khác</span>";
+            $facilities_html .= "<span class='room-badge room-badge-more'>+{$remaining} {$GLOBALS['_LANG']['more_amenities']}</span>";
           }
 
           // get features
@@ -214,11 +214,11 @@
             $area_text .= "m²";
           }
 
-          $bedroom_text = !empty($room_data['bedroom_count']) ? $room_data['bedroom_count'] . " PN" : "";
-          $bathroom_text = !empty($room_data['bathroom_count']) ? $room_data['bathroom_count'] . " WC" : "";
-          $guest_text = $room_data['adult'] . " NL";
+          $bedroom_text = !empty($room_data['bedroom_count']) ? $room_data['bedroom_count'] . " " . $GLOBALS['_LANG']['bedroom_short'] : "";
+          $bathroom_text = !empty($room_data['bathroom_count']) ? $room_data['bathroom_count'] . " " . $GLOBALS['_LANG']['bathroom_short'] : "";
+          $guest_text = $room_data['adult'] . " " . $GLOBALS['_LANG']['adult_short'];
           if ($room_data['children'] > 0) {
-            $guest_text .= ", " . $room_data['children'] . " TE";
+            $guest_text .= ", " . $room_data['children'] . " " . $GLOBALS['_LANG']['children_short'];
           }
 
           // Rating
@@ -261,7 +261,7 @@
           $room_json = [
             "@type" => "HotelRoom",
             "name" => $room_data['name'],
-            "description" => "Phòng nghỉ tại " . $settings_r['site_title'],
+            "description" => $GLOBALS['_LANG']['room_desc_at'] . " " . $settings_r['site_title'],
             "image" => $room_thumb,
             "offers" => [
               "@type" => "Offer",
@@ -313,7 +313,7 @@
                       <meta itemprop="price" content="{$room_data['price']}">
                       <meta itemprop="priceCurrency" content="VND">
                       <span class="price-value">$formatted_price</span>
-                      <span class="price-unit">VNĐ/đêm</span>
+                      <span class="price-unit">{$GLOBALS['_LANG']['vnd_per_night']}</span>
                     </span>
                   </div>
                 </div>
@@ -324,10 +324,10 @@
                   $rating_html
 
                   <div class="hp-specs">
-                    <span class="hp-spec" title="Diện tích"><i class="bi bi-aspect-ratio"></i> $area_text</span>
-                    <span class="hp-spec" title="Phòng ngủ"><i class="bi bi-door-closed"></i> $bedroom_text</span>
-                    <span class="hp-spec" title="Phòng tắm"><i class="bi bi-droplet"></i> $bathroom_text</span>
-                    <span class="hp-spec" title="Sức chứa"><i class="bi bi-people"></i> $guest_text</span>
+                    <span class="hp-spec" title="{$GLOBALS['_LANG']['area_label']}"><i class="bi bi-aspect-ratio"></i> $area_text</span>
+                    <span class="hp-spec" title="{$GLOBALS['_LANG']['bedroom_label']}"><i class="bi bi-door-closed"></i> $bedroom_text</span>
+                    <span class="hp-spec" title="{$GLOBALS['_LANG']['bathroom_label']}"><i class="bi bi-droplet"></i> $bathroom_text</span>
+                    <span class="hp-spec" title="{$GLOBALS['_LANG']['capacity_label']}"><i class="bi bi-people"></i> $guest_text</span>
                   </div>
 
                   <div class="hp-facilities">
@@ -339,8 +339,8 @@
                   <div class="room-actions">
                     <a href="room_details.php?id={$room_data['id']}"
                        class="btn btn-outline-primary room-detail-btn"
-                       aria-label="Xem chi tiết phòng {$room_data['name']}">
-                      <i class="bi bi-arrow-right me-2"></i>Xem chi tiết
+                       aria-label="{$GLOBALS['_LANG']['view_details']} {$room_data['name']}">
+                      <i class="bi bi-arrow-right me-2"></i>{$GLOBALS['_LANG']['view_details']}
                     </a>
                   </div>
                 </div>
@@ -372,7 +372,7 @@
           <a href="rooms.php"
             class="btn btn-outline-primary btn-lg rooms-view-more-btn"
             aria-label="Xem tất cả các phòng">
-            <i class="bi bi-arrow-right-circle me-2"></i>Tìm hiểu thêm
+            <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
           </a>
         </div>
       </div>
@@ -383,8 +383,8 @@
   <section class="facilities-section py-5" aria-label="Các tiện tích">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font">Các tiện tích</h2>
-        <p class="text-muted mb-0">Trải nghiệm các tiện ích đẳng cấp tại khách sạn của chúng tôi</p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('facilities_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('facilities_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
@@ -436,7 +436,7 @@
           <a href="facilities.php"
             class="btn btn-outline-primary btn-lg facilities-view-more-btn"
             aria-label="Xem tất cả các tiện tích">
-            <i class="bi bi-arrow-right-circle me-2"></i>Tìm hiểu thêm
+            <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
           </a>
         </div>
       </div>
@@ -447,8 +447,8 @@
   <section class="testimonials-section py-5" aria-label="Đánh giá dịch vụ">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font">Đánh giá dịch vụ</h2>
-        <p class="text-muted mb-0">Những chia sẻ chân thực từ khách hàng đã trải nghiệm dịch vụ của chúng tôi</p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('reviews_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('reviews_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
@@ -470,7 +470,7 @@
               echo '<div class="col-12 text-center py-5">
                 <div class="no-reviews-message">
                   <i class="bi bi-chat-quote fs-1 text-muted mb-3 d-block"></i>
-                  <p class="text-muted">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!</p>
+                  <p class="text-muted">' . __('no_reviews') . '</p>
                 </div>
               </div>';
             } else {
@@ -583,8 +583,8 @@
   <section class="contact-section py-5" aria-label="Liên hệ">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font">Liên hệ</h2>
-        <p class="text-muted mb-0">Chúng tôi luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của bạn</p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('contact_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('contact_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
@@ -605,7 +605,7 @@
                 <div class="contact-icon-wrapper phone-icon">
                   <i class="bi bi-telephone-fill"></i>
                 </div>
-                <h5 class="contact-card-title">Tổng đài viên</h5>
+                <h5 class="contact-card-title"><?php _e('hotline') ?></h5>
               </div>
               <div class="contact-card-body">
                 <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>"
@@ -626,7 +626,7 @@
                 <div class="contact-icon-wrapper social-icon">
                   <i class="bi bi-share-fill"></i>
                 </div>
-                <h5 class="contact-card-title">Theo dõi chúng tôi</h5>
+                <h5 class="contact-card-title"><?php _e('follow_us') ?></h5>
               </div>
               <div class="contact-card-body">
                 <div class="social-links">
@@ -722,19 +722,19 @@
         <form id="recovery-form">
           <div class="modal-header">
             <h5 class="modal-title d-flex align-items-center">
-              <i class="bi bi-shield-lock fs-3 me-2"></i> Tạo mật khẩu mới
+              <i class="bi bi-shield-lock fs-3 me-2"></i> <?php _e('create_new_password') ?>
             </h5>
           </div>
           <div class="modal-body">
             <div class="mb-4">
-              <label class="form-label">Mật khẩu mới</label>
+              <label class="form-label"><?php _e('new_password') ?></label>
               <input type="password" name="pass" required class="form-control shadow-none">
               <input type="hidden" name="email">
               <input type="hidden" name="token">
             </div>
             <div class="mb-2 text-end">
-              <button type="button" class="btn shadow-none me-2" data-bs-dismiss="modal">Huỷ</button>
-              <button type="submit" class="btn btn-dark shadow-none">Tiếp tục</button>
+              <button type="button" class="btn shadow-none me-2" data-bs-dismiss="modal"><?php _e('cancel') ?></button>
+              <button type="submit" class="btn btn-dark shadow-none"><?php _e('continue') ?></button>
             </div>
           </div>
         </form>
@@ -771,7 +771,7 @@
           </script>
         showModal;
     } else {
-      alert("error", "Liên kết không còn khả dụng!");
+      alert("error", __('link_expired'));
     }
   }
 
@@ -847,9 +847,9 @@
 
       xhr.onload = function() {
         if (this.responseText == 'failed') {
-          alert('error', "Khôi phục tài khoản thất bại!");
+          alert('error', "<?php _e('recovery_failed') ?>");
         } else {
-          alert('success', "Khôi phục tài khoản thành công!");
+          alert('success', "<?php _e('recovery_success') ?>");
           recovery_form.reset();
         }
       }
@@ -861,12 +861,12 @@
     flatpickr.localize({
       firstDayOfWeek: 1,
       weekdays: {
-        shorthand: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
-        longhand: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"]
+        shorthand: <?php echo json_encode(explode(',', __('fp_weekdays_short'))); ?>,
+        longhand: <?php echo json_encode(explode(',', __('fp_weekdays_long'))); ?>
       },
       months: {
-        shorthand: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
-        longhand: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]
+        shorthand: <?php echo json_encode(explode(',', __('fp_months_short'))); ?>,
+        longhand: <?php echo json_encode(explode(',', __('fp_months_long'))); ?>
       }
     });
 

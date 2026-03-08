@@ -11,20 +11,20 @@
       $q = "UPDATE `rating_review` SET `seen`=?";
       $values = [1];
       if(update($q,$values,'i')){
-        alert('success','Đã xem tất cả đánh giá!');
+        alert('success',__('seen_all_reviews'));
       }
       else{
-        alert('error','Thao tác thất bại!');
+        alert('error',__('action_failed'));
       }
     }
     else{
       $q = "UPDATE `rating_review` SET `seen`=? WHERE `sr_no`=?";
       $values = [1,$frm_data['seen']];
       if(update($q,$values,'ii')){
-        alert('success','Đã xem đánh giá!');
+        alert('success',__('seen_review'));
       }
       else{
-        alert('error','Thao tác thất bại!');
+        alert('error',__('action_failed'));
       }
     }
   }
@@ -36,20 +36,20 @@
     if($frm_data['del']=='all'){
       $q = "DELETE FROM `rating_review`";
       if(mysqli_query($con,$q)){
-        alert('success','Đã xoá tất cả đánh giá!');
+        alert('success',__('deleted_all_reviews'));
       }
       else{
-        alert('error','Thao tác thất bại!');
+        alert('error',__('action_failed'));
       }
     }
     else{
       $q = "DELETE FROM `rating_review` WHERE `sr_no`=?";
       $values = [$frm_data['del']];
       if(delete($q,$values,'i')){
-        alert('success','Đã xoá đánh giá!');
+        alert('success',__('deleted_review'));
       }
       else{
-        alert('error','Thao tác thất bại!');
+        alert('error',__('action_failed'));
       }
     }
   }
@@ -70,17 +70,17 @@
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-        <h3 class="mb-4">Đánh giá</h3>
+        <h3 class="mb-4"><?php _e('reviews_title') ?></h3>
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
 
             <div class="text-end mb-4">
               <a href="?seen=all" class="btn btn-dark rounded-pill shadow-none btn-sm">
-                <i class="bi bi-check-all"></i> Đã xem tất cả
+                <i class="bi bi-check-all"></i> <?php _e('mark_all_read') ?>
               </a>
               <a href="?del=all" class="btn btn-danger rounded-pill shadow-none btn-sm">
-                <i class="bi bi-trash"></i> Xoá tất cả
+                <i class="bi bi-trash"></i> <?php _e('delete_all') ?>
               </a>
             </div>
 
@@ -89,12 +89,12 @@
                 <thead>
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
-                    <th scope="col">Room Name</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col" width="30%">Review</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?php _e('room_name') ?></th>
+                    <th scope="col"><?php _e('name') ?></th>
+                    <th scope="col"><?php _e('rating') ?></th>
+                    <th scope="col" width="30%"><?php _e('review') ?></th>
+                    <th scope="col"><?php _e('date') ?></th>
+                    <th scope="col"><?php _e('action') ?></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,9 +113,9 @@
 
                       $seen='';
                       if($row['seen']!=1){
-                        $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary mb-2'>Mark as read</a> <br>";
+                        $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary mb-2'>{$GLOBALS['_LANG']['mark_read']}</a> <br>";
                       }
-                      $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'>Delete</a>";
+                      $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'>{$GLOBALS['_LANG']['delete_btn']}</a>";
 
                       echo<<<query
                         <tr>

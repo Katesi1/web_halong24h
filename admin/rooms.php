@@ -19,14 +19,14 @@
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-        <h3 class="mb-4">Danh sách phòng</h3>
+        <h3 class="mb-4"><?php _e('room_list_title') ?></h3>
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
 
             <div class="text-end mb-4">
               <button type="button" class="btn custom-bg text-white shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
-                <i class="bi bi-plus-square"></i> Thêm phòng
+                <i class="bi bi-plus-square"></i> <?php _e('add_room') ?>
               </button>
             </div>
 
@@ -35,13 +35,13 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tên phòng</th>
-                    <th scope="col">Loại phòng</th>
-                    <th scope="col">Diện tích</th>
-                    <th scope="col">Khách</th>
-                    <th scope="col">Giá/đêm</th>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Hành động</th>
+                    <th scope="col"><?php _e('room_name') ?></th>
+                    <th scope="col"><?php _e('room_type') ?></th>
+                    <th scope="col"><?php _e('area') ?></th>
+                    <th scope="col"><?php _e('guests') ?></th>
+                    <th scope="col"><?php _e('price_per_night') ?></th>
+                    <th scope="col"><?php _e('status') ?></th>
+                    <th scope="col"><?php _e('action') ?></th>
                   </tr>
                 </thead>
                 <tbody id="room-data">                 
@@ -64,19 +64,19 @@
       <form id="add_room_form" autocomplete="off">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Thêm Phòng</h5>
-            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            <h5 class="modal-title"><?php _e('add_room') ?></h5>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Tên phòng</label>
+                <label class="form-label fw-bold"><?php _e('room_name') ?></label>
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Loại phòng</label>
+                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
                 <select name="room_type_id" class="form-select shadow-none" required>
-                  <option value="" selected disabled>Chọn loại phòng</option>
+                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
                   <?php 
                     $res = selectAll('room_types');
                     while($opt = mysqli_fetch_assoc($res)){
@@ -88,28 +88,28 @@
                 </select>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Diện tích</label>
+                <label class="form-label fw-bold"><?php _e('area') ?></label>
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Giá/đêm (VNĐ)</label>
-                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="0 = Liên hệ">
+                <label class="form-label fw-bold"><?php _e('price_per_night') ?></label>
+                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="<?php _e('price_contact') ?>">
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Người lớn (Tiêu chuẩn)</label>
+                <label class="form-label fw-bold"><?php _e('adults_standard') ?></label>
                 <input type="number" min="1" name="adult" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Trẻ em (Tiêu chuẩn)</label>
+                <label class="form-label fw-bold"><?php _e('children_standard') ?></label>
                 <input type="number" min="0" name="children" class="form-control shadow-none" required>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Ảnh phòng</label>
+                <label class="form-label fw-bold"><?php _e('room_image') ?></label>
                 <input type="file" name="room_image" accept=".jpg,.jpeg,.png,.webp,.heic,.heif" class="form-control shadow-none">
-                <small class="text-muted">JPG, PNG, WEBP, HEIC — tối đa 10MB (HEIC sẽ tự động convert sang JPG)</small>
+                <small class="text-muted"><?php _e('image_formats') ?></small>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">View</label>
+                <label class="form-label fw-bold"><?php _e('view') ?></label>
                 <div class="row">
                   <?php
                     $res = selectAll('features');
@@ -138,7 +138,7 @@
                 </div>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Tiện ích</label>
+                <label class="form-label fw-bold"><?php _e('amenities') ?></label>
                 <div class="row">
                   <?php 
                     $res = selectAll('facilities');
@@ -156,14 +156,14 @@
                 </div>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Mô tả</label>
+                <label class="form-label fw-bold"><?php _e('description') ?></label>
                 <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Huỷ</button>
-            <button type="submit" class="btn custom-bg text-white shadow-none">Tiếp tục</button>
+            <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg text-white shadow-none"><?php _e('continue_btn') ?></button>
           </div>
         </div>
       </form>
@@ -177,19 +177,19 @@
       <form id="edit_room_form" autocomplete="off">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Cập nhật phòng</h5>
-            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            <h5 class="modal-title"><?php _e('update_room') ?></h5>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Tên phòng</label>
+                <label class="form-label fw-bold"><?php _e('room_name') ?></label>
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Loại phòng</label>
+                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
                 <select name="room_type_id" class="form-select shadow-none" required>
-                  <option value="" selected disabled>Chọn loại phòng</option>
+                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
                   <?php
                     $res = selectAll('room_types');
                     while($opt = mysqli_fetch_assoc($res)){
@@ -201,23 +201,23 @@
                 </select>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Diện tích</label>
+                <label class="form-label fw-bold"><?php _e('area') ?></label>
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Giá/đêm (VNĐ)</label>
-                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="0 = Liên hệ">
+                <label class="form-label fw-bold"><?php _e('price_per_night') ?></label>
+                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="<?php _e('price_contact') ?>">
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Người lớn (Tiêu chuẩn)</label>
+                <label class="form-label fw-bold"><?php _e('adults_standard') ?></label>
                 <input type="number" min="1" name="adult" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Trẻ em (Tiêu chuẩn)</label>
+                <label class="form-label fw-bold"><?php _e('children_standard') ?></label>
                 <input type="number" min="0" name="children" class="form-control shadow-none" required>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">View</label>
+                <label class="form-label fw-bold"><?php _e('view') ?></label>
                 <div class="row">
                   <?php
                     $res = selectAll('features');
@@ -235,7 +235,7 @@
                 </div>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Tiện ích</label>
+                <label class="form-label fw-bold"><?php _e('amenities') ?></label>
                 <div class="row">
                   <?php
                     $res = selectAll('facilities');
@@ -253,15 +253,15 @@
                 </div>
               </div>
               <div class="col-12 mb-3">
-                <label class="form-label fw-bold">Mô tả</label>
+                <label class="form-label fw-bold"><?php _e('description') ?></label>
                 <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
               </div>
               <input type="hidden" name="room_id">
             </div>
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Huỷ</button>
-            <button type="submit" class="btn custom-bg text-white shadow-none">Lưu thay đổi</button>
+            <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg text-white shadow-none"><?php _e('save_changes') ?></button>
           </div>
         </div>
       </form>
@@ -281,26 +281,26 @@
           <div id="image-alert"></div>
           <div class="border-bottom border-3 pb-3 mb-3">
             <form id="add_image_form">
-              <label class="form-label fw-bold">Thêm ảnh</label>
+              <label class="form-label fw-bold"><?php _e('add_image') ?></label>
               <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp,.heic,.heif" class="form-control shadow-none mb-3" required>
-              <small class="text-muted">HEIC sẽ tự động convert sang JPG</small>
-              <button class="btn custom-bg text-white shadow-none">Tải lên</button>
+              <small class="text-muted"><?php _e('heic_auto_convert') ?></small>
+              <button class="btn custom-bg text-white shadow-none"><?php _e('upload') ?></button>
               <input type="hidden" name="room_id">
             </form>
           </div>
           <div class="alert alert-info py-2 small mb-3">
             <i class="bi bi-info-circle"></i>
-            <strong>Ảnh chính</strong> = hiển thị trên card danh sách phòng. Các ảnh còn lại hiển thị ở trang chi tiết.
-            Nhấn <span class="badge bg-secondary"><i class="bi bi-star"></i></span> để chọn ảnh chính.
+            <?php _e('main_photo_note') ?>
+            <?php _e('click_set_main') ?> <span class="badge bg-secondary"><i class="bi bi-star"></i></span> <?php _e('to_set_main') ?>
           </div>
           <div class="table-responsive-lg" style="height: 350px; overflow-y: scroll;">
             <table class="table table-hover border text-start">
               <thead>
                 <tr class="bg-dark text-light sticky-top">
-                  <th scope="col" width="55%">Ảnh</th>
-                  <th scope="col">Loại</th>
-                  <th scope="col">Chọn chính</th>
-                  <th scope="col">Xoá</th>
+                  <th scope="col" width="55%"><?php _e('image') ?></th>
+                  <th scope="col"><?php _e('type') ?></th>
+                  <th scope="col"><?php _e('set_main') ?></th>
+                  <th scope="col"><?php _e('delete_btn') ?></th>
                 </tr>
               </thead>
               <tbody id="room-image-data">
@@ -325,7 +325,7 @@
       // Show loading
       const btn = document.activeElement;
       const origText = btn ? btn.innerHTML : '';
-      if (btn) btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang convert HEIC...';
+      if (btn) btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> <?php _e("heic_converting") ?>';
 
       try {
         const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.8 });

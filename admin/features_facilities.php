@@ -24,8 +24,8 @@ adminLogin();
       <!-- Page title -->
       <div class="d-flex align-items-center gap-3 mb-4">
         <div>
-          <h3 class="mb-0" style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#e2e8f0;">Không Gian &amp; Tiện ích</h3>
-          <p class="mb-0" style="font-size:13px;color:#64748b;">Quản lý loại căn hộ, không gian và tiện ích</p>
+          <h3 class="mb-0" style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#e2e8f0;"><?php _e('ff_page_title') ?></h3>
+          <p class="mb-0" style="font-size:13px;color:#64748b;"><?php _e('ff_page_sub') ?></p>
         </div>
       </div>
 
@@ -40,13 +40,13 @@ adminLogin();
                 style="border-bottom:1px solid rgba(129,140,248,.10);">
                 <div class="d-flex align-items-center gap-2">
                   <i class="bi bi-house-door" style="font-size:18px;color:#818cf8;"></i>
-                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Loại căn hộ</h5>
+                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;"><?php _e('property_types') ?></h5>
                   <span id="count-room-type" class="badge ms-1"
                     style="background:rgba(129,140,248,.15);color:#818cf8;font-size:11px;border:1px solid rgba(129,140,248,.25);">0</span>
                 </div>
                 <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#room-type-s"
                   style="background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.35);color:#818cf8;">
-                  <i class="bi bi-plus-lg me-1"></i>Thêm
+                  <i class="bi bi-plus-lg me-1"></i><?php _e('add_btn') ?>
                 </button>
               </div>
 
@@ -55,7 +55,7 @@ adminLogin();
                   <i class="bi bi-search position-absolute"
                     style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
                   <input type="text" id="search-room-type" class="form-control"
-                    style="padding-left:36px;" placeholder="Tìm kiếm loại căn hộ...">
+                    style="padding-left:36px;" placeholder="<?php _e('search_property') ?>">
                 </div>
               </div>
 
@@ -64,13 +64,13 @@ adminLogin();
                   <thead>
                     <tr>
                       <th style="width:60px;">#</th>
-                      <th>Tên loại</th>
-                      <th style="width:100px;">Thao tác</th>
+                      <th><?php _e('type_name') ?></th>
+                      <th style="width:100px;"><?php _e('actions') ?></th>
                     </tr>
                   </thead>
                   <tbody id="room-type-data">
                     <tr>
-                      <td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                      <td colspan="3" class="text-center py-5" style="color:#64748b;"><?php _e('loading') ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -92,13 +92,13 @@ adminLogin();
                 style="border-bottom:1px solid rgba(129,140,248,.10);">
                 <div class="d-flex align-items-center gap-2">
                   <i class="bi bi-layout-wtf" style="font-size:18px;color:#a78bfa;"></i>
-                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Không gian</h5>
+                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;"><?php _e('features_label') ?></h5>
                   <span id="count-feature" class="badge ms-1"
                     style="background:rgba(167,139,250,.15);color:#a78bfa;font-size:11px;border:1px solid rgba(167,139,250,.25);">0</span>
                 </div>
                 <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s"
                   style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:#a78bfa;">
-                  <i class="bi bi-plus-lg me-1"></i>Thêm
+                  <i class="bi bi-plus-lg me-1"></i><?php _e('add_btn') ?>
                 </button>
               </div>
 
@@ -107,7 +107,7 @@ adminLogin();
                   <i class="bi bi-search position-absolute"
                     style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
                   <input type="text" id="search-feature" class="form-control"
-                    style="padding-left:36px;" placeholder="Tìm kiếm không gian...">
+                    style="padding-left:36px;" placeholder="<?php _e('search_feature') ?>">
                 </div>
               </div>
 
@@ -116,13 +116,13 @@ adminLogin();
                   <thead>
                     <tr>
                       <th style="width:60px;">#</th>
-                      <th>Tên không gian</th>
-                      <th style="width:100px;">Thao tác</th>
+                      <th><?php _e('feature_name') ?></th>
+                      <th style="width:100px;"><?php _e('actions') ?></th>
                     </tr>
                   </thead>
                   <tbody id="features-data">
                     <tr>
-                      <td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                      <td colspan="3" class="text-center py-5" style="color:#64748b;"><?php _e('loading') ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -144,13 +144,13 @@ adminLogin();
             style="border-bottom:1px solid rgba(129,140,248,.10);">
             <div class="d-flex align-items-center gap-2">
               <i class="bi bi-grid-3x3-gap" style="font-size:18px;color:#60a5fa;"></i>
-              <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Tiện ích</h5>
+              <h5 class="m-0" style="font-weight:700;color:#e2e8f0;"><?php _e('facilities_label') ?></h5>
               <span id="count-facility" class="badge ms-1"
                 style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:11px;border:1px solid rgba(96,165,250,.25);">0</span>
             </div>
             <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s"
               style="background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:#60a5fa;">
-              <i class="bi bi-plus-lg me-1"></i>Thêm
+              <i class="bi bi-plus-lg me-1"></i><?php _e('add_btn') ?>
             </button>
           </div>
 
@@ -159,7 +159,7 @@ adminLogin();
               <i class="bi bi-search position-absolute"
                 style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
               <input type="text" id="search-facility" class="form-control"
-                style="padding-left:36px;" placeholder="Tìm kiếm tiện ích...">
+                style="padding-left:36px;" placeholder="<?php _e('search_facility') ?>">
             </div>
           </div>
 
@@ -169,14 +169,14 @@ adminLogin();
                 <tr>
                   <th style="width:60px;">#</th>
                   <th style="width:90px;">Icon</th>
-                  <th>Tên tiện ích</th>
-                  <th>Mô tả</th>
-                  <th style="width:100px;">Thao tác</th>
+                  <th><?php _e('facility_name') ?></th>
+                  <th><?php _e('description') ?></th>
+                  <th style="width:100px;"><?php _e('actions') ?></th>
                 </tr>
               </thead>
               <tbody id="facilities-data">
                 <tr>
-                  <td colspan="5" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                  <td colspan="5" class="text-center py-5" style="color:#64748b;"><?php _e('loading') ?></td>
                 </tr>
               </tbody>
             </table>
@@ -198,17 +198,17 @@ adminLogin();
       <form id="room_type_s_form">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Thêm loại căn hộ</h5>
+            <h5 class="modal-title"><?php _e('add_property_type') ?></h5>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label class="form-label fw-bold">Tên</label>
-              <input type="text" name="roomtype_name" class="form-control" placeholder="VD: Studio, 1 Bedroom..." required>
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="roomtype_name" class="form-control" placeholder="<?php _e('property_ph') ?>" required>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal">Huỷ</button>
-            <button type="submit" class="btn custom-bg">Thêm</button>
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('add_btn') ?></button>
           </div>
         </div>
       </form>
@@ -221,17 +221,17 @@ adminLogin();
       <form id="feature_s_form">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Thêm Không Gian</h5>
+            <h5 class="modal-title"><?php _e('add_feature') ?></h5>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label class="form-label fw-bold">Tên</label>
-              <input type="text" name="feature_name" class="form-control" placeholder="VD: Phòng khách, Ban công..." required>
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="feature_name" class="form-control" placeholder="<?php _e('feature_placeholder') ?>" required>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal">Huỷ</button>
-            <button type="submit" class="btn custom-bg">Thêm</button>
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('add_btn') ?></button>
           </div>
         </div>
       </form>
@@ -244,29 +244,29 @@ adminLogin();
       <form id="facility_s_form">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Thêm Tiện Ích</h5>
+            <h5 class="modal-title"><?php _e('add_facility') ?></h5>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label class="form-label fw-bold">Tên</label>
-              <input type="text" name="facility_name" class="form-control" placeholder="VD: Wifi, Điều hoà..." required>
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="facility_name" class="form-control" placeholder="<?php _e('facility_name_ph') ?>" required>
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Icon FontAwesome</label>
+              <label class="form-label fw-bold"><?php _e('icon_fa') ?></label>
               <div class="input-group">
                 <span class="input-group-text" id="icon-preview"><i class="fa-solid fa-check" style="width:20px;text-align:center;"></i></span>
-                <input type="text" name="facility_icon" class="form-control" placeholder="VD: fa-wifi, fa-bed, fa-tv..." id="facility_icon_input">
+                <input type="text" name="facility_icon" class="form-control" placeholder="<?php _e('icon_ph') ?>" id="facility_icon_input">
               </div>
-              <small class="text-muted">Xem danh sách icon tại <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a></small>
+              <small class="text-muted"><?php _e('icon_list_link') ?> <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a></small>
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Mô tả <span style="color:#64748b;font-weight:400;">(không bắt buộc)</span></label>
-              <textarea name="facility_desc" class="form-control" rows="3" placeholder="Mô tả ngắn về tiện ích..."></textarea>
+              <label class="form-label fw-bold"><?php _e('description') ?> <span style="color:#64748b;font-weight:400;">(<?php _e('optional') ?>)</span></label>
+              <textarea name="facility_desc" class="form-control" rows="3" placeholder="<?php _e('facility_desc_ph') ?>"></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal">Huỷ</button>
-            <button type="submit" class="btn custom-bg">Thêm</button>
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('add_btn') ?></button>
           </div>
         </div>
       </form>

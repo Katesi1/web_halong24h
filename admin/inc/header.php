@@ -24,7 +24,7 @@
   <!-- Mobile close header -->
   <div class="d-flex align-items-center justify-content-between d-lg-none px-3 py-2" style="border-bottom:1px solid rgba(0,245,255,.07);">
     <span style="font-size:10px;color:#2a4060;font-family:'JetBrains Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;">MENU</span>
-    <button class="btn p-1" id="closeSidebarMobile" style="color:#3a5070;font-size:18px;line-height:1;" aria-label="Đóng sidebar">
+    <button class="btn p-1" id="closeSidebarMobile" style="color:#3a5070;font-size:18px;line-height:1;" aria-label="<?php echo __('close') ?>">
       <i class="bi bi-x-lg"></i>
     </button>
   </div>
@@ -33,97 +33,97 @@
   <nav class="sidebar-nav" aria-label="Admin Navigation" style="padding-bottom:80px;">
     <ul class="nav flex-column" style="list-style:none;padding:0;margin:0;">
 
-      <li><div class="sidebar-section-label">TỔNG QUAN</div></li>
+      <li><div class="sidebar-section-label"><?php _e('admin_overview') ?></div></li>
 
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.php" data-title="Dashboard">
+        <a class="nav-link" href="dashboard.php" data-title="<?php echo __('admin_dashboard') ?>">
           <i class="bi bi-speedometer2"></i>
-          <span>Dashboard</span>
+          <span><?php _e('admin_dashboard') ?></span>
         </a>
       </li>
 
-      <li><div class="sidebar-section-label">ĐẶT PHÒNG</div></li>
+      <li><div class="sidebar-section-label"><?php _e('admin_bookings') ?></div></li>
 
       <li class="nav-item">
         <button class="collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#bookingLinks" aria-expanded="true" aria-controls="bookingLinks">
           <span style="display:flex;align-items:center;gap:11px;">
             <i class="bi bi-calendar-check" style="font-size:17px;width:20px;text-align:center;"></i>
-            <span>Đặt phòng</span>
+            <span><?php _e('admin_booking_menu') ?></span>
           </span>
           <i class="bi bi-chevron-down" style="font-size:11px;opacity:.5;transition:transform .2s;"></i>
         </button>
         <div class="collapse show submenu" id="bookingLinks">
           <ul class="nav flex-column" style="list-style:none;padding:0;margin:0;">
             <li class="nav-item">
-              <a class="nav-link" href="new_bookings.php" data-title="Đặt phòng mới">
+              <a class="nav-link" href="new_bookings.php" data-title="<?php echo __('admin_new_bookings') ?>">
                 <i class="bi bi-calendar-plus"></i>
-                <span>Đặt phòng mới</span>
+                <span><?php _e('admin_new_bookings') ?></span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="refund_bookings.php" data-title="Hoàn tiền">
+              <a class="nav-link" href="refund_bookings.php" data-title="<?php echo __('admin_refund') ?>">
                 <i class="bi bi-arrow-counterclockwise"></i>
-                <span>Hoàn tiền</span>
+                <span><?php _e('admin_refund') ?></span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="booking_records.php" data-title="Thống kê">
+              <a class="nav-link" href="booking_records.php" data-title="<?php echo __('admin_statistics') ?>">
                 <i class="bi bi-clipboard-data"></i>
-                <span>Thống kê</span>
+                <span><?php _e('admin_statistics') ?></span>
               </a>
             </li>
           </ul>
         </div>
       </li>
 
-      <li><div class="sidebar-section-label">QUẢN LÝ</div></li>
+      <li><div class="sidebar-section-label"><?php _e('admin_management') ?></div></li>
 
       <li class="nav-item">
-        <a class="nav-link" href="rooms.php" data-title="Danh sách phòng">
+        <a class="nav-link" href="rooms.php" data-title="<?php echo __('admin_rooms') ?>">
           <i class="bi bi-door-open"></i>
-          <span>Danh sách phòng</span>
+          <span><?php _e('admin_rooms') ?></span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="users.php" data-title="Người dùng">
+        <a class="nav-link" href="users.php" data-title="<?php echo __('admin_users') ?>">
           <i class="bi bi-people"></i>
-          <span>Người dùng</span>
+          <span><?php _e('admin_users') ?></span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="features_facilities.php" data-title="Tiện ích & Không gian">
+        <a class="nav-link" href="features_facilities.php" data-title="<?php echo __('admin_facilities') ?>">
           <i class="bi bi-grid-3x3-gap"></i>
-          <span>Tiện ích & Không gian</span>
+          <span><?php _e('admin_facilities') ?></span>
         </a>
       </li>
 
-      <li><div class="sidebar-section-label">NỘI DUNG</div></li>
+      <li><div class="sidebar-section-label"><?php _e('admin_content') ?></div></li>
 
       <li class="nav-item">
-        <a class="nav-link" href="carousel.php" data-title="Trình chiếu">
+        <a class="nav-link" href="carousel.php" data-title="<?php echo __('admin_carousel') ?>">
           <i class="bi bi-images"></i>
-          <span>Trình chiếu</span>
+          <span><?php _e('admin_carousel') ?></span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="user_queries.php" data-title="Tin nhắn">
+        <a class="nav-link" href="user_queries.php" data-title="<?php echo __('admin_messages') ?>">
           <i class="bi bi-chat-dots"></i>
-          <span>Tin nhắn</span>
+          <span><?php _e('admin_messages') ?></span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="rate_review.php" data-title="Đánh giá">
+        <a class="nav-link" href="rate_review.php" data-title="<?php echo __('admin_reviews') ?>">
           <i class="bi bi-star"></i>
-          <span>Đánh giá</span>
+          <span><?php _e('admin_reviews') ?></span>
         </a>
       </li>
 
-      <li><div class="sidebar-section-label">HỆ THỐNG</div></li>
+      <li><div class="sidebar-section-label"><?php _e('admin_system') ?></div></li>
 
       <li class="nav-item">
-        <a class="nav-link" href="settings.php" data-title="Cài đặt">
+        <a class="nav-link" href="settings.php" data-title="<?php echo __('admin_settings') ?>">
           <i class="bi bi-gear"></i>
-          <span>Cài đặt</span>
+          <span><?php _e('admin_settings') ?></span>
         </a>
       </li>
 
@@ -150,10 +150,10 @@
 
   <!-- Right: clock + logout -->
   <div class="d-flex align-items-center gap-3">
-    <div id="topbarClock" class="topbar-clock d-none d-md-block" aria-label="Giờ hiện tại"></div>
-    <a href="logout.php" class="btn-logout" title="Đăng xuất">
+    <div id="topbarClock" class="topbar-clock d-none d-md-block" aria-label="<?php echo __('admin_current_time') ?>"></div>
+    <a href="logout.php" class="btn-logout" title="<?php echo __('logout') ?>">
       <i class="bi bi-box-arrow-right me-1"></i>
-      <span>Đăng xuất</span>
+      <span><?php _e('logout') ?></span>
     </a>
   </div>
 

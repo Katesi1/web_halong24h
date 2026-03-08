@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Hồ sơ cá nhân</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('user_profile') ?></title>
   <style>
     /* ===== PROFILE PAGE ===== */
     .profile-page { background: #f4f6f9; min-height: 100vh; }
@@ -307,9 +307,9 @@
 
     <!-- Breadcrumb -->
     <div class="profile-breadcrumb">
-      <a href="index.php">Trang chủ</a>
+      <a href="index.php"><?php _e('home') ?></a>
       <span class="sep">›</span>
-      <span>Hồ sơ cá nhân</span>
+      <span><?php _e('user_profile') ?></span>
     </div>
 
     <div class="row g-4">
@@ -321,7 +321,7 @@
         <div class="profile-sidebar-card">
           <div class="profile-cover"></div>
           <div class="profile-avatar-wrap">
-            <div class="profile-avatar-container" onclick="document.getElementById('avatar-file-input').click()" title="Nhấp để đổi ảnh">
+            <div class="profile-avatar-container" onclick="document.getElementById('avatar-file-input').click()" title="<?php echo __('click_change_photo') ?>">
               <?php if ($u_fetch['profile'] == 'avatar-default.png'): ?>
                 <div class="profile-avatar-icon" id="avatar-icon-placeholder">
                   <i class="bi bi-person-fill"></i>
@@ -341,23 +341,23 @@
             <div class="profile-name"><?php echo htmlspecialchars($u_fetch['name']) ?></div>
             <div class="profile-email"><?php echo htmlspecialchars($u_fetch['email']) ?></div>
             <span class="profile-member-badge">
-              <i class="bi bi-calendar3 me-1"></i> Thành viên từ <?php echo $member_since ?>
+              <i class="bi bi-calendar3 me-1"></i> <?php _e('member_since') ?> <?php echo $member_since ?>
             </span>
           </div>
 
           <!-- Nav -->
           <nav class="profile-sidebar-nav">
             <button class="profile-nav-item active" onclick="switchTab('info', this)">
-              <i class="bi bi-person-fill"></i> Thông tin cá nhân
+              <i class="bi bi-person-fill"></i> <?php _e('personal_info') ?>
             </button>
             <button class="profile-nav-item" onclick="switchTab('security', this)">
-              <i class="bi bi-shield-lock-fill"></i> Bảo mật
+              <i class="bi bi-shield-lock-fill"></i> <?php _e('security') ?>
             </button>
             <button class="profile-nav-item" onclick="window.location.href='bookings.php'">
-              <i class="bi bi-calendar-check-fill"></i> Lịch sử đặt phòng
+              <i class="bi bi-calendar-check-fill"></i> <?php _e('booking_history') ?>
             </button>
             <button class="profile-nav-item danger" onclick="window.location.href='logout.php'">
-              <i class="bi bi-box-arrow-right"></i> Đăng xuất
+              <i class="bi bi-box-arrow-right"></i> <?php _e('logout') ?>
             </button>
           </nav>
         </div>
@@ -373,52 +373,52 @@
             <div class="profile-content-header">
               <div class="profile-content-icon"><i class="bi bi-person-fill"></i></div>
               <div>
-                <div class="profile-content-title">Thông tin cá nhân</div>
-                <div class="profile-content-subtitle">Cập nhật tên, số điện thoại và địa chỉ của bạn</div>
+                <div class="profile-content-title"><?php _e('personal_info') ?></div>
+                <div class="profile-content-subtitle"><?php _e('update_info_sub') ?></div>
               </div>
             </div>
             <div class="profile-content-body">
               <form id="info-form">
                 <div class="row g-4">
                   <div class="col-md-6">
-                    <label class="pf-label">Họ và tên</label>
+                    <label class="pf-label"><?php _e('full_name') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-person-fill"></i></span>
                       <input name="name" type="text" class="pf-input" value="<?php echo htmlspecialchars($u_fetch['name']) ?>" required>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label class="pf-label">Số điện thoại</label>
+                    <label class="pf-label"><?php _e('phone_number') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-telephone-fill"></i></span>
                       <input name="phonenum" type="tel" class="pf-input" value="<?php echo htmlspecialchars($u_fetch['phonenum']) ?>" required>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label class="pf-label">Ngày sinh</label>
+                    <label class="pf-label"><?php _e('date_of_birth') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-calendar-fill"></i></span>
                       <input name="dob" type="date" class="pf-input" value="<?php echo $u_fetch['dob'] ?>">
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label class="pf-label">Mã định danh (CCCD)</label>
+                    <label class="pf-label"><?php _e('id_card') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-card-text"></i></span>
-                      <input name="pincode" type="text" class="pf-input" value="<?php echo htmlspecialchars($u_fetch['pincode'] ?: '') ?>" placeholder="Nhập số CCCD">
+                      <input name="pincode" type="text" class="pf-input" value="<?php echo htmlspecialchars($u_fetch['pincode'] ?: '') ?>" placeholder="<?php echo __('enter_id') ?>">
                     </div>
                   </div>
                   <div class="col-12">
-                    <label class="pf-label">Địa chỉ</label>
+                    <label class="pf-label"><?php _e('address') ?></label>
                     <div class="pf-input-group" style="align-items:flex-start;">
                       <span class="pf-input-icon" style="padding-top:13px;"><i class="bi bi-geo-alt-fill"></i></span>
-                      <textarea name="address" class="pf-input" rows="2" style="resize:none; padding-top:12px;" placeholder="Địa chỉ của bạn"><?php echo htmlspecialchars($u_fetch['address'] ?: '') ?></textarea>
+                      <textarea name="address" class="pf-input" rows="2" style="resize:none; padding-top:12px;" placeholder="<?php echo __('your_address') ?>"><?php echo htmlspecialchars($u_fetch['address'] ?: '') ?></textarea>
                     </div>
                   </div>
                 </div>
                 <div class="mt-4">
                   <button type="submit" class="pf-save-btn">
-                    <i class="bi bi-check-circle-fill me-2"></i>Lưu thay đổi
+                    <i class="bi bi-check-circle-fill me-2"></i><?php _e('save_changes') ?>
                   </button>
                 </div>
               </form>
@@ -432,18 +432,18 @@
             <div class="profile-content-header">
               <div class="profile-content-icon"><i class="bi bi-shield-lock-fill"></i></div>
               <div>
-                <div class="profile-content-title">Bảo mật tài khoản</div>
-                <div class="profile-content-subtitle">Đổi mật khẩu để bảo vệ tài khoản của bạn</div>
+                <div class="profile-content-title"><?php _e('account_security') ?></div>
+                <div class="profile-content-subtitle"><?php _e('change_pass_sub') ?></div>
               </div>
             </div>
             <div class="profile-content-body">
               <form id="pass-form">
                 <div class="row g-4">
                   <div class="col-12">
-                    <label class="pf-label">Mật khẩu mới</label>
+                    <label class="pf-label"><?php _e('new_password') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-lock-fill"></i></span>
-                      <input name="new_pass" id="pf-new-pass" type="password" class="pf-input" required minlength="8" placeholder="Nhập mật khẩu mới">
+                      <input name="new_pass" id="pf-new-pass" type="password" class="pf-input" required minlength="8" placeholder="<?php echo __('enter_new_pass') ?>">
                       <button type="button" class="pf-eye-btn" onclick="pfTogglePass('pf-new-pass', this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                     <!-- Strength bar -->
@@ -454,25 +454,25 @@
                       <span id="pf-strength-label" class="pf-strength-label"></span>
                     </div>
                     <ul class="pf-pass-rules" id="pf-pass-rules">
-                      <li id="pf-rule-len"><i class="bi bi-x-circle-fill"></i> Ít nhất 8 ký tự</li>
-                      <li id="pf-rule-upper"><i class="bi bi-x-circle-fill"></i> Có chữ hoa (A–Z)</li>
-                      <li id="pf-rule-lower"><i class="bi bi-x-circle-fill"></i> Có chữ thường (a–z)</li>
-                      <li id="pf-rule-num"><i class="bi bi-x-circle-fill"></i> Có chữ số (0–9)</li>
-                      <li id="pf-rule-special"><i class="bi bi-x-circle-fill"></i> Có ký tự đặc biệt (!@#$…)</li>
+                      <li id="pf-rule-len"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_min_8') ?></li>
+                      <li id="pf-rule-upper"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_uppercase') ?></li>
+                      <li id="pf-rule-lower"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_lowercase') ?></li>
+                      <li id="pf-rule-num"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_number') ?></li>
+                      <li id="pf-rule-special"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_special') ?></li>
                     </ul>
                   </div>
                   <div class="col-12">
-                    <label class="pf-label">Xác nhận mật khẩu mới</label>
+                    <label class="pf-label"><?php _e('confirm_password') ?></label>
                     <div class="pf-input-group">
                       <span class="pf-input-icon"><i class="bi bi-shield-lock-fill"></i></span>
-                      <input name="confirm_pass" id="pf-confirm-pass" type="password" class="pf-input" required minlength="8" placeholder="Nhập lại mật khẩu mới">
+                      <input name="confirm_pass" id="pf-confirm-pass" type="password" class="pf-input" required minlength="8" placeholder="<?php echo __('confirm_new_pass') ?>">
                       <button type="button" class="pf-eye-btn" onclick="pfTogglePass('pf-confirm-pass', this)"><i class="bi bi-eye-slash"></i></button>
                     </div>
                   </div>
                 </div>
                 <div class="mt-4">
                   <button type="submit" class="pf-save-btn">
-                    <i class="bi bi-check-circle-fill me-2"></i>Đổi mật khẩu
+                    <i class="bi bi-check-circle-fill me-2"></i><?php _e('change_password') ?>
                   </button>
                 </div>
               </form>
@@ -530,16 +530,16 @@
         .then(r => r.text())
         .then(res => {
           if (res === 'inv_img') {
-            alert('error', 'Chỉ hỗ trợ định dạng JPG, WEBP & PNG!');
+            alert('error', '<?php _e("only_jpg_png_webp") ?>');
             if (currentAvatarIsDefault) showAvatarIcon();
             else showAvatarImg(currentAvatarSrc);
           } else if (res === 'upd_failed') {
-            alert('error', 'Tải ảnh lên thất bại!');
+            alert('error', '<?php _e("upload_failed") ?>');
           } else if (res == 1) {
-            alert('success', 'Ảnh đại diện đã được cập nhật!');
+            alert('success', '<?php _e("avatar_updated") ?>');
             setTimeout(() => window.location.reload(), 900);
           } else {
-            alert('error', 'Có lỗi xảy ra!');
+            alert('error', '<?php _e("error_occurred") ?>');
           }
         });
     });
@@ -558,9 +558,9 @@
       fetch('ajax/profile.php', { method: 'POST', body: data })
         .then(r => r.text())
         .then(res => {
-          if (res === 'phone_already') alert('error', 'Số điện thoại này đã được đăng ký!');
-          else if (res == 0) alert('error', 'Không có thay đổi nào được ghi nhận!');
-          else alert('success', 'Thông tin đã được cập nhật!');
+          if (res === 'phone_already') alert('error', '<?php _e("phone_already") ?>');
+          else if (res == 0) alert('error', '<?php _e("no_changes") ?>');
+          else alert('success', '<?php _e("info_updated") ?>');
         });
     });
 
@@ -587,11 +587,11 @@
     };
     const PF_STRENGTH_LEVELS = [
       { label: '',           color: '',        pct: 0   },
-      { label: 'Yếu',       color: '#e74c3c', pct: 20  },
-      { label: 'Yếu',       color: '#e74c3c', pct: 40  },
-      { label: 'Trung bình',color: '#f39c12', pct: 60  },
-      { label: 'Khá',       color: '#3498db', pct: 80  },
-      { label: 'Mạnh',      color: '#2D6A4F', pct: 100 },
+      { label: '<?php _e("strength_weak") ?>',       color: '#e74c3c', pct: 20  },
+      { label: '<?php _e("strength_weak") ?>',       color: '#e74c3c', pct: 40  },
+      { label: '<?php _e("strength_medium") ?>',color: '#f39c12', pct: 60  },
+      { label: '<?php _e("strength_good") ?>',       color: '#3498db', pct: 80  },
+      { label: '<?php _e("strength_strong") ?>',      color: '#2D6A4F', pct: 100 },
     ];
 
     function pfCheckStrength(val) {
@@ -623,11 +623,11 @@
       const confirmPass = this.elements['confirm_pass'].value;
 
       if (!pfCheckStrength(newPass)) {
-        alert('error', 'Mật khẩu phải có ít nhất 8 ký tự gồm chữ hoa, thường, số và ký tự đặc biệt!');
+        alert('error', '<?php _e("pass_weak_msg") ?>');
         return;
       }
       if (newPass !== confirmPass) {
-        alert('error', 'Mật khẩu xác nhận không khớp!');
+        alert('error', '<?php _e("pass_mismatch") ?>');
         return;
       }
 
@@ -639,10 +639,10 @@
       fetch('ajax/profile.php', { method: 'POST', body: data })
         .then(r => r.text())
         .then(res => {
-          if (res === 'mismatch') alert('error', 'Mật khẩu không khớp!');
-          else if (res === 'pass_weak') alert('error', 'Mật khẩu không đủ mạnh!');
-          else if (res == 0) alert('error', 'Cập nhật thất bại!');
-          else { alert('success', 'Mật khẩu đã được thay đổi!'); this.reset(); pfCheckStrength(''); }
+          if (res === 'mismatch') alert('error', '<?php _e("pass_mismatch") ?>');
+          else if (res === 'pass_weak') alert('error', '<?php _e("pass_not_strong") ?>');
+          else if (res == 0) alert('error', '<?php _e("update_failed") ?>');
+          else { alert('success', '<?php _e("pass_changed") ?>'); this.reset(); pfCheckStrength(''); }
         });
     });
   </script>

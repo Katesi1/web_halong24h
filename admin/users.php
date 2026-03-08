@@ -19,13 +19,13 @@
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-        <h3 class="mb-4">Danh sách người dùng</h3>
+        <h3 class="mb-4"><?php _e('user_list') ?></h3>
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
 
             <div class="text-end mb-4">
-              <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search...">
+              <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="<?php _e('type_to_search') ?>">
             </div>
 
             <div class="table-responsive">
@@ -33,15 +33,15 @@
                 <thead>
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col"><?php _e('name') ?></th>
                     <th scope="col">Email</th>
-                    <th scope="col">Phone no.</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Verified</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?php _e('phone_number') ?></th>
+                    <th scope="col"><?php _e('location') ?></th>
+                    <th scope="col"><?php _e('dob') ?></th>
+                    <th scope="col"><?php _e('verified') ?></th>
+                    <th scope="col"><?php _e('status') ?></th>
+                    <th scope="col"><?php _e('date') ?></th>
+                    <th scope="col"><?php _e('action') ?></th>
                   </tr>
                 </thead>
                 <tbody id="users-data">                 

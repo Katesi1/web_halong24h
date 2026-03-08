@@ -6,6 +6,7 @@
   require('admin/inc/essentials.php');
 
   session_start();
+  require('inc/lang.php');
 
   // Lấy thông tin liên hệ để lấy số Zalo
   $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
@@ -70,16 +71,16 @@
     $checkout_formatted = date("d/m/Y", strtotime($frm_data['checkout']));
     $days = date_diff(new DateTime($frm_data['checkin']), new DateTime($frm_data['checkout']))->days;
     
-    $zalo_message = "Xin chào! Tôi muốn đặt phòng với thông tin sau:\n\n";
-    $zalo_message .= "📋 Mã đặt phòng: " . $booking_code . "\n";
-    $zalo_message .= "👤 Tên khách hàng: " . $frm_data['name'] . "\n";
-    $zalo_message .= "📞 Số điện thoại: " . $frm_data['phonenum'] . "\n";
-    $zalo_message .= "🏨 Tên phòng: " . $_SESSION['room']['name'] . "\n";
-    $zalo_message .= "📅 Ngày nhận phòng: " . $checkin_formatted . "\n";
-    $zalo_message .= "📅 Ngày trả phòng: " . $checkout_formatted . "\n";
-    $zalo_message .= "🌙 Số đêm: " . $days . " đêm\n";
-    $zalo_message .= "💰 Tổng tiền: " . number_format($TXN_AMOUNT, 0, ',', '.') . " VND\n\n";
-    $zalo_message .= "Vui lòng xác nhận đặt phòng này. Cảm ơn!";
+    $zalo_message = __('zalo_greeting') . "\n\n";
+    $zalo_message .= "📋 " . __('zalo_booking_code') . ": " . $booking_code . "\n";
+    $zalo_message .= "👤 " . __('zalo_customer') . ": " . $frm_data['name'] . "\n";
+    $zalo_message .= "📞 " . __('zalo_phone') . ": " . $frm_data['phonenum'] . "\n";
+    $zalo_message .= "🏨 " . __('zalo_room') . ": " . $_SESSION['room']['name'] . "\n";
+    $zalo_message .= "📅 " . __('zalo_checkin') . ": " . $checkin_formatted . "\n";
+    $zalo_message .= "📅 " . __('zalo_checkout') . ": " . $checkout_formatted . "\n";
+    $zalo_message .= "🌙 " . __('zalo_nights') . ": " . $days . " " . __('zalo_night_unit') . "\n";
+    $zalo_message .= "💰 " . __('zalo_total') . ": " . number_format($TXN_AMOUNT, 0, ',', '.') . " VND\n\n";
+    $zalo_message .= __('zalo_confirm');
     
     // Tạo link Zalo
     // Lấy số điện thoại từ link Zalo hoặc từ pn1

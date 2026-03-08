@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Liên hệ</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('contact') ?></title>
   <style>
     .contact-hero {
       background: linear-gradient(135deg, #1a3c34 0%, #2D6A4F 50%, #40916C 100%);
@@ -112,9 +112,9 @@
   <!-- Hero -->
   <div class="contact-hero">
     <div class="container text-center">
-      <span class="section-badge"><i class="bi bi-headset me-1"></i> Hỗ trợ 24/7</span>
-      <h1 class="fw-bold display-5 mb-3">Liên Hệ Với Chúng Tôi</h1>
-      <p class="lead mb-0 opacity-75">Chúng tôi luôn sẵn sàng hỗ trợ bạn — hãy liên hệ qua hotline, email hoặc để lại lời nhắn để được tư vấn nhanh nhất</p>
+      <span class="section-badge"><i class="bi bi-headset me-1"></i> <?php _e('support_24_7') ?></span>
+      <h1 class="fw-bold display-5 mb-3"><?php _e('contact_us') ?></h1>
+      <p class="lead mb-0 opacity-75"><?php _e('contact_hero_sub') ?></p>
     </div>
   </div>
 
@@ -136,7 +136,7 @@
               <i class="bi bi-geo-alt-fill"></i>
             </div>
             <div>
-              <p class="fw-semibold mb-0 small text-muted">Địa chỉ</p>
+              <p class="fw-semibold mb-0 small text-muted"><?php _e('address') ?></p>
               <a href="<?php echo $contact_r['gmap'] ?>" target="_blank" class="text-decoration-none text-dark fw-medium">
                 <?php echo $contact_r['address'] ?>
               </a>
@@ -149,7 +149,7 @@
               <i class="bi bi-telephone-fill"></i>
             </div>
             <div>
-              <p class="fw-semibold mb-0 small text-muted">Hotline hỗ trợ</p>
+              <p class="fw-semibold mb-0 small text-muted"><?php _e('support_hotline') ?></p>
               <a href="tel:+<?php echo $contact_r['pn1'] ?>" class="text-decoration-none text-dark fw-medium">
                 +<?php echo $contact_r['pn1'] ?>
               </a>
@@ -162,7 +162,7 @@
               <i class="bi bi-envelope-fill"></i>
             </div>
             <div>
-              <p class="fw-semibold mb-0 small text-muted">Email</p>
+              <p class="fw-semibold mb-0 small text-muted"><?php _e('email') ?></p>
               <a href="mailto:<?php echo $contact_r['email'] ?>" class="text-decoration-none text-dark fw-medium">
                 <?php echo $contact_r['email'] ?>
               </a>
@@ -175,8 +175,8 @@
               <i class="bi bi-clock-fill"></i>
             </div>
             <div>
-              <p class="fw-semibold mb-0 small text-muted">Giờ làm việc</p>
-              <span class="text-dark fw-medium">Thứ 2 – Chủ nhật: 7:00 – 22:00</span>
+              <p class="fw-semibold mb-0 small text-muted"><?php _e('working_hours') ?></p>
+              <span class="text-dark fw-medium"><?php _e('working_hours_value') ?></span>
             </div>
           </div>
 
@@ -186,7 +186,7 @@
               <i class="bi bi-share-fill"></i>
             </div>
             <div>
-              <p class="fw-semibold mb-1 small text-muted">Theo dõi chúng tôi</p>
+              <p class="fw-semibold mb-1 small text-muted"><?php _e('follow_us') ?></p>
               <div class="d-flex gap-2">
                 <?php if ($contact_r['tw'] != ''): ?>
                   <a href="<?php echo htmlspecialchars($contact_r['tw'] ?? '') ?>" class="social-link" title="Twitter">
@@ -209,13 +209,13 @@
       <!-- Form liên hệ -->
       <div class="col-lg-7">
         <div class="card form-card p-4 p-lg-5">
-          <h4 class="fw-bold h-font mb-1">Để Lại Lời Nhắn</h4>
-          <p class="text-muted small mb-4">Điền thông tin bên dưới — chúng tôi sẽ phản hồi trong vòng 24 giờ</p>
+          <h4 class="fw-bold h-font mb-1"><?php _e('leave_message') ?></h4>
+          <p class="text-muted small mb-4"><?php _e('message_form_sub') ?></p>
 
           <form method="POST">
             <div class="row g-3">
               <div class="col-md-6">
-                <label class="form-label fw-medium">Họ và tên <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium"><?php _e('full_name') ?> <span class="text-danger">*</span></label>
                 <input name="name" required type="text" class="form-control shadow-none rounded-3" placeholder="Nguyễn Văn A">
               </div>
               <div class="col-md-6">
@@ -223,16 +223,16 @@
                 <input name="email" required type="email" class="form-control shadow-none rounded-3" placeholder="email@example.com">
               </div>
               <div class="col-12">
-                <label class="form-label fw-medium">Tiêu đề <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium"><?php _e('subject') ?> <span class="text-danger">*</span></label>
                 <input name="subject" required type="text" class="form-control shadow-none rounded-3" placeholder="Tôi muốn hỏi về...">
               </div>
               <div class="col-12">
-                <label class="form-label fw-medium">Nội dung <span class="text-danger">*</span></label>
+                <label class="form-label fw-medium"><?php _e('message') ?> <span class="text-danger">*</span></label>
                 <textarea name="message" required class="form-control shadow-none rounded-3" rows="6" style="resize: none;" placeholder="Nhập nội dung tin nhắn của bạn tại đây..."></textarea>
               </div>
               <div class="col-12">
                 <button type="submit" name="send" class="btn btn-submit">
-                  <i class="bi bi-send-fill me-2"></i>Gửi tin nhắn
+                  <i class="bi bi-send-fill me-2"></i><?php _e('send_message') ?>
                 </button>
               </div>
             </div>
@@ -241,14 +241,14 @@
 
         <!-- Câu hỏi thường gặp nhanh -->
         <div class="card form-card p-4 mt-4">
-          <h6 class="fw-bold mb-3"><i class="bi bi-lightning-fill text-warning me-2"></i>Câu hỏi thường gặp</h6>
+          <h6 class="fw-bold mb-3"><i class="bi bi-lightning-fill text-warning me-2"></i><?php _e('faq_title') ?></h6>
           <div class="row g-3">
             <div class="col-md-6">
               <div class="d-flex align-items-start">
                 <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
                 <div>
-                  <p class="fw-semibold small mb-0">Giờ nhận phòng là mấy giờ?</p>
-                  <p class="text-muted small mb-0">Check-in: 14:00 | Check-out: 12:00</p>
+                  <p class="fw-semibold small mb-0"><?php _e('faq_checkin_q') ?></p>
+                  <p class="text-muted small mb-0"><?php _e('faq_checkin_a') ?></p>
                 </div>
               </div>
             </div>
@@ -256,8 +256,8 @@
               <div class="d-flex align-items-start">
                 <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
                 <div>
-                  <p class="fw-semibold small mb-0">Có chỗ đậu xe không?</p>
-                  <p class="text-muted small mb-0">Có bãi đậu xe miễn phí cho khách lưu trú</p>
+                  <p class="fw-semibold small mb-0"><?php _e('faq_parking_q') ?></p>
+                  <p class="text-muted small mb-0"><?php _e('faq_parking_a') ?></p>
                 </div>
               </div>
             </div>
@@ -265,8 +265,8 @@
               <div class="d-flex align-items-start">
                 <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
                 <div>
-                  <p class="fw-semibold small mb-0">Có dịch vụ đưa đón không?</p>
-                  <p class="text-muted small mb-0">Có, đặt trước ít nhất 24 giờ qua hotline</p>
+                  <p class="fw-semibold small mb-0"><?php _e('faq_shuttle_q') ?></p>
+                  <p class="text-muted small mb-0"><?php _e('faq_shuttle_a') ?></p>
                 </div>
               </div>
             </div>
@@ -274,8 +274,8 @@
               <div class="d-flex align-items-start">
                 <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
                 <div>
-                  <p class="fw-semibold small mb-0">Có thể hủy phòng không?</p>
-                  <p class="text-muted small mb-0">Miễn phí hủy trước 48 giờ khi nhận phòng</p>
+                  <p class="fw-semibold small mb-0"><?php _e('faq_cancel_q') ?></p>
+                  <p class="text-muted small mb-0"><?php _e('faq_cancel_a') ?></p>
                 </div>
               </div>
             </div>
@@ -293,9 +293,9 @@
       $values = [$frm_data['name'], $frm_data['email'], $frm_data['subject'], $frm_data['message']];
       $res = insert($q, $values, 'ssss');
       if ($res == 1) {
-        alert('success', 'Tin nhắn đã được gửi thành công!');
+        alert('success', __('msg_sent_success'));
       } else {
-        alert('error', 'Hệ thống đang được bảo trì! Hãy thử lại sau ít phút.');
+        alert('error', __('msg_sent_failed'));
       }
     }
   ?>

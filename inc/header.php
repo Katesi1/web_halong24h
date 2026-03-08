@@ -7,25 +7,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link me-2" href="index.php">Trang chủ</a>
+          <a class="nav-link me-2" href="index.php"><?php _e('nav_home') ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="rooms.php">Danh sách phòng</a>
+          <a class="nav-link me-2" href="rooms.php"><?php _e('nav_rooms') ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="services.php">Dịch Vụ</a>
+          <a class="nav-link me-2" href="services.php"><?php _e('nav_services') ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="specialties.php">Đặc sản Hạ Long</a>
+          <a class="nav-link me-2" href="specialties.php"><?php _e('nav_specialties') ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="blog.php">Blog cẩm nang</a>
+          <a class="nav-link me-2" href="blog.php"><?php _e('nav_blog') ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="contact.php">Liên hệ</a>
+          <a class="nav-link me-2" href="contact.php"><?php _e('nav_contact') ?></a>
         </li>
       </ul>
-      <div class="d-flex">
+      <div class="d-flex align-items-center">
+        <?php require('inc/lang_switcher.php'); ?>
         <?php
           if(isset($_SESSION['login']) && $_SESSION['login']==true)
           {
@@ -54,7 +55,7 @@
                     $avatar_dd
                     <div class="dd-user-text">
                       <div class="dd-user-name">$uname</div>
-                      <div class="dd-user-role">Thành viên</div>
+                      <div class="dd-user-role">{$GLOBALS['_LANG']['member']}</div>
                     </div>
                   </div>
                   <div class="dd-divider"></div>
@@ -62,21 +63,21 @@
                   <a class="dd-item" href="profile.php">
                     <span class="dd-item-icon"><i class="bi bi-person-fill"></i></span>
                     <div>
-                      <div class="dd-item-label">Hồ sơ cá nhân</div>
-                      <div class="dd-item-sub">Cập nhật thông tin</div>
+                      <div class="dd-item-label">{$GLOBALS['_LANG']['user_profile']}</div>
+                      <div class="dd-item-sub">{$GLOBALS['_LANG']['update_info']}</div>
                     </div>
                   </a>
                   <a class="dd-item" href="bookings.php">
                     <span class="dd-item-icon"><i class="bi bi-calendar-check-fill"></i></span>
                     <div>
-                      <div class="dd-item-label">Lịch sử đặt phòng</div>
-                      <div class="dd-item-sub">Xem và quản lý đặt phòng</div>
+                      <div class="dd-item-label">{$GLOBALS['_LANG']['booking_history']}</div>
+                      <div class="dd-item-sub">{$GLOBALS['_LANG']['view_manage_booking']}</div>
                     </div>
                   </a>
                   <div class="dd-divider"></div>
                   <a class="dd-item dd-item-danger" href="logout.php">
                     <span class="dd-item-icon danger"><i class="bi bi-box-arrow-right"></i></span>
-                    <div class="dd-item-label">Đăng xuất</div>
+                    <div class="dd-item-label">{$GLOBALS['_LANG']['logout']}</div>
                   </a>
                 </div>
               </div>
@@ -86,10 +87,10 @@
           {
             echo<<<data
               <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Đăng nhập
+                {$GLOBALS['_LANG']['login']}
               </button>
               <button type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#registerModal">
-                Đăng ký
+                {$GLOBALS['_LANG']['register']}
               </button>
             data;
           }
@@ -113,31 +114,31 @@
           <div class="auth-modal-icon">
             <i class="bi bi-person-fill"></i>
           </div>
-          <h4 class="auth-modal-title">Chào mừng trở lại!</h4>
-          <p class="auth-modal-subtitle">Đăng nhập để tiếp tục đặt phòng</p>
+          <h4 class="auth-modal-title"><?php _e('welcome_back') ?></h4>
+          <p class="auth-modal-subtitle"><?php _e('login_subtitle') ?></p>
         </div>
 
         <!-- Body -->
         <div class="auth-modal-body">
           <div class="auth-input-group mb-3">
             <span class="auth-input-icon"><i class="bi bi-envelope-fill"></i></span>
-            <input type="text" name="email_mob" required class="auth-input" placeholder="Email hoặc số điện thoại">
+            <input type="text" name="email_mob" required class="auth-input" placeholder="<?php _e('email_or_phone') ?>">
           </div>
           <div class="auth-input-group mb-4">
             <span class="auth-input-icon"><i class="bi bi-lock-fill"></i></span>
-            <input type="password" name="pass" required class="auth-input" placeholder="Mật khẩu">
+            <input type="password" name="pass" required class="auth-input" placeholder="<?php _e('password') ?>">
           </div>
 
           <button type="submit" class="auth-submit-btn">
-            <i class="bi bi-box-arrow-in-right me-2"></i> Đăng nhập
+            <i class="bi bi-box-arrow-in-right me-2"></i> <?php _e('login') ?>
           </button>
 
-          <div class="auth-divider"><span>hoặc</span></div>
+          <div class="auth-divider"><span><?php _e('or') ?></span></div>
 
           <div class="auth-switch-text">
-            Chưa có tài khoản?
+            <?php _e('no_account') ?>
             <a href="#" class="auth-switch-link" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">
-              Đăng ký ngay
+              <?php _e('register_now') ?>
             </a>
           </div>
         </div>
@@ -161,8 +162,8 @@
           <div class="auth-modal-icon">
             <i class="bi bi-person-plus-fill"></i>
           </div>
-          <h4 class="auth-modal-title">Tạo tài khoản mới</h4>
-          <p class="auth-modal-subtitle">Đăng ký miễn phí và đặt phòng ngay hôm nay</p>
+          <h4 class="auth-modal-title"><?php _e('create_account') ?></h4>
+          <p class="auth-modal-subtitle"><?php _e('register_subtitle') ?></p>
         </div>
 
         <!-- Body -->
@@ -171,25 +172,25 @@
             <div class="col-12">
               <div class="auth-input-group">
                 <span class="auth-input-icon"><i class="bi bi-person-fill"></i></span>
-                <input name="name" type="text" class="auth-input" required placeholder="Họ và tên">
+                <input name="name" type="text" class="auth-input" required placeholder="<?php _e('full_name') ?>">
               </div>
             </div>
             <div class="col-12">
               <div class="auth-input-group">
                 <span class="auth-input-icon"><i class="bi bi-envelope-fill"></i></span>
-                <input name="email" type="email" class="auth-input" required placeholder="Địa chỉ email">
+                <input name="email" type="email" class="auth-input" required placeholder="<?php _e('email_address') ?>">
               </div>
             </div>
             <div class="col-12">
               <div class="auth-input-group">
                 <span class="auth-input-icon"><i class="bi bi-telephone-fill"></i></span>
-                <input name="phonenum" type="tel" class="auth-input" required placeholder="Số điện thoại">
+                <input name="phonenum" type="tel" class="auth-input" required placeholder="<?php _e('phone_number') ?>">
               </div>
             </div>
             <div class="col-12">
               <div class="auth-input-group">
                 <span class="auth-input-icon"><i class="bi bi-lock-fill"></i></span>
-                <input name="pass" id="reg-pass" type="password" class="auth-input" required minlength="8" placeholder="Mật khẩu">
+                <input name="pass" id="reg-pass" type="password" class="auth-input" required minlength="8" placeholder="<?php _e('password') ?>">
                 <button type="button" class="auth-eye-btn" onclick="togglePassVis('reg-pass',this)">
                   <i class="bi bi-eye-slash"></i>
                 </button>
@@ -202,17 +203,17 @@
                 <span id="strength-label" class="pass-strength-label"></span>
               </div>
               <ul class="pass-rules mt-2" id="pass-rules">
-                <li id="rule-len"><i class="bi bi-x-circle-fill"></i> Ít nhất 8 ký tự</li>
-                <li id="rule-upper"><i class="bi bi-x-circle-fill"></i> Có chữ hoa (A–Z)</li>
-                <li id="rule-lower"><i class="bi bi-x-circle-fill"></i> Có chữ thường (a–z)</li>
-                <li id="rule-num"><i class="bi bi-x-circle-fill"></i> Có chữ số (0–9)</li>
-                <li id="rule-special"><i class="bi bi-x-circle-fill"></i> Có ký tự đặc biệt (!@#$…)</li>
+                <li id="rule-len"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_min_8') ?></li>
+                <li id="rule-upper"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_uppercase') ?></li>
+                <li id="rule-lower"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_lowercase') ?></li>
+                <li id="rule-num"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_number') ?></li>
+                <li id="rule-special"><i class="bi bi-x-circle-fill"></i> <?php _e('rule_special') ?></li>
               </ul>
             </div>
             <div class="col-12">
               <div class="auth-input-group">
                 <span class="auth-input-icon"><i class="bi bi-shield-lock-fill"></i></span>
-                <input name="cpass" id="reg-cpass" type="password" class="auth-input" required minlength="8" placeholder="Xác nhận mật khẩu">
+                <input name="cpass" id="reg-cpass" type="password" class="auth-input" required minlength="8" placeholder="<?php _e('confirm_password') ?>">
                 <button type="button" class="auth-eye-btn" onclick="togglePassVis('reg-cpass',this)">
                   <i class="bi bi-eye-slash"></i>
                 </button>
@@ -221,15 +222,15 @@
           </div>
 
           <button type="submit" class="auth-submit-btn mt-3">
-            <i class="bi bi-person-check-fill me-2"></i> Đăng ký
+            <i class="bi bi-person-check-fill me-2"></i> <?php _e('register') ?>
           </button>
 
-          <div class="auth-divider"><span>hoặc</span></div>
+          <div class="auth-divider"><span><?php _e('or') ?></span></div>
 
           <div class="auth-switch-text">
-            Đã có tài khoản?
+            <?php _e('has_account') ?>
             <a href="#" class="auth-switch-link" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
-              Đăng nhập ngay
+              <?php _e('login_now') ?>
             </a>
           </div>
         </div>
@@ -250,24 +251,24 @@
           <div class="auth-modal-icon">
             <i class="bi bi-key-fill"></i>
           </div>
-          <h4 class="auth-modal-title">Quên mật khẩu?</h4>
-          <p class="auth-modal-subtitle">Nhập email để nhận liên kết đặt lại mật khẩu</p>
+          <h4 class="auth-modal-title"><?php _e('forgot_password') ?></h4>
+          <p class="auth-modal-subtitle"><?php _e('forgot_subtitle') ?></p>
         </div>
 
         <!-- Body -->
         <div class="auth-modal-body">
           <div class="auth-input-group mb-4">
             <span class="auth-input-icon"><i class="bi bi-envelope-fill"></i></span>
-            <input type="email" name="email" required class="auth-input" placeholder="Địa chỉ email của bạn">
+            <input type="email" name="email" required class="auth-input" placeholder="<?php _e('your_email') ?>">
           </div>
 
           <button type="submit" class="auth-submit-btn">
-            <i class="bi bi-send-fill me-2"></i> Gửi liên kết
+            <i class="bi bi-send-fill me-2"></i> <?php _e('send_link') ?>
           </button>
 
           <div class="auth-switch-text mt-3">
             <a href="#" class="auth-switch-link" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
-              <i class="bi bi-arrow-left me-1"></i> Quay lại đăng nhập
+              <i class="bi bi-arrow-left me-1"></i> <?php _e('back_to_login') ?>
             </a>
           </div>
         </div>

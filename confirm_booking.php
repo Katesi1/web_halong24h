@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Xác nhận đặt phòng</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('confirm_booking_nav') ?></title>
 </head>
 <body class="bg-light">
 
@@ -62,13 +62,13 @@
     <div class="row">
 
       <div class="col-12 my-5 mb-4 px-4">
-        <h4 class="mt-4 fw-bold h-font">XÁC NHẬN ĐẶT PHÒNG</h4>
+        <h4 class="mt-4 fw-bold h-font"><?php _e('confirm_booking') ?></h4>
         <div style="font-size: 14px;">
-          <a href="index.php" class="text-secondary text-decoration-none">Trang chủ</a>
+          <a href="index.php" class="text-secondary text-decoration-none"><?php _e('home') ?></a>
           <span class="text-secondary"> > </span>
-          <a href="rooms.php" class="text-secondary text-decoration-none">Danh sách phòng</a>
+          <a href="rooms.php" class="text-secondary text-decoration-none"><?php _e('room_list') ?></a>
           <span class="text-secondary"> > </span>
-          <a href="#" class="text-secondary text-decoration-none">Xác nhận đặt phòng</a>
+          <a href="#" class="text-secondary text-decoration-none"><?php _e('confirm_booking_nav') ?></a>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
             <div class="card p-3 shadow-sm rounded">
               <img src="$room_thumb" class="img-fluid rounded mb-3">
               <h5>$room_data[name]</h5>
-              <h6>$room_data[price] VND / đêm</h6>
+              <h6>$room_data[price] {$GLOBALS['_LANG']['vnd_per_night']}</h6>
             </div>
           data;
 
@@ -100,33 +100,33 @@
         <div class="card mb-4 border-0 shadow-sm rounded-3">
           <div class="card-body">
             <form action="pay_now.php" method="POST" id="booking_form">
-              <h6 class="mb-3">Thông tin chi tiết</h6>
+              <h6 class="mb-3"><?php _e('booking_details') ?></h6>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Tên</label>
+                  <label class="form-label"><?php _e('name') ?></label>
                   <input name="name" type="text" value="<?php echo $user_data['name'] ?>" class="form-control shadow-none" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Số điện thoại</label>
+                  <label class="form-label"><?php _e('phone_number') ?></label>
                   <input name="phonenum" type="number" value="<?php echo $user_data['phonenum'] ?>" class="form-control shadow-none" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">Nhận phòng</label>
+                  <label class="form-label"><?php _e('checkin') ?></label>
                   <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                 </div>
                 <div class="col-md-6 mb-4">
-                  <label class="form-label">Trả phòng</label>
+                  <label class="form-label"><?php _e('checkout') ?></label>
                   <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                 </div>
                 
                 <div class="col-12">
                   <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">
-                    <span class="visually-hidden">Xin vui lòng chờ...</span>
+                    <span class="visually-hidden"><?php _e('please_wait') ?></span>
                   </div>
 
-                  <h6 class="mb-3 text-danger" id="pay_info">Chọn ngày nhận phòng và trả phòng!</h6>
+                  <h6 class="mb-3 text-danger" id="pay_info"><?php _e('select_dates_msg') ?></h6>
 
-                  <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Xác nhận đặt phòng</button>
+                  <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled><?php _e('confirm_btn') ?></button>
                 </div>
               </div>
             </form>
@@ -172,19 +172,19 @@
           let data = JSON.parse(this.responseText);
 
           if(data.status == 'check_in_out_equal'){
-            pay_info.innerText = "You cannot check-out on the same day!";
+            pay_info.innerText = "<?php _e('checkin_out_equal') ?>";
           }
           else if(data.status == 'check_out_earlier'){
-            pay_info.innerText = "Check-out date is earlier than check-in date!";
+            pay_info.innerText = "<?php _e('checkout_earlier') ?>";
           }
           else if(data.status == 'check_in_earlier'){
-            pay_info.innerText = "Check-in date is earlier than today's date!";
+            pay_info.innerText = "<?php _e('checkin_earlier') ?>";
           }
           else if(data.status == 'unavailable'){
-            pay_info.innerText = "Room not available for this check-in date!";
+            pay_info.innerText = "<?php _e('room_unavailable') ?>";
           }
           else{
-            pay_info.innerHTML = "Số đêm: "+data.days+" đêm<br>Tổng tiền: "+data.payment+" VND";
+            pay_info.innerHTML = "<?php _e('num_nights') ?>: "+data.days+" <?php _e('night') ?><br><?php _e('total_amount') ?>: "+data.payment+" <?php _e('vnd') ?>";
             pay_info.classList.replace('text-danger','text-dark');
             booking_form.elements['pay_now'].removeAttribute('disabled');
           }

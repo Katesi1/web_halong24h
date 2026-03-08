@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Chi tiết phòng</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('room_details') ?></title>
 </head>
 <body class="bg-light">
 
@@ -33,9 +33,9 @@
       <div class="col-12 my-5 mb-4 px-4">
         <h2 class="fw-bold"><?php echo $room_data['name'] ?></h2>
         <div style="font-size: 14px;">
-          <a href="index.php" class="text-secondary text-decoration-none">Trang chủ</a>
+          <a href="index.php" class="text-secondary text-decoration-none"><?php _e('home') ?></a>
           <span class="text-secondary"> > </span>
-          <a href="rooms.php" class="text-secondary text-decoration-none">Danh sách phòng</a>
+          <a href="rooms.php" class="text-secondary text-decoration-none"><?php _e('room_list') ?></a>
         </div>
       </div>
 
@@ -328,7 +328,7 @@
             // Price & Rating
             $formatted_price = $room_data['price'] > 0
               ? number_format($room_data['price'], 0, ',', '.')
-              : 'Liên hệ';
+              : __('contact_for_price');
 
             $rating_q = "SELECT AVG(rating) AS `avg_rating`, COUNT(*) AS `total` FROM `rating_review`
               WHERE `room_id`='$room_data[id]'";
@@ -348,14 +348,14 @@
                   $rating_stars .= "<i class='bi bi-star'></i> ";
                 }
               }
-              $rating_text = "<span style='font-size:13px;opacity:.8;margin-left:4px;'>$avg ({$rating_fetch['total']} đánh giá)</span>";
+              $rating_text = "<span style='font-size:13px;opacity:.8;margin-left:4px;'>$avg ({$rating_fetch['total']} {$GLOBALS['_LANG']['review_count']})</span>";
             }
           ?>
           <div class="room-price-header">
             <div class="price-amount">
               <?php echo $formatted_price; ?>
               <?php if($room_data['price'] > 0): ?>
-                <span class="price-unit">VND / đêm</span>
+                <span class="price-unit"><?php _e('vnd_per_night') ?></span>
               <?php endif; ?>
             </div>
             <?php if($rating_stars): ?>
@@ -392,7 +392,7 @@
               if($features_data):
             ?>
             <div class="info-section">
-              <div class="info-section-title"><i class="bi bi-eye"></i> View</div>
+              <div class="info-section-title"><i class="bi bi-eye"></i> <?php _e('view_filter') ?></div>
               <div><?php echo $features_data; ?></div>
             </div>
             <?php endif; ?>
@@ -412,25 +412,25 @@
               if($facilities_data):
             ?>
             <div class="info-section">
-              <div class="info-section-title"><i class="bi bi-star"></i> Tiện ích</div>
+              <div class="info-section-title"><i class="bi bi-star"></i> <?php _e('facilities') ?></div>
               <div><?php echo $facilities_data; ?></div>
             </div>
             <?php endif; ?>
 
             <div class="info-section">
-              <div class="info-section-title"><i class="bi bi-people"></i> Sức chứa</div>
+              <div class="info-section-title"><i class="bi bi-people"></i> <?php _e('capacity_label') ?></div>
               <div class="info-stat">
                 <div class="info-stat-icon"><i class="bi bi-person"></i></div>
-                <div class="info-stat-text"><span><?php echo $room_data['adult']; ?></span> Người lớn</div>
+                <div class="info-stat-text"><span><?php echo $room_data['adult']; ?></span> <?php _e('adults') ?></div>
               </div>
               <div class="info-stat">
                 <div class="info-stat-icon"><i class="bi bi-person-heart"></i></div>
-                <div class="info-stat-text"><span><?php echo $room_data['children']; ?></span> Trẻ em</div>
+                <div class="info-stat-text"><span><?php echo $room_data['children']; ?></span> <?php _e('children') ?></div>
               </div>
             </div>
 
             <div class="info-section">
-              <div class="info-section-title"><i class="bi bi-arrows-fullscreen"></i> Diện tích</div>
+              <div class="info-section-title"><i class="bi bi-arrows-fullscreen"></i> <?php _e('area_label') ?></div>
               <div class="info-stat">
                 <div class="info-stat-icon"><i class="bi bi-aspect-ratio"></i></div>
                 <div class="info-stat-text"><span><?php echo $room_data['area']; ?></span> m&sup2;</div>
@@ -446,7 +446,7 @@
             ?>
             <div style="padding-top: 14px;">
               <button onclick="checkLoginToBook(<?php echo $login; ?>,<?php echo $room_data['id']; ?>)" class="btn-book">
-                <i class="bi bi-calendar-check"></i> Đặt ngay
+                <i class="bi bi-calendar-check"></i> <?php _e('book_now') ?>
               </button>
             </div>
             <?php } ?>
@@ -457,7 +457,7 @@
       <div class="col-12 mt-4 px-4">
         <div class="card border-0 shadow-sm rounded-3 mb-4">
           <div class="card-body p-4">
-            <h5 class="fw-bold h-font mb-3"><i class="bi bi-file-text me-2" style="color:var(--teal);"></i>Mô tả</h5>
+            <h5 class="fw-bold h-font mb-3"><i class="bi bi-file-text me-2" style="color:var(--teal);"></i><?php _e('description') ?></h5>
             <p class="text-secondary mb-0" style="line-height:1.8;">
               <?php echo nl2br($room_data['description']); ?>
             </p>
@@ -466,7 +466,7 @@
 
         <div class="card border-0 shadow-sm rounded-3 mb-5">
           <div class="card-body p-4">
-            <h5 class="fw-bold h-font mb-3"><i class="bi bi-chat-left-quote me-2" style="color:var(--teal);"></i>Trải nghiệm khách hàng</h5>
+            <h5 class="fw-bold h-font mb-3"><i class="bi bi-chat-left-quote me-2" style="color:var(--teal);"></i><?php _e('guest_reviews') ?></h5>
 
             <?php
               $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
@@ -481,7 +481,7 @@
               if(mysqli_num_rows($review_res)==0){
                 echo "<div class='text-center py-4'>
                   <i class='bi bi-chat-dots' style='font-size:40px;color:#ddd;'></i>
-                  <p class='text-muted mt-2 mb-0'>Chưa có đánh giá nào</p>
+                  <p class='text-muted mt-2 mb-0'>" . __('no_reviews_short') . "</p>
                 </div>";
               }
               else

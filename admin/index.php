@@ -303,21 +303,21 @@ if ((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)) {
         <?php if (isset($_POST['login'])): ?>
           <div class="login-error">
             <i class="bi bi-exclamation-triangle-fill"></i>
-            Tên đăng nhập hoặc mật khẩu không đúng.
+            <?php _e('admin_login_error') ?>
           </div>
         <?php endif; ?>
 
         <form method="POST" autocomplete="off">
           <div class="login-field">
-            <label class="login-label">Tên đăng nhập</label>
+            <label class="login-label"><?php _e('admin_username') ?></label>
             <div class="login-input-wrap">
-              <input type="text" name="admin_name" class="login-input" placeholder="Nhập tên đăng nhập" required>
+              <input type="text" name="admin_name" class="login-input" placeholder="<?php _e('admin_username_ph') ?>" required>
               <i class="bi bi-person fi"></i>
             </div>
           </div>
 
           <div class="login-field">
-            <label class="login-label">Mật khẩu</label>
+            <label class="login-label"><?php _e('admin_password') ?></label>
             <div class="login-input-wrap">
               <input type="password" name="admin_pass" class="login-input" placeholder="••••••••" required>
               <i class="bi bi-lock fi"></i>
@@ -325,7 +325,7 @@ if ((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)) {
           </div>
 
           <button type="submit" name="login" class="login-btn">
-            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
+            <i class="bi bi-box-arrow-in-right me-2"></i><?php _e('admin_login_btn') ?>
           </button>
         </form>
       </div>

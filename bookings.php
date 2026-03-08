@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
-  <title><?php echo $settings_r['site_title'] ?> - Lịch sử đặt phòng</title>
+  <title><?php echo $settings_r['site_title'] ?> - <?php _e('booking_history') ?></title>
   <style>
     /* ===== SHARED WITH PROFILE PAGE ===== */
     .profile-page { background: #f4f6f9; min-height: 100vh; }
@@ -271,11 +271,11 @@
 
     <!-- Breadcrumb -->
     <div class="profile-breadcrumb">
-      <a href="index.php">Trang chủ</a>
+      <a href="index.php"><?php _e('home') ?></a>
       <span class="sep">›</span>
-      <a href="profile.php">Hồ sơ cá nhân</a>
+      <a href="profile.php"><?php _e('user_profile') ?></a>
       <span class="sep">›</span>
-      <span>Lịch sử đặt phòng</span>
+      <span><?php _e('booking_history') ?></span>
     </div>
 
     <div class="row g-4">
@@ -298,28 +298,28 @@
           <div class="sidebar-stats">
             <div class="stat-cell">
               <div class="stat-num"><?php echo (int)$stats['total'] ?></div>
-              <div class="stat-label">Tổng</div>
+              <div class="stat-label"><?php _e('total') ?></div>
             </div>
             <div class="stat-cell confirmed">
               <div class="stat-num"><?php echo (int)$stats['confirmed'] ?></div>
-              <div class="stat-label">Xác nhận</div>
+              <div class="stat-label"><?php _e('confirmed') ?></div>
             </div>
             <div class="stat-cell cancelled">
               <div class="stat-num"><?php echo (int)$stats['cancelled'] ?></div>
-              <div class="stat-label">Đã hủy</div>
+              <div class="stat-label"><?php _e('cancelled') ?></div>
             </div>
           </div>
 
           <!-- Nav -->
           <nav class="profile-sidebar-nav">
             <a class="profile-nav-item" href="profile.php">
-              <i class="bi bi-person-fill"></i> Hồ sơ cá nhân
+              <i class="bi bi-person-fill"></i> <?php _e('user_profile') ?>
             </a>
             <a class="profile-nav-item active" href="bookings.php">
-              <i class="bi bi-calendar-check-fill"></i> Lịch sử đặt phòng
+              <i class="bi bi-calendar-check-fill"></i> <?php _e('booking_history') ?>
             </a>
             <a class="profile-nav-item danger" href="logout.php">
-              <i class="bi bi-box-arrow-right"></i> Đăng xuất
+              <i class="bi bi-box-arrow-right"></i> <?php _e('logout') ?>
             </a>
           </nav>
         </div>
@@ -331,18 +331,18 @@
         <!-- Header banner -->
         <div class="bk-header-card">
           <div>
-            <p class="bk-header-title"><i class="bi bi-calendar-check-fill me-2"></i>Lịch sử đặt phòng</p>
-            <p class="bk-header-sub">Quản lý và theo dõi tất cả các đặt phòng của bạn</p>
+            <p class="bk-header-title"><i class="bi bi-calendar-check-fill me-2"></i><?php _e('booking_history_title') ?></p>
+            <p class="bk-header-sub"><?php _e('manage_bookings_sub') ?></p>
           </div>
           <i class="bi bi-building bk-header-icon"></i>
         </div>
 
         <!-- Filter tabs -->
         <div class="bk-filter-tabs">
-          <button class="bk-filter-btn active" onclick="filterBookings('all', this)">Tất cả (<?php echo (int)$stats['total'] ?>)</button>
-          <button class="bk-filter-btn" onclick="filterBookings('booked', this)">Đã xác nhận</button>
-          <button class="bk-filter-btn" onclick="filterBookings('pending', this)">Chờ xác nhận</button>
-          <button class="bk-filter-btn" onclick="filterBookings('cancelled', this)">Đã hủy</button>
+          <button class="bk-filter-btn active" onclick="filterBookings('all', this)"><?php _e('all') ?> (<?php echo (int)$stats['total'] ?>)</button>
+          <button class="bk-filter-btn" onclick="filterBookings('booked', this)"><?php _e('status_booked') ?></button>
+          <button class="bk-filter-btn" onclick="filterBookings('pending', this)"><?php _e('status_pending') ?></button>
+          <button class="bk-filter-btn" onclick="filterBookings('cancelled', this)"><?php _e('status_cancelled') ?></button>
         </div>
 
         <!-- Booking list -->
@@ -350,9 +350,9 @@
           <?php if (empty($all_bookings)): ?>
             <div class="bk-empty">
               <div class="bk-empty-icon"><i class="bi bi-calendar-x"></i></div>
-              <div class="bk-empty-title">Chưa có đặt phòng nào</div>
-              <div class="bk-empty-sub">Hãy khám phá và đặt phòng ngay hôm nay!</div>
-              <a href="rooms.php" class="bk-empty-btn"><i class="bi bi-search me-2"></i>Khám phá phòng</a>
+              <div class="bk-empty-title"><?php _e('no_bookings') ?></div>
+              <div class="bk-empty-sub"><?php _e('no_bookings_sub') ?></div>
+              <a href="rooms.php" class="bk-empty-btn"><i class="bi bi-search me-2"></i><?php _e('explore_rooms') ?></a>
             </div>
           <?php else: ?>
             <?php foreach ($all_bookings as $data):
@@ -364,10 +364,10 @@
 
               $status = $data['booking_status'];
               $status_map = [
-                'booked'          => ['label' => 'Đã xác nhận', 'class' => 'bk-status-booked'],
-                'pending'         => ['label' => 'Chờ xác nhận', 'class' => 'bk-status-pending'],
-                'cancelled'       => ['label' => 'Đã hủy',      'class' => 'bk-status-cancelled'],
-                'payment failed'  => ['label' => 'TT thất bại', 'class' => 'bk-status-failed'],
+                'booked'          => ['label' => __('status_booked'), 'class' => 'bk-status-booked'],
+                'pending'         => ['label' => __('status_pending'), 'class' => 'bk-status-pending'],
+                'cancelled'       => ['label' => __('status_cancelled'),      'class' => 'bk-status-cancelled'],
+                'payment failed'  => ['label' => __('status_failed'), 'class' => 'bk-status-failed'],
               ];
               $sinfo = $status_map[$status] ?? ['label' => $status, 'class' => 'bk-status-pending'];
             ?>
@@ -401,7 +401,7 @@
                       <span class="bk-date-val"><?php echo $checkout ?></span>
                     </div>
                     <div class="bk-date-item">
-                      <span class="bk-date-label"><i class="bi bi-calendar3 me-1"></i>Ngày đặt</span>
+                      <span class="bk-date-label"><i class="bi bi-calendar3 me-1"></i><?php _e('booking_date') ?></span>
                       <span class="bk-date-val"><?php echo $book_date ?></span>
                     </div>
                   </div>
@@ -409,9 +409,9 @@
 
                 <div class="bk-card-bottom">
                   <div class="bk-price-info">
-                    <span class="bk-total-label">Tổng tiền:</span>
-                    <span class="bk-total-price"><?php echo number_format($data['total_pay']) ?> đ</span>
-                    <span class="bk-nights-badge"><?php echo $nights ?> đêm</span>
+                    <span class="bk-total-label"><?php _e('total_price') ?>:</span>
+                    <span class="bk-total-price"><?php echo number_format($data['total_pay']) ?> <?php _e('vnd') ?></span>
+                    <span class="bk-nights-badge"><?php echo $nights ?> <?php _e('night') ?></span>
                   </div>
 
                   <div class="bk-action-area">
@@ -419,17 +419,17 @@
                       <?php if ($data['arrival'] == 0): ?>
                         <button type="button" class="bk-btn-cancel"
                           onclick="cancelBooking(<?php echo $data['booking_id'] ?>)">
-                          <i class="bi bi-x-circle me-1"></i>Hủy đặt phòng
+                          <i class="bi bi-x-circle me-1"></i><?php _e('cancel_booking') ?>
                         </button>
                       <?php elseif ($data['rate_review'] == 0): ?>
                         <button type="button" class="bk-btn-review"
                           onclick="openReview(<?php echo $data['booking_id'] ?>, <?php echo $data['room_id'] ?>)"
                           data-bs-toggle="modal" data-bs-target="#reviewModal">
-                          <i class="bi bi-star-fill me-1"></i>Đánh giá
+                          <i class="bi bi-star-fill me-1"></i><?php _e('review') ?>
                         </button>
                       <?php endif; ?>
                     <?php elseif ($status === 'cancelled' && $data['refund'] == 0): ?>
-                      <span class="bk-refund-badge"><i class="bi bi-arrow-clockwise me-1"></i>Đang hoàn tiền</span>
+                      <span class="bk-refund-badge"><i class="bi bi-arrow-clockwise me-1"></i><?php _e('refunding') ?></span>
                     <?php endif; ?>
                   </div>
                 </div>
@@ -451,15 +451,15 @@
 
           <div class="modal-header review-modal-header">
             <div>
-              <h5 class="modal-title fw-bold mb-1"><i class="bi bi-star-fill me-2"></i>Đánh giá phòng</h5>
-              <p style="font-size:0.82rem;opacity:0.85;margin:0">Chia sẻ trải nghiệm của bạn</p>
+              <h5 class="modal-title fw-bold mb-1"><i class="bi bi-star-fill me-2"></i><?php _e('review_room') ?></h5>
+              <p style="font-size:0.82rem;opacity:0.85;margin:0"><?php _e('share_experience') ?></p>
             </div>
             <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
           <div class="modal-body p-4">
             <div class="mb-4">
-              <label class="form-label fw-semibold mb-2" style="font-size:0.88rem">Xếp hạng của bạn</label>
+              <label class="form-label fw-semibold mb-2" style="font-size:0.88rem"><?php _e('your_rating') ?></label>
               <div class="star-select">
                 <input type="radio" name="rating" id="s5" value="5"><label for="s5"><i class="bi bi-star-fill"></i></label>
                 <input type="radio" name="rating" id="s4" value="4"><label for="s4"><i class="bi bi-star-fill"></i></label>
@@ -469,15 +469,15 @@
               </div>
             </div>
             <div class="mb-4">
-              <label class="form-label fw-semibold mb-2" style="font-size:0.88rem">Nhận xét</label>
+              <label class="form-label fw-semibold mb-2" style="font-size:0.88rem"><?php _e('your_comment') ?></label>
               <textarea name="review" rows="4" required class="form-control shadow-none"
                 style="border-radius:10px;border-color:#e0e0e0;font-size:0.9rem"
-                placeholder="Hãy chia sẻ cảm nhận của bạn về phòng..."></textarea>
+                placeholder="<?php echo __('comment_placeholder') ?>"></textarea>
             </div>
             <input type="hidden" name="booking_id">
             <input type="hidden" name="room_id">
             <button type="submit" class="pf-save-btn w-100" style="background:linear-gradient(135deg,#2D6A4F,#40916C);border:none;color:#fff;padding:12px;border-radius:10px;font-weight:600;cursor:pointer;">
-              <i class="bi bi-send-fill me-2"></i>Gửi đánh giá
+              <i class="bi bi-send-fill me-2"></i><?php _e('submit_review') ?>
             </button>
           </div>
 
@@ -488,10 +488,10 @@
 
   <?php
     if (isset($_GET['cancel_status'])) {
-      echo "<script>document.addEventListener('DOMContentLoaded',()=>alert('success','Đã hủy đặt phòng thành công!'));</script>";
+      echo "<script>document.addEventListener('DOMContentLoaded',()=>alert('success','" . __('cancel_success') . "'));</script>";
     }
     if (isset($_GET['review_status'])) {
-      echo "<script>document.addEventListener('DOMContentLoaded',()=>alert('success','Cảm ơn bạn đã đánh giá!'));</script>";
+      echo "<script>document.addEventListener('DOMContentLoaded',()=>alert('success','" . __('review_thanks') . "'));</script>";
     }
   ?>
 
@@ -513,7 +513,7 @@
 
     // ===== Cancel booking =====
     function cancelBooking(id) {
-      if (!confirm('Bạn có chắc muốn hủy đặt phòng này?')) return;
+      if (!confirm('<?php _e("cancel_confirm") ?>')) return;
 
       fetch('ajax/cancel_booking.php', {
         method: 'POST',
@@ -523,7 +523,7 @@
         if (res == 1) {
           window.location.href = 'bookings.php?cancel_status=true';
         } else {
-          alert('error', 'Hủy đặt phòng không thành công!');
+          alert('error', '<?php _e("cancel_failed") ?>');
         }
       });
     }
@@ -551,7 +551,7 @@
             window.location.href = 'bookings.php?review_status=true';
           } else {
             bootstrap.Modal.getInstance(document.getElementById('reviewModal')).hide();
-            alert('error', 'Gửi đánh giá thất bại!');
+            alert('error', '<?php _e("review_failed") ?>');
           }
         });
     });

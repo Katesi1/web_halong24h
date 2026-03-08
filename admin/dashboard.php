@@ -69,12 +69,12 @@
       <div class="page-header">
         <div>
           <h1>Dashboard</h1>
-          <p class="text-muted mb-0">Tổng quan hệ thống và thống kê</p>
+          <p class="text-muted mb-0"><?php _e('dashboard_subtitle') ?></p>
         </div>
         <?php 
           if($is_shutdown['shutdown']){
             echo<<<data
-              <span class="badge bg-danger py-2 px-3 rounded-lg">Shutdown Mode is Active!</span>
+              <span class="badge bg-danger py-2 px-3 rounded-lg">{$GLOBALS['_LANG']['shutdown_active']}</span>
             data;
           }
         ?>
@@ -88,9 +88,9 @@
               <div class="stat-card-icon">
                 <i class="bi bi-door-open"></i>
               </div>
-              <div class="stat-card-title">Tổng số phòng</div>
+              <div class="stat-card-title"><?php _e('total_rooms') ?></div>
               <div class="stat-card-value"><?php echo $total_rooms['total'] ?></div>
-              <div class="stat-card-subvalue">Phòng đang hoạt động</div>
+              <div class="stat-card-subvalue"><?php _e('active_rooms') ?></div>
             </div>
           </a>
         </div>
@@ -100,9 +100,9 @@
               <div class="stat-card-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
                 <i class="bi bi-calendar-check"></i>
               </div>
-              <div class="stat-card-title">Tổng đặt phòng</div>
+              <div class="stat-card-title"><?php _e('total_bookings') ?></div>
               <div class="stat-card-value"><?php echo $total_bookings_all['total'] ?></div>
-              <div class="stat-card-subvalue">Tất cả đơn đặt phòng</div>
+              <div class="stat-card-subvalue"><?php _e('all_bookings') ?></div>
             </div>
           </a>
         </div>
@@ -112,7 +112,7 @@
               <div class="stat-card-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                 <i class="bi bi-cash-stack"></i>
               </div>
-              <div class="stat-card-title">Tổng doanh thu</div>
+              <div class="stat-card-title"><?php _e('total_revenue') ?></div>
               <div class="stat-card-value"><?php echo number_format($total_revenue['revenue'] ?? 0, 0, ',', '.') ?></div>
               <div class="stat-card-subvalue">VND</div>
             </div>
@@ -124,9 +124,9 @@
               <div class="stat-card-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
                 <i class="bi bi-bell"></i>
               </div>
-              <div class="stat-card-title">Đặt phòng mới</div>
+              <div class="stat-card-title"><?php _e('new_bookings') ?></div>
               <div class="stat-card-value"><?php echo $current_bookings['new_bookings'] ?></div>
-              <div class="stat-card-subvalue">Cần xử lý</div>
+              <div class="stat-card-subvalue"><?php _e('needs_processing') ?></div>
             </div>
           </a>
         </div>
@@ -140,9 +140,9 @@
               <div class="stat-card-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                 <i class="bi bi-arrow-counterclockwise"></i>
               </div>
-              <div class="stat-card-title">Yêu cầu hoàn tiền</div>
+              <div class="stat-card-title"><?php _e('refund_requests') ?></div>
               <div class="stat-card-value"><?php echo $current_bookings['refund_bookings'] ?></div>
-              <div class="stat-card-subvalue">Đang chờ xử lý</div>
+              <div class="stat-card-subvalue"><?php _e('pending') ?></div>
             </div>
           </a>
         </div>
@@ -152,9 +152,9 @@
               <div class="stat-card-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
                 <i class="bi bi-chat-dots"></i>
               </div>
-              <div class="stat-card-title">Tin nhắn mới</div>
+              <div class="stat-card-title"><?php _e('new_messages') ?></div>
               <div class="stat-card-value"><?php echo $unread_queries['count'] ?></div>
-              <div class="stat-card-subvalue">Chưa đọc</div>
+              <div class="stat-card-subvalue"><?php _e('unread') ?></div>
             </div>
           </a>
         </div>
@@ -164,9 +164,9 @@
               <div class="stat-card-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
                 <i class="bi bi-star"></i>
               </div>
-              <div class="stat-card-title">Đánh giá mới</div>
+              <div class="stat-card-title"><?php _e('new_reviews') ?></div>
               <div class="stat-card-value"><?php echo $unread_reviews['count'] ?></div>
-              <div class="stat-card-subvalue">Chưa xem</div>
+              <div class="stat-card-subvalue"><?php _e('unreviewed') ?></div>
             </div>
           </a>
         </div>
@@ -176,9 +176,9 @@
               <div class="stat-card-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
                 <i class="bi bi-people"></i>
               </div>
-              <div class="stat-card-title">Tổng người dùng</div>
+              <div class="stat-card-title"><?php _e('total_users') ?></div>
               <div class="stat-card-value"><?php echo $current_users['total'] ?></div>
-              <div class="stat-card-subvalue"><?php echo $current_users['active'] ?> đang hoạt động</div>
+              <div class="stat-card-subvalue"><?php echo $current_users['active'] ?> <?php _e('active') ?></div>
             </div>
           </a>
         </div>
@@ -187,32 +187,32 @@
       <!-- Chart Analytics Section -->
       <div class="chart-container mb-4">
         <div class="chart-header">
-          <h3 class="chart-title">Phân tích đặt phòng</h3>
+          <h3 class="chart-title"><?php _e('booking_analytics') ?></h3>
           <select class="form-select shadow-none w-auto" id="bookingPeriod" onchange="booking_analytics(this.value)">
-            <option value="1">30 ngày qua</option>
-            <option value="2">90 ngày qua</option>
-            <option value="3">1 năm qua</option>
-            <option value="4">Tất cả</option>
+            <option value="1"><?php _e('last_30_days') ?></option>
+            <option value="2"><?php _e('last_90_days') ?></option>
+            <option value="3"><?php _e('last_year') ?></option>
+            <option value="4"><?php _e('all_label') ?></option>
           </select>
         </div>
         <div class="row mb-4">
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Tổng đặt phòng</div>
+              <div class="stat-card-title"><?php _e('total_bookings') ?></div>
               <div class="stat-card-value" id="total_bookings">0</div>
               <div class="stat-card-subvalue" id="total_amt">0 VND</div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Đặt phòng đang hoạt động</div>
+              <div class="stat-card-title"><?php _e('active_bookings') ?></div>
               <div class="stat-card-value" id="active_bookings">0</div>
               <div class="stat-card-subvalue" id="active_amt">0 VND</div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Đặt phòng đã hủy</div>
+              <div class="stat-card-title"><?php _e('cancelled_bookings') ?></div>
               <div class="stat-card-value" id="cancelled_bookings">0</div>
               <div class="stat-card-subvalue" id="cancelled_amt">0 VND</div>
             </div>
@@ -224,30 +224,30 @@
       <!-- User Analytics Chart -->
       <div class="chart-container mb-4">
         <div class="chart-header">
-          <h3 class="chart-title">Phân tích người dùng, tin nhắn và đánh giá</h3>
+          <h3 class="chart-title"><?php _e('user_analytics') ?></h3>
           <select class="form-select shadow-none w-auto" id="userPeriod" onchange="user_analytics(this.value)">
-            <option value="1">30 ngày qua</option>
-            <option value="2">90 ngày qua</option>
-            <option value="3">1 năm qua</option>
-            <option value="4">Tất cả</option>
+            <option value="1"><?php _e('last_30_days') ?></option>
+            <option value="2"><?php _e('last_90_days') ?></option>
+            <option value="3"><?php _e('last_year') ?></option>
+            <option value="4"><?php _e('all_label') ?></option>
           </select>
         </div>
         <div class="row mb-4">
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Đăng ký mới</div>
+              <div class="stat-card-title"><?php _e('new_registrations') ?></div>
               <div class="stat-card-value" id="total_new_reg">0</div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Tin nhắn</div>
+              <div class="stat-card-title"><?php _e('messages') ?></div>
               <div class="stat-card-value" id="total_queries">0</div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Đánh giá</div>
+              <div class="stat-card-title"><?php _e('reviews') ?></div>
               <div class="stat-card-value" id="total_reviews">0</div>
             </div>
           </div>
@@ -257,29 +257,29 @@
 
       <!-- User Statistics -->
       <div class="chart-container">
-        <h3 class="chart-title mb-4">Thống kê người dùng</h3>
+        <h3 class="chart-title mb-4"><?php _e('user_statistics') ?></h3>
         <div class="row">
           <div class="col-md-3 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Tổng số</div>
+              <div class="stat-card-title"><?php _e('total_count') ?></div>
               <div class="stat-card-value"><?php echo $current_users['total'] ?></div>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Đang hoạt động</div>
+              <div class="stat-card-title"><?php _e('active_status') ?></div>
               <div class="stat-card-value"><?php echo $current_users['active'] ?></div>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Không hoạt động</div>
+              <div class="stat-card-title"><?php _e('inactive_status') ?></div>
               <div class="stat-card-value"><?php echo $current_users['inactive'] ?></div>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="stat-card">
-              <div class="stat-card-title">Chưa xác thực</div>
+              <div class="stat-card-title"><?php _e('unverified') ?></div>
               <div class="stat-card-value"><?php echo $current_users['unverified'] ?></div>
             </div>
           </div>

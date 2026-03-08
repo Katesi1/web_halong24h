@@ -9,10 +9,10 @@
 <?php
 
   session_start();
-  
 
   require('admin/inc/db_config.php');
   require('admin/inc/essentials.php');
+  require('inc/lang.php');
   
   $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
   $settings_q = "SELECT * FROM `settings` WHERE `sr_no`=?";
@@ -24,7 +24,7 @@
     echo<<<alertbar
       <div class='bg-danger text-center p-2 fw-bold'>
         <i class="bi bi-exclamation-triangle-fill"></i>
-        Tạm thời không hỗ trợ đặt phòng!
+        {$GLOBALS['_LANG']['shutdown_notice']}
       </div>
     alertbar;
   }
