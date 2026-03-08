@@ -130,42 +130,57 @@
       <div class="row g-4">
         <?php
 
-        $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `id` DESC LIMIT 3", [1, 0], 'ii');
+        $room_res = select(
+          "SELECT r.*, pt.name AS prop_type_name, pt.slug AS prop_type_slug,
+                  rt.name AS room_type_name, b.name AS building_name,
+                  f.name AS view_name
+           FROM `rooms` r
+           LEFT JOIN `property_types` pt ON r.property_type_id = pt.id
+           LEFT JOIN `room_types` rt ON r.room_type_id = rt.id
+           LEFT JOIN `buildings` b ON r.building_id = b.id
+           LEFT JOIN `features` f ON r.view_type_id = f.id
+           WHERE r.`status`=? AND r.`removed`=?
+           ORDER BY r.`id` DESC LIMIT 3",
+          [1, 0], 'ii'
+        );
         $rooms_data_json = [];
 
         while ($room_data = mysqli_fetch_assoc($room_res)) {
-          // get features of room
-          $fea_q = mysqli_query($con, "SELECT f.name FROM `features` f 
-              INNER JOIN `room_features` rfea ON f.id = rfea.features_id 
-              WHERE rfea.room_id = '$room_data[id]'");
+          // get facilities of room (for compact display)
+          $fac_q = mysqli_query($con, "SELECT f.name FROM `facilities` f
+              INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id
+              WHERE rfac.room_id = '{$room_data['id']}'");
 
-          $features_data = "";
-          $features_list = [];
-          while ($fea_row = mysqli_fetch_assoc($fea_q)) {
-            $features_list[] = $fea_row['name'];
-            $features_data .= "<span class='room-badge' aria-label='Tính năng: {$fea_row['name']}'>
-                <i class='bi bi-check-circle me-1'></i>{$fea_row['name']}
-              </span>";
-          }
-
-          // get facilities of room
-          $fac_q = mysqli_query($con, "SELECT f.name FROM `facilities` f 
-              INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
-              WHERE rfac.room_id = '$room_data[id]'");
-
-          $facilities_data = "";
           $facilities_list = [];
           while ($fac_row = mysqli_fetch_assoc($fac_q)) {
             $facilities_list[] = $fac_row['name'];
-            $facilities_data .= "<span class='room-badge' aria-label='Tiện ích: {$fac_row['name']}'>
-                <i class='bi bi-check-circle me-1'></i>{$fac_row['name']}
-              </span>";
+          }
+
+          // Build truncated facilities (max 6 items for ~3 lines)
+          $max_show = 6;
+          $total_fac = count($facilities_list);
+          $facilities_html = "";
+          for ($i = 0; $i < min($max_show, $total_fac); $i++) {
+            $facilities_html .= "<span class='room-badge'><i class='bi bi-check-circle me-1'></i>{$facilities_list[$i]}</span>";
+          }
+          if ($total_fac > $max_show) {
+            $remaining = $total_fac - $max_show;
+            $facilities_html .= "<span class='room-badge room-badge-more'>+{$remaining} tiện ích khác</span>";
+          }
+
+          // get features
+          $fea_q = mysqli_query($con, "SELECT f.name FROM `features` f
+              INNER JOIN `room_features` rfea ON f.id = rfea.features_id
+              WHERE rfea.room_id = '{$room_data['id']}'");
+          $features_list = [];
+          while ($fea_row = mysqli_fetch_assoc($fea_q)) {
+            $features_list[] = $fea_row['name'];
           }
 
           // get thumbnail of image
           $room_thumb = ROOMS_IMG_PATH . "thumbnail.jpg";
-          $thumb_q = mysqli_query($con, "SELECT * FROM `room_images` 
-              WHERE `room_id`='$room_data[id]' 
+          $thumb_q = mysqli_query($con, "SELECT * FROM `room_images`
+              WHERE `room_id`='{$room_data['id']}'
               AND `thumb`='1'");
 
           if (mysqli_num_rows($thumb_q) > 0) {
@@ -176,53 +191,70 @@
           // Format price
           $formatted_price = number_format($room_data['price'], 0, ',', '.');
 
-          $book_btn = "";
-
-          if (!$settings_r['shutdown']) {
-            $login = 0;
-            if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-              $login = 1;
-            }
-
-            $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-primary room-book-btn' aria-label='Đặt phòng {$room_data['name']}'>
-                <i class='bi bi-calendar-check me-2'></i>Đặt ngay
-              </button>";
+          // Property type badge
+          $prop_badge = "";
+          if (!empty($room_data['prop_type_name'])) {
+            $badge_class = ($room_data['prop_type_slug'] === 'villa') ? 'badge-villa' : 'badge-homestay';
+            $prop_badge = "<span class='hp-prop-badge {$badge_class}'>{$room_data['prop_type_name']}</span>";
           }
 
-          $rating_q = "SELECT AVG(rating) AS `avg_rating`, COUNT(*) AS `review_count` FROM `rating_review`
-              WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+          // View badge
+          $view_badge = "";
+          if (!empty($room_data['view_name'])) {
+            $view_badge = "<span class='hp-view-badge'><i class='bi bi-eye me-1'></i>{$room_data['view_name']}</span>";
+          }
 
+          // Room specs
+          $area_text = "";
+          if (!empty($room_data['area'])) {
+            $area_text = $room_data['area'];
+            if (!empty($room_data['area_max']) && $room_data['area_max'] > $room_data['area']) {
+              $area_text .= "-" . $room_data['area_max'];
+            }
+            $area_text .= "m²";
+          }
+
+          $bedroom_text = !empty($room_data['bedroom_count']) ? $room_data['bedroom_count'] . " PN" : "";
+          $bathroom_text = !empty($room_data['bathroom_count']) ? $room_data['bathroom_count'] . " WC" : "";
+          $guest_text = $room_data['adult'] . " NL";
+          if ($room_data['children'] > 0) {
+            $guest_text .= ", " . $room_data['children'] . " TE";
+          }
+
+          // Rating
+          $rating_q = "SELECT AVG(rating) AS `avg_rating`, COUNT(*) AS `review_count` FROM `rating_review`
+              WHERE `room_id`='{$room_data['id']}' ORDER BY `sr_no` DESC LIMIT 20";
           $rating_res = mysqli_query($con, $rating_q);
           $rating_fetch = mysqli_fetch_assoc($rating_res);
 
-          $rating_data = "";
+          $rating_html = "";
           $avg_rating = 0;
           $review_count = 0;
 
           if ($rating_fetch['avg_rating'] != NULL && $rating_fetch['avg_rating'] > 0) {
             $avg_rating = round($rating_fetch['avg_rating'], 1);
-            $review_count = isset($rating_fetch['review_count']) ? (int)$rating_fetch['review_count'] : 0;
+            $review_count = (int)$rating_fetch['review_count'];
             $stars_html = "";
-
             for ($i = 0; $i < 5; $i++) {
               if ($i < floor($avg_rating)) {
-                $stars_html .= "<i class='bi bi-star-fill text-warning' aria-hidden='true'></i>";
+                $stars_html .= "<i class='bi bi-star-fill text-warning'></i>";
               } elseif ($i < $avg_rating) {
-                $stars_html .= "<i class='bi bi-star-half text-warning' aria-hidden='true'></i>";
+                $stars_html .= "<i class='bi bi-star-half text-warning'></i>";
               } else {
-                $stars_html .= "<i class='bi bi-star text-warning' aria-hidden='true'></i>";
+                $stars_html .= "<i class='bi bi-star text-warning'></i>";
               }
             }
-
-            $rating_data = "<div class='room-rating' aria-label='Đánh giá: {$avg_rating} trên 5 sao'>
-                <div class='rating-stars mb-1'>
-                  $stars_html
-                </div>
-                <div class='rating-text'>
-                  <span class='fw-bold'>{$avg_rating}</span>
-                  <span class='text-muted small ms-1'>({$review_count} đánh giá)</span>
-                </div>
+            $rating_html = "<div class='hp-rating'>
+                {$stars_html}
+                <span class='hp-rating-score'>{$avg_rating}</span>
+                <span class='hp-rating-count'>({$review_count})</span>
               </div>";
+          }
+
+          // Building name
+          $building_html = "";
+          if (!empty($room_data['building_name'])) {
+            $building_html = "<div class='hp-building'><i class='bi bi-building me-1'></i>{$room_data['building_name']}</div>";
           }
 
           // Prepare JSON-LD data for SEO
@@ -243,25 +275,16 @@
             ]
           ];
 
-          // Add amenity features if available
           $amenity_features = [];
           foreach ($features_list as $feature) {
-            $amenity_features[] = [
-              "@type" => "LocationFeatureSpecification",
-              "name" => $feature
-            ];
+            $amenity_features[] = ["@type" => "LocationFeatureSpecification", "name" => $feature];
           }
           foreach ($facilities_list as $facility) {
-            $amenity_features[] = [
-              "@type" => "LocationFeatureSpecification",
-              "name" => $facility
-            ];
+            $amenity_features[] = ["@type" => "LocationFeatureSpecification", "name" => $facility];
           }
-
           if (!empty($amenity_features)) {
             $room_json["amenityFeature"] = $amenity_features;
           }
-
           if ($avg_rating > 0 && $review_count > 0) {
             $room_json["aggregateRating"] = [
               "@type" => "AggregateRating",
@@ -269,7 +292,6 @@
               "reviewCount" => $review_count
             ];
           }
-
           $rooms_data_json[] = $room_json;
 
           // print room card
@@ -277,11 +299,15 @@
             <article class="col-lg-4 col-md-6 room-card-wrapper" itemscope itemtype="https://schema.org/HotelRoom">
               <div class="room-card h-100">
                 <div class="room-image-wrapper">
-                  <img src="$room_thumb" 
-                       alt="Hình ảnh phòng {$room_data['name']}" 
-                       class="room-image" 
+                  <img src="$room_thumb"
+                       alt="Hình ảnh phòng {$room_data['name']}"
+                       class="room-image"
                        loading="lazy"
                        itemprop="image">
+                  <div class="hp-image-overlay">
+                    $prop_badge
+                    $view_badge
+                  </div>
                   <div class="room-price-badge">
                     <span class="price-amount" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                       <meta itemprop="price" content="{$room_data['price']}">
@@ -292,49 +318,29 @@
                   </div>
                 </div>
                 <div class="room-content">
-                  <h3 class="room-title" itemprop="name">$room_data[name]</h3>
-                  
-                  $rating_data
-                  
-                  <div class="room-features">
-                    <h4 class="feature-title">
-                      <i class="bi bi-grid-3x3-gap me-2"></i>Không gian
-                    </h4>
-                    <div class="feature-badges">
-                      $features_data
+                  <h3 class="room-title" itemprop="name">{$room_data['name']}</h3>
+
+                  $building_html
+                  $rating_html
+
+                  <div class="hp-specs">
+                    <span class="hp-spec" title="Diện tích"><i class="bi bi-aspect-ratio"></i> $area_text</span>
+                    <span class="hp-spec" title="Phòng ngủ"><i class="bi bi-door-closed"></i> $bedroom_text</span>
+                    <span class="hp-spec" title="Phòng tắm"><i class="bi bi-droplet"></i> $bathroom_text</span>
+                    <span class="hp-spec" title="Sức chứa"><i class="bi bi-people"></i> $guest_text</span>
+                  </div>
+
+                  <div class="hp-facilities">
+                    <div class="hp-facilities-list">
+                      $facilities_html
                     </div>
                   </div>
-                  
-                  <div class="room-facilities">
-                    <h4 class="feature-title">
-                      <i class="bi bi-star me-2"></i>Tiện ích
-                    </h4>
-                    <div class="feature-badges">
-                      $facilities_data
-                    </div>
-                  </div>
-                  
-                  <div class="room-guests">
-                    <div class="guest-info">
-                      <i class="bi bi-people-fill me-2"></i>
-                      <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
-                        <meta itemprop="value" content="{$room_data['adult']}">
-                        <strong>{$room_data['adult']}</strong> Người lớn
-                      </span>
-                      <span class="mx-2">•</span>
-                      <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
-                        <meta itemprop="value" content="{$room_data['children']}">
-                        <strong>{$room_data['children']}</strong> Trẻ em
-                      </span>
-                    </div>
-                  </div>
-                  
+
                   <div class="room-actions">
-                    $book_btn
-                    <a href="room_details.php?id=$room_data[id]" 
+                    <a href="room_details.php?id={$room_data['id']}"
                        class="btn btn-outline-primary room-detail-btn"
                        aria-label="Xem chi tiết phòng {$room_data['name']}">
-                      <i class="bi bi-arrow-right me-2"></i>Chi tiết
+                      <i class="bi bi-arrow-right me-2"></i>Xem chi tiết
                     </a>
                   </div>
                 </div>
