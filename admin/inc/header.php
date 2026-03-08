@@ -126,23 +126,11 @@
           <span>Cài đặt</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../index.php" data-title="Xem trang web" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-box-arrow-up-right"></i>
-          <span>Xem trang web</span>
-        </a>
-      </li>
 
     </ul>
   </nav>
 
-  <!-- Bottom logout -->
-  <div class="sidebar-bottom-logout">
-    <a href="logout.php" class="sidebar-logout-btn" title="Đăng xuất">
-      <i class="bi bi-box-arrow-left"></i>
-      <span>Đăng xuất</span>
-    </a>
-  </div>
+
 
 </div><!-- /#dashboard-menu -->
 
@@ -152,16 +140,8 @@
 ════════════════════════════════════════════ -->
 <header class="admin-topbar" id="mainTopbar" role="banner">
 
-  <!-- Left: toggle + breadcrumb -->
+  <!-- Left: breadcrumb -->
   <div class="d-flex align-items-center gap-3">
-    <!-- Mobile hamburger -->
-    <button class="sidebar-toggle-btn-mobile d-lg-none" id="sidebarToggleMobile" aria-label="Mở sidebar" title="Mở sidebar">
-      <i class="bi bi-list"></i>
-    </button>
-    <!-- Desktop collapse/expand -->
-    <button class="sidebar-toggle-btn d-none d-lg-flex" id="sidebarToggle" aria-label="Thu nhỏ/mở rộng sidebar" title="Thu nhỏ/Mở rộng sidebar">
-      <i class="bi bi-layout-sidebar-reverse"></i>
-    </button>
     <!-- Page breadcrumb -->
     <nav aria-label="breadcrumb">
       <span id="topbarBreadcrumb" class="topbar-title">HaLong24h Admin</span>

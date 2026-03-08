@@ -1,10 +1,11 @@
 <?php
-  require('inc/essentials.php');
-  require('inc/db_config.php');
-  adminLogin();
+require('inc/essentials.php');
+require('inc/db_config.php');
+adminLogin();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +13,7 @@
   <title>Trang quản lý - Không gian và Tiện ích</title>
   <?php require('inc/links.php'); ?>
 </head>
+
 <body>
 
   <?php require('inc/header.php'); ?>
@@ -27,99 +29,110 @@
         </div>
       </div>
 
-      <!-- ── Loại căn hộ ── -->
-      <div class="card mb-4">
-        <div class="card-body p-0">
+      <!-- ── Loại căn hộ và Không gian ── -->
+      <div class="row mb-4">
+        <!-- ── Loại căn hộ ── -->
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+          <div class="card h-100">
+            <div class="card-body p-0">
 
-          <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
-               style="border-bottom:1px solid rgba(129,140,248,.10);">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-house-door" style="font-size:18px;color:#818cf8;"></i>
-              <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Loại căn hộ</h5>
-              <span id="count-room-type" class="badge ms-1"
+              <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
+                style="border-bottom:1px solid rgba(129,140,248,.10);">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-house-door" style="font-size:18px;color:#818cf8;"></i>
+                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Loại căn hộ</h5>
+                  <span id="count-room-type" class="badge ms-1"
                     style="background:rgba(129,140,248,.15);color:#818cf8;font-size:11px;border:1px solid rgba(129,140,248,.25);">0</span>
+                </div>
+                <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#room-type-s"
+                  style="background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.35);color:#818cf8;">
+                  <i class="bi bi-plus-lg me-1"></i>Thêm
+                </button>
+              </div>
+
+              <div class="px-4 py-3">
+                <div class="position-relative">
+                  <i class="bi bi-search position-absolute"
+                    style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
+                  <input type="text" id="search-room-type" class="form-control"
+                    style="padding-left:36px;" placeholder="Tìm kiếm loại căn hộ...">
+                </div>
+              </div>
+
+              <div class="table-container" style="border-radius:0;border:none;box-shadow:none;">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:60px;">#</th>
+                      <th>Tên loại</th>
+                      <th style="width:100px;">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="room-type-data">
+                    <tr>
+                      <td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="pagination-room-type"
+                class="d-flex align-items-center justify-content-between px-4 py-3"
+                style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
             </div>
-            <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#room-type-s"
-                    style="background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.35);color:#818cf8;">
-              <i class="bi bi-plus-lg me-1"></i>Thêm
-            </button>
           </div>
-
-          <div class="px-4 py-3">
-            <div class="position-relative">
-              <i class="bi bi-search position-absolute"
-                 style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
-              <input type="text" id="search-room-type" class="form-control"
-                     style="padding-left:36px;" placeholder="Tìm kiếm loại căn hộ...">
-            </div>
-          </div>
-
-          <div class="table-container" style="border-radius:0;border:none;box-shadow:none;">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th style="width:60px;">#</th>
-                  <th>Tên loại</th>
-                  <th style="width:100px;">Thao tác</th>
-                </tr>
-              </thead>
-              <tbody id="room-type-data">
-                <tr><td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div id="pagination-room-type"
-               class="d-flex align-items-center justify-content-between px-4 py-3"
-               style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
         </div>
-      </div>
 
-      <!-- ── Không gian ── -->
-      <div class="card mb-4">
-        <div class="card-body p-0">
+        <!-- ── Không gian ── -->
+        <div class="col-lg-6 col-md-12">
+          <div class="card h-100">
+            <div class="card-body p-0">
 
-          <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
-               style="border-bottom:1px solid rgba(129,140,248,.10);">
-            <div class="d-flex align-items-center gap-2">
-              <i class="bi bi-layout-wtf" style="font-size:18px;color:#a78bfa;"></i>
-              <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Không gian</h5>
-              <span id="count-feature" class="badge ms-1"
+              <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
+                style="border-bottom:1px solid rgba(129,140,248,.10);">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-layout-wtf" style="font-size:18px;color:#a78bfa;"></i>
+                  <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Không gian</h5>
+                  <span id="count-feature" class="badge ms-1"
                     style="background:rgba(167,139,250,.15);color:#a78bfa;font-size:11px;border:1px solid rgba(167,139,250,.25);">0</span>
+                </div>
+                <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s"
+                  style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:#a78bfa;">
+                  <i class="bi bi-plus-lg me-1"></i>Thêm
+                </button>
+              </div>
+
+              <div class="px-4 py-3">
+                <div class="position-relative">
+                  <i class="bi bi-search position-absolute"
+                    style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
+                  <input type="text" id="search-feature" class="form-control"
+                    style="padding-left:36px;" placeholder="Tìm kiếm không gian...">
+                </div>
+              </div>
+
+              <div class="table-container" style="border-radius:0;border:none;box-shadow:none;">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:60px;">#</th>
+                      <th>Tên không gian</th>
+                      <th style="width:100px;">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="features-data">
+                    <tr>
+                      <td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="pagination-feature"
+                class="d-flex align-items-center justify-content-between px-4 py-3"
+                style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
             </div>
-            <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s"
-                    style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:#a78bfa;">
-              <i class="bi bi-plus-lg me-1"></i>Thêm
-            </button>
           </div>
-
-          <div class="px-4 py-3">
-            <div class="position-relative">
-              <i class="bi bi-search position-absolute"
-                 style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
-              <input type="text" id="search-feature" class="form-control"
-                     style="padding-left:36px;" placeholder="Tìm kiếm không gian...">
-            </div>
-          </div>
-
-          <div class="table-container" style="border-radius:0;border:none;box-shadow:none;">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th style="width:60px;">#</th>
-                  <th>Tên không gian</th>
-                  <th style="width:100px;">Thao tác</th>
-                </tr>
-              </thead>
-              <tbody id="features-data">
-                <tr><td colspan="3" class="text-center py-5" style="color:#64748b;">Đang tải...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div id="pagination-feature"
-               class="d-flex align-items-center justify-content-between px-4 py-3"
-               style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
         </div>
       </div>
 
@@ -128,15 +141,15 @@
         <div class="card-body p-0">
 
           <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
-               style="border-bottom:1px solid rgba(129,140,248,.10);">
+            style="border-bottom:1px solid rgba(129,140,248,.10);">
             <div class="d-flex align-items-center gap-2">
               <i class="bi bi-grid-3x3-gap" style="font-size:18px;color:#60a5fa;"></i>
               <h5 class="m-0" style="font-weight:700;color:#e2e8f0;">Tiện ích</h5>
               <span id="count-facility" class="badge ms-1"
-                    style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:11px;border:1px solid rgba(96,165,250,.25);">0</span>
+                style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:11px;border:1px solid rgba(96,165,250,.25);">0</span>
             </div>
             <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s"
-                    style="background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:#60a5fa;">
+              style="background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:#60a5fa;">
               <i class="bi bi-plus-lg me-1"></i>Thêm
             </button>
           </div>
@@ -144,9 +157,9 @@
           <div class="px-4 py-3">
             <div class="position-relative">
               <i class="bi bi-search position-absolute"
-                 style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
+                style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
               <input type="text" id="search-facility" class="form-control"
-                     style="padding-left:36px;" placeholder="Tìm kiếm tiện ích...">
+                style="padding-left:36px;" placeholder="Tìm kiếm tiện ích...">
             </div>
           </div>
 
@@ -162,14 +175,16 @@
                 </tr>
               </thead>
               <tbody id="facilities-data">
-                <tr><td colspan="5" class="text-center py-5" style="color:#64748b;">Đang tải...</td></tr>
+                <tr>
+                  <td colspan="5" class="text-center py-5" style="color:#64748b;">Đang tải...</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <div id="pagination-facility"
-               class="d-flex align-items-center justify-content-between px-4 py-3"
-               style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
+            class="d-flex align-items-center justify-content-between px-4 py-3"
+            style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
         </div>
       </div>
 
@@ -259,4 +274,5 @@
   <script src="scripts/features_facilities.js"></script>
 
 </body>
+
 </html>
