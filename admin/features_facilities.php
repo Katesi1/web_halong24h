@@ -25,6 +25,33 @@
           <div class="card-body">
 
             <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0">Loại căn hộ</h5>
+              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#room-type-s">
+                <i class="bi bi-plus-square"></i> Thêm
+              </button>
+            </div>
+
+            <div class="table-responsive-md" style="height: 350px; overflow-y: scroll;">
+              <table class="table table-hover border">
+                <thead>
+                  <tr class="bg-dark text-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="room-type-data">                 
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+
+            <div class="d-flex align-items-center justify-content-between mb-3">
               <h5 class="card-title m-0">Không gian</h5>
               <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s">
                 <i class="bi bi-plus-square"></i> Thêm
@@ -83,6 +110,31 @@
   </div>
   
 
+  <!-- Room type modal -->
+
+  <div class="modal fade" id="room-type-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="room_type_s_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Thêm loại căn hộ</h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Tên</label>
+              <input type="text" name="roomtype_name" class="form-control shadow-none" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Huỷ</button>
+            <button type="submit" class="btn custom-bg text-white shadow-none">Cập nhật</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
   <!-- Feature modal -->
 
   <div class="modal fade" id="feature-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -123,7 +175,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Icon</label>
-              <input type="file" name="facility_icon" accept=".svg" class="form-control shadow-none" required>
+              <input type="file" name="facility_icon" accept=".svg" class="form-control shadow-none">
             </div>
             <div class="mb-3">
               <label class="form-label">Mô tả</label>

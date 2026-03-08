@@ -40,6 +40,8 @@
                     <th scope="col">Guests</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">Room Type</th>
+                    <th scope="col">Bedrooms</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -73,6 +75,20 @@
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Loại phòng</label>
+                <select name="room_type_id" class="form-select shadow-none" required>
+                  <option value="" selected disabled>Chọn loại phòng</option>
+                  <?php 
+                    $res = selectAll('room_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <option value='$opt[id]'>$opt[name]</option>
+                      ";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Diện tích</label>
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
@@ -92,20 +108,35 @@
                 <label class="form-label fw-bold">Trẻ em (Tối đa.)</label>
                 <input type="number" min="1" name="children" class="form-control shadow-none" required>
               </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Số phòng ngủ</label>
+                <input type="number" min="1" name="bedroom_quantities" class="form-control shadow-none bedroom-qty" disabled>
+              </div>
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Không gian</label>
                 <div class="row">
                   <?php 
                     $res = selectAll('features');
                     while($opt = mysqli_fetch_assoc($res)){
-                      echo"
-                        <div class='col-md-3 mb-1'>
-                          <label>
-                            <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
-                            $opt[name]
-                          </label>
-                        </div>
-                      ";
+                      if($opt['name'] == 'Phòng Ngủ'){
+                        echo"
+                          <div class='col-md-3 mb-1'>
+                            <label>
+                              <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none feature-bedroom'>
+                              $opt[name]
+                            </label>
+                          </div>
+                        ";
+                      } else {
+                        echo"
+                          <div class='col-md-3 mb-1'>
+                            <label>
+                              <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
+                              $opt[name]
+                            </label>
+                          </div>
+                        ";
+                      }
                     }
                   ?>
                 </div>
@@ -159,6 +190,20 @@
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Loại phòng</label>
+                <select name="room_type_id" class="form-select shadow-none" required>
+                  <option value="" selected disabled>Chọn loại phòng</option>
+                  <?php 
+                    $res = selectAll('room_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <option value='$opt[id]'>$opt[name]</option>
+                      ";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Diện tích</label>
                 <input type="number" min="1" name="area" class="form-control shadow-none" required>
               </div>
@@ -178,20 +223,35 @@
                 <label class="form-label fw-bold">Trẻ em (Tối đa.)</label>
                 <input type="number" min="1" name="children" class="form-control shadow-none" required>
               </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Số phòng ngủ</label>
+                <input type="number" min="1" name="bedroom_quantities" class="form-control shadow-none bedroom-qty" disabled>
+              </div>
               <div class="col-12 mb-3">
                 <label class="form-label fw-bold">Không gian</label>
                 <div class="row">
                   <?php 
                     $res = selectAll('features');
                     while($opt = mysqli_fetch_assoc($res)){
-                      echo"
-                        <div class='col-md-3 mb-1'>
-                          <label>
-                            <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
-                            $opt[name]
-                          </label>
-                        </div>
-                      ";
+                      if($opt['name'] == 'Phòng Ngủ'){
+                        echo"
+                          <div class='col-md-3 mb-1'>
+                            <label>
+                              <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none feature-bedroom'>
+                              $opt[name]
+                            </label>
+                          </div>
+                        ";
+                      } else {
+                        echo"
+                          <div class='col-md-3 mb-1'>
+                            <label>
+                              <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
+                              $opt[name]
+                            </label>
+                          </div>
+                        ";
+                      }
                     }
                   ?>
                 </div>
