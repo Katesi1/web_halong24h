@@ -12,29 +12,18 @@ function add_room() {
   data.append("room_type_id", add_room_form.elements["room_type_id"].value);
   data.append("area", add_room_form.elements["area"].value);
   data.append("price", add_room_form.elements["price"].value);
-  data.append("quantity", add_room_form.elements["quantity"].value);
   data.append("adult", add_room_form.elements["adult"].value);
   data.append("children", add_room_form.elements["children"].value);
   data.append("desc", add_room_form.elements["desc"].value);
-  data.append(
-    "bedroom_quantities",
-    add_room_form.elements["bedroom_quantities"]
-      ? add_room_form.elements["bedroom_quantities"].value || 0
-      : 0,
-  );
 
   let features = [];
   add_room_form.elements["features"].forEach((el) => {
-    if (el.checked) {
-      features.push(el.value);
-    }
+    if (el.checked) features.push(el.value);
   });
 
   let facilities = [];
   add_room_form.elements["facilities"].forEach((el) => {
-    if (el.checked) {
-      facilities.push(el.value);
-    }
+    if (el.checked) facilities.push(el.value);
   });
 
   data.append("features", JSON.stringify(features));
@@ -44,16 +33,41 @@ function add_room() {
   xhr.open("POST", "ajax/rooms.php", true);
 
   xhr.onload = function () {
+    var room_id = parseInt(this.responseText);
+
     var myModal = document.getElementById("add-room");
     var modal = bootstrap.Modal.getInstance(myModal);
     modal.hide();
 
-    if (this.responseText == 1) {
-      alert("success", "New room added!");
-      add_room_form.reset();
-      get_all_rooms();
+    if (room_id > 0) {
+      var imageFile = add_room_form.elements["room_image"].files[0];
+      if (imageFile) {
+        var imgData = new FormData();
+        imgData.append("add_image", "");
+        imgData.append("room_id", room_id);
+        imgData.append("image", imageFile);
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "ajax/rooms.php", true);
+        xhr2.onload = function () {
+          add_room_form.reset();
+          get_all_rooms();
+          if (this.responseText == "inv_img") {
+            alert("error", "Chỉ chấp nhận JPG, PNG, WEBP!");
+          } else if (this.responseText == "inv_size") {
+            alert("error", "Ảnh phải nhỏ hơn 2MB!");
+          } else {
+            alert("success", "Thêm phòng và ảnh thành công!");
+          }
+        };
+        xhr2.send(imgData);
+      } else {
+        alert("success", "Thêm phòng thành công!");
+        add_room_form.reset();
+        get_all_rooms();
+      }
     } else {
-      alert("error", "Server Down!");
+      alert("error", "Lỗi máy chủ!");
     }
   };
 
@@ -75,6 +89,10 @@ function get_all_rooms() {
 let edit_room_form = document.getElementById("edit_room_form");
 
 function edit_details(id) {
+  // Bỏ chọn tất cả checkbox trước khi điền dữ liệu mới
+  edit_room_form.elements["features"].forEach((el) => { el.checked = false; });
+  edit_room_form.elements["facilities"].forEach((el) => { el.checked = false; });
+
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "ajax/rooms.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -86,37 +104,18 @@ function edit_details(id) {
     edit_room_form.elements["room_type_id"].value = data.roomdata.room_type_id;
     edit_room_form.elements["area"].value = data.roomdata.area;
     edit_room_form.elements["price"].value = data.roomdata.price;
-    edit_room_form.elements["quantity"].value = data.roomdata.quantity;
     edit_room_form.elements["adult"].value = data.roomdata.adult;
     edit_room_form.elements["children"].value = data.roomdata.children;
     edit_room_form.elements["desc"].value = data.roomdata.description;
     edit_room_form.elements["room_id"].value = data.roomdata.id;
-    if (edit_room_form.elements["bedroom_quantities"]) {
-      edit_room_form.elements["bedroom_quantities"].value =
-        data.roomdata.bedroom_quantities || "";
-    }
 
     edit_room_form.elements["features"].forEach((el) => {
-      if (data.features.includes(Number(el.value))) {
-        el.checked = true;
-      }
+      el.checked = data.features.includes(Number(el.value));
     });
 
     edit_room_form.elements["facilities"].forEach((el) => {
-      if (data.facilities.includes(Number(el.value))) {
-        el.checked = true;
-      }
+      el.checked = data.facilities.includes(Number(el.value));
     });
-
-    const bedroomCheckbox = edit_room_form.querySelector(".feature-bedroom");
-    const bedroomInput = edit_room_form.querySelector(".bedroom-qty");
-    if (bedroomCheckbox && bedroomInput) {
-      if (bedroomCheckbox.checked) {
-        bedroomInput.disabled = false;
-      } else {
-        bedroomInput.disabled = true;
-      }
-    }
   };
 
   xhr.send("get_room=" + id);
@@ -127,25 +126,6 @@ edit_room_form.addEventListener("submit", function (e) {
   submit_edit_room();
 });
 
-function setupBedroomToggle(form) {
-  if (!form) return;
-  const bedroomCheckbox = form.querySelector(".feature-bedroom");
-  const bedroomInput = form.querySelector(".bedroom-qty");
-  if (!bedroomCheckbox || !bedroomInput) return;
-
-  const syncVisibility = () => {
-    if (bedroomCheckbox.checked) {
-      bedroomInput.disabled = false;
-    } else {
-      bedroomInput.disabled = true;
-      bedroomInput.value = "";
-    }
-  };
-
-  bedroomCheckbox.addEventListener("change", syncVisibility);
-  syncVisibility();
-}
-
 function submit_edit_room() {
   let data = new FormData();
   data.append("edit_room", "");
@@ -154,29 +134,18 @@ function submit_edit_room() {
   data.append("room_type_id", edit_room_form.elements["room_type_id"].value);
   data.append("area", edit_room_form.elements["area"].value);
   data.append("price", edit_room_form.elements["price"].value);
-  data.append("quantity", edit_room_form.elements["quantity"].value);
   data.append("adult", edit_room_form.elements["adult"].value);
   data.append("children", edit_room_form.elements["children"].value);
   data.append("desc", edit_room_form.elements["desc"].value);
-  data.append(
-    "bedroom_quantities",
-    edit_room_form.elements["bedroom_quantities"]
-      ? edit_room_form.elements["bedroom_quantities"].value || 0
-      : 0,
-  );
 
   let features = [];
   edit_room_form.elements["features"].forEach((el) => {
-    if (el.checked) {
-      features.push(el.value);
-    }
+    if (el.checked) features.push(el.value);
   });
 
   let facilities = [];
   edit_room_form.elements["facilities"].forEach((el) => {
-    if (el.checked) {
-      facilities.push(el.value);
-    }
+    if (el.checked) facilities.push(el.value);
   });
 
   data.append("features", JSON.stringify(features));
@@ -191,11 +160,11 @@ function submit_edit_room() {
     modal.hide();
 
     if (this.responseText == 1) {
-      alert("success", "Room data edited!");
+      alert("success", "Cập nhật phòng thành công!");
       edit_room_form.reset();
       get_all_rooms();
     } else {
-      alert("error", "Server Down!");
+      alert("error", "Lỗi máy chủ!");
     }
   };
 
@@ -343,6 +312,4 @@ function remove_room(room_id) {
 
 window.onload = function () {
   get_all_rooms();
-  setupBedroomToggle(add_room_form);
-  setupBedroomToggle(edit_room_form);
 };

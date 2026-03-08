@@ -107,38 +107,26 @@
   if(isset($_POST['add_facility']))
   {
     $frm_data = filteration($_POST);
+    $icon_class = !empty($frm_data['icon']) ? $frm_data['icon'] : 'fa-check';
 
-    $img_r = uploadSVGImage($_FILES['icon'],FACILITIES_FOLDER);
-
-    if($img_r == 'inv_img'){
-      echo $img_r;
-    }
-    else if($img_r == 'inv_size'){
-      echo $img_r;
-    }
-    else if($img_r == 'upd_failed'){
-      echo $img_r;
-    }
-    else{
-      $q = "INSERT INTO `facilities`(`icon`,`name`, `description`) VALUES (?,?,?)";
-      $values = [$img_r,$frm_data['name'],$frm_data['desc']];
-      $res = insert($q,$values,'sss');
-      echo $res;
-    }
+    $q = "INSERT INTO `facilities`(`icon`,`name`,`description`) VALUES (?,?,?)";
+    $values = [$icon_class, $frm_data['name'], $frm_data['desc']];
+    $res = insert($q,$values,'sss');
+    echo $res;
   }
 
   if(isset($_POST['get_facilities']))
   {
     $res = selectAll('facilities');
     $i=1;
-    $path = FACILITIES_IMG_PATH;
 
     while($row = mysqli_fetch_assoc($res))
     {
+      $icon_html = "<i class='fa-solid {$row['icon']}' style='font-size:20px;color:#60a5fa;'></i>";
       echo <<<data
         <tr class='align-middle'>
           <td>$i</td>
-          <td><img src="$path$row[icon]" width="100px"></td>
+          <td>$icon_html</td>
           <td>$row[name]</td>
           <td>$row[description]</td>
           <td>
@@ -161,23 +149,13 @@
 
     if(mysqli_num_rows($check_q)==0)
     {
-      $pre_q = "SELECT * FROM `facilities` WHERE `id`=?";
-      $res = select($pre_q,$values,'i');
-      $img = mysqli_fetch_assoc($res);
-  
-      if(deleteImage($img['icon'],FACILITIES_FOLDER)){
-        $q = "DELETE FROM `facilities` WHERE `id`=?";
-        $res = delete($q,$values,'i');
-        echo $res;      
-      }
-      else{
-        echo 0;
-      }
+      $q = "DELETE FROM `facilities` WHERE `id`=?";
+      $res = delete($q,$values,'i');
+      echo $res;
     }
     else{
       echo 'room_added';
     }
-
   }
 
 ?>

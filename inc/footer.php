@@ -26,10 +26,10 @@
             data;
       }
       ?>
-      <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
+      <a href="<?php echo htmlspecialchars($contact_r['fb'] ?? '') ?>" class="d-inline-block text-dark text-decoration-none mb-2">
         <i class="bi bi-facebook me-1"></i> Facebook
       </a><br>
-      <a href="<?php echo $contact_r['zalo'] ?>" class="d-inline-block text-dark text-decoration-none">
+      <a href="<?php echo htmlspecialchars($contact_r['zalo'] ?? '') ?>" class="d-inline-block text-dark text-decoration-none">
         <i class="bi bi-chat-dots-fill me-1"></i> Zalo
       </a><br>
     </div>

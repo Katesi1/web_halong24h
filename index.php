@@ -385,7 +385,6 @@
       <div class="row g-4 justify-content-center">
         <?php
         $res = mysqli_query($con, "SELECT * FROM `facilities` ORDER BY `id` DESC LIMIT 5");
-        $path = FACILITIES_IMG_PATH;
         $facilities_data_json = [];
 
         while ($row = mysqli_fetch_assoc($res)) {
@@ -399,11 +398,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6 facility-item" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
               <div class="facility-card h-100">
                 <div class="facility-icon-wrapper">
-                  <img src="$path$row[icon]" 
-                       alt="Icon $row[name]" 
-                       class="facility-icon"
-                       loading="lazy"
-                       itemprop="image">
+                  <i class="fa-solid $row[icon]" style="font-size:2.5rem;" aria-hidden="true"></i>
                 </div>
                 <h5 class="facility-name mt-3" itemprop="name">$row[name]</h5>
                 <meta itemprop="value" content="true">
@@ -591,15 +586,7 @@
         <div class="col-lg-8 col-md-7">
           <div class="contact-map-wrapper">
             <div class="map-container">
-              <iframe
-                class="contact-map"
-                height="400px"
-                src="<?php echo $contact_r['iframe'] ?>"
-                loading="lazy"
-                title="Bản đồ vị trí khách sạn"
-                allowfullscreen
-                aria-label="Bản đồ vị trí khách sạn">
-              </iframe>
+              <?php echo $contact_r['iframe'] ?? '' ?>
             </div>
           </div>
         </div>
@@ -654,7 +641,7 @@
                   }
                   ?>
 
-                  <a href="<?php echo $contact_r['fb'] ?>"
+                  <a href="<?php echo htmlspecialchars($contact_r['fb'] ?? '') ?>"
                     class="social-link facebook-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -665,7 +652,7 @@
                     <span>Facebook</span>
                   </a>
 
-                  <a href="<?php echo $contact_r['zalo'] ?>"
+                  <a href="<?php echo htmlspecialchars($contact_r['zalo'] ?? '') ?>"
                     class="social-link zalo-link"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -40,47 +40,52 @@
       </div>
 
       <div class="col-lg-7 col-md-12 px-4">
-        <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <?php 
+        <?php
+          $fallback_img = ROOMS_IMG_PATH."thumbnail.jpg";
+          $img_q = mysqli_query($con,"SELECT * FROM `room_images` WHERE `room_id`='$room_data[id]' ORDER BY `thumb` DESC, `sort_order` ASC");
+          $all_images = [];
+          if(mysqli_num_rows($img_q) > 0){
+            while($img_row = mysqli_fetch_assoc($img_q)){
+              $all_images[] = $img_row;
+            }
+          }
+          $main_img = count($all_images) > 0 ? ROOMS_IMG_PATH.$all_images[0]['image'] : $fallback_img;
+        ?>
 
-              $room_img = ROOMS_IMG_PATH."thumbnail.jpg";
-              $img_q = mysqli_query($con,"SELECT * FROM `room_images` 
-                WHERE `room_id`='$room_data[id]'");
-
-              if(mysqli_num_rows($img_q)>0)
-              {
-                $active_class = 'active';
-
-                while($img_res = mysqli_fetch_assoc($img_q))
-                {
-                  echo"
-                    <div class='carousel-item $active_class'>
-                      <img src='".ROOMS_IMG_PATH.$img_res['image']."' class='d-block w-100 rounded'>
-                    </div>
-                  ";
-                  $active_class='';
-                }
-
-              }
-              else{
-                echo"<div class='carousel-item active'>
-                  <img src='$room_img' class='d-block w-100'>
-                </div>";
-              }
-
-            ?>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Lùi</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Tiến</span>
-          </button>
+        <!-- Ảnh chính -->
+        <div class="mb-3">
+          <img id="mainRoomImage" src="<?php echo $main_img; ?>" class="w-100 rounded-3" style="aspect-ratio:4/3;object-fit:cover;cursor:zoom-in;" alt="<?php echo $room_data['name']; ?>">
         </div>
 
+        <!-- Thumbnails -->
+        <?php if(count($all_images) > 1): ?>
+        <div class="d-flex gap-2 flex-wrap">
+          <?php foreach($all_images as $idx => $img):
+            $src = ROOMS_IMG_PATH.$img['image'];
+            $active_border = $idx === 0 ? 'border-2 border-dark' : 'border';
+          ?>
+          <img src="<?php echo $src; ?>"
+               class="rounded-2 thumb-preview <?php echo $active_border; ?>"
+               style="width:80px;height:60px;object-fit:cover;cursor:pointer;opacity:<?php echo $idx===0?'1':'.65'; ?>;transition:opacity .2s,border-color .2s;"
+               onclick="switchMainImage(this,'<?php echo $src; ?>')"
+               alt="">
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <script>
+        function switchMainImage(el, src){
+          document.getElementById('mainRoomImage').src = src;
+          document.querySelectorAll('.thumb-preview').forEach(function(t){
+            t.style.opacity = '.65';
+            t.classList.remove('border-dark','border-2');
+            t.classList.add('border');
+          });
+          el.style.opacity = '1';
+          el.classList.remove('border');
+          el.classList.add('border-2','border-dark');
+        }
+        </script>
       </div>
 
       <div class="col-lg-5 col-md-12 px-4">
@@ -113,14 +118,26 @@
                 </div>
               rating;
 
-              $fea_q = mysqli_query($con,"SELECT f.name FROM `features` f 
-                INNER JOIN `room_features` rfea ON f.id = rfea.features_id 
+              $fea_q = mysqli_query($con,"SELECT f.name FROM `features` f
+                INNER JOIN `room_features` rfea ON f.id = rfea.features_id
                 WHERE rfea.room_id = '$room_data[id]'");
+
+              $feature_icons = [
+                'Phòng Ngủ'  => 'fa-bed',
+                'Ban Công'   => 'fa-door-open',
+                'Nhà Bếp'   => 'fa-utensils',
+                'Ghế Sofa'  => 'fa-couch',
+                'View Biển' => 'fa-water',
+                'View Phố'  => 'fa-city',
+                'Sân Vườn'  => 'fa-tree',
+                'Bể Bơi'    => 'fa-person-swimming',
+              ];
 
               $features_data = "";
               while($fea_row = mysqli_fetch_assoc($fea_q)){
-                $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-                  $fea_row[name]
+                $ico_class = $feature_icons[$fea_row['name']] ?? 'fa-circle-check';
+                $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1 px-3 py-2'>
+                  <i class='fa-solid {$ico_class} me-1'></i>{$fea_row['name']}
                 </span>";
               }
 
@@ -131,20 +148,21 @@
                 </div>
               features;
 
-              $fac_q = mysqli_query($con,"SELECT f.name FROM `facilities` f 
-                INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
+              $fac_q = mysqli_query($con,"SELECT f.name, f.icon FROM `facilities` f
+                INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id
                 WHERE rfac.room_id = '$room_data[id]'");
 
               $facilities_data = "";
               while($fac_row = mysqli_fetch_assoc($fac_q)){
-                $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-                  $fac_row[name]
+                $icon = $fac_row['icon'] ? "<i class='fa-solid {$fac_row['icon']} me-1'></i>" : "";
+                $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1 px-3 py-2'>
+                  {$icon}{$fac_row['name']}
                 </span>";
               }
-              
+
               echo<<<facilities
                 <div class="mb-3">
-                  <h6 class="mb-1">Facilities</h6>
+                  <h6 class="mb-1">Tiện ích</h6>
                   $facilities_data
                 </div>
               facilities;

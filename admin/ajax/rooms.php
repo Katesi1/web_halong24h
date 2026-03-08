@@ -60,7 +60,7 @@
     }
     
     if($flag){
-      echo 1;
+      echo $room_id;
     }
     else{
       echo 0;
@@ -95,22 +95,23 @@
         ? $row['bedroom_quantities']
         : '-';
 
+      $price_display = $row['price'] > 0 ? number_format($row['price'],0,',','.') . ' VNĐ' : 'Liên hệ';
+
       $data.="
         <tr class='align-middle'>
           <td>$i</td>
           <td>$row[name]</td>
-          <td>$row[area] m2</td>
+          <td>$type_name</td>
+          <td>$row[area] m²</td>
           <td>
             <span class='badge rounded-pill bg-light text-dark'>
-              Adult: $row[adult]
+              Người lớn: $row[adult]
             </span><br>
             <span class='badge rounded-pill bg-light text-dark'>
-              Children: $row[children]
+              Trẻ em: $row[children]
             </span>
           </td>
-          <td>$row[price] VND</td>
-          <td>$type_name</td>
-          <td>$bedrooms</td>
+          <td>$price_display</td>
           <td>$status</td>
           <td>
             <button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-room'>

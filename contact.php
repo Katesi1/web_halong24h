@@ -127,7 +127,7 @@
 
           <!-- Map -->
           <div class="map-wrapper">
-            <iframe class="w-100 d-block" height="260px" src="<?php echo $contact_r['iframe'] ?>" loading="lazy" style="border:0;"></iframe>
+            <?php echo $contact_r['iframe'] ?? '' ?>
           </div>
 
           <!-- Địa chỉ -->
@@ -189,14 +189,14 @@
               <p class="fw-semibold mb-1 small text-muted">Theo dõi chúng tôi</p>
               <div class="d-flex gap-2">
                 <?php if ($contact_r['tw'] != ''): ?>
-                  <a href="<?php echo $contact_r['tw'] ?>" class="social-link" title="Twitter">
+                  <a href="<?php echo htmlspecialchars($contact_r['tw'] ?? '') ?>" class="social-link" title="Twitter">
                     <i class="bi bi-twitter"></i>
                   </a>
                 <?php endif; ?>
-                <a href="<?php echo $contact_r['fb'] ?>" class="social-link" title="Facebook">
+                <a href="<?php echo htmlspecialchars($contact_r['fb'] ?? '') ?>" class="social-link" title="Facebook">
                   <i class="bi bi-facebook"></i>
                 </a>
-                <a href="<?php echo $contact_r['zalo'] ?>" class="social-link" title="Zalo">
+                <a href="<?php echo htmlspecialchars($contact_r['zalo'] ?? '') ?>" class="social-link" title="Zalo">
                   <i class="bi bi-chat-dots-fill"></i>
                 </a>
               </div>

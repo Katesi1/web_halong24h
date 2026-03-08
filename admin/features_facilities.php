@@ -252,8 +252,12 @@ adminLogin();
               <input type="text" name="facility_name" class="form-control" placeholder="VD: Wifi, Điều hoà..." required>
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Icon <span style="color:#64748b;font-weight:400;">(SVG, tối đa 1MB)</span></label>
-              <input type="file" name="facility_icon" accept=".svg" class="form-control">
+              <label class="form-label fw-bold">Icon FontAwesome</label>
+              <div class="input-group">
+                <span class="input-group-text" id="icon-preview"><i class="fa-solid fa-check" style="width:20px;text-align:center;"></i></span>
+                <input type="text" name="facility_icon" class="form-control" placeholder="VD: fa-wifi, fa-bed, fa-tv..." id="facility_icon_input">
+              </div>
+              <small class="text-muted">Xem danh sách icon tại <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a></small>
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Mô tả <span style="color:#64748b;font-weight:400;">(không bắt buộc)</span></label>

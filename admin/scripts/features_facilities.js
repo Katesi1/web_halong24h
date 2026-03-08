@@ -226,23 +226,20 @@ function add_facility() {
   var form = document.getElementById('facility_s_form');
   var data = new FormData();
   data.append('name', form.elements['facility_name'].value);
-  data.append('icon', form.elements['facility_icon'].files[0]);
+  data.append('icon', form.elements['facility_icon'].value.trim());
   data.append('desc', form.elements['facility_desc'].value);
   data.append('add_facility', '');
 
   postForm('ajax/features_facilities.php', data, function (res) {
     var modal = bootstrap.Modal.getInstance(document.getElementById('facility-s'));
     modal.hide();
-    if (res === 'inv_img') {
-      toast.error('Chỉ chấp nhận file SVG!');
-    } else if (res === 'inv_size') {
-      toast.error('File phải nhỏ hơn 1MB!');
-    } else if (res === 'upd_failed') {
-      toast.error('Upload thất bại. Vui lòng thử lại!');
-    } else {
+    if (parseInt(res) > 0) {
       toast.success('Đã thêm tiện ích mới!');
       form.reset();
+      document.getElementById('icon-preview').innerHTML = '<i class="fa-solid fa-check" style="width:20px;text-align:center;"></i>';
       get_facilities();
+    } else {
+      toast.error('Thêm thất bại. Vui lòng thử lại!');
     }
   });
 }
@@ -286,4 +283,16 @@ window.addEventListener('load', function () {
   get_room_types();
   get_features();
   get_facilities();
+
+  // Live preview icon khi nhập class FA
+  var iconInput = document.getElementById('facility_icon_input');
+  var iconPreview = document.getElementById('icon-preview');
+  if (iconInput && iconPreview) {
+    iconInput.addEventListener('input', function () {
+      var cls = this.value.trim();
+      iconPreview.innerHTML = cls
+        ? '<i class="fa-solid ' + cls + '" style="width:20px;text-align:center;"></i>'
+        : '<i class="fa-solid fa-check" style="width:20px;text-align:center;"></i>';
+    });
+  }
 });
