@@ -1034,4 +1034,133 @@ return [
     'spec_tip_2'            => 'Chả mực nên mua tại các cơ sở có thương hiệu uy tín, tránh mua hàng không rõ nguồn gốc tại các điểm du lịch.',
     'spec_tip_3'            => 'Sá sùng khô có thể bảo quản lâu, rất phù hợp làm quà. Chọn loại màu đỏ nâu, không ẩm mốc, mùi thơm đặc trưng.',
     'spec_tip_4'            => 'Mặc cả tại chợ là điều bình thường. Hỏi giá ít nhất 2-3 hàng trước khi quyết định mua để có giá hợp lý nhất.',
+
+    // ═══ ADMIN GUIDE ═══
+    'admin_guide'                  => 'Hướng dẫn sử dụng',
+    'guide_quick_nav'              => 'Điều hướng nhanh',
+    'guide_nav_dashboard'          => 'Tổng quan',
+    'guide_nav_rooms'              => 'Quản lý phòng',
+    'guide_nav_bookings'           => 'Đặt phòng',
+    'guide_nav_users'              => 'Người dùng',
+    'guide_nav_reviews'            => 'Đánh giá',
+    'guide_nav_messages'           => 'Tin nhắn',
+    'guide_nav_carousel'           => 'Carousel',
+    'guide_nav_facilities'         => 'Tiện ích',
+    'guide_nav_settings'           => 'Cài đặt',
+
+    // Guide: Login
+    'guide_login_title'            => 'Đăng nhập hệ thống',
+    'guide_login_step1'            => 'Truy cập trang quản trị tại đường dẫn <code>/admin/</code>',
+    'guide_login_step2'            => 'Nhập <strong>Tên đăng nhập</strong> và <strong>Mật khẩu</strong>',
+    'guide_login_step3'            => 'Nhấn <strong>Đăng nhập</strong> — hệ thống sẽ chuyển đến Dashboard',
+    'guide_login_note'             => 'Để đăng xuất: nhấn nút <strong>Đăng xuất</strong> ở góc trên bên phải.',
+
+    // Guide: Dashboard
+    'guide_dashboard_title'        => 'Tổng quan (Dashboard)',
+    'guide_dashboard_desc'         => 'Dashboard hiển thị tổng quan toàn bộ hoạt động hệ thống qua các thẻ thống kê và biểu đồ phân tích.',
+    'guide_dash_rooms'             => 'Tổng số phòng',
+    'guide_dash_bookings'          => 'Tổng đặt phòng',
+    'guide_dash_revenue'           => 'Tổng doanh thu',
+    'guide_dash_new_bookings'      => 'Đặt phòng mới',
+    'guide_dash_refunds'           => 'Yêu cầu hoàn tiền',
+    'guide_dash_messages'          => 'Tin nhắn chưa đọc',
+    'guide_dash_reviews'           => 'Đánh giá chưa xem',
+    'guide_dash_users'             => 'Tổng người dùng',
+    'guide_dashboard_tip'          => 'Nhấn vào từng thẻ thống kê để chuyển nhanh đến trang quản lý tương ứng. Biểu đồ có thể chọn kỳ phân tích: 30 ngày / 90 ngày / 365 ngày / Toàn bộ.',
+
+    // Guide: Rooms
+    'guide_rooms_title'            => 'Quản lý phòng',
+    'guide_rooms_desc'             => 'Thêm, sửa, xóa phòng. Bật/tắt trạng thái hiển thị và quản lý ảnh phòng.',
+    'guide_rooms_add_title'        => 'Thêm phòng mới',
+    'guide_rooms_add_step1'        => 'Nhấn nút <strong>Thêm phòng</strong> — form hiện ra',
+    'guide_rooms_add_step2'        => 'Điền thông tin: Tên, Loại phòng, Diện tích, Giá, Số khách, Ảnh, Tiện ích, Mô tả',
+    'guide_rooms_add_step3'        => 'Nhấn <strong>Lưu</strong> — phòng được thêm vào hệ thống',
+    'guide_rooms_edit_title'       => 'Sửa thông tin phòng',
+    'guide_rooms_edit_desc'        => 'Nhấn nút bút chì trên dòng phòng cần sửa. Form hiện ra với dữ liệu hiện tại, chỉnh sửa và nhấn Cập nhật.',
+    'guide_rooms_images_title'     => 'Quản lý ảnh phòng',
+    'guide_rooms_images_step1'     => 'Nhấn nút <strong>hình ảnh</strong> trên dòng phòng',
+    'guide_rooms_images_step2'     => 'Upload ảnh mới (hỗ trợ JPEG, PNG, WebP, HEIC)',
+    'guide_rooms_images_step3'     => 'Nhấn <strong>ngôi sao</strong> để đặt ảnh chính, nhấn <strong>X</strong> để xóa ảnh',
+    'guide_rooms_note'             => 'Phòng bị xóa sẽ ẩn đi (xóa mềm), dữ liệu đặt phòng liên quan vẫn được giữ nguyên. Nhập giá = 0 sẽ hiển thị "Liên hệ" trên website.',
+
+    // Guide: Bookings
+    'guide_bookings_title'         => 'Quản lý đặt phòng',
+    'guide_bookings_desc'          => 'Hệ thống đặt phòng gồm 3 giai đoạn: Đơn mới → Hoàn tiền → Thống kê.',
+    'guide_bookings_flow_guest'    => 'Khách đặt phòng',
+    'guide_bookings_flow_new'      => 'Đơn đặt phòng mới',
+    'guide_bookings_flow_assign'   => 'Gán phòng',
+    'guide_bookings_flow_cancel_action' => 'Hủy đơn',
+    'guide_bookings_flow_done'     => 'Hoàn thành',
+    'guide_bookings_flow_refund'   => 'Hoàn tiền',
+    'guide_bookings_flow_stats'    => 'Thống kê',
+    'guide_bookings_new_title'     => 'Đặt phòng mới',
+    'guide_bookings_new_desc'      => 'Xem danh sách đơn mới, tìm kiếm theo mã đơn/SĐT/tên. Nhấn "Gán phòng" để nhập mã phòng thực tế, hoặc "Hủy" để hủy đơn.',
+    'guide_bookings_refund_title'  => 'Hoàn tiền',
+    'guide_bookings_refund_desc'   => 'Xem đơn đã hủy đang chờ hoàn tiền. Kiểm tra thông tin và nhấn "Hoàn tiền" để xác nhận đã hoàn tiền cho khách.',
+    'guide_bookings_stats_title'   => 'Thống kê',
+    'guide_bookings_stats_desc'    => 'Xem lịch sử tất cả đặt phòng với trạng thái (xanh = thành công, đỏ = đã hủy, vàng = thất bại). Hỗ trợ tìm kiếm và phân trang.',
+
+    // Guide: Users
+    'guide_users_title'            => 'Quản lý người dùng',
+    'guide_users_desc'             => 'Xem danh sách tài khoản khách hàng đã đăng ký.',
+    'guide_users_search'           => 'Tìm kiếm người dùng theo tên',
+    'guide_users_toggle'           => 'Bật/Tắt tài khoản — tài khoản bị tắt không thể đăng nhập và đặt phòng',
+    'guide_users_delete'           => 'Xóa tài khoản chưa xác minh email',
+    'guide_users_note'             => 'Không thể xóa tài khoản đã xác minh để bảo vệ dữ liệu đặt phòng liên quan.',
+
+    // Guide: Reviews
+    'guide_reviews_title'          => 'Quản lý đánh giá',
+    'guide_reviews_desc'           => 'Xem và kiểm duyệt đánh giá của khách hàng. Đánh giá hiển thị trên trang chủ (mục Testimonials).',
+    'guide_reviews_mark'           => 'Đánh dấu đã đọc từng đánh giá',
+    'guide_reviews_delete'         => 'Xóa đánh giá không phù hợp',
+    'guide_reviews_bulk'           => 'Đánh dấu tất cả đã đọc / Xóa tất cả',
+    'guide_reviews_tip'            => 'Khách hàng chỉ có thể gửi đánh giá sau khi đã hoàn thành đặt phòng. Số đánh giá chưa xem hiển thị trên Dashboard.',
+
+    // Guide: Messages
+    'guide_messages_title'         => 'Quản lý tin nhắn',
+    'guide_messages_desc'          => 'Xem tin nhắn từ form liên hệ của khách trên trang web.',
+    'guide_messages_mark'          => 'Đánh dấu đã đọc từng tin nhắn',
+    'guide_messages_delete'        => 'Xóa tin nhắn',
+    'guide_messages_bulk'          => 'Đánh dấu tất cả đã đọc / Xóa tất cả',
+
+    // Guide: Carousel
+    'guide_carousel_title'         => 'Quản lý Carousel (Slider trang chủ)',
+    'guide_carousel_desc'          => 'Quản lý hình ảnh slider banner trên trang chủ.',
+    'guide_carousel_step1'         => 'Nhấn nút <strong>Thêm ảnh</strong>',
+    'guide_carousel_step2'         => 'Chọn file ảnh (hỗ trợ JPEG, PNG, WebP)',
+    'guide_carousel_step3'         => 'Nhấn <strong>Upload</strong> — ảnh xuất hiện trên slider trang chủ',
+    'guide_carousel_tip'           => 'Nên sử dụng ảnh có kích thước lớn, tỷ lệ ngang (16:9) để hiển thị đẹp trên slider.',
+
+    // Guide: Facilities
+    'guide_facilities_title'       => 'Quản lý loại phòng & tiện ích',
+    'guide_facilities_desc'        => 'Quản lý 3 nhóm danh mục dữ liệu dùng khi thêm/sửa phòng.',
+    'guide_fac_types'              => 'Loại phòng',
+    'guide_fac_types_desc'         => 'Villa 4PN, Penthouse, Căn hộ 3PN... Dùng để phân loại phòng.',
+    'guide_fac_features'           => 'Đặc điểm',
+    'guide_fac_features_desc'      => 'Ban công, View biển, Sân vườn, Bể bơi... Hiển thị trên card phòng.',
+    'guide_fac_amenities'          => 'Tiện ích',
+    'guide_fac_amenities_desc'     => 'WiFi, Điều hòa, Smart TV, Bếp từ... Kèm icon và mô tả chi tiết.',
+    'guide_facilities_note'        => 'Không thể xóa danh mục đang được gán cho phòng nào đó. Cần gỡ khỏi tất cả phòng trước khi xóa.',
+
+    // Guide: Settings
+    'guide_settings_title'         => 'Cài đặt hệ thống',
+    'guide_settings_desc'          => 'Cấu hình thông tin chung, chế độ bảo trì, thông tin liên hệ và đội ngũ.',
+    'guide_set_general'            => 'Cài đặt chung',
+    'guide_set_general_desc'       => 'Tên website và mô tả giới thiệu.',
+    'guide_set_maintenance'        => 'Bảo trì',
+    'guide_set_maintenance_desc'   => 'Bật/tắt chế độ bảo trì. Khi bật, khách không thể đặt phòng.',
+    'guide_set_contact'            => 'Liên hệ',
+    'guide_set_contact_desc'       => 'Địa chỉ, SĐT, email, mạng xã hội, Google Maps.',
+    'guide_set_team'               => 'Đội ngũ',
+    'guide_set_team_desc'          => 'Thêm/xóa thành viên đội ngũ quản lý.',
+    'guide_settings_warning'       => 'Khi bật chế độ bảo trì, toàn bộ website sẽ hiển thị thông báo "Đang bảo trì" cho khách. Quản trị viên vẫn truy cập được admin panel.',
+
+    // Guide: Sidebar map
+    'guide_sidebar_title'          => 'Bản đồ menu',
+    'guide_map_overview'           => 'Tổng quan',
+    'guide_map_bookings'           => 'Đặt phòng',
+    'guide_map_management'         => 'Quản lý',
+    'guide_map_content'            => 'Nội dung',
+    'guide_map_system'             => 'Hệ thống',
+    'guide_back_to_top'            => 'Về đầu trang',
 ];

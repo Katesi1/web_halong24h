@@ -126,6 +126,12 @@
           <span><?php _e('admin_settings') ?></span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="guide.php" data-title="<?php echo __('admin_guide') ?>">
+          <i class="bi bi-book"></i>
+          <span><?php _e('admin_guide') ?></span>
+        </a>
+      </li>
 
     </ul>
   </nav>

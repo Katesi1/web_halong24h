@@ -1034,4 +1034,133 @@ return [
     'spec_tip_2'            => 'Buy squid cake from reputable branded establishments, avoid products of unknown origin at tourist spots.',
     'spec_tip_3'            => 'Dried sa sung can be stored for a long time, making it great for gifts. Choose the reddish-brown type, not moldy, with a distinctive aroma.',
     'spec_tip_4'            => 'Bargaining at markets is normal. Ask prices at least 2-3 stalls before deciding to buy for the best deal.',
+
+    // ═══ ADMIN GUIDE ═══
+    'admin_guide'                  => 'User Guide',
+    'guide_quick_nav'              => 'Quick Navigation',
+    'guide_nav_dashboard'          => 'Dashboard',
+    'guide_nav_rooms'              => 'Room Management',
+    'guide_nav_bookings'           => 'Bookings',
+    'guide_nav_users'              => 'Users',
+    'guide_nav_reviews'            => 'Reviews',
+    'guide_nav_messages'           => 'Messages',
+    'guide_nav_carousel'           => 'Carousel',
+    'guide_nav_facilities'         => 'Facilities',
+    'guide_nav_settings'           => 'Settings',
+
+    // Guide: Login
+    'guide_login_title'            => 'System Login',
+    'guide_login_step1'            => 'Go to admin page at <code>/admin/</code>',
+    'guide_login_step2'            => 'Enter <strong>Username</strong> and <strong>Password</strong>',
+    'guide_login_step3'            => 'Click <strong>Login</strong> — the system will redirect to Dashboard',
+    'guide_login_note'             => 'To log out: click the <strong>Logout</strong> button in the top right corner.',
+
+    // Guide: Dashboard
+    'guide_dashboard_title'        => 'Dashboard',
+    'guide_dashboard_desc'         => 'Dashboard displays a full overview of the system through statistics cards and analytics charts.',
+    'guide_dash_rooms'             => 'Total Rooms',
+    'guide_dash_bookings'          => 'Total Bookings',
+    'guide_dash_revenue'           => 'Total Revenue',
+    'guide_dash_new_bookings'      => 'New Bookings',
+    'guide_dash_refunds'           => 'Refund Requests',
+    'guide_dash_messages'          => 'Unread Messages',
+    'guide_dash_reviews'           => 'Unread Reviews',
+    'guide_dash_users'             => 'Total Users',
+    'guide_dashboard_tip'          => 'Click on each statistics card to navigate to the corresponding management page. Charts support period selection: 30 days / 90 days / 365 days / All time.',
+
+    // Guide: Rooms
+    'guide_rooms_title'            => 'Room Management',
+    'guide_rooms_desc'             => 'Add, edit, delete rooms. Toggle display status and manage room photos.',
+    'guide_rooms_add_title'        => 'Add New Room',
+    'guide_rooms_add_step1'        => 'Click the <strong>Add Room</strong> button — form appears',
+    'guide_rooms_add_step2'        => 'Fill in: Name, Room Type, Area, Price, Guest Count, Photo, Amenities, Description',
+    'guide_rooms_add_step3'        => 'Click <strong>Save</strong> — room is added to the system',
+    'guide_rooms_edit_title'       => 'Edit Room Information',
+    'guide_rooms_edit_desc'        => 'Click the pencil icon on the room row. Form appears with current data, edit and click Update.',
+    'guide_rooms_images_title'     => 'Room Photo Management',
+    'guide_rooms_images_step1'     => 'Click the <strong>image</strong> icon on the room row',
+    'guide_rooms_images_step2'     => 'Upload new photos (supports JPEG, PNG, WebP, HEIC)',
+    'guide_rooms_images_step3'     => 'Click <strong>star</strong> to set as main photo, click <strong>X</strong> to delete',
+    'guide_rooms_note'             => 'Deleted rooms are soft-deleted (hidden), related booking data is preserved. Setting price = 0 will display "Contact us" on the website.',
+
+    // Guide: Bookings
+    'guide_bookings_title'         => 'Booking Management',
+    'guide_bookings_desc'          => 'The booking system has 3 stages: New Orders → Refunds → Statistics.',
+    'guide_bookings_flow_guest'    => 'Guest books room',
+    'guide_bookings_flow_new'      => 'New Booking',
+    'guide_bookings_flow_assign'   => 'Assign Room',
+    'guide_bookings_flow_cancel_action' => 'Cancel Order',
+    'guide_bookings_flow_done'     => 'Completed',
+    'guide_bookings_flow_refund'   => 'Refund',
+    'guide_bookings_flow_stats'    => 'Statistics',
+    'guide_bookings_new_title'     => 'New Bookings',
+    'guide_bookings_new_desc'      => 'View new orders, search by order ID/phone/name. Click "Assign Room" to enter the physical room code, or "Cancel" to cancel the order.',
+    'guide_bookings_refund_title'  => 'Refunds',
+    'guide_bookings_refund_desc'   => 'View cancelled orders pending refund. Review the information and click "Refund" to confirm payment has been refunded.',
+    'guide_bookings_stats_title'   => 'Statistics',
+    'guide_bookings_stats_desc'    => 'View all booking history with status (green = success, red = cancelled, yellow = failed). Supports search and pagination.',
+
+    // Guide: Users
+    'guide_users_title'            => 'User Management',
+    'guide_users_desc'             => 'View the list of registered customer accounts.',
+    'guide_users_search'           => 'Search users by name',
+    'guide_users_toggle'           => 'Enable/Disable account — disabled accounts cannot login or book rooms',
+    'guide_users_delete'           => 'Delete unverified email accounts',
+    'guide_users_note'             => 'Cannot delete verified accounts to protect related booking data.',
+
+    // Guide: Reviews
+    'guide_reviews_title'          => 'Review Management',
+    'guide_reviews_desc'           => 'View and moderate customer reviews. Reviews are displayed on the homepage (Testimonials section).',
+    'guide_reviews_mark'           => 'Mark individual reviews as read',
+    'guide_reviews_delete'         => 'Delete inappropriate reviews',
+    'guide_reviews_bulk'           => 'Mark all as read / Delete all',
+    'guide_reviews_tip'            => 'Customers can only submit reviews after completing a booking. Unread review count is shown on Dashboard.',
+
+    // Guide: Messages
+    'guide_messages_title'         => 'Message Management',
+    'guide_messages_desc'          => 'View messages from the contact form on the website.',
+    'guide_messages_mark'          => 'Mark individual messages as read',
+    'guide_messages_delete'        => 'Delete messages',
+    'guide_messages_bulk'          => 'Mark all as read / Delete all',
+
+    // Guide: Carousel
+    'guide_carousel_title'         => 'Carousel Management (Homepage Slider)',
+    'guide_carousel_desc'          => 'Manage slider banner images on the homepage.',
+    'guide_carousel_step1'         => 'Click the <strong>Add Image</strong> button',
+    'guide_carousel_step2'         => 'Select an image file (supports JPEG, PNG, WebP)',
+    'guide_carousel_step3'         => 'Click <strong>Upload</strong> — image appears on the homepage slider',
+    'guide_carousel_tip'           => 'Use large images with landscape ratio (16:9) for best display on the slider.',
+
+    // Guide: Facilities
+    'guide_facilities_title'       => 'Room Types & Facilities Management',
+    'guide_facilities_desc'        => 'Manage 3 data category groups used when adding/editing rooms.',
+    'guide_fac_types'              => 'Room Types',
+    'guide_fac_types_desc'         => '4BR Villa, Penthouse, 3BR Apartment... Used to classify rooms.',
+    'guide_fac_features'           => 'Features',
+    'guide_fac_features_desc'      => 'Balcony, Sea View, Garden, Pool... Displayed on room cards.',
+    'guide_fac_amenities'          => 'Amenities',
+    'guide_fac_amenities_desc'     => 'WiFi, AC, Smart TV, Induction Stove... With icons and descriptions.',
+    'guide_facilities_note'        => 'Cannot delete categories that are assigned to any room. Remove from all rooms first before deleting.',
+
+    // Guide: Settings
+    'guide_settings_title'         => 'System Settings',
+    'guide_settings_desc'          => 'Configure general info, maintenance mode, contact details and team.',
+    'guide_set_general'            => 'General',
+    'guide_set_general_desc'       => 'Website name and description.',
+    'guide_set_maintenance'        => 'Maintenance',
+    'guide_set_maintenance_desc'   => 'Toggle maintenance mode. When on, guests cannot book rooms.',
+    'guide_set_contact'            => 'Contact',
+    'guide_set_contact_desc'       => 'Address, phone, email, social media, Google Maps.',
+    'guide_set_team'               => 'Team',
+    'guide_set_team_desc'          => 'Add/remove management team members.',
+    'guide_settings_warning'       => 'When maintenance mode is enabled, the entire website will show a "Under Maintenance" notice to guests. Admins can still access the admin panel.',
+
+    // Guide: Sidebar map
+    'guide_sidebar_title'          => 'Menu Map',
+    'guide_map_overview'           => 'Overview',
+    'guide_map_bookings'           => 'Bookings',
+    'guide_map_management'         => 'Management',
+    'guide_map_content'            => 'Content',
+    'guide_map_system'             => 'System',
+    'guide_back_to_top'            => 'Back to top',
 ];
