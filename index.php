@@ -119,7 +119,7 @@
   </div>
 
   <!-- Our Rooms -->
-  <section class="rooms-section py-5" aria-label="Danh sách phòng">
+  <section class="rooms-section py-5" aria-label="<?php _e('rooms_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
         <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('rooms_title') ?></h2>
@@ -300,7 +300,7 @@
               <div class="room-card h-100">
                 <div class="room-image-wrapper">
                   <img src="$room_thumb"
-                       alt="Hình ảnh phòng {$room_data['name']}"
+                       alt="{$GLOBALS['_LANG']['image_of']} {$room_data['name']}"
                        class="room-image"
                        loading="lazy"
                        itemprop="image">
@@ -371,7 +371,7 @@
         <div class="col-12 text-center mt-5">
           <a href="rooms.php"
             class="btn btn-outline-primary btn-lg rooms-view-more-btn"
-            aria-label="Xem tất cả các phòng">
+            aria-label="<?php echo __('view_details') . ' ' . __('rooms_title') ?>"
             <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
           </a>
         </div>
@@ -380,7 +380,7 @@
   </section>
 
   <!-- Our Facilities -->
-  <section class="facilities-section py-5" aria-label="Các tiện tích">
+  <section class="facilities-section py-5" aria-label="<?php _e('facilities_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
         <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('facilities_title') ?></h2>
@@ -419,7 +419,7 @@
           echo json_encode([
             "@context" => "https://schema.org",
             "@type" => "ItemList",
-            "name" => "Các tiện tích khách sạn",
+            "name" => $GLOBALS['_LANG']['facilities_title'],
             "itemListElement" => array_map(function ($facility, $index) {
               return [
                 "@type" => "ListItem",
@@ -435,7 +435,7 @@
         <div class="col-12 text-center mt-5">
           <a href="facilities.php"
             class="btn btn-outline-primary btn-lg facilities-view-more-btn"
-            aria-label="Xem tất cả các tiện tích">
+            aria-label="<?php echo __('view_details') . ' ' . __('facilities_title') ?>"
             <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
           </a>
         </div>
@@ -444,7 +444,7 @@
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials-section py-5" aria-label="Đánh giá dịch vụ">
+  <section class="testimonials-section py-5" aria-label="<?php _e('reviews_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
         <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('reviews_title') ?></h2>
@@ -521,7 +521,7 @@
                       <div class="testimonial-header">
                         <div class="testimonial-profile">
                           <img src="$img_path$row[profile]" 
-                               alt="Ảnh đại diện của $row[uname]" 
+                               alt="{$GLOBALS['_LANG']['image_of']} $row[uname]" 
                                class="testimonial-avatar"
                                loading="lazy"
                                itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -536,7 +536,7 @@
                         <div class="testimonial-rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
                           <meta itemprop="ratingValue" content="$rating">
                           <meta itemprop="bestRating" content="5">
-                          <div class="rating-stars" aria-label="Đánh giá $rating trên 5 sao">
+                          <div class="rating-stars" aria-label="$rating {$GLOBALS['_LANG']['rating_of_5']}">
                             $stars_html
                           </div>
                         </div>
@@ -558,7 +558,7 @@
                 echo json_encode([
                   "@context" => "https://schema.org",
                   "@type" => "ItemList",
-                  "name" => "Đánh giá dịch vụ khách sạn",
+                  "name" => $GLOBALS['_LANG']['reviews_title'],
                   "itemListElement" => array_map(function ($review, $index) {
                     return [
                       "@type" => "ListItem",
@@ -580,7 +580,7 @@
   </section>
 
   <!-- Reach us -->
-  <section class="contact-section py-5" aria-label="Liên hệ">
+  <section class="contact-section py-5" aria-label="<?php _e('contact_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
         <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('contact_title') ?></h2>
@@ -611,7 +611,7 @@
                 <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>"
                   class="contact-link phone-link"
                   itemprop="telephone"
-                  aria-label="Gọi điện thoại đến tổng đài">
+                  aria-label="<?php _e('support_hotline') ?>"
                   <i class="bi bi-telephone me-2"></i>
                   <span>+<?php echo $contact_r['pn1'] ?></span>
                 </a>
@@ -637,7 +637,7 @@
                          class="social-link twitter-link"
                          target="_blank"
                          rel="noopener noreferrer"
-                         aria-label="Theo dõi chúng tôi trên Twitter">
+                         aria-label="{$GLOBALS['_LANG']['follow_us']} Twitter">
                         <div class="social-icon-wrapper">
                           <i class="bi bi-twitter"></i>
                         </div>
@@ -651,7 +651,7 @@
                     class="social-link facebook-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Theo dõi chúng tôi trên Facebook">
+                    aria-label="<?php echo __('follow_us') ?> Facebook">
                     <div class="social-icon-wrapper">
                       <i class="bi bi-facebook"></i>
                     </div>
@@ -662,7 +662,7 @@
                     class="social-link zalo-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Liên hệ với chúng tôi qua Zalo">
+                    aria-label="<?php echo __('follow_us') ?> Zalo">
                     <div class="social-icon-wrapper">
                       <i class="bi bi-chat-dots-fill"></i>
                     </div>

@@ -55,6 +55,7 @@ return [
     'nav_specialties'     => 'Đặc sản Hạ Long',
     'nav_blog'            => 'Blog cẩm nang',
     'nav_contact'         => 'Liên hệ',
+    'nav_language'        => 'Ngôn ngữ',
 
     // ============================================================
     // AUTH - LOGIN MODAL
@@ -408,6 +409,8 @@ return [
     'admin_reviews'       => 'Đánh giá',
     'admin_settings'      => 'Cài đặt',
     'admin_current_time'  => 'Giờ hiện tại',
+    'admin_lang_settings' => 'Ngôn ngữ hiển thị',
+    'admin_lang_desc'     => 'Chọn ngôn ngữ hiển thị cho trang quản trị. Ngôn ngữ này độc lập với ngôn ngữ của người dùng.',
 
     // ============================================================
     // ADMIN - DASHBOARD
@@ -688,4 +691,347 @@ return [
     'zalo_night_unit'       => 'đêm',
     'zalo_total'            => 'Tổng tiền',
     'zalo_confirm'          => 'Vui lòng xác nhận đặt phòng này. Cảm ơn!',
+
+    // ============================================================
+    // BLOG PAGE
+    // ============================================================
+    'blog_title'            => 'Blog Cẩm Nang Du Lịch Hạ Long',
+    'blog_hero_badge'       => 'Cẩm nang du lịch',
+    'blog_hero_title'       => 'Blog Cẩm Nang Hạ Long',
+    'blog_hero_sub'         => 'Tất cả thông tin bạn cần biết để có chuyến du lịch Hạ Long hoàn hảo — từ điểm tham quan, ẩm thực đến mẹo đặt phòng tiết kiệm',
+    'blog_tag_attractions'  => 'Điểm tham quan',
+    'blog_tag_cuisine'      => 'Ẩm thực',
+    'blog_tag_tips'         => 'Kinh nghiệm',
+    'blog_tag_itinerary'    => 'Lịch trình',
+
+    // Featured article 1
+    'blog_a1_tag'           => 'Cẩm nang tổng hợp',
+    'blog_a1_updated'       => 'Cập nhật 2025',
+    'blog_a1_read_time'     => '10 phút đọc',
+    'blog_a1_title'         => 'Vịnh Hạ Long — Bí Kíp Khám Phá Toàn Diện Từ A Đến Z',
+    'blog_a1_desc'          => 'Vịnh Hạ Long là Di sản Thiên nhiên Thế giới được UNESCO công nhận hai lần (1994 và 2000), nằm ở tỉnh Quảng Ninh, cách Hà Nội khoảng 170km về phía Đông Bắc. Với hơn 1.600 hòn đảo đá vôi, diện tích khoảng 1.553 km², đây là một trong những kỳ quan thiên nhiên đẹp nhất thế giới...',
+    'blog_a1_overview'      => 'Tổng Quan Về Vịnh Hạ Long',
+    'blog_a1_overview_desc' => 'Vịnh Hạ Long trải dài qua địa phận các huyện Vân Đồn và Cẩm Phả thuộc tỉnh Quảng Ninh. Tên gọi "Hạ Long" theo truyền thuyết có nghĩa là "Rồng hạ xuống" — gắn liền với huyền thoại về đàn rồng thần từ trời cao xuống trần gian để giúp người Việt chống giặc ngoại xâm. Những hòn đảo kỳ vĩ chính là những viên ngọc từ miệng rồng phun ra tạo thành bức tường thành kiên cố.',
+    'blog_a1_attractions'   => 'Các Điểm Tham Quan Nổi Bật',
+    'blog_a1_sung_sot'      => 'Hang Sửng Sốt (Surprising Cave)',
+    'blog_a1_sung_sot_desc' => 'Hang động lớn và đẹp nhất vịnh Hạ Long, chia làm 3 ngăn với thạch nhũ kỳ ảo. Sức chứa 1.000 người.',
+    'blog_a1_titop'         => 'Đảo Ti Tốp',
+    'blog_a1_titop_desc'    => 'Bãi tắm cát trắng đẹp, leo đỉnh đảo ngắm toàn cảnh vịnh 360 độ tuyệt đẹp. Phù hợp cắm trại.',
+    'blog_a1_cuavan'         => 'Làng Chài Cửa Vạn',
+    'blog_a1_cuavan_desc'    => 'Làng chài nổi lâu đời nhất vịnh Hạ Long với hàng trăm hộ dân sinh sống trên bè nổi độc đáo.',
+    'blog_a1_thiencung'      => 'Hang Thien Cung',
+    'blog_a1_thiencung_desc' => 'Thiên Cung nghĩa là "Cung Điện Trời" — hang động rực rỡ màu sắc với thạch nhũ muôn hình muôn vẻ.',
+    'blog_a1_quanlan'        => 'Đảo Quan Lạn & Minh Châu',
+    'blog_a1_quanlan_desc'   => 'Bãi biển hoang sơ tuyệt đẹp, nước xanh trong như pha lê, cát trắng mịn — thiên đường biển đảo ít người biết.',
+    'blog_a1_tuanchau'       => 'Khu Du Lịch Tuần Châu',
+    'blog_a1_tuanchau_desc'  => 'Đảo nhân tạo lớn với công viên giải trí, bãi tắm, casino, sân golf và các show diễn ngoài trời hoành tráng.',
+    'blog_a1_experience'     => 'Kinh Nghiệm Tham Quan',
+    'blog_a1_tip1'           => 'Đặt tour du thuyền qua đêm để có trải nghiệm đầy đủ nhất — ngắm hoàng hôn, bình minh và bơi lặn giữa vịnh.',
+    'blog_a1_tip2'           => 'Mang theo kem chống nắng, mũ và áo khoác nhẹ vì thời tiết vịnh có thể thay đổi đột ngột.',
+    'blog_a1_tip3'           => 'Thuê kayak để khám phá các hang động ngầm và góc khuất bí ẩn mà tàu lớn không vào được.',
+    'blog_a1_tip4'           => 'Nên đặt tour với công ty uy tín, kiểm tra kỹ thiết bị an toàn trên tàu trước khi khởi hành.',
+    'blog_a1_tip5'           => 'Mang theo tiền mặt đủ vì nhiều điểm bán hàng trên đảo không chấp nhận thẻ.',
+
+    // Article 2 - Seasons
+    'blog_a2_tag'            => 'Kinh nghiệm',
+    'blog_a2_title'          => 'Hạ Long Nên Đi Mùa Nào? Lịch Du Lịch Theo Từng Tháng',
+    'blog_a2_desc'           => 'Hạ Long đẹp quanh năm nhưng mỗi mùa lại có vẻ đẹp riêng. Bài viết này phân tích chi tiết thời tiết, ưu nhược điểm của từng mùa để bạn chọn thời điểm phù hợp nhất...',
+    'blog_a2_spring'         => 'Mùa Xuân (Tháng 3 – 5)',
+    'blog_a2_spring_desc'    => 'Thời tiết mát mẻ, ấm áp, ít mưa. Đây là thời điểm lý tưởng nhất để du lịch Hạ Long. Biển trong xanh, tầm nhìn tốt, lý tưởng cho chụp ảnh. Nhiệt độ 20-28°C.',
+    'blog_a2_summer'         => 'Mùa Hè (Tháng 6 – 8)',
+    'blog_a2_summer_desc'    => 'Nóng và có mưa nhiều, đôi khi có bão. Nhưng đây là mùa cao điểm vì học sinh được nghỉ hè. Nhiều dịch vụ hoạt động nhộn nhịp. Nhiệt độ 28-35°C, cần theo dõi thời tiết.',
+    'blog_a2_autumn'         => 'Mùa Thu (Tháng 9 – 11)',
+    'blog_a2_autumn_desc'    => 'Khí hậu mát dịu, biển lặng, đây là mùa đẹp thứ hai để đến Hạ Long. Tháng 10 là tháng hoàn hảo nhất — ít mưa, nhiều nắng, biển xanh. Nhiệt độ 22-28°C.',
+    'blog_a2_winter'         => 'Mùa Đông (Tháng 12 – 2)',
+    'blog_a2_winter_desc'    => 'Lạnh và hay có sương mù tạo nên cảnh quan huyền bí đẹp như tranh. Ít khách du lịch nên giá phòng rẻ hơn. Cần mang áo ấm. Nhiệt độ 10-18°C, thỉnh thoảng dưới 10°C.',
+    'blog_a2_best_tip'       => 'Tháng 4, 5 và tháng 10, 11 là thời điểm lý tưởng nhất để du lịch Hạ Long — thời tiết đẹp, đỡ đông và giá cả hợp lý.',
+    'blog_a2_best_label'     => 'Gợi ý tốt nhất:',
+
+    // Article 3 - Itinerary
+    'blog_a3_tag'            => 'Lịch trình',
+    'blog_a3_title'          => 'Lịch Trình 2N1Đ và 3N2Đ Hạ Long Chi Tiết',
+    'blog_a3_desc'           => 'Gợi ý lịch trình du lịch Hạ Long tối ưu cho từng loại hành khách — gia đình, cặp đôi, nhóm bạn trẻ. Đã bao gồm điểm đến, giờ giấc và ước tính chi phí...',
+    'blog_a3_2d1n'           => 'Lịch Trình 2 Ngày 1 Đêm (Tour Nghỉ Đêm Trên Vịnh)',
+    'blog_a3_2d1n_day1'      => 'Ngày 1:',
+    'blog_a3_2d1n_day1_desc' => '8:00 Tập trung cảng, 12:00 Ăn trưa trên tàu giữa vịnh, 14:00 Thăm Hang Sửng Sốt, 15:30 Bơi lặn tại Đảo Ti Tốp, 18:00 Hoàng hôn vịnh + BBQ trên boong.',
+    'blog_a3_2d1n_day2'      => 'Ngày 2:',
+    'blog_a3_2d1n_day2_desc' => '6:00 Ngắm bình minh, 7:30 Tập Thái Cực Quyền trên boong, 8:30 Ăn sáng, 9:30 Kayak hang động, 11:00 Thăm làng chài Cửa Vạn, 12:30 Ăn trưa trở về cảng.',
+    'blog_a3_3d2n'           => 'Lịch Trình 3 Ngày 2 Đêm (Khám Phá Đầy Đủ)',
+    'blog_a3_3d2n_day1'      => 'Ngày 1:',
+    'blog_a3_3d2n_day1_desc' => 'Di chuyển từ Hà Nội đến Hạ Long (Xe khách 3.5 giờ), nhận phòng, khám phá phố đi bộ, ăn tối đặc sản, chợ đêm.',
+    'blog_a3_3d2n_day2'      => 'Ngày 2:',
+    'blog_a3_3d2n_day2_desc' => 'Tour nghỉ đêm trên vịnh — hang động, bơi lặn, kayak, làng chài, hoàng hôn, bình minh.',
+    'blog_a3_3d2n_day3'      => 'Ngày 3:',
+    'blog_a3_3d2n_day3_desc' => 'Tham quan Tuần Châu, mua đặc sản, trả phòng, trở về Hà Nội.',
+    'blog_a3_cost'           => 'Ước tính chi phí (1 người):',
+    'blog_a3_cost_2d1n'      => '2N1Đ: 2.500.000 – 4.500.000 VNĐ',
+    'blog_a3_cost_3d2n'      => '3N2Đ: 4.000.000 – 7.000.000 VNĐ',
+    'blog_a3_cost_note'      => '(Tùy hạng phòng, loại tàu và dịch vụ chọn)',
+
+    // Article 4 - Transportation
+    'blog_a4_tag'            => 'Phương tiện',
+    'blog_a4_title'          => 'Cách Di Chuyển Đến Hạ Long — Tất Cả Phương Tiện',
+    'blog_a4_desc'           => 'Từ Hà Nội, TP.HCM, Đà Nẵng và các tỉnh thành khác đến Hạ Long bằng phương tiện nào là nhanh nhất, tiết kiệm nhất? So sánh chi tiết các lựa chọn...',
+    'blog_a4_bus'            => 'Xe Khách / Limousine (Từ Hà Nội)',
+    'blog_a4_bus_desc'       => 'Phổ biến nhất. Thời gian: 3-4 giờ. Chi phí: 150.000-300.000 VNĐ/chiều. Có nhiều hãng uy tín: Kumho Việt Thanh, Hải Vân, Phương Trang, Hà Lâm. Lưu ý tránh xe dù không rõ nguồn gốc.',
+    'blog_a4_plane'          => 'Máy Bay (Từ TP.HCM / Đà Nẵng)',
+    'blog_a4_plane_desc'     => 'Bay đến sân bay Vân Đồn (VDO) — sân bay quốc tế gần nhất, cách trung tâm Hạ Long 50km. Vietjet, Bamboo Airways khai thác đường bay này. Thời gian bay 2 giờ từ TP.HCM.',
+    'blog_a4_boat'           => 'Tàu Cao Tốc (Đường Thủy)',
+    'blog_a4_boat_desc'      => 'Tàu cao tốc từ Tuần Châu đến đảo Cô Tô, Quan Lạn, Vân Đồn. Thời gian: 2-3 giờ. Trải nghiệm thú vị ngắm cảnh vịnh dọc đường.',
+    'blog_a4_car'            => 'Tự Lái Xe / Thuê Xe',
+    'blog_a4_car_desc'       => 'Đường cao tốc Hà Nội – Hạ Long dài 170km, đi trong 2.5 giờ qua cao tốc Nội Bài – Hạ Long. Thuê xe có tài xế khoảng 800.000 – 1.200.000 VNĐ/ngày.',
+
+    // Article 5 - Accommodation
+    'blog_a5_tag'            => 'Lưu trú',
+    'blog_a5_title'          => 'Nên Ở Đâu Tại Hạ Long? Bãi Cháy Hay Hòn Gai?',
+    'blog_a5_desc'           => 'Hai khu vực chính của thành phố Hạ Long có đặc điểm rất khác nhau. Bài viết so sánh chi tiết để bạn chọn được vị trí lưu trú phù hợp với nhu cầu và ngân sách...',
+    'blog_a5_baichay'        => 'Khu Bãi Cháy',
+    'blog_a5_baichay_desc'   => 'Khu du lịch náo nhiệt hơn, nhiều khách sạn resort cao cấp, gần cảng tàu du lịch, nhiều nhà hàng và điểm vui chơi giải trí. Phù hợp cho gia đình, cặp đôi muốn tiện nghi đầy đủ.',
+    'blog_a5_baichay_hl'     => 'Gần cảng Tuần Châu, view biển đẹp, nhiều lựa chọn ăn uống đêm, công viên Sun World Hạ Long',
+    'blog_a5_hongai'         => 'Khu Hòn Gai',
+    'blog_a5_hongai_desc'    => 'Khu trung tâm hành chính của thành phố, đậm chất đời thường địa phương hơn. Giá phòng hợp lý, gần chợ, bến cảng, văn phòng dịch vụ. Phù hợp khách du lịch tự túc muốn hòa mình vào cuộc sống địa phương.',
+    'blog_a5_hongai_hl'      => 'Gần chợ Hạ Long, bến cảng tàu, phố ẩm thực bình dân, giá tốt hơn',
+    'blog_a5_highlight'      => 'Điểm nổi bật:',
+    'blog_a5_suggest'        => 'Gợi ý:',
+    'blog_a5_suggest_desc'   => 'Cặp đôi và gia đình có ngân sách tốt → Bãi Cháy. Nhóm bạn trẻ, khách du lịch tự túc → Hòn Gai.',
+
+    // Article 6 - Festivals
+    'blog_a6_tag'            => 'Văn hóa',
+    'blog_a6_title'          => 'Lễ Hội & Sự Kiện Văn Hóa Đặc Sắc Tại Hạ Long',
+    'blog_a6_desc'           => 'Hạ Long không chỉ có thiên nhiên hùng vĩ — nơi đây còn sôi động với các lễ hội truyền thống đặc sắc, sự kiện âm nhạc, bắn pháo hoa và nhiều hoạt động văn hóa hấp dẫn...',
+    'blog_a6_carnival'       => 'Lễ Hội Carnaval Hạ Long (Tháng 4-5)',
+    'blog_a6_carnival_desc'  => 'Lễ hội thường niên hoành tráng nhất tỉnh Quảng Ninh với diễu hành đường phố, biểu diễn nghệ thuật, bắn pháo hoa và nhiều hoạt động vui chơi giải trí. Thu hút hàng trăm nghìn du khách mỗi năm.',
+    'blog_a6_boat_race'      => 'Lễ Hội Đua Thuyền (Mùng 2 Tháng 1 Âm Lịch)',
+    'blog_a6_boat_race_desc' => 'Lễ hội đua thuyền truyền thống của ngư dân vùng biển, diễn ra sôi nổi trên mặt vịnh. Nghi lễ cầu ngư cầu mong mùa đánh bắt bội thu, an toàn ra khơi.',
+    'blog_a6_festival'       => 'Festival Hạ Long (Định kỳ 2 năm/lần)',
+    'blog_a6_festival_desc'  => 'Sự kiện văn hóa du lịch quốc tế quy mô lớn với triển lãm, hội thảo, biểu diễn nghệ thuật quốc tế và hoạt động giới thiệu văn hóa Quảng Ninh.',
+    'blog_a6_fireworks'      => 'Pháo Hoa Giao Thừa & Dịp Lễ Lớn',
+    'blog_a6_fireworks_desc' => 'Bãi Cháy và công viên ven vịnh là điểm xem pháo hoa đẹp nhất mỗi dịp Tết Nguyên Đán, Quốc Khánh 2/9 và các lễ hội lớn của thành phố.',
+
+    // Article 7 - Adventure
+    'blog_a7_tag'            => 'Phiêu lưu',
+    'blog_a7_title'          => 'Top Hoạt Động Mạo Hiểm & Thể Thao Tại Vịnh Hạ Long',
+    'blog_a7_desc'           => 'Hạ Long không chỉ để ngắm nhìn — hãy trải nghiệm những hoạt động phiêu lưu hấp dẫn như leo núi đá vôi, lặn biển, kite surfing và chèo thuyền kayak qua hang động...',
+    'blog_a7_kayak'          => 'Chèo Kayak',
+    'blog_a7_kayak_desc'     => 'Khám phá hang động ngầm, lagoon kín',
+    'blog_a7_diving'         => 'Lặn Biển (Snorkel/Scuba)',
+    'blog_a7_diving_desc'    => 'San hô, cá nhiệt đới tại Cô Tô, Quan Lạn',
+    'blog_a7_climbing'       => 'Leo Núi Đá Vôi',
+    'blog_a7_climbing_desc'  => 'Đảo Ti Tốp, Núi Bài Thơ Hạ Long',
+    'blog_a7_fishing'        => 'Câu Cá & Mực Đêm',
+    'blog_a7_fishing_desc'   => 'Trải nghiệm đánh cá cùng ngư dân',
+    'blog_a7_note'           => 'Các hoạt động này đều có sẵn trong gói tour du thuyền qua đêm. Đặt trước ít nhất 1 ngày tại lễ tân hoặc qua app du lịch.',
+
+    // Article 8 - Budget tips
+    'blog_a8_tag'            => 'Tiết kiệm',
+    'blog_a8_title'          => 'Bí Quyết Du Lịch Hạ Long Tiết Kiệm Không Lo Tốn Kém',
+    'blog_a8_desc'           => '10 mẹo vàng giúp bạn có chuyến du lịch Hạ Long chất lượng với chi phí tối ưu — từ đặt phòng, đặt tour đến ăn uống và mua sắm đặc sản...',
+    'blog_a8_tip1'           => 'Đặt phòng sớm:',
+    'blog_a8_tip1_desc'      => 'Đặt trước 2-4 tuần để có giá tốt nhất, đặc biệt dịp lễ và hè.',
+    'blog_a8_tip2'           => 'Đi ngày thường:',
+    'blog_a8_tip2_desc'      => 'Thứ 2 đến Thứ 5 thường rẻ hơn 20-30% so với cuối tuần.',
+    'blog_a8_tip3'           => 'So sánh tour:',
+    'blog_a8_tip3_desc'      => 'Liên hệ ít nhất 3-5 công ty tour để so sánh trước khi quyết định.',
+    'blog_a8_tip4'           => 'Ăn ở chợ địa phương:',
+    'blog_a8_tip4_desc'      => 'Bữa sáng và ăn vặt tại chợ bình dân ngon hơn và rẻ hơn nhiều so với nhà hàng ven biển.',
+    'blog_a8_tip5'           => 'Thuê xe máy:',
+    'blog_a8_tip5_desc'      => 'Thay vì taxi, thuê xe máy 150.000-200.000 VNĐ/ngày để tự do di chuyển.',
+    'blog_a8_tip6'           => 'Mua đặc sản ở chợ:',
+    'blog_a8_tip6_desc'      => 'Giá chợ thường rẻ hơn 30-50% so với cửa hàng tại bến cảng.',
+    'blog_a8_tip7'           => 'Đi tour nhóm ghép:',
+    'blog_a8_tip7_desc'      => 'Rẻ hơn tour riêng 40-60%, phù hợp cho khách đi 1-2 người.',
+    'blog_a8_tip8'           => 'Dùng thẻ ngân hàng:',
+    'blog_a8_tip8_desc'      => 'Nhiều khách sạn có ưu đãi thanh toán qua app ngân hàng hoặc ví điện tử.',
+    'blog_a8_tip9'           => 'Tránh mua hải sản ở bến cảng:',
+    'blog_a8_tip9_desc'      => 'Giá thường đắt hơn nhiều — ra chợ cá mua rồi nhờ nhà hàng chế biến.',
+    'blog_a8_tip10'          => 'Đặt phòng khách sạn:',
+    'blog_a8_tip10_desc'     => 'Đặt trực tiếp qua website/điện thoại đôi khi rẻ hơn OTA (Booking.com, Agoda) vì tránh phí hoa hồng.',
+
+    // Article 9 - Responsible tourism
+    'blog_a9_tag'            => 'Môi trường',
+    'blog_a9_title'          => 'Du Lịch Có Trách Nhiệm Tại Vịnh Hạ Long',
+    'blog_a9_desc'           => 'Vịnh Hạ Long đang đối mặt với thách thức môi trường nghiêm trọng. Hãy cùng tìm hiểu cách du khách có thể góp phần bảo vệ kỳ quan thiên nhiên này cho các thế hệ tương lai...',
+    'blog_a9_do'             => 'Những điều NÊN làm:',
+    'blog_a9_do1'            => 'Mang túi vải thay thế túi nilon khi mua sắm',
+    'blog_a9_do2'            => 'Sử dụng bình nước cá nhân, tránh chai nhựa dùng một lần',
+    'blog_a9_do3'            => 'Không xả rác xuống vịnh, sử dụng thùng rác trên tàu',
+    'blog_a9_do4'            => 'Chọn các tour du lịch có chứng nhận eco-friendly',
+    'blog_a9_do5'            => 'Không chạm vào san hô khi lặn biển',
+    'blog_a9_dont'           => 'Những điều KHÔNG NÊN làm:',
+    'blog_a9_dont1'          => 'Không mua sản phẩm từ san hô, vỏ sò, vảy cá hiếm',
+    'blog_a9_dont2'          => 'Không la hét, gây ồn ào trong các hang động',
+    'blog_a9_dont3'          => 'Không cho các loài động vật hoang dã ăn',
+    'blog_a9_dont4'          => 'Không khắc tên lên đá tại các danh thắng',
+    'blog_a9_dont5'          => 'Không câu cá trong vùng cấm khai thác',
+
+    // Latest articles heading
+    'blog_latest'            => 'Bài Viết Mới Nhất',
+
+    // Read more / Collapse buttons
+    'blog_read_more'         => 'Đọc thêm',
+    'blog_read_full'         => 'Xem đầy đủ',
+    'blog_collapse'          => 'Thu gọn',
+
+    // Sidebar - Quick info
+    'blog_sidebar_title'     => 'Thông Tin Nhanh Về Hạ Long',
+    'blog_sidebar_province'  => 'Tỉnh / Thành phố',
+    'blog_sidebar_province_val' => 'Quảng Ninh',
+    'blog_sidebar_distance'  => 'Cách Hà Nội',
+    'blog_sidebar_area'      => 'Diện tích vịnh',
+    'blog_sidebar_islands'   => 'Số đảo đá vôi',
+    'blog_sidebar_islands_val' => '1.600+ đảo',
+    'blog_sidebar_unesco'    => 'Di sản UNESCO',
+    'blog_sidebar_airport'   => 'Sân bay gần nhất',
+    'blog_sidebar_airport_val' => 'Vân Đồn (VDO)',
+    'blog_sidebar_best_time' => 'Mùa đẹp nhất',
+    'blog_sidebar_best_time_val' => 'Tháng 4-5, 10-11',
+    'blog_sidebar_timezone'  => 'Múi giờ',
+    'blog_sidebar_timezone_val' => 'UTC+7 (Hà Nội)',
+
+    // Sidebar - Travel tips
+    'blog_tips_title'        => 'Mẹo Du Lịch Nhanh',
+    'blog_tips_hotline'      => 'Đường dây hỗ trợ du lịch',
+    'blog_tips_hotline_val'  => '1800 599 945 (miễn phí, 24/7)',
+    'blog_tips_currency'     => 'Tiền tệ',
+    'blog_tips_currency_val' => 'VNĐ (Đồng Việt Nam). Đổi tiền tại ngân hàng, không đổi ngoài đường',
+    'blog_tips_sim'          => 'Sim & Internet',
+    'blog_tips_sim_val'      => 'Viettel và Mobifone phủ sóng tốt. Mua SIM du lịch 100-150k/tuần',
+    'blog_tips_insurance'    => 'Bảo hiểm du lịch',
+    'blog_tips_insurance_val' => 'Nên mua bảo hiểm du lịch nếu tham gia các hoạt động ngoài trời, lặn biển',
+
+    // Sidebar - FAQ
+    'blog_faq_title'         => 'Câu Hỏi Thường Gặp',
+    'blog_faq_q1'            => 'Vé vào cổng Vịnh Hạ Long bao nhiêu tiền?',
+    'blog_faq_a1'            => 'Vé tham quan vịnh: 270.000 VNĐ/người lớn, 130.000 VNĐ/trẻ em (từ 1-1.4m). Phí này thường đã được tính vào giá tour. Nếu tự đặt, bạn cần mua tại Ban Quản lý Vịnh Hạ Long.',
+    'blog_faq_q2'            => 'Tour du thuyền qua đêm tốt nhất là tour nào?',
+    'blog_faq_a2'            => 'Các công ty tour uy tín: Indochina Junk, Paradise Cruises, Bhaya Cruises, Era Cruises. Nên chọn tàu 3 sao trở lên với đánh giá tốt trên TripAdvisor và Booking.com.',
+    'blog_faq_q3'            => 'Có thể mang trẻ nhỏ đi tour vịnh không?',
+    'blog_faq_a3'            => 'Có thể. Hầu hết du thuyền đều có giường phụ cho trẻ nhỏ. Một số tàu có chương trình đặc biệt cho gia đình có con nhỏ. Nên hỏi kỹ khi đặt tour.',
+    'blog_faq_q4'            => 'Có cần mang áo phao khi đi vịnh không?',
+    'blog_faq_a4'            => 'Tàu du lịch bắt buộc phải cung cấp áo phao cho khách. Nhưng nếu bạn tự chèo kayak hoặc bơi lặn, hãy đảm bảo mặc áo phao đúng cách theo hướng dẫn của nhân viên.',
+
+    // Sidebar - CTA
+    'blog_cta_title'         => 'Sẵn Sàng Khám Phá Hạ Long?',
+    'blog_cta_desc'          => 'Đặt phòng ngay hôm nay để có giá tốt nhất và chuẩn bị cho chuyến phiêu lưu tuyệt vời!',
+    'blog_cta_btn'           => 'Xem Phòng Trống',
+
+    // ============================================================
+    // CONTACT - PLACEHOLDERS
+    // ============================================================
+    'contact_name_ph'       => 'Nguyễn Văn A',
+    'contact_subject_ph'    => 'Tôi muốn hỏi về...',
+    'contact_message_ph'    => 'Nhập nội dung tin nhắn của bạn tại đây...',
+
+    // ============================================================
+    // ROOM DETAILS - FEATURE NAMES
+    // ============================================================
+    'feat_bedroom'          => 'Phòng Ngủ',
+    'feat_balcony'          => 'Ban Công',
+    'feat_kitchen'          => 'Nhà Bếp',
+    'feat_sofa'             => 'Ghế Sofa',
+    'feat_sea_view'         => 'View Biển',
+    'feat_city_view'        => 'View Phố',
+    'feat_garden'           => 'Sân Vườn',
+    'feat_pool'             => 'Bể Bơi',
+
+    // ============================================================
+    // SPECIALTIES - INTRO
+    // ============================================================
+    'spec_intro_p1'         => 'Nằm bên bờ Vịnh Hạ Long — Di sản Thiên nhiên Thế giới được UNESCO công nhận — thành phố Hạ Long (Quảng Ninh) sở hữu nguồn hải sản dồi dào, tươi ngon quanh năm. Từ những loài đặc sản quý hiếm chỉ có tại vùng biển này đến các món ăn dân dã đậm đà bản sắc làng chài, ẩm thực Hạ Long luôn để lại ấn tượng sâu sắc trong lòng du khách.',
+    'spec_intro_p2'         => 'Đặc điểm khí hậu biển ôn hòa cùng hệ sinh thái phong phú của vịnh tạo nên những loài hải sản có hương vị đặc trưng không thể lẫn với bất kỳ nơi nào khác tại Việt Nam.',
+
+    // SPECIALTIES - HIGHLIGHT BOXES
+    'spec_squid_cake'       => 'Chả Mực',
+    'spec_squid_cake_short' => 'Đặc sản số 1',
+    'spec_milk_oyster'      => 'Hàu Sữa',
+    'spec_milk_oyster_short'=> 'Béo ngậy, tươi ngon',
+    'spec_nodding_cake'     => 'Bánh Gật Gù',
+    'spec_nodding_cake_short'=> 'Đặc sản vùng cao',
+    'spec_mantis_shrimp'    => 'Bề Bề Hấp',
+    'spec_mantis_shrimp_short'=> 'Ngọt thịt, giàu dinh dưỡng',
+
+    // SPECIALTIES - FOOD CARD TAGS
+    'spec_tag_no1'          => 'Đặc sản số 1',
+    'spec_tag_fresh'        => 'Hải sản tươi sống',
+    'spec_tag_special'      => 'Cực kỳ đặc biệt',
+    'spec_tag_popular'      => 'Phổ biến & ngon',
+    'spec_tag_quangninh'    => 'Đặc sản Quảng Ninh',
+    'spec_tag_rustic'       => 'Ẩm thực dân dã',
+    'spec_tag_souvenir'     => 'Đặc sản mang về',
+    'spec_tag_rare'         => 'Độc đáo & hiếm',
+    'spec_tag_snack'        => 'Đồ ăn vặt nổi tiếng',
+
+    // SPECIALTIES - SQUID CAKE
+    'spec_squid_cake_title' => 'Chả Mực Hạ Long',
+    'spec_squid_cake_desc'  => 'Chả mực Hạ Long được chế biến từ mực tươi đánh bắt trực tiếp tại vịnh, giã tay thủ công truyền thống. Miếng chả mực dai ngọt, thơm đậm đà, vàng giòn bên ngoài — đây là đặc sản được ưa chuộng nhất khi mang về làm quà.',
+    'spec_squid_cake_where' => 'Chợ Hạ Long, phố Hoàng Diệu, các nhà hàng ven biển',
+    'spec_squid_cake_price' => '150.000 – 300.000 VNĐ / phần',
+
+    // SPECIALTIES - OYSTER
+    'spec_oyster_title'     => 'Hàu Sữa Vịnh Hạ Long',
+    'spec_oyster_desc'      => 'Hàu nuôi tự nhiên trong môi trường nước biển sạch của Vịnh Hạ Long có vị béo ngậy, ngọt tự nhiên đặc trưng. Có thể thưởng thức sống với nước mắm chanh, nướng mỡ hành hoặc hấp gừng. Giàu kẽm và protein cao.',
+    'spec_oyster_where'     => 'Làng chài Cửa Vạn, bè nổi trên vịnh, nhà hàng hải sản',
+    'spec_oyster_price'     => '50.000 – 120.000 VNĐ / chục',
+
+    // SPECIALTIES - SANDWORM
+    'spec_sandworm_title'   => 'Sá Sùng (Giun Biển)',
+    'spec_sandworm_desc'    => 'Sá sùng — loài giun biển quý hiếm sống trong cát ven bờ vịnh Hạ Long — là đặc sản cực kỳ giá trị. Khi nướng hoặc sấy khô, sá sùng có hương thơm đặc trưng, vị ngọt đậm đà. Được dùng làm nước dùng phở, súp hải sản thơm ngon hoặc ăn trực tiếp.',
+    'spec_sandworm_where'   => 'Chợ đêm Hạ Long, tiệm đặc sản Quảng Ninh',
+    'spec_sandworm_price'   => '1.500.000 – 3.000.000 VNĐ / kg (khô)',
+
+    // SPECIALTIES - MANTIS SHRIMP
+    'spec_mantis_title'     => 'Bề Bề (Tôm Tít) Hạ Long',
+    'spec_mantis_desc'      => 'Bề bề — hay còn gọi là tôm tít, mantis shrimp — là loài hải sản đặc trưng của vùng biển Hạ Long. Hấp sả, nướng muối ớt hay rang me đều tuyệt ngon. Thịt bề bề chắc, ngọt và béo hơn tôm thông thường, đặc biệt hấp dẫn với bề bề mang trứng.',
+    'spec_mantis_where'     => 'Chợ Hải Sản Hạ Long, phố ẩm thực Hùng Thắng',
+    'spec_mantis_price'     => '200.000 – 350.000 VNĐ / kg',
+
+    // SPECIALTIES - NGAN
+    'spec_ngan_title'       => 'Ngán (Tu Hài)',
+    'spec_ngan_desc'        => 'Ngán là loài nhuyễn thể đặc trưng của vùng biển Quảng Ninh, có vị ngọt đậm đà và hương thơm đặc biệt. Ngán hấp gừng, ngán xào bơ tỏi hoặc ngán sống chấm mù tạt đều là những cách thưởng thức phổ biến. Mùa ngán béo nhất vào tháng 9-12 hàng năm.',
+    'spec_ngan_where'       => 'Nhà hàng hải sản khu Bãi Cháy, Tuần Châu',
+    'spec_ngan_price'       => '180.000 – 250.000 VNĐ / kg',
+
+    // SPECIALTIES - NODDING CAKE
+    'spec_nodding_title'    => 'Bánh Gật Gù',
+    'spec_nodding_desc'     => 'Bánh gật gù là đặc sản làm từ bột gạo tẻ, tráng mỏng như bánh cuốn nhưng to hơn, mềm dẻo đặc trưng. Được cuộn lại thành từng khúc và ăn kèm nước chấm đặc biệt pha từ tôm he, mắm tôm, ớt. Món ăn sáng bình dân nhưng đậm đà hương vị Hạ Long.',
+    'spec_nodding_where'    => 'Chợ Hà Tu, phố Lê Thánh Tông, Bãi Cháy',
+    'spec_nodding_price'    => '15.000 – 30.000 VNĐ / suất',
+
+    // SPECIALTIES - SHRIMP PASTE
+    'spec_shrimp_paste_title'=> 'Ruốc & Mắm Hạ Long',
+    'spec_shrimp_paste_desc'=> 'Ruốc biển (tép moi) Hạ Long được làm từ loài tép nhỏ đặc trưng của vịnh, có màu đỏ hồng rất đẹp và hương vị thơm ngon. Ngoài ruốc, mắm tôm Quảng Ninh và mắm sá sùng cũng là những đặc sản quý giá để mang về làm quà tặng người thân.',
+    'spec_shrimp_paste_where'=> 'Chợ Hạ Long 1, siêu thị Big C Hạ Long, cửa hàng đặc sản',
+    'spec_shrimp_paste_price'=> '80.000 – 200.000 VNĐ / hộp',
+
+    // SPECIALTIES - HORSESHOE CRAB
+    'spec_horseshoe_title'  => 'Sam Biển Hạ Long',
+    'spec_horseshoe_desc'   => 'Sam biển là loài đặc sản hiếm có tại vùng biển Hạ Long. Trứng sam màu xanh lá đặc trưng, được chế biến thành gỏi trộn hoặc rang muối. Thịt sam trắng, thơm ngon và có giá trị dinh dưỡng cao. Lưu ý chỉ ăn sam cái có trứng mới an toàn.',
+    'spec_horseshoe_where'  => 'Nhà hàng chuyên hải sản, bến cá Hòn Gai',
+    'spec_horseshoe_price'  => '300.000 – 500.000 VNĐ / con',
+
+    // SPECIALTIES - NEM CHUA
+    'spec_nemchua_title'    => 'Nem Chua Hạ Long & Bánh Coóng Phù',
+    'spec_nemchua_desc'     => 'Nem chua Hạ Long làm từ thịt lợn tươi kết hợp bì lợn, có vị chua thanh, ngọt dịu và cay nhẹ rất đặc trưng. Còn Bánh Coóng phù — hay còn gọi là chè trôi nước — là món tráng miệng đậu xanh nhân mềm, nước đường gừng thơm, rất phổ biến ở các chợ đêm Hạ Long.',
+    'spec_nemchua_where'    => 'Chợ đêm Hạ Long, khu ẩm thực đường phố Bãi Cháy',
+    'spec_nemchua_price'    => '20.000 – 50.000 VNĐ / phần',
+
+    // SPECIALTIES - FAMOUS PLACES
+    'spec_place_market_title'      => 'Chợ Hạ Long 1 & Chợ Hạ Long 2',
+    'spec_place_market_desc'       => 'Hai khu chợ truyền thống lớn nhất thành phố với đầy đủ hải sản tươi sống, đặc sản khô và các mặt hàng thực phẩm địa phương. Giá cả bình dân, trải nghiệm mua sắm đích thực của người dân địa phương.',
+    'spec_place_market_hours'      => 'Mở cửa: 5:00 – 20:00',
+    'spec_place_nightmarket_title' => 'Chợ Đêm Hạ Long & Phố Đi Bộ',
+    'spec_place_nightmarket_desc'  => 'Khu chợ đêm sôi động với hàng trăm gian hàng ẩm thực đường phố, đồ lưu niệm và biểu diễn văn nghệ. Đây là điểm hẹn lý tưởng vào buổi tối cho cả gia đình và nhóm bạn.',
+    'spec_place_nightmarket_hours' => 'Hoạt động: 18:00 – 23:00',
+    'spec_place_baichay_title'     => 'Khu Nhà Hàng Bãi Cháy',
+    'spec_place_baichay_desc'      => 'Tập trung nhiều nhà hàng hải sản cao cấp với view biển tuyệt đẹp dọc theo đường Hạ Long. Phù hợp cho các bữa tiệc gia đình, tiếp khách doanh nghiệp. Hải sản được chọn tươi sống ngay tại bể.',
+    'spec_place_baichay_badge'     => 'Phù hợp: Nhóm, gia đình, tiệc',
+    'spec_place_cruise_title'      => 'Nhà Hàng Trên Du Thuyền',
+    'spec_place_cruise_desc'       => 'Thưởng thức bữa tối lãng mạn giữa lòng vịnh Hạ Long trên du thuyền hạng sang. Menu đa dạng từ hải sản tươi đến ẩm thực fusion Á-Âu. Trải nghiệm ẩm thực kết hợp ngắm hoàng hôn và ngàn sao đêm vịnh.',
+    'spec_place_cruise_badge'      => 'Đặt trước: Ít nhất 1 ngày',
+
+    // SPECIALTIES - BUYING TIPS
+    'spec_tip_1'            => 'Mua hải sản tươi sống tại các chợ cá buổi sáng sớm (4:00 – 7:00) để có hàng ngon nhất và giá tốt nhất.',
+    'spec_tip_2'            => 'Chả mực nên mua tại các cơ sở có thương hiệu uy tín, tránh mua hàng không rõ nguồn gốc tại các điểm du lịch.',
+    'spec_tip_3'            => 'Sá sùng khô có thể bảo quản lâu, rất phù hợp làm quà. Chọn loại màu đỏ nâu, không ẩm mốc, mùi thơm đặc trưng.',
+    'spec_tip_4'            => 'Mặc cả tại chợ là điều bình thường. Hỏi giá ít nhất 2-3 hàng trước khi quyết định mua để có giá hợp lý nhất.',
 ];

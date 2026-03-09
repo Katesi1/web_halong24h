@@ -216,7 +216,7 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label fw-medium"><?php _e('full_name') ?> <span class="text-danger">*</span></label>
-                <input name="name" required type="text" class="form-control shadow-none rounded-3" placeholder="Nguyễn Văn A">
+                <input name="name" required type="text" class="form-control shadow-none rounded-3" placeholder="<?php _e('contact_name_ph') ?>">
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-medium">Email <span class="text-danger">*</span></label>
@@ -224,11 +224,11 @@
               </div>
               <div class="col-12">
                 <label class="form-label fw-medium"><?php _e('subject') ?> <span class="text-danger">*</span></label>
-                <input name="subject" required type="text" class="form-control shadow-none rounded-3" placeholder="Tôi muốn hỏi về...">
+                <input name="subject" required type="text" class="form-control shadow-none rounded-3" placeholder="<?php _e('contact_subject_ph') ?>">
               </div>
               <div class="col-12">
                 <label class="form-label fw-medium"><?php _e('message') ?> <span class="text-danger">*</span></label>
-                <textarea name="message" required class="form-control shadow-none rounded-3" rows="6" style="resize: none;" placeholder="Nhập nội dung tin nhắn của bạn tại đây..."></textarea>
+                <textarea name="message" required class="form-control shadow-none rounded-3" rows="6" style="resize: none;" placeholder="<?php _e('contact_message_ph') ?>"></textarea>
               </div>
               <div class="col-12">
                 <button type="submit" name="send" class="btn btn-submit">

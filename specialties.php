@@ -101,8 +101,8 @@
     <div class="row align-items-center g-4">
       <div class="col-lg-6">
         <h2 class="fw-bold h-font mb-3"><?php _e('ne_sea_flavors') ?></h2>
-        <p class="text-muted lh-lg">Nằm bên bờ Vịnh Hạ Long — Di sản Thiên nhiên Thế giới được UNESCO công nhận — thành phố Hạ Long (Quảng Ninh) sở hữu nguồn hải sản dồi dào, tươi ngon quanh năm. Từ những loài đặc sản quý hiếm chỉ có tại vùng biển này đến các món ăn dân dã đậm đà bản sắc làng chài, ẩm thực Hạ Long luôn để lại ấn tượng sâu sắc trong lòng du khách.</p>
-        <p class="text-muted lh-lg">Đặc điểm khí hậu biển ôn hòa cùng hệ sinh thái phong phú của vịnh tạo nên những loài hải sản có hương vị đặc trưng không thể lẫn với bất kỳ nơi nào khác tại Việt Nam.</p>
+        <p class="text-muted lh-lg"><?php _e('spec_intro_p1') ?></p>
+        <p class="text-muted lh-lg"><?php _e('spec_intro_p2') ?></p>
         <div class="row g-3 mt-2">
           <div class="col-6">
             <div class="d-flex align-items-center">
@@ -135,29 +135,29 @@
           <div class="col-6">
             <div class="bg-warning-subtle rounded-3 p-4 text-center">
               <div class="fs-1 mb-2">🦑</div>
-              <h6 class="fw-bold">Chả Mực</h6>
-              <p class="small text-muted mb-0">Đặc sản số 1</p>
+              <h6 class="fw-bold"><?php _e('spec_squid_cake') ?></h6>
+              <p class="small text-muted mb-0"><?php _e('spec_squid_cake_short') ?></p>
             </div>
           </div>
           <div class="col-6">
             <div class="bg-danger-subtle rounded-3 p-4 text-center">
               <div class="fs-1 mb-2">🦪</div>
-              <h6 class="fw-bold">Hàu Sữa</h6>
-              <p class="small text-muted mb-0">Béo ngậy, tươi ngon</p>
+              <h6 class="fw-bold"><?php _e('spec_milk_oyster') ?></h6>
+              <p class="small text-muted mb-0"><?php _e('spec_milk_oyster_short') ?></p>
             </div>
           </div>
           <div class="col-6">
             <div class="bg-info-subtle rounded-3 p-4 text-center">
               <div class="fs-1 mb-2">🍜</div>
-              <h6 class="fw-bold">Bánh Gật Gù</h6>
-              <p class="small text-muted mb-0">Đặc sản vùng cao</p>
+              <h6 class="fw-bold"><?php _e('spec_nodding_cake') ?></h6>
+              <p class="small text-muted mb-0"><?php _e('spec_nodding_cake_short') ?></p>
             </div>
           </div>
           <div class="col-6">
             <div class="bg-success-subtle rounded-3 p-4 text-center">
               <div class="fs-1 mb-2">🦐</div>
-              <h6 class="fw-bold">Bề Bề Hấp</h6>
-              <p class="small text-muted mb-0">Ngọt thịt, giàu dinh dưỡng</p>
+              <h6 class="fw-bold"><?php _e('spec_mantis_shrimp') ?></h6>
+              <p class="small text-muted mb-0"><?php _e('spec_mantis_shrimp_short') ?></p>
             </div>
           </div>
         </div>
@@ -174,181 +174,181 @@
 
       <div class="row g-4">
 
-        <!-- Chả Mực -->
+        <!-- Cha Muc -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🦑</div>
             <div class="card-body p-4">
-              <span class="food-tag">Đặc sản số 1</span>
-              <h5 class="fw-bold">Chả Mực Hạ Long</h5>
-              <p class="text-muted">Chả mực Hạ Long được chế biến từ mực tươi đánh bắt trực tiếp tại vịnh, giã tay thủ công truyền thống. Miếng chả mực dai ngọt, thơm đậm đà, vàng giòn bên ngoài — đây là đặc sản được ưa chuộng nhất khi mang về làm quà.</p>
+              <span class="food-tag"><?php _e('spec_tag_no1') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_squid_cake_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_squid_cake_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ Hạ Long, phố Hoàng Diệu, các nhà hàng ven biển</small>
+                <small class="text-muted"><?php _e('spec_squid_cake_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">150.000 – 300.000 VNĐ / phần</small>
+                <small class="text-muted"><?php _e('spec_squid_cake_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Hàu Sữa -->
+        <!-- Hau Sua -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🦪</div>
             <div class="card-body p-4">
-              <span class="food-tag">Hải sản tươi sống</span>
-              <h5 class="fw-bold">Hàu Sữa Vịnh Hạ Long</h5>
-              <p class="text-muted">Hàu nuôi tự nhiên trong môi trường nước biển sạch của Vịnh Hạ Long có vị béo ngậy, ngọt tự nhiên đặc trưng. Có thể thưởng thức sống với nước mắm chanh, nướng mỡ hành hoặc hấp gừng. Giàu kẽm và protein cao.</p>
+              <span class="food-tag"><?php _e('spec_tag_fresh') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_oyster_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_oyster_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Làng chài Cửa Vạn, bè nổi trên vịnh, nhà hàng hải sản</small>
+                <small class="text-muted"><?php _e('spec_oyster_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">50.000 – 120.000 VNĐ / chục</small>
+                <small class="text-muted"><?php _e('spec_oyster_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Sá Sùng -->
+        <!-- Sa Sung -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🐛</div>
             <div class="card-body p-4">
-              <span class="food-tag">Cực kỳ đặc biệt</span>
-              <h5 class="fw-bold">Sá Sùng (Giun Biển)</h5>
-              <p class="text-muted">Sá sùng — loài giun biển quý hiếm sống trong cát ven bờ vịnh Hạ Long — là đặc sản cực kỳ giá trị. Khi nướng hoặc sấy khô, sá sùng có hương thơm đặc trưng, vị ngọt đậm đà. Được dùng làm nước dùng phở, súp hải sản thơm ngon hoặc ăn trực tiếp.</p>
+              <span class="food-tag"><?php _e('spec_tag_special') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_sandworm_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_sandworm_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ đêm Hạ Long, tiệm đặc sản Quảng Ninh</small>
+                <small class="text-muted"><?php _e('spec_sandworm_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">1.500.000 – 3.000.000 VNĐ / kg (khô)</small>
+                <small class="text-muted"><?php _e('spec_sandworm_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bề Bề -->
+        <!-- Be Be -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🦐</div>
             <div class="card-body p-4">
-              <span class="food-tag">Phổ biến & ngon</span>
-              <h5 class="fw-bold">Bề Bề (Tôm Tít) Hạ Long</h5>
-              <p class="text-muted">Bề bề — hay còn gọi là tôm tít, mantis shrimp — là loài hải sản đặc trưng của vùng biển Hạ Long. Hấp sả, nướng muối ớt hay rang me đều tuyệt ngon. Thịt bề bề chắc, ngọt và béo hơn tôm thông thường, đặc biệt hấp dẫn với bề bề mang trứng.</p>
+              <span class="food-tag"><?php _e('spec_tag_popular') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_mantis_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_mantis_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ Hải Sản Hạ Long, phố ẩm thực Hùng Thắng</small>
+                <small class="text-muted"><?php _e('spec_mantis_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">200.000 – 350.000 VNĐ / kg</small>
+                <small class="text-muted"><?php _e('spec_mantis_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Ngán -->
+        <!-- Ngan -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🐚</div>
             <div class="card-body p-4">
-              <span class="food-tag">Đặc sản Quảng Ninh</span>
-              <h5 class="fw-bold">Ngán (Tu Hài)</h5>
-              <p class="text-muted">Ngán là loài nhuyễn thể đặc trưng của vùng biển Quảng Ninh, có vị ngọt đậm đà và hương thơm đặc biệt. Ngán hấp gừng, ngán xào bơ tỏi hoặc ngán sống chấm mù tạt đều là những cách thưởng thức phổ biến. Mùa ngán béo nhất vào tháng 9-12 hàng năm.</p>
+              <span class="food-tag"><?php _e('spec_tag_quangninh') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_ngan_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_ngan_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Nhà hàng hải sản khu Bãi Cháy, Tuần Châu</small>
+                <small class="text-muted"><?php _e('spec_ngan_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">180.000 – 250.000 VNĐ / kg</small>
+                <small class="text-muted"><?php _e('spec_ngan_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bánh Gật Gù -->
+        <!-- Banh Gat Gu -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🍜</div>
             <div class="card-body p-4">
-              <span class="food-tag">Ẩm thực dân dã</span>
-              <h5 class="fw-bold">Bánh Gật Gù</h5>
-              <p class="text-muted">Bánh gật gù là đặc sản làm từ bột gạo tẻ, tráng mỏng như bánh cuốn nhưng to hơn, mềm dẻo đặc trưng. Được cuộn lại thành từng khúc và ăn kèm nước chấm đặc biệt pha từ tôm he, mắm tôm, ớt. Món ăn sáng bình dân nhưng đậm đà hương vị Hạ Long.</p>
+              <span class="food-tag"><?php _e('spec_tag_rustic') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_nodding_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_nodding_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ Hà Tu, phố Lê Thánh Tông, Bãi Cháy</small>
+                <small class="text-muted"><?php _e('spec_nodding_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">15.000 – 30.000 VNĐ / suất</small>
+                <small class="text-muted"><?php _e('spec_nodding_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Ruốc Hạ Long -->
+        <!-- Ruoc Ha Long -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🧂</div>
             <div class="card-body p-4">
-              <span class="food-tag">Đặc sản mang về</span>
-              <h5 class="fw-bold">Ruốc & Mắm Hạ Long</h5>
-              <p class="text-muted">Ruốc biển (tép moi) Hạ Long được làm từ loài tép nhỏ đặc trưng của vịnh, có màu đỏ hồng rất đẹp và hương vị thơm ngon. Ngoài ruốc, mắm tôm Quảng Ninh và mắm sá sùng cũng là những đặc sản quý giá để mang về làm quà tặng người thân.</p>
+              <span class="food-tag"><?php _e('spec_tag_souvenir') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_shrimp_paste_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_shrimp_paste_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ Hạ Long 1, siêu thị Big C Hạ Long, cửa hàng đặc sản</small>
+                <small class="text-muted"><?php _e('spec_shrimp_paste_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">80.000 – 200.000 VNĐ / hộp</small>
+                <small class="text-muted"><?php _e('spec_shrimp_paste_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Sam Biển -->
+        <!-- Sam Bien -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🦀</div>
             <div class="card-body p-4">
-              <span class="food-tag">Độc đáo & hiếm</span>
-              <h5 class="fw-bold">Sam Biển Hạ Long</h5>
-              <p class="text-muted">Sam biển là loài đặc sản hiếm có tại vùng biển Hạ Long. Trứng sam màu xanh lá đặc trưng, được chế biến thành gỏi trộn hoặc rang muối. Thịt sam trắng, thơm ngon và có giá trị dinh dưỡng cao. Lưu ý chỉ ăn sam cái có trứng mới an toàn.</p>
+              <span class="food-tag"><?php _e('spec_tag_rare') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_horseshoe_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_horseshoe_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Nhà hàng chuyên hải sản, bến cá Hòn Gai</small>
+                <small class="text-muted"><?php _e('spec_horseshoe_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">300.000 – 500.000 VNĐ / con</small>
+                <small class="text-muted"><?php _e('spec_horseshoe_price') ?></small>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Nem Chua Hạ Long -->
+        <!-- Nem Chua -->
         <div class="col-lg-4 col-md-6">
           <div class="card food-card h-100">
             <div class="food-img-placeholder">🥘</div>
             <div class="card-body p-4">
-              <span class="food-tag">Đồ ăn vặt nổi tiếng</span>
-              <h5 class="fw-bold">Nem Chua Hạ Long & Bánh Coóng Phù</h5>
-              <p class="text-muted">Nem chua Hạ Long làm từ thịt lợn tươi kết hợp bì lợn, có vị chua thanh, ngọt dịu và cay nhẹ rất đặc trưng. Còn Bánh Coóng phù — hay còn gọi là chè trôi nước — là món tráng miệng đậu xanh nhân mềm, nước đường gừng thơm, rất phổ biến ở các chợ đêm Hạ Long.</p>
+              <span class="food-tag"><?php _e('spec_tag_snack') ?></span>
+              <h5 class="fw-bold"><?php _e('spec_nemchua_title') ?></h5>
+              <p class="text-muted"><?php _e('spec_nemchua_desc') ?></p>
               <div class="d-flex align-items-center mt-3">
                 <i class="bi bi-geo-alt-fill text-warning me-2"></i>
-                <small class="text-muted">Chợ đêm Hạ Long, khu ẩm thực đường phố Bãi Cháy</small>
+                <small class="text-muted"><?php _e('spec_nemchua_where') ?></small>
               </div>
               <div class="d-flex align-items-center mt-1">
                 <i class="bi bi-currency-dollar text-warning me-2"></i>
-                <small class="text-muted">20.000 – 50.000 VNĐ / phần</small>
+                <small class="text-muted"><?php _e('spec_nemchua_price') ?></small>
               </div>
             </div>
           </div>
@@ -370,9 +370,9 @@
           <div class="d-flex align-items-start">
             <div class="fs-2 me-3">🏪</div>
             <div>
-              <h5 class="fw-bold mb-1">Chợ Hạ Long 1 & Chợ Hạ Long 2</h5>
-              <p class="text-muted mb-2">Hai khu chợ truyền thống lớn nhất thành phố với đầy đủ hải sản tươi sống, đặc sản khô và các mặt hàng thực phẩm địa phương. Giá cả bình dân, trải nghiệm mua sắm đích thực của người dân địa phương.</p>
-              <span class="badge bg-warning-subtle text-warning">Mở cửa: 5:00 – 20:00</span>
+              <h5 class="fw-bold mb-1"><?php _e('spec_place_market_title') ?></h5>
+              <p class="text-muted mb-2"><?php _e('spec_place_market_desc') ?></p>
+              <span class="badge bg-warning-subtle text-warning"><?php _e('spec_place_market_hours') ?></span>
             </div>
           </div>
         </div>
@@ -382,9 +382,9 @@
           <div class="d-flex align-items-start">
             <div class="fs-2 me-3">🌃</div>
             <div>
-              <h5 class="fw-bold mb-1">Chợ Đêm Hạ Long & Phố Đi Bộ</h5>
-              <p class="text-muted mb-2">Khu chợ đêm sôi động với hàng trăm gian hàng ẩm thực đường phố, đồ lưu niệm và biểu diễn văn nghệ. Đây là điểm hẹn lý tưởng vào buổi tối cho cả gia đình và nhóm bạn.</p>
-              <span class="badge bg-warning-subtle text-warning">Hoạt động: 18:00 – 23:00</span>
+              <h5 class="fw-bold mb-1"><?php _e('spec_place_nightmarket_title') ?></h5>
+              <p class="text-muted mb-2"><?php _e('spec_place_nightmarket_desc') ?></p>
+              <span class="badge bg-warning-subtle text-warning"><?php _e('spec_place_nightmarket_hours') ?></span>
             </div>
           </div>
         </div>
@@ -394,9 +394,9 @@
           <div class="d-flex align-items-start">
             <div class="fs-2 me-3">🍽️</div>
             <div>
-              <h5 class="fw-bold mb-1">Khu Nhà Hàng Bãi Cháy</h5>
-              <p class="text-muted mb-2">Tập trung nhiều nhà hàng hải sản cao cấp với view biển tuyệt đẹp dọc theo đường Hạ Long. Phù hợp cho các bữa tiệc gia đình, tiếp khách doanh nghiệp. Hải sản được chọn tươi sống ngay tại bể.</p>
-              <span class="badge bg-warning-subtle text-warning">Phù hợp: Nhóm, gia đình, tiệc</span>
+              <h5 class="fw-bold mb-1"><?php _e('spec_place_baichay_title') ?></h5>
+              <p class="text-muted mb-2"><?php _e('spec_place_baichay_desc') ?></p>
+              <span class="badge bg-warning-subtle text-warning"><?php _e('spec_place_baichay_badge') ?></span>
             </div>
           </div>
         </div>
@@ -406,9 +406,9 @@
           <div class="d-flex align-items-start">
             <div class="fs-2 me-3">⛵</div>
             <div>
-              <h5 class="fw-bold mb-1">Nhà Hàng Trên Du Thuyền</h5>
-              <p class="text-muted mb-2">Thưởng thức bữa tối lãng mạn giữa lòng vịnh Hạ Long trên du thuyền hạng sang. Menu đa dạng từ hải sản tươi đến ẩm thực fusion Á-Âu. Trải nghiệm ẩm thực kết hợp ngắm hoàng hôn và ngàn sao đêm vịnh.</p>
-              <span class="badge bg-warning-subtle text-warning">Đặt trước: Ít nhất 1 ngày</span>
+              <h5 class="fw-bold mb-1"><?php _e('spec_place_cruise_title') ?></h5>
+              <p class="text-muted mb-2"><?php _e('spec_place_cruise_desc') ?></p>
+              <span class="badge bg-warning-subtle text-warning"><?php _e('spec_place_cruise_badge') ?></span>
             </div>
           </div>
         </div>
@@ -424,25 +424,25 @@
         <div class="col-md-6">
           <div class="d-flex">
             <i class="bi bi-1-circle-fill text-warning me-3 mt-1 flex-shrink-0"></i>
-            <p class="mb-0 text-muted">Mua hải sản tươi sống tại các chợ cá buổi sáng sớm (4:00 – 7:00) để có hàng ngon nhất và giá tốt nhất.</p>
+            <p class="mb-0 text-muted"><?php _e('spec_tip_1') ?></p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="d-flex">
             <i class="bi bi-2-circle-fill text-warning me-3 mt-1 flex-shrink-0"></i>
-            <p class="mb-0 text-muted">Chả mực nên mua tại các cơ sở có thương hiệu uy tín, tránh mua hàng không rõ nguồn gốc tại các điểm du lịch.</p>
+            <p class="mb-0 text-muted"><?php _e('spec_tip_2') ?></p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="d-flex">
             <i class="bi bi-3-circle-fill text-warning me-3 mt-1 flex-shrink-0"></i>
-            <p class="mb-0 text-muted">Sá sùng khô có thể bảo quản lâu, rất phù hợp làm quà. Chọn loại màu đỏ nâu, không ẩm mốc, mùi thơm đặc trưng.</p>
+            <p class="mb-0 text-muted"><?php _e('spec_tip_3') ?></p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="d-flex">
             <i class="bi bi-4-circle-fill text-warning me-3 mt-1 flex-shrink-0"></i>
-            <p class="mb-0 text-muted">Mặc cả tại chợ là điều bình thường. Hỏi giá ít nhất 2-3 hàng trước khi quyết định mua để có giá hợp lý nhất.</p>
+            <p class="mb-0 text-muted"><?php _e('spec_tip_4') ?></p>
           </div>
         </div>
       </div>

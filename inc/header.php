@@ -27,6 +27,7 @@
       </ul>
       <div class="d-flex align-items-center">
         <?php require('inc/lang_switcher.php'); ?>
+        <span class="nav-separator"></span>
         <?php
           if(isset($_SESSION['login']) && $_SESSION['login']==true)
           {
@@ -279,6 +280,16 @@
 </div>
 
 <style>
+/* ===== NAV SEPARATOR ===== */
+.nav-separator {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background: #dde5e0;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
 /* ===== AUTH MODAL STYLES ===== */
 .auth-modal-dialog {
   max-width: 420px;

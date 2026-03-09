@@ -13,12 +13,16 @@
 define('DEFAULT_LANG', 'vi');
 define('SUPPORTED_LANGS', ['vi', 'en']);
 
+// Detect admin context (admin lang is independent from frontend)
+$_is_admin_context = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false);
+$_lang_session_key = $_is_admin_context ? 'admin_lang' : 'lang';
+
 // Detect and set language
 if (isset($_GET['lang']) && in_array($_GET['lang'], SUPPORTED_LANGS)) {
-    $_SESSION['lang'] = $_GET['lang'];
+    $_SESSION[$_lang_session_key] = $_GET['lang'];
 }
 
-$current_lang = $_SESSION['lang'] ?? DEFAULT_LANG;
+$current_lang = $_SESSION[$_lang_session_key] ?? DEFAULT_LANG;
 
 // Load language file
 $lang_file = __DIR__ . '/../lang/' . $current_lang . '.php';
@@ -52,7 +56,9 @@ function _e($key, $default = '') {
  * Get current language code
  */
 function current_lang() {
-    return $_SESSION['lang'] ?? DEFAULT_LANG;
+    $is_admin = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false);
+    $key = $is_admin ? 'admin_lang' : 'lang';
+    return $_SESSION[$key] ?? DEFAULT_LANG;
 }
 
 /**

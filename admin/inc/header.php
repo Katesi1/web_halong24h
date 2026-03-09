@@ -148,9 +148,43 @@
     </nav>
   </div>
 
-  <!-- Right: clock + logout -->
+  <!-- Right: clock + lang + logout -->
   <div class="d-flex align-items-center gap-3">
     <div id="topbarClock" class="topbar-clock d-none d-md-block" aria-label="<?php echo __('admin_current_time') ?>"></div>
+
+    <?php
+      $admin_current = current_lang();
+      $admin_page = basename($_SERVER['PHP_SELF']);
+      $admin_qs = $_SERVER['QUERY_STRING'] ?? '';
+      $admin_qs = preg_replace('/(&?lang=[a-z]{2})/', '', $admin_qs);
+      $admin_qs = ltrim($admin_qs, '&');
+      $admin_sep = $admin_qs ? '&' : '';
+      $admin_langs = [
+        'vi' => ['label' => 'VI', 'flag' => "\xF0\x9F\x87\xBB\xF0\x9F\x87\xB3"],
+        'en' => ['label' => 'EN', 'flag' => "\xF0\x9F\x87\xAC\xF0\x9F\x87\xA7"],
+      ];
+    ?>
+    <div class="dropdown admin-lang-switcher">
+      <button class="admin-lang-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="admin-lang-flag"><?php echo $admin_langs[$admin_current]['flag'] ?></span>
+        <span class="admin-lang-code"><?php echo $admin_langs[$admin_current]['label'] ?></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end admin-lang-menu">
+        <?php foreach ($admin_langs as $code => $info): ?>
+        <li>
+          <a class="dropdown-item admin-lang-item <?php echo $code === $admin_current ? 'active' : '' ?>"
+             href="<?php echo $admin_page . '?' . $admin_qs . $admin_sep . 'lang=' . $code ?>">
+            <span class="admin-lang-item-flag"><?php echo $info['flag'] ?></span>
+            <span><?php echo $info['label'] ?></span>
+            <?php if ($code === $admin_current): ?>
+              <i class="bi bi-check2 ms-auto"></i>
+            <?php endif; ?>
+          </a>
+        </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+
     <a href="logout.php" class="btn-logout" title="<?php echo __('logout') ?>">
       <i class="bi bi-box-arrow-right me-1"></i>
       <span><?php _e('logout') ?></span>
@@ -228,6 +262,62 @@
   #dashboard-menu.collapsed .sidebar-bottom-logout span { display: none; }
   #dashboard-menu.collapsed .sidebar-logout-btn { justify-content: center; padding: 9px; }
   #dashboard-menu.collapsed .sidebar-logo-text { display: none; }
+
+  /* ── Admin Language Switcher ── */
+  .admin-lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(148,163,184,.08);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: .82rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: all .2s;
+    line-height: 1;
+  }
+  .admin-lang-btn:hover {
+    background: rgba(165,180,252,.10);
+    border-color: rgba(165,180,252,.25);
+    color: var(--cyan);
+  }
+  .admin-lang-btn::after { display: none; }
+  .admin-lang-flag { font-size: 15px; line-height: 1; }
+  .admin-lang-code { letter-spacing: .5px; }
+
+  .admin-lang-menu {
+    min-width: 140px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    margin-top: 6px !important;
+  }
+  .admin-lang-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 7px;
+    color: var(--text-secondary);
+    font-size: .84rem;
+    font-weight: 500;
+    transition: all .15s;
+  }
+  .admin-lang-item:hover:not(.active) {
+    background: rgba(165,180,252,.08);
+    color: var(--text-primary);
+  }
+  .admin-lang-item.active {
+    background: rgba(165,180,252,.14);
+    color: var(--cyan);
+  }
+  .admin-lang-item-flag { font-size: 18px; line-height: 1; }
 
   /* ── Disable all transitions during init to prevent flash ── */
   .no-anim, .no-anim * {

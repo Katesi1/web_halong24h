@@ -373,14 +373,14 @@
                 WHERE rfea.room_id = '$room_data[id]'");
 
               $feature_icons = [
-                'Phòng Ngủ'  => 'bi-house-door',
-                'Ban Công'   => 'bi-door-open',
-                'Nhà Bếp'   => 'bi-cup-hot',
-                'Ghế Sofa'  => 'bi-lamp',
-                'View Biển'  => 'bi-water',
-                'View Phố'   => 'bi-buildings',
-                'Sân Vườn'   => 'bi-tree',
-                'Bể Bơi'    => 'bi-droplet-half',
+                __('feat_bedroom')   => 'bi-house-door',
+                __('feat_balcony')   => 'bi-door-open',
+                __('feat_kitchen')   => 'bi-cup-hot',
+                __('feat_sofa')      => 'bi-lamp',
+                __('feat_sea_view')  => 'bi-water',
+                __('feat_city_view') => 'bi-buildings',
+                __('feat_garden')    => 'bi-tree',
+                __('feat_pool')      => 'bi-droplet-half',
               ];
 
               $features_data = "";

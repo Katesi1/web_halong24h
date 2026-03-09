@@ -55,6 +55,7 @@ return [
     'nav_specialties'     => 'Ha Long Specialties',
     'nav_blog'            => 'Travel Guide',
     'nav_contact'         => 'Contact',
+    'nav_language'        => 'Language',
 
     // ============================================================
     // AUTH - LOGIN MODAL
@@ -408,6 +409,8 @@ return [
     'admin_reviews'       => 'Reviews',
     'admin_settings'      => 'Settings',
     'admin_current_time'  => 'Current Time',
+    'admin_lang_settings' => 'Display Language',
+    'admin_lang_desc'     => 'Choose the display language for the admin panel. This is independent from the user-facing language.',
 
     // ============================================================
     // ADMIN - DASHBOARD
@@ -688,4 +691,347 @@ return [
     'zalo_night_unit'       => 'nights',
     'zalo_total'            => 'Total Amount',
     'zalo_confirm'          => 'Please confirm this booking. Thank you!',
+
+    // ============================================================
+    // BLOG PAGE
+    // ============================================================
+    'blog_title'            => 'Ha Long Travel Guide Blog',
+    'blog_hero_badge'       => 'Travel guide',
+    'blog_hero_title'       => 'Ha Long Travel Guide Blog',
+    'blog_hero_sub'         => 'Everything you need to know for a perfect Ha Long trip — from attractions, cuisine to money-saving booking tips',
+    'blog_tag_attractions'  => 'Attractions',
+    'blog_tag_cuisine'      => 'Cuisine',
+    'blog_tag_tips'         => 'Tips',
+    'blog_tag_itinerary'    => 'Itinerary',
+
+    // Featured article 1
+    'blog_a1_tag'           => 'Complete guide',
+    'blog_a1_updated'       => 'Updated 2025',
+    'blog_a1_read_time'     => '10 min read',
+    'blog_a1_title'         => 'Ha Long Bay — The Ultimate A-to-Z Exploration Guide',
+    'blog_a1_desc'          => 'Ha Long Bay is a UNESCO World Natural Heritage Site recognized twice (1994 and 2000), located in Quang Ninh Province, about 170km northeast of Hanoi. With over 1,600 limestone islands spanning approximately 1,553 km², it is one of the most beautiful natural wonders in the world...',
+    'blog_a1_overview'      => 'Overview of Ha Long Bay',
+    'blog_a1_overview_desc' => 'Ha Long Bay stretches across Van Don and Cam Pha districts in Quang Ninh Province. The name "Ha Long" according to legend means "Descending Dragon" — linked to the myth of divine dragons descending from heaven to help the Vietnamese fight foreign invaders. The majestic islands are said to be jewels spat from the dragons\' mouths, forming a mighty fortress wall.',
+    'blog_a1_attractions'   => 'Top Attractions',
+    'blog_a1_sung_sot'      => 'Sung Sot Cave (Surprising Cave)',
+    'blog_a1_sung_sot_desc' => 'The largest and most beautiful cave in Ha Long Bay, divided into 3 chambers with magical stalactites. Capacity of 1,000 people.',
+    'blog_a1_titop'         => 'Ti Top Island',
+    'blog_a1_titop_desc'    => 'Beautiful white sand beach, climb to the island peak for a stunning 360-degree panoramic view of the bay. Ideal for camping.',
+    'blog_a1_cuavan'         => 'Cua Van Fishing Village',
+    'blog_a1_cuavan_desc'    => 'The oldest floating fishing village in Ha Long Bay with hundreds of families living on unique floating rafts.',
+    'blog_a1_thiencung'      => 'Thien Cung Cave',
+    'blog_a1_thiencung_desc' => 'Thien Cung means "Heavenly Palace" — a colorful cave with stalactites of countless shapes and forms.',
+    'blog_a1_quanlan'        => 'Quan Lan & Minh Chau Islands',
+    'blog_a1_quanlan_desc'   => 'Stunning pristine beaches, crystal-clear turquoise water, fine white sand — a hidden island paradise few people know about.',
+    'blog_a1_tuanchau'       => 'Tuan Chau Tourism Zone',
+    'blog_a1_tuanchau_desc'  => 'A large artificial island with amusement parks, beaches, casino, golf course and spectacular outdoor shows.',
+    'blog_a1_experience'     => 'Travel Tips',
+    'blog_a1_tip1'           => 'Book an overnight cruise for the most complete experience — watch sunsets, sunrises and swim in the bay.',
+    'blog_a1_tip2'           => 'Bring sunscreen, a hat and a light jacket as bay weather can change suddenly.',
+    'blog_a1_tip3'           => 'Rent a kayak to explore hidden caves and secret spots that large boats cannot access.',
+    'blog_a1_tip4'           => 'Book tours with reputable companies and check safety equipment on the boat before departure.',
+    'blog_a1_tip5'           => 'Bring enough cash as many island vendors do not accept cards.',
+
+    // Article 2 - Seasons
+    'blog_a2_tag'            => 'Tips',
+    'blog_a2_title'          => 'When to Visit Ha Long? Monthly Travel Calendar',
+    'blog_a2_desc'           => 'Ha Long is beautiful year-round but each season has its own charm. This article analyzes the weather, pros and cons of each season to help you choose the best time...',
+    'blog_a2_spring'         => 'Spring (March – May)',
+    'blog_a2_spring_desc'    => 'Cool, warm weather with little rain. This is the best time to visit Ha Long. Clear blue sea, good visibility, ideal for photography. Temperature 20-28°C.',
+    'blog_a2_summer'         => 'Summer (June – August)',
+    'blog_a2_summer_desc'    => 'Hot with frequent rain, occasional storms. But this is peak season as students are on summer break. Many lively services and activities. Temperature 28-35°C, monitor weather forecasts.',
+    'blog_a2_autumn'         => 'Autumn (September – November)',
+    'blog_a2_autumn_desc'    => 'Mild climate, calm seas, this is the second best season to visit Ha Long. October is the most perfect month — little rain, lots of sunshine, blue sea. Temperature 22-28°C.',
+    'blog_a2_winter'         => 'Winter (December – February)',
+    'blog_a2_winter_desc'    => 'Cold with frequent fog creating a mystical landscape like a painting. Fewer tourists so room prices are lower. Bring warm clothing. Temperature 10-18°C, occasionally below 10°C.',
+    'blog_a2_best_tip'       => 'April, May and October, November are the best times to visit Ha Long — beautiful weather, fewer crowds and reasonable prices.',
+    'blog_a2_best_label'     => 'Best tip:',
+
+    // Article 3 - Itinerary
+    'blog_a3_tag'            => 'Itinerary',
+    'blog_a3_title'          => 'Detailed 2D1N and 3D2N Ha Long Itineraries',
+    'blog_a3_desc'           => 'Optimal Ha Long travel itineraries for every type of traveler — families, couples, young groups. Includes destinations, schedules and cost estimates...',
+    'blog_a3_2d1n'           => '2-Day 1-Night Itinerary (Overnight Bay Tour)',
+    'blog_a3_2d1n_day1'      => 'Day 1:',
+    'blog_a3_2d1n_day1_desc' => '8:00 Gather at port, 12:00 Lunch on boat in the bay, 14:00 Visit Sung Sot Cave, 15:30 Swimming at Ti Top Island, 18:00 Bay sunset + BBQ on deck.',
+    'blog_a3_2d1n_day2'      => 'Day 2:',
+    'blog_a3_2d1n_day2_desc' => '6:00 Watch sunrise, 7:30 Tai Chi on deck, 8:30 Breakfast, 9:30 Cave kayaking, 11:00 Visit Cua Van fishing village, 12:30 Lunch and return to port.',
+    'blog_a3_3d2n'           => '3-Day 2-Night Itinerary (Full Exploration)',
+    'blog_a3_3d2n_day1'      => 'Day 1:',
+    'blog_a3_3d2n_day1_desc' => 'Travel from Hanoi to Ha Long (3.5-hour bus ride), check in, explore walking street, dinner with local specialties, night market.',
+    'blog_a3_3d2n_day2'      => 'Day 2:',
+    'blog_a3_3d2n_day2_desc' => 'Overnight bay tour — caves, swimming, kayaking, fishing village, sunset, sunrise.',
+    'blog_a3_3d2n_day3'      => 'Day 3:',
+    'blog_a3_3d2n_day3_desc' => 'Visit Tuan Chau, buy local specialties, check out, return to Hanoi.',
+    'blog_a3_cost'           => 'Estimated cost (per person):',
+    'blog_a3_cost_2d1n'      => '2D1N: 2,500,000 – 4,500,000 VND',
+    'blog_a3_cost_3d2n'      => '3D2N: 4,000,000 – 7,000,000 VND',
+    'blog_a3_cost_note'      => '(Depending on room class, boat type and services chosen)',
+
+    // Article 4 - Transportation
+    'blog_a4_tag'            => 'Transportation',
+    'blog_a4_title'          => 'How to Get to Ha Long — All Transportation Options',
+    'blog_a4_desc'           => 'From Hanoi, Ho Chi Minh City, Da Nang and other provinces — which transportation is fastest and most economical to Ha Long? Detailed comparison of all options...',
+    'blog_a4_bus'            => 'Bus / Limousine (From Hanoi)',
+    'blog_a4_bus_desc'       => 'Most popular. Duration: 3-4 hours. Cost: 150,000-300,000 VND/way. Reputable companies: Kumho Viet Thanh, Hai Van, Phuong Trang, Ha Lam. Avoid unlicensed vehicles.',
+    'blog_a4_plane'          => 'Airplane (From HCMC / Da Nang)',
+    'blog_a4_plane_desc'     => 'Fly to Van Don Airport (VDO) — the nearest international airport, 50km from Ha Long center. Vietjet and Bamboo Airways operate this route. 2-hour flight from HCMC.',
+    'blog_a4_boat'           => 'Speed Boat (Waterway)',
+    'blog_a4_boat_desc'      => 'Speed boat from Tuan Chau to Co To Island, Quan Lan, Van Don. Duration: 2-3 hours. An enjoyable experience with bay views along the way.',
+    'blog_a4_car'            => 'Self-Drive / Car Rental',
+    'blog_a4_car_desc'       => 'Hanoi – Ha Long expressway is 170km, takes 2.5 hours via Noi Bai – Ha Long highway. Car rental with driver costs about 800,000 – 1,200,000 VND/day.',
+
+    // Article 5 - Accommodation
+    'blog_a5_tag'            => 'Accommodation',
+    'blog_a5_title'          => 'Where to Stay in Ha Long? Bai Chay or Hon Gai?',
+    'blog_a5_desc'           => 'The two main areas of Ha Long City have very different characteristics. This article compares them in detail to help you choose the best location for your needs and budget...',
+    'blog_a5_baichay'        => 'Bai Chay Area',
+    'blog_a5_baichay_desc'   => 'The livelier tourist area with many high-end hotel resorts, close to the cruise port, many restaurants and entertainment spots. Ideal for families and couples wanting full amenities.',
+    'blog_a5_baichay_hl'     => 'Near Tuan Chau port, beautiful sea views, many night dining options, Sun World Ha Long park',
+    'blog_a5_hongai'         => 'Hon Gai Area',
+    'blog_a5_hongai_desc'    => 'The administrative center of the city with more local daily life character. Reasonable room prices, close to markets, piers and service offices. Ideal for independent travelers wanting to immerse in local life.',
+    'blog_a5_hongai_hl'      => 'Near Ha Long market, boat pier, affordable food streets, better prices',
+    'blog_a5_highlight'      => 'Highlights:',
+    'blog_a5_suggest'        => 'Suggestion:',
+    'blog_a5_suggest_desc'   => 'Couples and families with good budget → Bai Chay. Young groups, independent travelers → Hon Gai.',
+
+    // Article 6 - Festivals
+    'blog_a6_tag'            => 'Culture',
+    'blog_a6_title'          => 'Unique Festivals & Cultural Events in Ha Long',
+    'blog_a6_desc'           => 'Ha Long is not just about majestic nature — it also buzzes with unique traditional festivals, music events, fireworks and many exciting cultural activities...',
+    'blog_a6_carnival'       => 'Ha Long Carnival (April-May)',
+    'blog_a6_carnival_desc'  => 'The most spectacular annual festival in Quang Ninh province with street parades, art performances, fireworks and many entertainment activities. Attracts hundreds of thousands of visitors each year.',
+    'blog_a6_boat_race'      => 'Boat Racing Festival (2nd of January, Lunar Calendar)',
+    'blog_a6_boat_race_desc' => 'Traditional boat racing festival of coastal fishermen, taking place vibrantly on the bay surface. Fishing prayer ceremonies for a bountiful catch and safe voyages.',
+    'blog_a6_festival'       => 'Ha Long Festival (Every 2 years)',
+    'blog_a6_festival_desc'  => 'A large-scale international cultural tourism event with exhibitions, seminars, international art performances and activities promoting Quang Ninh culture.',
+    'blog_a6_fireworks'      => 'New Year\'s Eve Fireworks & Major Holidays',
+    'blog_a6_fireworks_desc' => 'Bai Chay and waterfront parks are the best spots for fireworks every Lunar New Year, National Day (Sep 2) and major city festivals.',
+
+    // Article 7 - Adventure
+    'blog_a7_tag'            => 'Adventure',
+    'blog_a7_title'          => 'Top Adventure & Sports Activities in Ha Long Bay',
+    'blog_a7_desc'           => 'Ha Long is not just for sightseeing — experience exciting adventures like limestone rock climbing, scuba diving, kite surfing and kayaking through caves...',
+    'blog_a7_kayak'          => 'Kayaking',
+    'blog_a7_kayak_desc'     => 'Explore hidden caves and enclosed lagoons',
+    'blog_a7_diving'         => 'Diving (Snorkel/Scuba)',
+    'blog_a7_diving_desc'    => 'Coral reefs, tropical fish at Co To, Quan Lan',
+    'blog_a7_climbing'       => 'Limestone Rock Climbing',
+    'blog_a7_climbing_desc'  => 'Ti Top Island, Bai Tho Mountain Ha Long',
+    'blog_a7_fishing'        => 'Night Fishing & Squid Catching',
+    'blog_a7_fishing_desc'   => 'Experience fishing with local fishermen',
+    'blog_a7_note'           => 'All these activities are available in overnight cruise packages. Book at least 1 day in advance at reception or via travel apps.',
+
+    // Article 8 - Budget tips
+    'blog_a8_tag'            => 'Budget',
+    'blog_a8_title'          => 'Tips for a Budget-Friendly Ha Long Trip Without Worry',
+    'blog_a8_desc'           => '10 golden tips to help you enjoy a quality Ha Long trip at optimal cost — from booking rooms, tours to dining and shopping for specialties...',
+    'blog_a8_tip1'           => 'Book early:',
+    'blog_a8_tip1_desc'      => 'Book 2-4 weeks in advance for the best prices, especially during holidays and summer.',
+    'blog_a8_tip2'           => 'Go on weekdays:',
+    'blog_a8_tip2_desc'      => 'Monday to Thursday is usually 20-30% cheaper than weekends.',
+    'blog_a8_tip3'           => 'Compare tours:',
+    'blog_a8_tip3_desc'      => 'Contact at least 3-5 tour companies to compare before deciding.',
+    'blog_a8_tip4'           => 'Eat at local markets:',
+    'blog_a8_tip4_desc'      => 'Breakfast and snacks at local markets are tastier and much cheaper than beachfront restaurants.',
+    'blog_a8_tip5'           => 'Rent a motorbike:',
+    'blog_a8_tip5_desc'      => 'Instead of taxis, rent a motorbike for 150,000-200,000 VND/day for freedom of movement.',
+    'blog_a8_tip6'           => 'Buy specialties at markets:',
+    'blog_a8_tip6_desc'      => 'Market prices are usually 30-50% cheaper than shops at the port.',
+    'blog_a8_tip7'           => 'Join group tours:',
+    'blog_a8_tip7_desc'      => '40-60% cheaper than private tours, suitable for solo or duo travelers.',
+    'blog_a8_tip8'           => 'Use bank cards:',
+    'blog_a8_tip8_desc'      => 'Many hotels offer discounts for payments via banking apps or e-wallets.',
+    'blog_a8_tip9'           => 'Avoid buying seafood at the port:',
+    'blog_a8_tip9_desc'      => 'Prices are usually much higher — buy at the fish market and have a restaurant cook it.',
+    'blog_a8_tip10'          => 'Book hotels directly:',
+    'blog_a8_tip10_desc'     => 'Booking directly via website/phone is sometimes cheaper than OTAs (Booking.com, Agoda) as it avoids commission fees.',
+
+    // Article 9 - Responsible tourism
+    'blog_a9_tag'            => 'Environment',
+    'blog_a9_title'          => 'Responsible Tourism in Ha Long Bay',
+    'blog_a9_desc'           => 'Ha Long Bay faces serious environmental challenges. Let\'s learn how tourists can help protect this natural wonder for future generations...',
+    'blog_a9_do'             => 'Things you SHOULD do:',
+    'blog_a9_do1'            => 'Bring cloth bags instead of plastic bags when shopping',
+    'blog_a9_do2'            => 'Use personal water bottles, avoid single-use plastic bottles',
+    'blog_a9_do3'            => 'Do not litter in the bay, use trash bins on the boat',
+    'blog_a9_do4'            => 'Choose eco-friendly certified tours',
+    'blog_a9_do5'            => 'Do not touch coral when diving',
+    'blog_a9_dont'           => 'Things you should NOT do:',
+    'blog_a9_dont1'          => 'Do not buy products made from coral, shells or rare fish scales',
+    'blog_a9_dont2'          => 'Do not shout or make noise in caves',
+    'blog_a9_dont3'          => 'Do not feed wild animals',
+    'blog_a9_dont4'          => 'Do not carve names on rocks at scenic spots',
+    'blog_a9_dont5'          => 'Do not fish in restricted areas',
+
+    // Latest articles heading
+    'blog_latest'            => 'Latest Articles',
+
+    // Read more / Collapse buttons
+    'blog_read_more'         => 'Read more',
+    'blog_read_full'         => 'Read full article',
+    'blog_collapse'          => 'Collapse',
+
+    // Sidebar - Quick info
+    'blog_sidebar_title'     => 'Quick Facts About Ha Long',
+    'blog_sidebar_province'  => 'Province / City',
+    'blog_sidebar_province_val' => 'Quang Ninh',
+    'blog_sidebar_distance'  => 'Distance from Hanoi',
+    'blog_sidebar_area'      => 'Bay area',
+    'blog_sidebar_islands'   => 'Limestone islands',
+    'blog_sidebar_islands_val' => '1,600+ islands',
+    'blog_sidebar_unesco'    => 'UNESCO Heritage',
+    'blog_sidebar_airport'   => 'Nearest airport',
+    'blog_sidebar_airport_val' => 'Van Don (VDO)',
+    'blog_sidebar_best_time' => 'Best season',
+    'blog_sidebar_best_time_val' => 'Apr-May, Oct-Nov',
+    'blog_sidebar_timezone'  => 'Timezone',
+    'blog_sidebar_timezone_val' => 'UTC+7 (Hanoi)',
+
+    // Sidebar - Travel tips
+    'blog_tips_title'        => 'Quick Travel Tips',
+    'blog_tips_hotline'      => 'Tourism support hotline',
+    'blog_tips_hotline_val'  => '1800 599 945 (free, 24/7)',
+    'blog_tips_currency'     => 'Currency',
+    'blog_tips_currency_val' => 'VND (Vietnamese Dong). Exchange at banks, not on the street',
+    'blog_tips_sim'          => 'SIM & Internet',
+    'blog_tips_sim_val'      => 'Viettel and Mobifone have good coverage. Buy tourist SIM 100-150k/week',
+    'blog_tips_insurance'    => 'Travel insurance',
+    'blog_tips_insurance_val' => 'Recommended if participating in outdoor activities or diving',
+
+    // Sidebar - FAQ
+    'blog_faq_title'         => 'Frequently Asked Questions',
+    'blog_faq_q1'            => 'How much is the entrance fee to Ha Long Bay?',
+    'blog_faq_a1'            => 'Bay sightseeing ticket: 270,000 VND/adult, 130,000 VND/child (height 1-1.4m). This fee is usually included in tour prices. If booking independently, purchase at Ha Long Bay Management Board.',
+    'blog_faq_q2'            => 'What is the best overnight cruise tour?',
+    'blog_faq_a2'            => 'Reputable tour companies: Indochina Junk, Paradise Cruises, Bhaya Cruises, Era Cruises. Choose 3-star or above boats with good reviews on TripAdvisor and Booking.com.',
+    'blog_faq_q3'            => 'Can I bring young children on bay tours?',
+    'blog_faq_a3'            => 'Yes. Most cruises have extra beds for children. Some boats have special programs for families with young children. Ask carefully when booking.',
+    'blog_faq_q4'            => 'Do I need to bring a life jacket for the bay trip?',
+    'blog_faq_a4'            => 'Tour boats are required to provide life jackets for guests. However, if you kayak or swim on your own, make sure to wear the life jacket properly following staff instructions.',
+
+    // Sidebar - CTA
+    'blog_cta_title'         => 'Ready to Explore Ha Long?',
+    'blog_cta_desc'          => 'Book your room today for the best prices and prepare for an amazing adventure!',
+    'blog_cta_btn'           => 'View Available Rooms',
+
+    // ============================================================
+    // CONTACT - PLACEHOLDERS
+    // ============================================================
+    'contact_name_ph'       => 'John Doe',
+    'contact_subject_ph'    => 'I would like to ask about...',
+    'contact_message_ph'    => 'Enter your message here...',
+
+    // ============================================================
+    // ROOM DETAILS - FEATURE NAMES
+    // ============================================================
+    'feat_bedroom'          => 'Bedroom',
+    'feat_balcony'          => 'Balcony',
+    'feat_kitchen'          => 'Kitchen',
+    'feat_sofa'             => 'Sofa',
+    'feat_sea_view'         => 'Sea View',
+    'feat_city_view'        => 'City View',
+    'feat_garden'           => 'Garden',
+    'feat_pool'             => 'Swimming Pool',
+
+    // ============================================================
+    // SPECIALTIES - INTRO
+    // ============================================================
+    'spec_intro_p1'         => 'Located on the shores of Ha Long Bay — a UNESCO World Natural Heritage Site — Ha Long city (Quang Ninh) boasts abundant, fresh seafood year-round. From rare specialties found only in these waters to rustic dishes rich in fishing village character, Ha Long cuisine always leaves a deep impression on visitors.',
+    'spec_intro_p2'         => 'The mild maritime climate and rich ecosystem of the bay produce seafood with distinctive flavors that cannot be found anywhere else in Vietnam.',
+
+    // SPECIALTIES - HIGHLIGHT BOXES
+    'spec_squid_cake'       => 'Squid Cake',
+    'spec_squid_cake_short' => 'No. 1 Specialty',
+    'spec_milk_oyster'      => 'Milk Oyster',
+    'spec_milk_oyster_short'=> 'Creamy & Fresh',
+    'spec_nodding_cake'     => 'Nodding Cake',
+    'spec_nodding_cake_short'=> 'Highland Specialty',
+    'spec_mantis_shrimp'    => 'Steamed Mantis Shrimp',
+    'spec_mantis_shrimp_short'=> 'Sweet & Nutritious',
+
+    // SPECIALTIES - FOOD CARD TAGS
+    'spec_tag_no1'          => 'No. 1 Specialty',
+    'spec_tag_fresh'        => 'Fresh Seafood',
+    'spec_tag_special'      => 'Extremely Special',
+    'spec_tag_popular'      => 'Popular & Delicious',
+    'spec_tag_quangninh'    => 'Quang Ninh Specialty',
+    'spec_tag_rustic'       => 'Rustic Cuisine',
+    'spec_tag_souvenir'     => 'Take-Home Specialty',
+    'spec_tag_rare'         => 'Unique & Rare',
+    'spec_tag_snack'        => 'Famous Street Food',
+
+    // SPECIALTIES - SQUID CAKE
+    'spec_squid_cake_title' => 'Ha Long Squid Cake',
+    'spec_squid_cake_desc'  => 'Ha Long squid cake is made from fresh squid caught directly from the bay, hand-pounded using traditional methods. Each piece is chewy, sweet, richly aromatic, and golden crispy on the outside — this is the most popular specialty to bring home as a gift.',
+    'spec_squid_cake_where' => 'Ha Long Market, Hoang Dieu Street, seaside restaurants',
+    'spec_squid_cake_price' => '150,000 – 300,000 VND / serving',
+
+    // SPECIALTIES - OYSTER
+    'spec_oyster_title'     => 'Ha Long Bay Milk Oyster',
+    'spec_oyster_desc'      => 'Naturally farmed oysters in the clean seawater of Ha Long Bay have a distinctively creamy, naturally sweet taste. They can be enjoyed raw with lime fish sauce, grilled with scallion oil, or steamed with ginger. Rich in zinc and high in protein.',
+    'spec_oyster_where'     => 'Cua Van Fishing Village, floating rafts on the bay, seafood restaurants',
+    'spec_oyster_price'     => '50,000 – 120,000 VND / dozen',
+
+    // SPECIALTIES - SANDWORM
+    'spec_sandworm_title'   => 'Sa Sung (Sea Worm)',
+    'spec_sandworm_desc'    => 'Sa Sung — a rare sea worm living in the sand along Ha Long Bay shores — is an extremely valuable specialty. When grilled or dried, sa sung has a distinctive aroma and rich sweet flavor. It is used to make pho broth, seafood soup, or eaten directly.',
+    'spec_sandworm_where'   => 'Ha Long Night Market, Quang Ninh specialty shops',
+    'spec_sandworm_price'   => '1,500,000 – 3,000,000 VND / kg (dried)',
+
+    // SPECIALTIES - MANTIS SHRIMP
+    'spec_mantis_title'     => 'Ha Long Mantis Shrimp',
+    'spec_mantis_desc'      => 'Mantis shrimp is a signature seafood of the Ha Long sea area. Steamed with lemongrass, grilled with salt and chili, or stir-fried with tamarind — all are delicious. Mantis shrimp meat is firm, sweet, and richer than regular shrimp, especially appealing when carrying eggs.',
+    'spec_mantis_where'     => 'Ha Long Seafood Market, Hung Thang food street',
+    'spec_mantis_price'     => '200,000 – 350,000 VND / kg',
+
+    // SPECIALTIES - NGAN
+    'spec_ngan_title'       => 'Ngan Clam (Geoduck)',
+    'spec_ngan_desc'        => 'Ngan is a distinctive mollusk of the Quang Ninh sea area, with a rich sweet taste and special aroma. Steamed with ginger, stir-fried with garlic butter, or eaten raw with wasabi are all popular ways to enjoy it. The fattiest ngan season is from September to December.',
+    'spec_ngan_where'       => 'Seafood restaurants in Bai Chay, Tuan Chau',
+    'spec_ngan_price'       => '180,000 – 250,000 VND / kg',
+
+    // SPECIALTIES - NODDING CAKE
+    'spec_nodding_title'    => 'Nodding Cake (Banh Gat Gu)',
+    'spec_nodding_desc'     => 'Nodding cake is a specialty made from rice flour, spread thin like rolled rice paper but larger, with a distinctive soft and chewy texture. It is rolled into pieces and served with a special dipping sauce made from shrimp, shrimp paste, and chili. A humble breakfast dish but rich in Ha Long flavor.',
+    'spec_nodding_where'    => 'Ha Tu Market, Le Thanh Tong Street, Bai Chay',
+    'spec_nodding_price'    => '15,000 – 30,000 VND / serving',
+
+    // SPECIALTIES - SHRIMP PASTE
+    'spec_shrimp_paste_title'=> 'Ha Long Shrimp Paste & Fish Sauce',
+    'spec_shrimp_paste_desc'=> 'Ha Long sea shrimp paste is made from tiny shrimp unique to the bay, with a beautiful pinkish-red color and delicious aroma. Besides shrimp paste, Quang Ninh shrimp sauce and sa sung fish sauce are also precious specialties to bring home as gifts.',
+    'spec_shrimp_paste_where'=> 'Ha Long Market 1, Big C Ha Long, specialty shops',
+    'spec_shrimp_paste_price'=> '80,000 – 200,000 VND / box',
+
+    // SPECIALTIES - HORSESHOE CRAB
+    'spec_horseshoe_title'  => 'Ha Long Horseshoe Crab',
+    'spec_horseshoe_desc'   => 'Horseshoe crab is a rare specialty found in Ha Long Bay waters. Its distinctive green eggs are prepared as salad or salt-roasted. The white meat is aromatic, delicious, and highly nutritious. Note: only eat female horseshoe crabs with eggs for safety.',
+    'spec_horseshoe_where'  => 'Specialty seafood restaurants, Hon Gai fish wharf',
+    'spec_horseshoe_price'  => '300,000 – 500,000 VND / piece',
+
+    // SPECIALTIES - NEM CHUA
+    'spec_nemchua_title'    => 'Ha Long Fermented Pork Roll & Coong Phu Cake',
+    'spec_nemchua_desc'     => 'Ha Long fermented pork roll is made from fresh pork combined with pork skin, with a distinctively light sour, mildly sweet, and slightly spicy taste. Coong Phu cake — also known as floating cake — is a mung bean dessert with soft filling in aromatic ginger syrup, very popular at Ha Long night markets.',
+    'spec_nemchua_where'    => 'Ha Long Night Market, Bai Chay street food area',
+    'spec_nemchua_price'    => '20,000 – 50,000 VND / serving',
+
+    // SPECIALTIES - FAMOUS PLACES
+    'spec_place_market_title'      => 'Ha Long Market 1 & Ha Long Market 2',
+    'spec_place_market_desc'       => 'The two largest traditional markets in the city with a full range of fresh seafood, dried specialties, and local food products. Affordable prices, an authentic shopping experience of the local people.',
+    'spec_place_market_hours'      => 'Open: 5:00 AM – 8:00 PM',
+    'spec_place_nightmarket_title' => 'Ha Long Night Market & Walking Street',
+    'spec_place_nightmarket_desc'  => 'A vibrant night market with hundreds of street food stalls, souvenirs, and cultural performances. An ideal evening destination for families and groups of friends.',
+    'spec_place_nightmarket_hours' => 'Active: 6:00 PM – 11:00 PM',
+    'spec_place_baichay_title'     => 'Bai Chay Restaurant District',
+    'spec_place_baichay_desc'      => 'A concentration of premium seafood restaurants with beautiful sea views along Ha Long Road. Suitable for family dinners, business entertainment. Fresh seafood is selected live from tanks.',
+    'spec_place_baichay_badge'     => 'Suitable for: Groups, families, banquets',
+    'spec_place_cruise_title'      => 'Cruise Ship Restaurants',
+    'spec_place_cruise_desc'       => 'Enjoy a romantic dinner in the heart of Ha Long Bay on a luxury cruise. Diverse menu from fresh seafood to Asian-European fusion cuisine. A dining experience combined with sunset and stargazing over the bay.',
+    'spec_place_cruise_badge'      => 'Advance booking: At least 1 day',
+
+    // SPECIALTIES - BUYING TIPS
+    'spec_tip_1'            => 'Buy fresh seafood at fish markets early in the morning (4:00 – 7:00 AM) for the best quality and prices.',
+    'spec_tip_2'            => 'Buy squid cake from reputable branded establishments, avoid products of unknown origin at tourist spots.',
+    'spec_tip_3'            => 'Dried sa sung can be stored for a long time, making it great for gifts. Choose the reddish-brown type, not moldy, with a distinctive aroma.',
+    'spec_tip_4'            => 'Bargaining at markets is normal. Ask prices at least 2-3 stalls before deciding to buy for the best deal.',
 ];

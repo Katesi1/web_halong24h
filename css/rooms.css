@@ -556,8 +556,7 @@
 .room-image-wrapper {
   position: relative;
   overflow: hidden;
-  height: 100%;
-  min-height: 250px;
+  height: 280px;
 }
 
 .room-image-wrapper img {
@@ -795,7 +794,7 @@
   }
 
   .room-image-wrapper {
-    min-height: 200px;
+    height: 220px;
   }
 
   .room-content-wrapper {

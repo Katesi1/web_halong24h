@@ -82,6 +82,37 @@
           </div>
         </div>
 
+        <!-- Language settings section -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0">
+                <i class="bi bi-translate me-2"></i><?php _e('admin_lang_settings') ?>
+              </h5>
+            </div>
+            <p class="card-text text-muted mb-3"><?php _e('admin_lang_desc') ?></p>
+            <div class="d-flex gap-2">
+              <?php
+                $setting_langs = [
+                  'vi' => ['label' => 'Tiếng Việt', 'flag' => "\xF0\x9F\x87\xBB\xF0\x9F\x87\xB3", 'code' => 'VI'],
+                  'en' => ['label' => 'English',     'flag' => "\xF0\x9F\x87\xAC\xF0\x9F\x87\xA7", 'code' => 'EN'],
+                ];
+                $cur = current_lang();
+                foreach ($setting_langs as $code => $info):
+              ?>
+              <a href="settings.php?lang=<?php echo $code ?>"
+                 class="btn <?php echo $code === $cur ? 'btn-primary' : 'btn-outline-secondary' ?> d-flex align-items-center gap-2 px-3">
+                <span style="font-size:20px"><?php echo $info['flag'] ?></span>
+                <span><?php echo $info['label'] ?></span>
+                <?php if ($code === $cur): ?>
+                  <i class="bi bi-check-circle-fill ms-1"></i>
+                <?php endif; ?>
+              </a>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
+
         <!-- Contact details section -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
