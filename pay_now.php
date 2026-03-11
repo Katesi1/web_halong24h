@@ -86,7 +86,7 @@
     // Lấy số điện thoại từ link Zalo hoặc từ pn1
     $zalo_phone = '';
     if(!empty($contact_r['zalo'])){
-      // Nếu zalo là URL như https://zalo.me/914298300, extract số điện thoại
+      // Nếu zalo là URL như https://zalo.me/0325992001, extract số điện thoại
       if(preg_match('/zalo\.me\/(\d+)/', $contact_r['zalo'], $matches)){
         $zalo_phone = $matches[1];
       } else {

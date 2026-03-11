@@ -42,7 +42,7 @@
 <script>
   // Inject contact data for floating widget
   window.floatingContactData = {
-    phone: '+<?php echo $contact_r['pn1'] ?>',
+    phone: '0325992001',
     facebook: '<?php echo $contact_r['fb'] ?>',
     zalo: '<?php echo $contact_r['zalo'] ?>'
   };

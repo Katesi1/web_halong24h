@@ -977,7 +977,7 @@ return [
     // Sidebar - Travel tips
     'blog_tips_title'        => 'Quick Travel Tips',
     'blog_tips_hotline'      => 'Tourism support hotline',
-    'blog_tips_hotline_val'  => '1800 599 945 (free, 24/7)',
+    'blog_tips_hotline_val'  => '0325 992 001 (free, 24/7)',
     'blog_tips_currency'     => 'Currency',
     'blog_tips_currency_val' => 'VND (Vietnamese Dong). Exchange at banks, not on the street',
     'blog_tips_sim'          => 'SIM & Internet',

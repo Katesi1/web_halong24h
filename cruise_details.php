@@ -221,8 +221,8 @@
           <p><?php _e('cruise_cta_desc') ?></p>
         </div>
         <div class="cd-cta-actions">
-          <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn cd-cta-btn-phone">
-            <i class="bi bi-telephone me-2"></i><?php echo $contact_r['pn1'] ?>
+          <a href="tel:0325992001" class="btn cd-cta-btn-phone">
+            <i class="bi bi-telephone me-2"></i>0325 992 001
           </a>
           <?php if (!empty($contact_r['zalo'])): ?>
             <a href="<?php echo htmlspecialchars($contact_r['zalo']) ?>" target="_blank" class="btn cd-cta-btn-zalo">

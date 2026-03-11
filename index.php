@@ -680,12 +680,12 @@
                 <h5 class="contact-card-title"><?php _e('hotline') ?></h5>
               </div>
               <div class="contact-card-body">
-                <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>"
+                <a href="tel:0325992001"
                   class="contact-link phone-link"
                   itemprop="telephone"
                   aria-label="<?php _e('support_hotline') ?>"
                   <i class="bi bi-telephone me-2"></i>
-                  <span>+<?php echo $contact_r['pn1'] ?></span>
+                  <span>0325 992 001</span>
                 </a>
                 <meta itemprop="contactType" content="customer service">
                 <meta itemprop="areaServed" content="VN">
@@ -764,10 +764,10 @@
           "@context": "https://schema.org",
           "@type": "Hotel",
           "name": "<?php echo $settings_r['site_title'] ?>",
-          "telephone": "+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>",
+          "telephone": "+84325992001",
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>",
+            "telephone": "+84325992001",
             "contactType": "customer service",
             "areaServed": "VN"
           }

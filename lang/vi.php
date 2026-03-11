@@ -977,7 +977,7 @@ return [
     // Sidebar - Travel tips
     'blog_tips_title'        => 'Mẹo Du Lịch Nhanh',
     'blog_tips_hotline'      => 'Đường dây hỗ trợ du lịch',
-    'blog_tips_hotline_val'  => '1800 599 945 (miễn phí, 24/7)',
+    'blog_tips_hotline_val'  => '0325 992 001 (miễn phí, 24/7)',
     'blog_tips_currency'     => 'Tiền tệ',
     'blog_tips_currency_val' => 'VNĐ (Đồng Việt Nam). Đổi tiền tại ngân hàng, không đổi ngoài đường',
     'blog_tips_sim'          => 'Sim & Internet',

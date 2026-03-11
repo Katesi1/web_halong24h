@@ -150,8 +150,8 @@
             </div>
             <div>
               <p class="fw-semibold mb-0 small text-muted"><?php _e('support_hotline') ?></p>
-              <a href="tel:+<?php echo $contact_r['pn1'] ?>" class="text-decoration-none text-dark fw-medium">
-                +<?php echo $contact_r['pn1'] ?>
+              <a href="tel:0325992001" class="text-decoration-none text-dark fw-medium">
+                0325 992 001
               </a>
             </div>
           </div>

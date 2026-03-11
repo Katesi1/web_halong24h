@@ -55,7 +55,7 @@
       require_once('inc/services_data.php');
       $is_vi = current_lang() === 'vi';
       $idx = 0;
-      $phone_raw = str_replace(' ', '', $contact_r['pn1'] ?? '');
+      $phone_raw = '0325992001';
       $lang_adult = __('svc_adult');
       $lang_child = __('svc_child');
       $lang_free = __('svc_free_under_1m');

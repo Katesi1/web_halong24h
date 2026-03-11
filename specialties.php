@@ -116,7 +116,7 @@
       <h1 class="fw-bold display-5 mb-3"><?php _e('halong_specialties') ?></h1>
       <p class="lead mb-4 opacity-75"><?php _e('specialties_hero_sub') ?></p>
       <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-lg btn-light text-dark fw-bold px-4 rounded-pill shadow">
+        <a href="tel:0325992001" class="btn btn-lg btn-light text-dark fw-bold px-4 rounded-pill shadow">
           <i class="bi bi-telephone-fill me-2 text-danger"></i><?php _e('spec_order_call') ?>
         </a>
         <a href="#order-section" class="btn btn-lg btn-outline-light fw-bold px-4 rounded-pill">
@@ -502,7 +502,7 @@
         </div>
 
         <div class="d-flex flex-wrap gap-3">
-          <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-lg text-white px-4 rounded-pill" style="background:linear-gradient(135deg,#c05e1b,#e07b39);">
+          <a href="tel:0325992001" class="btn btn-lg text-white px-4 rounded-pill" style="background:linear-gradient(135deg,#c05e1b,#e07b39);">
             <i class="bi bi-telephone-fill me-2"></i><?php _e('spec_order_call') ?>
           </a>
           <?php if (!empty($contact_r['zalo'])): ?>
@@ -526,8 +526,8 @@
               <i class="bi bi-telephone-fill text-warning fs-4 me-3"></i>
               <div>
                 <small class="text-muted d-block"><?php _e('spec_consult_hotline') ?></small>
-                <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="fw-bold text-dark text-decoration-none fs-5">
-                  +<?php echo $contact_r['pn1'] ?>
+                <a href="tel:0325992001" class="fw-bold text-dark text-decoration-none fs-5">
+                  0325 992 001
                 </a>
               </div>
             </div>
@@ -592,7 +592,7 @@
   <div class="sticky-cta" id="stickyCta">
     <div class="container d-flex justify-content-center align-items-center gap-3 flex-wrap">
       <span class="text-white fw-semibold d-none d-md-inline"><i class="bi bi-fire me-1"></i> <?php _e('spec_order_title') ?></span>
-      <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-light btn-sm rounded-pill px-3 shadow-sm">
+      <a href="tel:0325992001" class="btn btn-light btn-sm rounded-pill px-3 shadow-sm">
         <i class="bi bi-telephone-fill text-danger me-1"></i><?php _e('spec_order_call') ?>
       </a>
       <?php if (!empty($contact_r['zalo'])): ?>
