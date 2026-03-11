@@ -1163,4 +1163,22 @@ return [
     'guide_map_content'            => 'Nội dung',
     'guide_map_system'             => 'Hệ thống',
     'guide_back_to_top'            => 'Về đầu trang',
+
+    // ═══ ROOM CALENDAR ═══
+    'admin_room_calendar'  => 'Lịch phòng',
+    'cal_legend'           => 'Chú thích',
+    'cal_available'        => 'Còn trống',
+    'cal_booked'           => 'Đã đặt',
+    'cal_pending'          => 'Chờ cọc',
+    'cal_peak'             => 'Giá cao điểm',
+    'cal_holiday'          => 'Ngày lễ',
+    'cal_today'            => 'Hôm nay',
+    'cal_room'             => 'Phòng / Căn',
+    'cal_bulk_update'      => 'Cập nhật hàng loạt',
+    'cal_select_room'      => 'Chọn phòng',
+    'cal_from_date'        => 'Từ ngày',
+    'cal_to_date'          => 'Đến ngày',
+    'cal_note'             => 'Ghi chú',
+    'cal_note_placeholder' => 'Ghi chú (tuỳ chọn)...',
+    'cal_apply'            => 'Áp dụng',
 ];

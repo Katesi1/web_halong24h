@@ -85,6 +85,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="room_calendar.php" data-title="<?php echo __('admin_room_calendar') ?>">
+          <i class="bi bi-calendar3"></i>
+          <span><?php _e('admin_room_calendar') ?></span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="users.php" data-title="<?php echo __('admin_users') ?>">
           <i class="bi bi-people"></i>
           <span><?php _e('admin_users') ?></span>

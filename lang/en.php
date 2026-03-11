@@ -1163,4 +1163,22 @@ return [
     'guide_map_content'            => 'Content',
     'guide_map_system'             => 'System',
     'guide_back_to_top'            => 'Back to top',
+
+    // ═══ ROOM CALENDAR ═══
+    'admin_room_calendar'  => 'Room Calendar',
+    'cal_legend'           => 'Legend',
+    'cal_available'        => 'Available',
+    'cal_booked'           => 'Booked',
+    'cal_pending'          => 'Pending Deposit',
+    'cal_peak'             => 'Peak Price',
+    'cal_holiday'          => 'Holiday',
+    'cal_today'            => 'Today',
+    'cal_room'             => 'Room',
+    'cal_bulk_update'      => 'Bulk Update',
+    'cal_select_room'      => 'Select Room',
+    'cal_from_date'        => 'From Date',
+    'cal_to_date'          => 'To Date',
+    'cal_note'             => 'Note',
+    'cal_note_placeholder' => 'Note (optional)...',
+    'cal_apply'            => 'Apply',
 ];
