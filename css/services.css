@@ -1,0 +1,935 @@
+/* ============================================
+   Services Page Styles
+   ============================================ */
+
+/* Hero Section */
+.svc-hero {
+    background: linear-gradient(135deg, #1a3c34 0%, #2D6A4F 50%, #40916C 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+}
+
+.svc-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(0,0,0,0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.min-vh-40 {
+    min-height: 280px;
+}
+
+.opacity-85 {
+    opacity: 0.85;
+}
+
+.svc-hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
+}
+
+.svc-hero-btn {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    transition: all 0.3s ease;
+}
+
+.svc-hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   Sun World Tickets Section
+   ============================================ */
+
+.sw-tickets-section {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8faf9 100%);
+}
+
+.sw-section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Detail Cards */
+.sw-detail-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(45, 106, 79, 0.08);
+    border: 1px solid rgba(45, 106, 79, 0.1);
+    transition: all 0.4s ease;
+}
+
+.sw-detail-card:hover {
+    box-shadow: 0 12px 40px rgba(45, 106, 79, 0.15);
+    transform: translateY(-4px);
+}
+
+.sw-detail-img-wrapper {
+    position: relative;
+    height: 100%;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.sw-detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.sw-detail-card:hover .sw-detail-img {
+    transform: scale(1.05);
+}
+
+.sw-detail-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(45, 106, 79, 0.9);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+.sw-detail-content {
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.sw-detail-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2D6A4F;
+    margin-bottom: 0.5rem;
+}
+
+.sw-detail-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sw-detail-rating i {
+    font-size: 0.85rem;
+}
+
+.sw-rating-value {
+    font-weight: 700;
+    color: #2D6A4F;
+    font-size: 0.95rem;
+}
+
+.sw-rating-count {
+    color: #94a3b8;
+    font-size: 0.8rem;
+}
+
+.sw-detail-desc {
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+}
+
+.sw-highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.sw-highlights-list li {
+    font-size: 0.85rem;
+    color: #475569;
+    display: flex;
+    align-items: center;
+}
+
+.sw-highlights-list li i {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Price boxes */
+.sw-detail-prices {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.sw-price-box {
+    flex: 1;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border: 1px solid rgba(45, 106, 79, 0.15);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+}
+
+.sw-price-label {
+    display: block;
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.sw-price-value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #2D6A4F;
+}
+
+.sw-price-child .sw-price-value {
+    font-size: 1.1rem;
+    color: #40916C;
+}
+
+.sw-free-note {
+    font-size: 0.78rem;
+    color: #0ea5e9;
+    margin-bottom: 1rem;
+}
+
+.sw-book-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+}
+
+.sw-book-btn:hover {
+    background: linear-gradient(135deg, #1e4d3a 0%, #2D6A4F 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+}
+
+/* ============================================
+   Combo Section
+   ============================================ */
+
+.sw-combo-title-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.sw-combo-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(45, 106, 79, 0.08);
+    border: 2px solid rgba(45, 106, 79, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.sw-combo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(45, 106, 79, 0.2);
+}
+
+.sw-combo-vip {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 24px rgba(245, 158, 11, 0.15);
+}
+
+.sw-combo-vip:hover {
+    box-shadow: 0 12px 40px rgba(245, 158, 11, 0.25);
+}
+
+.sw-vip-ribbon {
+    position: absolute;
+    top: 16px;
+    right: -30px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    padding: 6px 40px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(45deg);
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.sw-combo-header {
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+}
+
+.sw-combo-vip .sw-combo-header {
+    background: linear-gradient(135deg, #1a3c34 0%, #2D6A4F 100%);
+}
+
+.sw-combo-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.sw-combo-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Merriweather', serif;
+}
+
+.sw-combo-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.sw-combo-body {
+    padding: 2rem;
+}
+
+.sw-combo-price-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sw-combo-price {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-radius: 12px;
+    border: 1px solid rgba(45, 106, 79, 0.12);
+}
+
+.sw-combo-price-label {
+    display: block;
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.sw-combo-price-amount {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #2D6A4F;
+}
+
+.sw-combo-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.sw-combo-features li {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+}
+
+.sw-combo-features li:last-child {
+    border-bottom: none;
+}
+
+.sw-combo-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+}
+
+.sw-combo-btn:hover {
+    background: linear-gradient(135deg, #1e4d3a 0%, #2D6A4F 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+}
+
+.sw-combo-vip .sw-combo-btn {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.sw-combo-vip .sw-combo-btn:hover {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+/* ============================================
+   Price Table
+   ============================================ */
+
+.sw-price-table {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(45, 106, 79, 0.08);
+}
+
+.sw-price-table thead th {
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.sw-price-table tbody td {
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+    border-color: #f1f5f9;
+    font-size: 0.9rem;
+}
+
+.sw-price-table tbody tr:hover {
+    background: #f0fdf4;
+}
+
+.sw-combo-row {
+    background: #fefce8;
+}
+
+.sw-combo-row:hover {
+    background: #fef9c3 !important;
+}
+
+/* ============================================
+   CTA Section
+   ============================================ */
+
+.sw-cta-card {
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    border-radius: 24px;
+    padding: 3rem;
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(45, 106, 79, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.sw-cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.sw-cta-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.sw-cta-desc {
+    opacity: 0.85;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.sw-cta-btn {
+    background: #fff;
+    color: #2D6A4F;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sw-cta-btn:hover {
+    background: #f0fdf4;
+    color: #1e4d3a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,255,255,0.3);
+}
+
+.sw-cta-btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 12px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sw-cta-btn-outline:hover {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   Hotel Services Section
+   ============================================ */
+
+.hotel-services-section {
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Desktop: grid layout for hotel services swiper */
+@media (min-width: 768px) {
+    .swiper-hotel-services {
+        overflow: visible;
+    }
+    .swiper-hotel-services .swiper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        transform: none !important;
+    }
+    .swiper-hotel-services .swiper-slide {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .swiper-hotel-services .swiper-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile swiper pagination */
+.swiper-pagination-hs {
+    position: relative;
+    margin-top: 20px;
+}
+
+.hs-card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(45, 106, 79, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.hs-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(45,106,79,0.15);
+    border-color: rgba(45, 106, 79, 0.25);
+}
+
+.hs-icon-wrap {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    transition: all 0.3s ease;
+}
+
+.hs-card:hover .hs-icon-wrap {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.hs-icon-wrap i {
+    font-size: 28px;
+    color: white;
+}
+
+.hs-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.hs-zalo-btn {
+    background: #0068FF;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hs-zalo-btn:hover {
+    background: #0052cc;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,104,255,0.3);
+}
+
+.hs-book-btn {
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hs-book-btn:hover {
+    background: linear-gradient(135deg, #1B4332, #2D6A4F);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45,106,79,0.3);
+}
+
+/* ============================================
+   Commitment Section
+   ============================================ */
+
+.commitment-section {
+    background: #f8f9fa;
+}
+
+.sw-commitment-card {
+    background: linear-gradient(135deg, #f0faf4, #e8f5e9);
+    border-radius: 24px;
+    border: 1px solid #b7dfc8;
+    transition: all 0.3s ease;
+}
+
+.sw-commitment-card:hover {
+    box-shadow: 0 8px 30px rgba(45, 106, 79, 0.12);
+}
+
+/* ============================================
+   Book Actions & Zalo Button
+   ============================================ */
+
+.sw-book-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.sw-book-actions .sw-book-btn {
+    flex: 1;
+}
+
+.sw-zalo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0068FF 0%, #0052CC 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 104, 255, 0.3);
+    white-space: nowrap;
+}
+
+.sw-zalo-btn:hover {
+    background: linear-gradient(135deg, #0052CC 0%, #0068FF 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 104, 255, 0.4);
+}
+
+.sw-combo-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.sw-combo-actions .sw-combo-btn {
+    flex: 1;
+}
+
+.sw-combo-zalo-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0068FF 0%, #0052CC 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1.25rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 104, 255, 0.3);
+    white-space: nowrap;
+}
+
+.sw-combo-zalo-btn:hover {
+    background: linear-gradient(135deg, #0052CC 0%, #0068FF 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 104, 255, 0.4);
+}
+
+/* ============================================
+   Booking Modal
+   ============================================ */
+
+.sw-modal-content {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.sw-modal-header {
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    border: none;
+}
+
+.sw-modal-header .modal-title {
+    font-size: 1.2rem;
+}
+
+.sw-modal-footer {
+    border-top: 1px solid #f1f5f9;
+    padding: 1rem 2rem;
+    background: #fafafa;
+}
+
+.sw-modal-content .form-control,
+.sw-modal-content .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.sw-modal-content .form-control:focus,
+.sw-modal-content .form-select:focus {
+    border-color: #2D6A4F;
+    box-shadow: 0 0 0 0.2rem rgba(45, 106, 79, 0.15);
+}
+
+.sw-modal-content .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    color: #374151;
+}
+
+.sw-submit-btn {
+    background: linear-gradient(135deg, #2D6A4F 0%, #1e4d3a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+}
+
+.sw-submit-btn:hover {
+    background: linear-gradient(135deg, #1e4d3a 0%, #2D6A4F 100%);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+}
+
+/* Contact info inside form */
+.sw-form-contact-info {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1px solid rgba(45, 106, 79, 0.15);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+
+.sw-form-contact-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #2D6A4F;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sw-form-contact-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #1e4d3a;
+}
+
+.sw-form-contact-link.sw-form-zalo {
+    background: #0068FF;
+    color: #fff;
+    border-color: #0068FF;
+}
+
+.sw-form-contact-link.sw-form-zalo:hover {
+    background: #0052CC;
+    color: #fff;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 991px) {
+    .sw-detail-img-wrapper {
+        min-height: 260px;
+    }
+
+    .sw-detail-content {
+        padding: 1.75rem;
+    }
+
+    .sw-detail-name {
+        font-size: 1.3rem;
+    }
+
+    .sw-highlights-list {
+        grid-template-columns: 1fr;
+    }
+
+    .sw-cta-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .svc-hero {
+        min-height: 260px;
+    }
+
+    .sw-detail-img-wrapper {
+        min-height: 220px;
+        height: 220px;
+    }
+
+    .sw-detail-content {
+        padding: 1.5rem;
+    }
+
+    .sw-detail-name {
+        font-size: 1.2rem;
+    }
+
+    .sw-detail-prices {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .sw-combo-price-row {
+        flex-direction: column;
+    }
+
+    .sw-combo-price-amount {
+        font-size: 1.3rem;
+    }
+
+    .sw-cta-card {
+        text-align: center;
+        padding: 1.75rem;
+    }
+
+    .sw-cta-card .text-lg-end {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .sw-detail-card .row {
+        flex-direction: column !important;
+    }
+
+    .sw-detail-img-wrapper {
+        height: 200px;
+        min-height: 200px;
+    }
+
+    .sw-detail-content {
+        padding: 1.25rem;
+    }
+
+    .sw-price-table thead th,
+    .sw-price-table tbody td {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .sw-combo-header {
+        padding: 1.5rem;
+    }
+
+    .sw-combo-body {
+        padding: 1.5rem;
+    }
+
+    .sw-vip-ribbon {
+        font-size: 0.6rem;
+        padding: 4px 35px;
+        top: 12px;
+        right: -35px;
+    }
+}
