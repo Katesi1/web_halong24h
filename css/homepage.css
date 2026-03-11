@@ -935,6 +935,17 @@
     background: linear-gradient(90deg, transparent, #C8A951, transparent) !important;
 }
 
+/* Cruise Card Link */
+.cruise-card-link,
+.cruise-card-link:hover,
+.cruise-card-link:focus,
+.cruise-card-link:active,
+.cruise-card-link:visited {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
 /* Cruise Card */
 .cruise-card {
     background: rgba(255, 255, 255, 0.04);
@@ -1037,8 +1048,8 @@
 .cruise-price-badge .cruise-price-value {
     font-size: 1.2rem;
     font-weight: 800;
-    color: #C8A951;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    color: #FFD700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 12px rgba(255,215,0,0.3);
     line-height: 1.1;
 }
 
@@ -1046,6 +1057,21 @@
     font-size: 0.6rem;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
+}
+
+.cruise-price-badge small {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.cruise-price-badge strong {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 0 12px rgba(255,215,0,0.3);
+    line-height: 1.1;
+    display: block;
 }
 
 /* Cruise Content */

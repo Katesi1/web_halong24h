@@ -13,6 +13,9 @@
           <a class="nav-link me-2" href="rooms.php"><?php _e('nav_rooms') ?></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link me-2" href="cruises.php"><?php _e('nav_cruises') ?></a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link me-2" href="services.php"><?php _e('nav_services') ?></a>
         </li>
         <li class="nav-item">

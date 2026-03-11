@@ -178,6 +178,25 @@ return [
     'cruise_2d1n'         => '2 ngày 1 đêm',
     'cruise_rating'       => 'đánh giá',
 
+    // Cruise pages
+    'cruises_meta_desc'       => 'Khám phá các du thuyền sang trọng tại vịnh Hạ Long, Bái Tử Long, Lan Hạ. Đặt tour du thuyền 2 ngày 1 đêm với giá tốt nhất.',
+    'cruises_page_title'      => 'Du Thuyền Vịnh Hạ Long',
+    'cruises_page_subtitle'   => 'Lựa chọn du thuyền phù hợp cho hành trình khám phá kỳ quan thiên nhiên thế giới',
+    'cruise_stat_ships'       => 'Du thuyền',
+    'cruise_stat_stars'       => 'Hạng sao',
+    'cruise_stat_price'       => 'VNĐ/người',
+    'cruise_stat_reviews'     => 'Đánh giá',
+    'cruise_cabins'           => 'cabin',
+    'cruise_launched'         => 'Ra mắt',
+    'cruise_route'            => 'Tuyến',
+    'cruise_tab_overview'     => 'Tổng quan',
+    'cruise_tab_itinerary'    => 'Lịch trình',
+    'cruise_tab_cabins'       => 'Hạng phòng & Giá',
+    'cruise_tab_amenities'    => 'Tiện ích trên tàu',
+    'cruise_cta_title'        => 'Đặt tour du thuyền ngay hôm nay',
+    'cruise_cta_desc'         => 'Liên hệ với chúng tôi để nhận báo giá tốt nhất và tư vấn lịch trình phù hợp.',
+    'nav_cruises'             => 'Du thuyền',
+
     // ============================================================
     // HOMEPAGE - TESTIMONIALS SECTION
     // ============================================================

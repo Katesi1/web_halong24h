@@ -178,6 +178,25 @@ return [
     'cruise_2d1n'         => '2 days 1 night',
     'cruise_rating'       => 'reviews',
 
+    // Cruise pages
+    'cruises_meta_desc'       => 'Discover luxury cruises in Ha Long Bay, Bai Tu Long, Lan Ha. Book 2-day-1-night cruise tours at the best prices.',
+    'cruises_page_title'      => 'Ha Long Bay Cruises',
+    'cruises_page_subtitle'   => 'Choose the perfect cruise for your journey to discover a world natural wonder',
+    'cruise_stat_ships'       => 'Cruises',
+    'cruise_stat_stars'       => 'Star class',
+    'cruise_stat_price'       => 'VND/person',
+    'cruise_stat_reviews'     => 'Reviews',
+    'cruise_cabins'           => 'cabins',
+    'cruise_launched'         => 'Launched',
+    'cruise_route'            => 'Route',
+    'cruise_tab_overview'     => 'Overview',
+    'cruise_tab_itinerary'    => 'Itinerary',
+    'cruise_tab_cabins'       => 'Cabins & Rates',
+    'cruise_tab_amenities'    => 'Onboard Amenities',
+    'cruise_cta_title'        => 'Book your cruise today',
+    'cruise_cta_desc'         => 'Contact us for the best rates and personalized itinerary recommendations.',
+    'nav_cruises'             => 'Cruises',
+
     // ============================================================
     // HOMEPAGE - TESTIMONIALS SECTION
     // ============================================================
