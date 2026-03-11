@@ -127,7 +127,8 @@
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
-      <div class="row g-4">
+      <div class="swiper swiper-rooms">
+        <div class="swiper-wrapper">
         <?php
 
         $room_res = select(
@@ -296,7 +297,7 @@
 
           // print room card
           echo <<<data
-            <article class="col-lg-4 col-md-6 room-card-wrapper" itemscope itemtype="https://schema.org/HotelRoom">
+            <article class="swiper-slide room-card-wrapper" itemscope itemtype="https://schema.org/HotelRoom">
               <div class="room-card h-100">
                 <div class="room-image-wrapper">
                   <img src="$room_thumb"
@@ -367,14 +368,16 @@
         }
 
         ?>
-
-        <div class="col-12 text-center mt-5">
-          <a href="rooms.php"
-            class="btn btn-outline-primary btn-lg rooms-view-more-btn"
-            aria-label="<?php echo __('view_details') . ' ' . __('rooms_title') ?>"
-            <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
-          </a>
         </div>
+        <div class="swiper-pagination rooms-pagination"></div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="rooms.php"
+          class="btn btn-outline-primary btn-lg rooms-view-more-btn"
+          aria-label="<?php echo __('view_details') . ' ' . __('rooms_title') ?>">
+          <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
+        </a>
       </div>
     </div>
   </section>
@@ -388,7 +391,8 @@
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
-      <div class="row g-4">
+      <div class="swiper swiper-cruises">
+        <div class="swiper-wrapper">
         <?php
         require_once('inc/cruises_data.php');
         $is_vi = current_lang() === 'vi';
@@ -440,7 +444,7 @@
 
           $img = $cruise['image'];
           echo <<<CARD
-            <article class="col-lg-4 col-md-6">
+            <article class="swiper-slide">
               <a href="{$detail_url}" class="cruise-card-link">
                 <div class="cruise-card h-100">
                   <div class="cruise-image-wrapper">
@@ -491,6 +495,8 @@
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         echo '</script>';
         ?>
+        </div>
+        <div class="swiper-pagination cruises-pagination"></div>
       </div>
     </div>
   </section>
@@ -843,6 +849,49 @@
       }
     });
 
+    // Rooms swiper (mobile only)
+    var roomsSwiper = null;
+    var cruisesSwiper = null;
+
+    function initMobileSwipers() {
+      if (window.innerWidth < 768) {
+        if (!roomsSwiper) {
+          roomsSwiper = new Swiper(".swiper-rooms", {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".rooms-pagination",
+              clickable: true,
+            },
+          });
+        }
+        if (!cruisesSwiper) {
+          cruisesSwiper = new Swiper(".swiper-cruises", {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".cruises-pagination",
+              clickable: true,
+            },
+          });
+        }
+      } else {
+        if (roomsSwiper) {
+          roomsSwiper.destroy(true, true);
+          roomsSwiper = null;
+        }
+        if (cruisesSwiper) {
+          cruisesSwiper.destroy(true, true);
+          cruisesSwiper = null;
+        }
+      }
+    }
+
+    initMobileSwipers();
+    window.addEventListener('resize', initMobileSwipers);
+
     var swiper = new Swiper(".swiper-testimonials", {
       effect: "coverflow",
       grabCursor: true,
@@ -858,7 +907,7 @@
         slideShadows: false,
       },
       pagination: {
-        el: ".swiper-pagination",
+        el: ".testimonials-pagination",
       },
       breakpoints: {
         320: {

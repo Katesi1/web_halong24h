@@ -788,6 +788,90 @@
 }
 
 /* ============================================
+   Rooms & Cruises Swiper (mobile only)
+   ============================================ */
+
+/* Desktop: disable swiper, show as grid */
+@media screen and (min-width: 768px) {
+    .swiper-rooms .swiper-wrapper,
+    .swiper-cruises .swiper-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 0;
+        align-items: stretch;
+    }
+
+    .swiper-rooms .swiper-slide,
+    .swiper-cruises .swiper-slide {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+        margin: 0 0.5rem;
+        height: auto;
+    }
+
+    .swiper-rooms .swiper-slide .room-card,
+    .swiper-cruises .swiper-slide .cruise-card {
+        height: 100%;
+    }
+
+    .rooms-pagination,
+    .cruises-pagination {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .swiper-rooms .swiper-slide,
+    .swiper-cruises .swiper-slide {
+        flex: 0 0 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+}
+
+/* Mobile: swiper active */
+@media screen and (max-width: 767px) {
+    .swiper-rooms,
+    .swiper-cruises {
+        overflow: hidden;
+        padding-bottom: 2.5rem;
+    }
+
+    .swiper-rooms .swiper-wrapper,
+    .swiper-cruises .swiper-wrapper {
+        align-items: stretch;
+    }
+
+    .swiper-rooms .swiper-slide,
+    .swiper-cruises .swiper-slide {
+        height: auto;
+    }
+
+    .swiper-rooms .swiper-slide .room-card,
+    .swiper-cruises .swiper-slide .cruise-card {
+        height: 100%;
+    }
+
+    .rooms-pagination,
+    .cruises-pagination {
+        margin-top: 1rem;
+    }
+
+    .rooms-pagination .swiper-pagination-bullet,
+    .cruises-pagination .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: #2D6A4F;
+        opacity: 0.3;
+    }
+
+    .rooms-pagination .swiper-pagination-bullet-active,
+    .cruises-pagination .swiper-pagination-bullet-active {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* ============================================
    Facilities Section Styles
    ============================================ */
 
