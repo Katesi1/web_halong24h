@@ -48,6 +48,7 @@
 
       // run query to check room is available or not
 
+      // 1. Check booking_order for existing bookings
       $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order`
         WHERE booking_status=? AND room_id=?
         AND check_out > ? AND check_in < ?";
@@ -56,6 +57,21 @@
       $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'siss'));
 
       if($tb_fetch['total_bookings'] > 0){
+        $status = 'unavailable';
+        $result = json_encode(['status'=>$status]);
+        echo $result;
+        exit;
+      }
+
+      // 2. Check room_calendar for admin-blocked dates (booked/pending)
+      $cal_query = "SELECT COUNT(*) AS `blocked_days` FROM `room_calendar`
+        WHERE room_id=? AND `date` >= ? AND `date` < ?
+        AND `status` IN ('booked','pending')";
+
+      $cal_values = [$_SESSION['room']['id'], $frm_data['check_in'], $frm_data['check_out']];
+      $cal_fetch = mysqli_fetch_assoc(select($cal_query, $cal_values, 'iss'));
+
+      if($cal_fetch['blocked_days'] > 0){
         $status = 'unavailable';
         $result = json_encode(['status'=>$status]);
         echo $result;
