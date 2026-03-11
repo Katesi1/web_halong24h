@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require('inc/links.php'); ?>
   <?php require('inc/cruises_data.php'); ?>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/cruises.css">
   <title><?php echo $settings_r['site_title'] ?> - <?php _e('cruises_title') ?></title>
   <meta name="description" content="<?php _e('cruises_meta_desc') ?>">
@@ -66,7 +67,8 @@
       </div>
 
       <!-- Cruise Cards -->
-      <div class="row g-4">
+      <div class="swiper swiper-cruise-listing">
+        <div class="swiper-wrapper">
         <?php
         $is_vi = current_lang() === 'vi';
         $cruises_json_ld = [];
@@ -138,7 +140,7 @@
           ];
 
           echo <<<CARD
-            <article class="col-lg-6">
+            <article class="swiper-slide">
               <div class="cl-card">
                 <div class="cl-card-image">
                   <img src="{$cruise['image']}" alt="{$cruise['name']} - Du thuyền Hạ Long" loading="lazy">
@@ -199,11 +201,45 @@
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         echo '</script>';
         ?>
+        </div>
+        <div class="swiper-pagination cruise-listing-pagination"></div>
       </div>
     </div>
   </section>
 
   <?php require('inc/footer.php'); ?>
+
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+  <script>
+    var cruiseListSwiper = null;
+    function initCruiseListSwiper() {
+      if (window.innerWidth < 768) {
+        if (!cruiseListSwiper) {
+          cruiseListSwiper = new Swiper(".swiper-cruise-listing", {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".cruise-listing-pagination",
+              clickable: true,
+              dynamicBullets: true
+            },
+            breakpoints: {
+              480: { slidesPerView: 1.25, spaceBetween: 16 },
+              576: { slidesPerView: 1.4, spaceBetween: 16 }
+            }
+          });
+        }
+      } else {
+        if (cruiseListSwiper) {
+          cruiseListSwiper.destroy(true, true);
+          cruiseListSwiper = null;
+        }
+      }
+    }
+    initCruiseListSwiper();
+    window.addEventListener('resize', initCruiseListSwiper);
+  </script>
 
 </body>
 

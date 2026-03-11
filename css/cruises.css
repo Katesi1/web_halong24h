@@ -296,10 +296,76 @@
     box-shadow: 0 6px 20px rgba(45, 106, 79, 0.25);
 }
 
-/* Responsive listing */
-@media (max-width: 767px) {
+/* Desktop: disable swiper, show as grid */
+@media (min-width: 768px) {
+    .swiper-cruise-listing {
+        overflow: visible;
+    }
+
+    .swiper-cruise-listing .swiper-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        transform: none !important;
+    }
+
+    .swiper-cruise-listing .swiper-slide {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+        width: auto !important;
+        margin-right: 0 !important;
+        height: auto;
+    }
+
+    .cruise-listing-pagination {
+        display: none;
+    }
+}
+
+/* Tablet: card chuyển dọc, ảnh trên nội dung dưới */
+@media (min-width: 768px) and (max-width: 991px) {
     .cl-card {
         flex-direction: column;
+    }
+
+    .cl-card-image {
+        width: 100%;
+        min-height: 220px;
+        height: 220px;
+    }
+
+    .cl-card-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .cl-card-body {
+        padding: 1.25rem;
+    }
+
+    .cl-card-title {
+        font-size: 1.15rem;
+    }
+}
+
+/* Responsive listing */
+@media (max-width: 767px) {
+    .swiper-cruise-listing {
+        overflow: hidden;
+        padding-bottom: 2.5rem;
+    }
+
+    .swiper-cruise-listing .swiper-wrapper {
+        align-items: stretch;
+    }
+
+    .swiper-cruise-listing .swiper-slide {
+        height: auto;
+    }
+
+    .cl-card {
+        flex-direction: column;
+        height: 100%;
     }
 
     .cl-card-image {
@@ -315,6 +381,23 @@
 
     .cruise-hero-title {
         font-size: 1.75rem;
+    }
+
+    .cruise-listing-pagination {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+    .cruise-listing-pagination .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: #2D6A4F;
+        opacity: 0.3;
+    }
+
+    .cruise-listing-pagination .swiper-pagination-bullet-active {
+        opacity: 1;
+        transform: scale(1.2);
     }
 }
 
