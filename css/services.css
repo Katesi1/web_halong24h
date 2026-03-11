@@ -2,6 +2,47 @@
    Services Page Styles
    ============================================ */
 
+/* Desktop: disable swiper for SW tickets */
+@media (min-width: 768px) {
+    .swiper-sw-tickets {
+        overflow: visible;
+    }
+    .swiper-sw-tickets .swiper-wrapper {
+        display: block;
+        transform: none !important;
+    }
+    .swiper-sw-tickets .swiper-slide {
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Desktop: grid for combo cards */
+@media (min-width: 768px) {
+    .swiper-sw-combos {
+        overflow: visible;
+    }
+    .swiper-sw-combos .swiper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        justify-content: center;
+        transform: none !important;
+    }
+    .swiper-sw-combos .swiper-slide {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* Mobile swiper pagination for SW sections */
+.swiper-pagination-sw,
+.swiper-pagination-combo {
+    position: relative;
+    margin-top: 20px;
+}
+
 /* Hero Section */
 .svc-hero {
     background: linear-gradient(135deg, #1a3c34 0%, #2D6A4F 50%, #40916C 100%);

@@ -61,86 +61,94 @@
       $lang_free = __('svc_free_under_1m');
       $lang_book = __('svc_book_now');
       $lang_reviews = __('svc_reviews');
-
-      foreach ($services_data as $slug => $svc) {
-        if (!empty($svc['is_combo'])) continue; // combos shown separately
-        $name = $is_vi ? $svc['name_vi'] : $svc['name_en'];
-        $desc = $is_vi ? $svc['desc_vi'] : $svc['desc_en'];
-        $highlights = $is_vi ? $svc['highlights_vi'] : $svc['highlights_en'];
-        $category = $is_vi ? $svc['category_vi'] : $svc['category_en'];
-        $is_reversed = ($idx % 2 === 1);
-        $idx++;
-
-        // Rating stars
-        $stars = '';
-        $r = $svc['rating'];
-        for ($s = 0; $s < 5; $s++) {
-          if ($s < floor($r)) $stars .= '<i class="bi bi-star-fill text-warning"></i>';
-          elseif ($s < $r) $stars .= '<i class="bi bi-star-half text-warning"></i>';
-          else $stars .= '<i class="bi bi-star text-warning"></i>';
-        }
-
-        $reverse_class = $is_reversed ? 'flex-row-reverse' : '';
-        $highlights_html = '';
-        foreach ($highlights as $hl) {
-          $highlights_html .= "<li><i class='bi bi-check-circle-fill text-success me-2'></i>{$hl}</li>";
-        }
-
-        echo <<<DETAIL
-          <div class="sw-detail-card mb-5" id="{$slug}" itemscope itemtype="https://schema.org/TouristAttraction">
-            <div class="row g-0 {$reverse_class}">
-              <div class="col-lg-6">
-                <div class="sw-detail-img-wrapper">
-                  <img src="{$svc['image']}"
-                       alt="{$name} - Sun World Hạ Long"
-                       class="sw-detail-img"
-                       loading="lazy"
-                       itemprop="image">
-                  <div class="sw-detail-category">
-                    <i class="{$svc['icon']} me-1"></i>{$category}
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="sw-detail-content">
-                  <h3 class="sw-detail-name h-font" itemprop="name">{$name}</h3>
-                  <div class="sw-detail-rating mb-3">
-                    {$stars}
-                    <span class="sw-rating-value">{$svc['rating']}</span>
-                    <span class="sw-rating-count">({$svc['reviews']} {$lang_reviews})</span>
-                  </div>
-                  <p class="sw-detail-desc" itemprop="description">{$desc}</p>
-                  <ul class="sw-highlights-list">
-                    {$highlights_html}
-                  </ul>
-                  <div class="sw-detail-prices">
-                    <div class="sw-price-box">
-                      <span class="sw-price-label"><i class="bi bi-person-fill me-1"></i>{$lang_adult}</span>
-                      <span class="sw-price-value">{$svc['price_adult']}đ</span>
-                    </div>
-                    <div class="sw-price-box sw-price-child">
-                      <span class="sw-price-label"><i class="bi bi-emoji-smile me-1"></i>{$lang_child}</span>
-                      <span class="sw-price-value">{$svc['price_child']}đ</span>
-                    </div>
-                  </div>
-                  <p class="sw-free-note">
-                    <i class="bi bi-info-circle me-1"></i>{$lang_free}
-                  </p>
-                  <div class="sw-book-actions">
-                    <button type="button" class="btn sw-book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-service="{$name}" data-price="{$svc['price_adult']}">
-                      <i class="bi bi-cart-check me-2"></i>{$lang_book}
-                    </button>
-                    <a href="https://zalo.me/0325992001" target="_blank" rel="noopener" class="btn sw-zalo-btn">
-                      <i class="bi bi-chat-dots-fill me-2"></i>Zalo
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        DETAIL;
-      }
       ?>
+
+      <div class="swiper swiper-sw-tickets">
+        <div class="swiper-wrapper">
+          <?php
+          foreach ($services_data as $slug => $svc) {
+            if (!empty($svc['is_combo'])) continue;
+            $name = $is_vi ? $svc['name_vi'] : $svc['name_en'];
+            $desc = $is_vi ? $svc['desc_vi'] : $svc['desc_en'];
+            $highlights = $is_vi ? $svc['highlights_vi'] : $svc['highlights_en'];
+            $category = $is_vi ? $svc['category_vi'] : $svc['category_en'];
+            $is_reversed = ($idx % 2 === 1);
+            $idx++;
+
+            $stars = '';
+            $r = $svc['rating'];
+            for ($s = 0; $s < 5; $s++) {
+              if ($s < floor($r)) $stars .= '<i class="bi bi-star-fill text-warning"></i>';
+              elseif ($s < $r) $stars .= '<i class="bi bi-star-half text-warning"></i>';
+              else $stars .= '<i class="bi bi-star text-warning"></i>';
+            }
+
+            $reverse_class = $is_reversed ? 'flex-row-reverse' : '';
+            $highlights_html = '';
+            foreach ($highlights as $hl) {
+              $highlights_html .= "<li><i class='bi bi-check-circle-fill text-success me-2'></i>{$hl}</li>";
+            }
+
+            echo <<<DETAIL
+              <div class="swiper-slide">
+                <div class="sw-detail-card" id="{$slug}" itemscope itemtype="https://schema.org/TouristAttraction">
+                  <div class="row g-0 {$reverse_class}">
+                    <div class="col-lg-6">
+                      <div class="sw-detail-img-wrapper">
+                        <img src="{$svc['image']}"
+                             alt="{$name} - Sun World Hạ Long"
+                             class="sw-detail-img"
+                             loading="lazy"
+                             itemprop="image">
+                        <div class="sw-detail-category">
+                          <i class="{$svc['icon']} me-1"></i>{$category}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="sw-detail-content">
+                        <h3 class="sw-detail-name h-font" itemprop="name">{$name}</h3>
+                        <div class="sw-detail-rating mb-3">
+                          {$stars}
+                          <span class="sw-rating-value">{$svc['rating']}</span>
+                          <span class="sw-rating-count">({$svc['reviews']} {$lang_reviews})</span>
+                        </div>
+                        <p class="sw-detail-desc" itemprop="description">{$desc}</p>
+                        <ul class="sw-highlights-list">
+                          {$highlights_html}
+                        </ul>
+                        <div class="sw-detail-prices">
+                          <div class="sw-price-box">
+                            <span class="sw-price-label"><i class="bi bi-person-fill me-1"></i>{$lang_adult}</span>
+                            <span class="sw-price-value">{$svc['price_adult']}đ</span>
+                          </div>
+                          <div class="sw-price-box sw-price-child">
+                            <span class="sw-price-label"><i class="bi bi-emoji-smile me-1"></i>{$lang_child}</span>
+                            <span class="sw-price-value">{$svc['price_child']}đ</span>
+                          </div>
+                        </div>
+                        <p class="sw-free-note">
+                          <i class="bi bi-info-circle me-1"></i>{$lang_free}
+                        </p>
+                        <div class="sw-book-actions">
+                          <button type="button" class="btn sw-book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-service="{$name}" data-price="{$svc['price_adult']}">
+                            <i class="bi bi-cart-check me-2"></i>{$lang_book}
+                          </button>
+                          <a href="https://zalo.me/0325992001" target="_blank" rel="noopener" class="btn sw-zalo-btn">
+                            <i class="bi bi-chat-dots-fill me-2"></i>Zalo
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            DETAIL;
+          }
+          ?>
+        </div>
+        <div class="swiper-pagination swiper-pagination-sw d-md-none"></div>
+      </div>
 
       <!-- Combo Packages -->
       <div class="sw-combo-section mt-5">
@@ -152,60 +160,63 @@
           <p class="text-muted"><?php _e('sw_combo_subtitle') ?></p>
         </div>
 
-        <div class="row g-4 justify-content-center">
-          <?php
-          foreach ($services_data as $slug => $svc) {
-            if (empty($svc['is_combo'])) continue;
-            $name = $is_vi ? $svc['name_vi'] : $svc['name_en'];
-            $desc = $is_vi ? $svc['desc_vi'] : $svc['desc_en'];
-            $highlights = $is_vi ? $svc['highlights_vi'] : $svc['highlights_en'];
+        <div class="swiper swiper-sw-combos">
+          <div class="swiper-wrapper">
+            <?php
+            foreach ($services_data as $slug => $svc) {
+              if (empty($svc['is_combo'])) continue;
+              $name = $is_vi ? $svc['name_vi'] : $svc['name_en'];
+              $desc = $is_vi ? $svc['desc_vi'] : $svc['desc_en'];
+              $highlights = $is_vi ? $svc['highlights_vi'] : $svc['highlights_en'];
 
-            $highlights_html = '';
-            foreach ($highlights as $hl) {
-              $highlights_html .= "<li><i class='bi bi-check2-circle text-success me-2'></i>{$hl}</li>";
-            }
+              $highlights_html = '';
+              foreach ($highlights as $hl) {
+                $highlights_html .= "<li><i class='bi bi-check2-circle text-success me-2'></i>{$hl}</li>";
+              }
 
-            $is_vip = ($slug === 'combo-3-parks');
-            $card_class = $is_vip ? 'sw-combo-card sw-combo-vip' : 'sw-combo-card';
-            $badge_html = $is_vip ? "<div class='sw-vip-ribbon'>" . __('sw_most_popular') . "</div>" : '';
+              $is_vip = ($slug === 'combo-3-parks');
+              $card_class = $is_vip ? 'sw-combo-card sw-combo-vip' : 'sw-combo-card';
+              $badge_html = $is_vip ? "<div class='sw-vip-ribbon'>" . __('sw_most_popular') . "</div>" : '';
 
-            echo <<<COMBO
-              <div class="col-lg-5 col-md-6" id="{$slug}">
-                <div class="{$card_class}">
-                  {$badge_html}
-                  <div class="sw-combo-header">
-                    <i class="{$svc['icon']} sw-combo-icon"></i>
-                    <h4 class="sw-combo-name">{$name}</h4>
-                    <p class="sw-combo-desc">{$desc}</p>
-                  </div>
-                  <div class="sw-combo-body">
-                    <div class="sw-combo-price-row">
-                      <div class="sw-combo-price">
-                        <span class="sw-combo-price-label">{$lang_adult}</span>
-                        <span class="sw-combo-price-amount">{$svc['price_adult']}đ</span>
-                      </div>
-                      <div class="sw-combo-price">
-                        <span class="sw-combo-price-label">{$lang_child}</span>
-                        <span class="sw-combo-price-amount">{$svc['price_child']}đ</span>
-                      </div>
+              echo <<<COMBO
+                <div class="swiper-slide" id="{$slug}">
+                  <div class="{$card_class}">
+                    {$badge_html}
+                    <div class="sw-combo-header">
+                      <i class="{$svc['icon']} sw-combo-icon"></i>
+                      <h4 class="sw-combo-name">{$name}</h4>
+                      <p class="sw-combo-desc">{$desc}</p>
                     </div>
-                    <ul class="sw-combo-features">
-                      {$highlights_html}
-                    </ul>
-                    <div class="sw-combo-actions">
-                      <button type="button" class="btn sw-combo-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-service="{$name}" data-price="{$svc['price_adult']}">
-                        <i class="bi bi-cart-check me-2"></i>{$lang_book}
-                      </button>
-                      <a href="https://zalo.me/0325992001" target="_blank" rel="noopener" class="btn sw-combo-zalo-btn">
-                        <i class="bi bi-chat-dots-fill me-2"></i>Zalo
-                      </a>
+                    <div class="sw-combo-body">
+                      <div class="sw-combo-price-row">
+                        <div class="sw-combo-price">
+                          <span class="sw-combo-price-label">{$lang_adult}</span>
+                          <span class="sw-combo-price-amount">{$svc['price_adult']}đ</span>
+                        </div>
+                        <div class="sw-combo-price">
+                          <span class="sw-combo-price-label">{$lang_child}</span>
+                          <span class="sw-combo-price-amount">{$svc['price_child']}đ</span>
+                        </div>
+                      </div>
+                      <ul class="sw-combo-features">
+                        {$highlights_html}
+                      </ul>
+                      <div class="sw-combo-actions">
+                        <button type="button" class="btn sw-combo-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-service="{$name}" data-price="{$svc['price_adult']}">
+                          <i class="bi bi-cart-check me-2"></i>{$lang_book}
+                        </button>
+                        <a href="https://zalo.me/0325992001" target="_blank" rel="noopener" class="btn sw-combo-zalo-btn">
+                          <i class="bi bi-chat-dots-fill me-2"></i>Zalo
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            COMBO;
-          }
-          ?>
+              COMBO;
+            }
+            ?>
+          </div>
+          <div class="swiper-pagination swiper-pagination-combo d-md-none"></div>
         </div>
       </div>
 
@@ -725,6 +736,52 @@
       alert('<?php _e('sw_form_success') ?>');
       form.reset();
     });
+
+    // SW Tickets swiper (mobile only)
+    var swTicketsSwiper = null;
+    function initSwTicketsSwiper() {
+      if (window.innerWidth < 768) {
+        if (!swTicketsSwiper) {
+          swTicketsSwiper = new Swiper(".swiper-sw-tickets", {
+            slidesPerView: 1.05,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".swiper-pagination-sw",
+              clickable: true,
+              dynamicBullets: true
+            }
+          });
+        }
+      } else {
+        if (swTicketsSwiper) { swTicketsSwiper.destroy(true, true); swTicketsSwiper = null; }
+      }
+    }
+    initSwTicketsSwiper();
+    window.addEventListener('resize', initSwTicketsSwiper);
+
+    // SW Combos swiper (mobile only)
+    var swCombosSwiper = null;
+    function initSwCombosSwiper() {
+      if (window.innerWidth < 768) {
+        if (!swCombosSwiper) {
+          swCombosSwiper = new Swiper(".swiper-sw-combos", {
+            slidesPerView: 1.1,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".swiper-pagination-combo",
+              clickable: true,
+              dynamicBullets: true
+            }
+          });
+        }
+      } else {
+        if (swCombosSwiper) { swCombosSwiper.destroy(true, true); swCombosSwiper = null; }
+      }
+    }
+    initSwCombosSwiper();
+    window.addEventListener('resize', initSwCombosSwiper);
 
     // Hotel Services swiper (mobile only)
     var hsSwiper = null;
