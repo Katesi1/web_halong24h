@@ -198,8 +198,21 @@ return [
     'nav_cruises'             => 'Cruises',
 
     // ============================================================
-    // HOMEPAGE - TESTIMONIALS SECTION
+    // HOMEPAGE - SERVICES / TICKETS SECTION
     // ============================================================
+    'hp_services_title'      => 'Tickets & Services',
+    'hp_services_subtitle'   => 'Book Sun World Ha Long tickets - Queen Cable Car, Dragon Park, Typhoon Water Park at the best prices',
+    'svc_from_price'         => 'From',
+    'svc_adult'              => 'Adult',
+    'svc_child'              => 'Child',
+    'svc_view_detail'        => 'View Details',
+    'svc_book_now'           => 'Book Now',
+    'svc_free_under_1m'      => 'Free for children under 1m height',
+    'svc_best_value'         => 'Best Value',
+    'svc_reviews'            => 'reviews',
+    'svc_view_all_services'  => 'View All Services',
+
+    // Keep old review keys for other pages
     'reviews_title'       => 'Guest Reviews',
     'reviews_subtitle'    => 'Authentic feedback from guests who experienced our services',
     'no_reviews'          => 'No reviews yet. Be the first to review!',

@@ -501,138 +501,152 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials-section py-5" aria-label="<?php _e('reviews_title') ?>">
+  <!-- Dịch vụ vé tham quan Sun World Hạ Long -->
+  <section class="services-section py-5" id="services-tickets" aria-label="<?php _e('hp_services_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('reviews_title') ?></h2>
-        <p class="text-muted mb-0"><?php _e('reviews_subtitle') ?></p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('hp_services_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('hp_services_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
-      <div class="testimonials-container">
-        <div class="swiper swiper-testimonials">
-          <div class="swiper-wrapper">
-            <?php
+      <div class="swiper swiper-services">
+        <div class="swiper-wrapper">
+        <?php
+        require_once('inc/services_data.php');
+        $is_vi = current_lang() === 'vi';
+        $services_json_ld = [];
+        $from_text = __('svc_from_price');
+        $adult_text = __('svc_adult');
+        $child_text = __('svc_child');
+        $detail_text = __('svc_view_detail');
+        $book_text = __('svc_book_now');
+        $free_under_1m = __('svc_free_under_1m');
 
-            $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
-                INNER JOIN `user_cred` uc ON rr.user_id = uc.id
-                INNER JOIN `rooms` r ON rr.room_id = r.id
-                ORDER BY `sr_no` DESC LIMIT 6";
+        foreach ($services_data as $slug => $svc) {
+          $name = $is_vi ? $svc['name_vi'] : $svc['name_en'];
+          $desc = $is_vi ? $svc['desc_vi'] : $svc['desc_en'];
+          $highlights = $is_vi ? $svc['highlights_vi'] : $svc['highlights_en'];
+          $category = $is_vi ? $svc['category_vi'] : $svc['category_en'];
 
-            $review_res = mysqli_query($con, $review_q);
-            $img_path = USERS_IMG_PATH;
-            $reviews_data_json = [];
+          // Rating stars
+          $rating_stars = '';
+          $r = $svc['rating'];
+          for ($s = 0; $s < 5; $s++) {
+            if ($s < floor($r)) $rating_stars .= '<i class="bi bi-star-fill text-warning"></i>';
+            elseif ($s < $r) $rating_stars .= '<i class="bi bi-star-half text-warning"></i>';
+            else $rating_stars .= '<i class="bi bi-star text-warning"></i>';
+          }
 
-            if (mysqli_num_rows($review_res) == 0) {
-              echo '<div class="col-12 text-center py-5">
-                <div class="no-reviews-message">
-                  <i class="bi bi-chat-quote fs-1 text-muted mb-3 d-block"></i>
-                  <p class="text-muted">' . __('no_reviews') . '</p>
+          // Highlights HTML
+          $highlights_html = '';
+          $show_hl = min(4, count($highlights));
+          for ($i = 0; $i < $show_hl; $i++) {
+            $highlights_html .= "<span class='svc-tag'><i class='bi bi-check2 me-1'></i>{$highlights[$i]}</span>";
+          }
+
+          // Combo badge
+          $combo_badge = '';
+          if (!empty($svc['is_combo'])) {
+            $combo_badge = "<span class='svc-combo-badge'><i class='bi bi-lightning-charge-fill me-1'></i>" . __('svc_best_value') . "</span>";
+          }
+
+          // JSON-LD
+          $services_json_ld[] = [
+            "@type" => "TouristAttraction",
+            "name" => $name,
+            "description" => $desc,
+            "image" => $svc['image'],
+            "offers" => [
+              "@type" => "Offer",
+              "price" => $svc['price_adult_raw'],
+              "priceCurrency" => "VND",
+              "availability" => "https://schema.org/InStock",
+              "description" => "Adult ticket"
+            ],
+            "aggregateRating" => [
+              "@type" => "AggregateRating",
+              "ratingValue" => $svc['rating'],
+              "reviewCount" => $svc['reviews'],
+              "bestRating" => 5
+            ],
+          ];
+
+          echo <<<CARD
+            <article class="swiper-slide" itemscope itemtype="https://schema.org/TouristAttraction">
+              <div class="svc-card h-100">
+                <div class="svc-image-wrapper">
+                  <img src="{$svc['image']}"
+                       alt="{$name} - Sun World Hạ Long"
+                       class="svc-image"
+                       loading="lazy"
+                       itemprop="image">
+                  <div class="svc-image-overlay">
+                    <span class="svc-category-badge">
+                      <i class="{$svc['icon']} me-1"></i>{$category}
+                    </span>
+                    {$combo_badge}
+                  </div>
+                  <div class="svc-price-badge">
+                    <small>{$from_text}</small>
+                    <strong>{$svc['price_adult']}</strong>
+                    <small>VNĐ/{$adult_text}</small>
+                  </div>
                 </div>
-              </div>';
-            } else {
-              while ($row = mysqli_fetch_assoc($review_res)) {
-                $stars_html = "";
-                $rating = (int)$row['rating'];
-
-                for ($i = 0; $i < 5; $i++) {
-                  if ($i < $rating) {
-                    $stars_html .= "<i class='bi bi-star-fill text-warning' aria-hidden='true'></i>";
-                  } else {
-                    $stars_html .= "<i class='bi bi-star text-warning' aria-hidden='true'></i>";
-                  }
-                }
-
-                // Prepare JSON-LD data for reviews
-                $reviews_data_json[] = [
-                  "@type" => "Review",
-                  "author" => [
-                    "@type" => "Person",
-                    "name" => $row['uname'],
-                    "image" => $img_path . $row['profile']
-                  ],
-                  "reviewRating" => [
-                    "@type" => "Rating",
-                    "ratingValue" => $rating,
-                    "bestRating" => 5
-                  ],
-                  "reviewBody" => $row['review'],
-                  "itemReviewed" => [
-                    "@type" => "HotelRoom",
-                    "name" => $row['rname']
-                  ]
-                ];
-
-                $review_date = isset($row['datentime']) && !empty($row['datentime']) ? date('d/m/Y', strtotime($row['datentime'])) : '';
-                $review_date_html = '';
-
-                if (!empty($review_date)) {
-                  $review_date_html = "<div class='testimonial-date text-muted small mt-2'>
-                    <i class='bi bi-calendar3 me-1'></i>$review_date
-                  </div>";
-                }
-
-                echo <<<slides
-                  <article class="swiper-slide testimonial-card" itemscope itemtype="https://schema.org/Review">
-                    <div class="testimonial-content">
-                      <div class="testimonial-header">
-                        <div class="testimonial-profile">
-                          <img src="$img_path$row[profile]" 
-                               alt="{$GLOBALS['_LANG']['image_of']} $row[uname]" 
-                               class="testimonial-avatar"
-                               loading="lazy"
-                               itemprop="author" itemscope itemtype="https://schema.org/Person">
-                          <meta itemprop="name" content="$row[uname]">
-                          <div class="testimonial-info">
-                            <h6 class="testimonial-name" itemprop="name">$row[uname]</h6>
-                            <p class="testimonial-room text-muted small mb-0">
-                              <i class="bi bi-door-open me-1"></i>$row[rname]
-                            </p>
-                          </div>
-                        </div>
-                        <div class="testimonial-rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-                          <meta itemprop="ratingValue" content="$rating">
-                          <meta itemprop="bestRating" content="5">
-                          <div class="rating-stars" aria-label="$rating {$GLOBALS['_LANG']['rating_of_5']}">
-                            $stars_html
-                          </div>
-                        </div>
-                      </div>
-                      <div class="testimonial-body">
-                        <p class="testimonial-text" itemprop="reviewBody">
-                          "$row[review]"
-                        </p>
-                        $review_date_html
-                      </div>
+                <div class="svc-content">
+                  <h3 class="svc-name" itemprop="name">{$name}</h3>
+                  <p class="svc-desc" itemprop="description">{$desc}</p>
+                  <div class="svc-pricing-row">
+                    <div class="svc-price-item">
+                      <i class="bi bi-person-fill"></i>
+                      <span>{$adult_text}: <strong>{$svc['price_adult']}đ</strong></span>
                     </div>
-                  </article>
-                slides;
-              }
+                    <div class="svc-price-item">
+                      <i class="bi bi-emoji-smile"></i>
+                      <span>{$child_text}: <strong>{$svc['price_child']}đ</strong></span>
+                    </div>
+                  </div>
+                  <div class="svc-rating-row">
+                    <div class="svc-rating-stars">{$rating_stars}</div>
+                    <span class="svc-rating-score">{$svc['rating']}</span>
+                    <span class="svc-rating-count">({$svc['reviews']} {$GLOBALS['_LANG']['svc_reviews']})</span>
+                  </div>
+                  <div class="svc-tags">{$highlights_html}</div>
+                  <div class="svc-free-note">
+                    <i class="bi bi-info-circle me-1"></i>{$free_under_1m}
+                  </div>
+                  <a href="services.php#{$slug}" class="btn svc-detail-btn">
+                    <i class="bi bi-arrow-right me-2"></i>{$detail_text}
+                  </a>
+                </div>
+              </div>
+            </article>
+          CARD;
+        }
 
-              // Output JSON-LD structured data for reviews
-              if (!empty($reviews_data_json)) {
-                echo '<script type="application/ld+json">';
-                echo json_encode([
-                  "@context" => "https://schema.org",
-                  "@type" => "ItemList",
-                  "name" => $GLOBALS['_LANG']['reviews_title'],
-                  "itemListElement" => array_map(function ($review, $index) {
-                    return [
-                      "@type" => "ListItem",
-                      "position" => $index + 1,
-                      "item" => $review
-                    ];
-                  }, $reviews_data_json, array_keys($reviews_data_json))
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                echo '</script>';
-              }
-            }
-
-            ?>
-          </div>
-          <div class="swiper-pagination testimonials-pagination"></div>
+        // JSON-LD
+        echo '<script type="application/ld+json">';
+        echo json_encode([
+          "@context" => "https://schema.org",
+          "@type" => "ItemList",
+          "name" => $GLOBALS['_LANG']['hp_services_title'],
+          "numberOfItems" => count($services_json_ld),
+          "itemListElement" => array_map(function ($item, $idx) {
+            return ["@type" => "ListItem", "position" => $idx + 1, "item" => $item];
+          }, $services_json_ld, array_keys($services_json_ld)),
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        echo '</script>';
+        ?>
         </div>
+        <div class="swiper-pagination services-pagination"></div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="services.php"
+           class="btn btn-outline-primary btn-lg svc-view-more-btn"
+           aria-label="<?php echo __('svc_view_all_services') ?>">
+          <i class="bi bi-grid me-2"></i><?php _e('svc_view_all_services') ?>
+        </a>
       </div>
     </div>
   </section>
@@ -892,38 +906,32 @@
     initMobileSwipers();
     window.addEventListener('resize', initMobileSwipers);
 
-    var swiper = new Swiper(".swiper-testimonials", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      slidesPerView: "3",
-      loop: true,
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: false,
-      },
-      pagination: {
-        el: ".testimonials-pagination",
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1,
-        },
-        640: {
-          slidesPerView: 1,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
+    // Services swiper (mobile only)
+    var servicesSwiper = null;
+
+    function initServicesSwiper() {
+      if (window.innerWidth < 768) {
+        if (!servicesSwiper) {
+          servicesSwiper = new Swiper(".swiper-services", {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: ".services-pagination",
+              clickable: true,
+            },
+          });
+        }
+      } else {
+        if (servicesSwiper) {
+          servicesSwiper.destroy(true, true);
+          servicesSwiper = null;
+        }
       }
-    });
+    }
+
+    initServicesSwiper();
+    window.addEventListener('resize', initServicesSwiper);
 
     // recover account
 

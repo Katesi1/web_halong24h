@@ -198,8 +198,21 @@ return [
     'nav_cruises'             => 'Du thuyền',
 
     // ============================================================
-    // HOMEPAGE - TESTIMONIALS SECTION
+    // HOMEPAGE - SERVICES / TICKETS SECTION
     // ============================================================
+    'hp_services_title'      => 'Vé Tham Quan & Dịch Vụ',
+    'hp_services_subtitle'   => 'Đặt vé Sun World Hạ Long - Cáp treo Nữ Hoàng, Dragon Park, Typhoon Water Park với giá ưu đãi nhất',
+    'svc_from_price'         => 'Từ',
+    'svc_adult'              => 'Người lớn',
+    'svc_child'              => 'Trẻ em',
+    'svc_view_detail'        => 'Xem chi tiết',
+    'svc_book_now'           => 'Đặt vé ngay',
+    'svc_free_under_1m'      => 'Miễn phí trẻ em dưới 1m chiều cao',
+    'svc_best_value'         => 'Tiết kiệm nhất',
+    'svc_reviews'            => 'đánh giá',
+    'svc_view_all_services'  => 'Xem tất cả dịch vụ',
+
+    // Keep old review keys for other pages
     'reviews_title'       => 'Đánh giá dịch vụ',
     'reviews_subtitle'    => 'Những chia sẻ chân thực từ khách hàng đã trải nghiệm dịch vụ của chúng tôi',
     'no_reviews'          => 'Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!',
