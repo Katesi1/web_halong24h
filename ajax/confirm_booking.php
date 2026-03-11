@@ -1,9 +1,13 @@
-<?php 
+<?php
 
+  // Suppress HTML error output for AJAX responses
+  ini_set('display_errors', 0);
+  error_reporting(E_ALL);
+  header('Content-Type: application/json');
+
+  session_start();
   require('../admin/inc/db_config.php');
   require('../admin/inc/essentials.php');
-
-  
 
   if(isset($_POST['check_availability']))
   {
@@ -13,7 +17,6 @@
 
     // check in and out validations
 
-    
     $today_date = new DateTime(date("Y-m-d"));
     $checkin_date = new DateTime($frm_data['check_in']);
     $checkout_date = new DateTime($frm_data['check_out']);
@@ -37,9 +40,13 @@
       echo $result;
     }
     else{
-      session_start();
+      // Validate session room data exists
+      if(!isset($_SESSION['room']['id']) || !isset($_SESSION['room']['price'])){
+        echo json_encode(['status'=>'error', 'msg'=>'Session expired']);
+        exit;
+      }
 
-      // run query to check room is available or not 
+      // run query to check room is available or not
 
       $tb_query = "SELECT COUNT(*) AS `total_bookings` FROM `booking_order`
         WHERE booking_status=? AND room_id=?
@@ -47,11 +54,8 @@
 
       $values = ['booked',$_SESSION['room']['id'],$frm_data['check_in'],$frm_data['check_out']];
       $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'siss'));
-      
-      $rq_result = select("SELECT `quantity` FROM `rooms` WHERE `id`=?",[$_SESSION['room']['id']],'i');
-      $rq_fetch = mysqli_fetch_assoc($rq_result);
 
-      if(($rq_fetch['quantity']-$tb_fetch['total_bookings'])==0){
+      if($tb_fetch['total_bookings'] > 0){
         $status = 'unavailable';
         $result = json_encode(['status'=>$status]);
         echo $result;
@@ -63,7 +67,7 @@
 
       $_SESSION['room']['payment'] = $payment;
       $_SESSION['room']['available'] = true;
-      
+
       $result = json_encode(["status"=>'available', "days"=>$count_days, "payment"=> $payment]);
       echo $result;
     }

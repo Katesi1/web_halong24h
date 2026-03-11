@@ -55,21 +55,15 @@
         ?>
 
         <style>
-          .img-zoom-container { position: relative; overflow: hidden; border-radius: 12px; }
-          .img-zoom-container img { cursor: crosshair; display: block; }
-          .img-zoom-result {
-            display: none;
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 12px;
-            background-repeat: no-repeat;
-            z-index: 100;
+          .img-gallery-main { position: relative; overflow: hidden; border-radius: 12px; cursor: pointer; }
+          .img-gallery-main img { display: block; transition: transform .3s; }
+          .img-gallery-main:hover img { transform: scale(1.02); }
+          .img-gallery-main .gallery-icon {
+            position: absolute; bottom: 12px; right: 12px;
+            background: rgba(0,0,0,.6); color: #fff;
+            padding: 6px 14px; border-radius: 8px;
+            font-size: 13px; display: flex; align-items: center; gap: 6px;
             pointer-events: none;
-          }
-          @media (max-width: 991px) {
-            .img-zoom-result { display: none !important; }
-            .img-zoom-container img { cursor: default; }
           }
 
           .thumb-carousel { position: relative; }
@@ -113,6 +107,69 @@
             font-size: 13px;
             color: #888;
             margin-top: 6px;
+          }
+
+          /* Lightbox */
+          .lightbox-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,.92); z-index: 9999;
+            align-items: center; justify-content: center; flex-direction: column;
+          }
+          .lightbox-overlay.active { display: flex; }
+          .lightbox-close {
+            position: absolute; top: 16px; right: 20px;
+            background: none; border: none; color: #fff; font-size: 32px;
+            cursor: pointer; z-index: 10001; opacity: .7; transition: opacity .2s;
+            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+          }
+          .lightbox-close:hover { opacity: 1; }
+          .lightbox-img-wrapper {
+            position: relative; max-width: 90vw; max-height: 80vh;
+            display: flex; align-items: center; justify-content: center;
+          }
+          .lightbox-img-wrapper img {
+            max-width: 90vw; max-height: 80vh; object-fit: contain;
+            border-radius: 8px; user-select: none;
+            animation: lbFadeIn .25s ease;
+          }
+          @keyframes lbFadeIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+          .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            border: none; background: rgba(255,255,255,.15); color: #fff;
+            font-size: 22px; cursor: pointer; z-index: 10001;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+            backdrop-filter: blur(4px);
+          }
+          .lightbox-nav:hover { background: rgba(255,255,255,.3); }
+          .lightbox-nav.lb-prev { left: max(12px, calc(50% - 45vw - 36px)); }
+          .lightbox-nav.lb-next { right: max(12px, calc(50% - 45vw - 36px)); }
+          .lightbox-counter {
+            color: rgba(255,255,255,.7); font-size: 14px; margin-top: 14px;
+            user-select: none;
+          }
+          .lightbox-thumbs {
+            display: flex; gap: 8px; margin-top: 12px;
+            max-width: 90vw; overflow-x: auto;
+            padding: 4px 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,.3) transparent;
+          }
+          .lightbox-thumbs img {
+            width: 60px; height: 45px; object-fit: cover;
+            border-radius: 6px; cursor: pointer;
+            opacity: .4; border: 2px solid transparent;
+            transition: opacity .2s, border-color .2s;
+            flex-shrink: 0;
+          }
+          .lightbox-thumbs img:hover { opacity: .7; }
+          .lightbox-thumbs img.active { opacity: 1; border-color: var(--teal); }
+          @media (max-width: 576px) {
+            .lightbox-nav { width: 40px; height: 40px; font-size: 18px; }
+            .lightbox-nav.lb-prev { left: 8px; }
+            .lightbox-nav.lb-next { right: 8px; }
+            .lightbox-thumbs img { width: 48px; height: 36px; }
           }
 
           .room-info-card {
@@ -216,9 +273,11 @@
           .btn-book i { margin-right: 6px; }
         </style>
 
-        <div class="img-zoom-container mb-3">
+        <div class="img-gallery-main mb-3" onclick="openLightbox(currentLightboxIndex)">
           <img id="mainRoomImage" src="<?php echo $main_img; ?>" class="w-100" style="aspect-ratio:4/3;object-fit:cover;" alt="<?php echo $room_data['name']; ?>">
-          <div id="zoomResult" class="img-zoom-result"></div>
+          <?php if($total_images > 1): ?>
+          <div class="gallery-icon"><i class="bi bi-images"></i> <?php echo $total_images; ?> <?php _e('photos') ?></div>
+          <?php endif; ?>
         </div>
 
         <?php if($total_images > 1): ?>
@@ -251,6 +310,26 @@
           <?php endif; ?>
         </div>
         <?php endif; ?>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox-overlay" id="lightboxOverlay">
+          <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+          <?php if($total_images > 1): ?>
+          <button class="lightbox-nav lb-prev" onclick="navigateLightbox(-1)"><i class="bi bi-chevron-left"></i></button>
+          <button class="lightbox-nav lb-next" onclick="navigateLightbox(1)"><i class="bi bi-chevron-right"></i></button>
+          <?php endif; ?>
+          <div class="lightbox-img-wrapper">
+            <img id="lightboxImg" src="" alt="">
+          </div>
+          <?php if($total_images > 1): ?>
+          <div class="lightbox-counter"><span id="lightboxCounter"></span></div>
+          <div class="lightbox-thumbs" id="lightboxThumbs">
+            <?php foreach($all_images as $idx => $img): ?>
+            <img src="<?php echo ROOMS_IMG_PATH.$img['image']; ?>" data-index="<?php echo $idx; ?>" onclick="goToLightbox(<?php echo $idx; ?>)" alt="">
+            <?php endforeach; ?>
+          </div>
+          <?php endif; ?>
+        </div>
 
         <script>
         var thumbsPerPage = <?php echo $thumbs_per_page; ?>;
@@ -285,40 +364,77 @@
           document.getElementById('mainRoomImage').src = el.dataset.src;
           allThumbs.forEach(function(t) { t.classList.remove('active'); });
           el.classList.add('active');
+          // Update lightbox current index
+          currentLightboxIndex = Array.from(allThumbs).indexOf(el);
         }
 
-        (function(){
-          var img = document.getElementById('mainRoomImage');
-          var result = document.getElementById('zoomResult');
-          var zoomLevel = 2.5;
+        // Lightbox
+        var lightboxImages = <?php echo json_encode(array_map(function($img){ return ROOMS_IMG_PATH.$img['image']; }, $all_images)); ?>;
+        var currentLightboxIndex = 0;
+        var overlay = document.getElementById('lightboxOverlay');
+        var lbImg = document.getElementById('lightboxImg');
+        var lbCounter = document.getElementById('lightboxCounter');
+        var lbThumbs = document.querySelectorAll('#lightboxThumbs img');
 
-          img.addEventListener('mouseenter', function(){
-            if (window.innerWidth <= 991) return;
-            result.style.backgroundImage = 'url(' + img.src + ')';
-            result.style.backgroundSize = (img.offsetWidth * zoomLevel) + 'px ' + (img.offsetHeight * zoomLevel) + 'px';
-            result.style.display = 'block';
-          });
+        function openLightbox(index) {
+          currentLightboxIndex = index;
+          updateLightbox();
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
 
-          img.addEventListener('mousemove', function(e){
-            if (window.innerWidth <= 991) return;
-            var rect = img.getBoundingClientRect();
-            var x = e.clientX - rect.left;
-            var y = e.clientY - rect.top;
-            var px = x / img.offsetWidth;
-            var py = y / img.offsetHeight;
-            var bgW = img.offsetWidth * zoomLevel;
-            var bgH = img.offsetHeight * zoomLevel;
-            var bgX = -(px * bgW - img.offsetWidth / 2);
-            var bgY = -(py * bgH - img.offsetHeight / 2);
-            bgX = Math.min(0, Math.max(bgX, img.offsetWidth - bgW));
-            bgY = Math.min(0, Math.max(bgY, img.offsetHeight - bgH));
-            result.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
-          });
+        function closeLightbox() {
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
 
-          img.addEventListener('mouseleave', function(){
-            result.style.display = 'none';
+        function navigateLightbox(dir) {
+          currentLightboxIndex += dir;
+          if (currentLightboxIndex < 0) currentLightboxIndex = lightboxImages.length - 1;
+          if (currentLightboxIndex >= lightboxImages.length) currentLightboxIndex = 0;
+          updateLightbox();
+        }
+
+        function goToLightbox(index) {
+          currentLightboxIndex = index;
+          updateLightbox();
+        }
+
+        function updateLightbox() {
+          lbImg.src = lightboxImages[currentLightboxIndex];
+          if (lbCounter) lbCounter.textContent = (currentLightboxIndex + 1) + ' / ' + lightboxImages.length;
+          lbThumbs.forEach(function(t, i) {
+            t.classList.toggle('active', i === currentLightboxIndex);
           });
-        })();
+          // Scroll active thumb into view
+          if (lbThumbs[currentLightboxIndex]) {
+            lbThumbs[currentLightboxIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+          // Also update main image & thumb grid
+          if (allThumbs[currentLightboxIndex]) {
+            document.getElementById('mainRoomImage').src = lightboxImages[currentLightboxIndex];
+            allThumbs.forEach(function(t) { t.classList.remove('active'); });
+            allThumbs[currentLightboxIndex].classList.add('active');
+          }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+          if (!overlay.classList.contains('active')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') navigateLightbox(-1);
+          if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        // Close on overlay background click
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) closeLightbox();
+        });
+
+        // Open lightbox from thumb click too
+        allThumbs.forEach(function(t, i) {
+          t.addEventListener('dblclick', function() { openLightbox(i); });
+        });
         </script>
       </div>
 

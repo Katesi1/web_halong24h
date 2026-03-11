@@ -10,7 +10,7 @@
   <title><?php echo $settings_r['site_title'] ?> - <?php _e('find_rooms') ?></title>
   <meta name="description" content="Khám phá Villa biển và Homestay cao cấp tại Hạ Long. Đặt phòng trực tuyến với giá tốt nhất.">
   <meta name="robots" content="index, follow">
-  <link rel="stylesheet" href="css/rooms.css">
+  <link rel="stylesheet" href="css/rooms.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
   <style>

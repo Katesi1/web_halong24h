@@ -416,6 +416,115 @@
     </div>
   </div>
 
+  <!-- Đặt mua / Tư vấn -->
+  <div class="container my-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <h2 class="fw-bold h-font mb-2"><?php _e('spec_order_title') ?></h2>
+        <div class="h-line mb-3" style="height:3px;width:80px;background:#c05e1b;"></div>
+        <p class="text-muted lh-lg mb-4"><?php _e('spec_order_desc') ?></p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6">
+            <div class="d-flex align-items-start">
+              <div class="rounded-circle bg-warning-subtle p-2 me-3 flex-shrink-0">
+                <i class="bi bi-box-seam text-warning fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1"><?php _e('spec_order_pack') ?></h6>
+                <p class="text-muted small mb-0"><?php _e('spec_order_pack_desc') ?></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-start">
+              <div class="rounded-circle bg-success-subtle p-2 me-3 flex-shrink-0">
+                <i class="bi bi-truck text-success fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1"><?php _e('spec_order_ship') ?></h6>
+                <p class="text-muted small mb-0"><?php _e('spec_order_ship_desc') ?></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-start">
+              <div class="rounded-circle bg-info-subtle p-2 me-3 flex-shrink-0">
+                <i class="bi bi-shield-check text-info fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1"><?php _e('spec_order_quality') ?></h6>
+                <p class="text-muted small mb-0"><?php _e('spec_order_quality_desc') ?></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-start">
+              <div class="rounded-circle bg-danger-subtle p-2 me-3 flex-shrink-0">
+                <i class="bi bi-gift text-danger fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1"><?php _e('spec_order_gift') ?></h6>
+                <p class="text-muted small mb-0"><?php _e('spec_order_gift_desc') ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-lg text-white px-4 rounded-pill" style="background:linear-gradient(135deg,#c05e1b,#e07b39);">
+            <i class="bi bi-telephone-fill me-2"></i><?php _e('spec_order_call') ?>
+          </a>
+          <?php if (!empty($contact_r['zalo'])): ?>
+          <a href="<?php echo htmlspecialchars($contact_r['zalo']) ?>" target="_blank" class="btn btn-lg btn-outline-primary px-4 rounded-pill">
+            <i class="bi bi-chat-dots-fill me-2"></i><?php _e('spec_order_zalo') ?>
+          </a>
+          <?php endif; ?>
+          <a href="contact.php" class="btn btn-lg btn-outline-secondary px-4 rounded-pill">
+            <i class="bi bi-envelope-fill me-2"></i><?php _e('spec_order_contact') ?>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-4" style="background:linear-gradient(135deg,#fff8f0,#ffecd8);">
+            <h5 class="fw-bold mb-3"><i class="bi bi-headset me-2 text-warning"></i><?php _e('spec_consult_title') ?></h5>
+            <p class="text-muted small mb-4"><?php _e('spec_consult_desc') ?></p>
+
+            <div class="d-flex align-items-center mb-3 p-3 bg-white rounded-3">
+              <i class="bi bi-telephone-fill text-warning fs-4 me-3"></i>
+              <div>
+                <small class="text-muted d-block"><?php _e('spec_consult_hotline') ?></small>
+                <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="fw-bold text-dark text-decoration-none fs-5">
+                  +<?php echo $contact_r['pn1'] ?>
+                </a>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3 p-3 bg-white rounded-3">
+              <i class="bi bi-envelope-fill text-warning fs-4 me-3"></i>
+              <div>
+                <small class="text-muted d-block">Email</small>
+                <a href="mailto:<?php echo $contact_r['email'] ?>" class="fw-bold text-dark text-decoration-none">
+                  <?php echo $contact_r['email'] ?>
+                </a>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center p-3 bg-white rounded-3">
+              <i class="bi bi-clock-fill text-warning fs-4 me-3"></i>
+              <div>
+                <small class="text-muted d-block"><?php _e('spec_consult_hours') ?></small>
+                <span class="fw-bold"><?php _e('spec_consult_hours_val') ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Mẹo khi mua đặc sản -->
   <div class="container mb-5">
     <div class="tip-box p-4">

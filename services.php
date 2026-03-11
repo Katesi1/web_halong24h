@@ -160,36 +160,6 @@
       <div class="col-lg-4 col-md-6">
         <div class="card service-card h-100 text-center p-4">
           <div class="service-icon-wrap">
-            <i class="bi bi-people-fill"></i>
-          </div>
-          <h5 class="fw-bold mb-2"><?php _e('svc_guide') ?></h5>
-          <p class="text-muted"><?php _e('svc_guide_desc') ?></p>
-          <div class="mt-auto pt-3">
-            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2">
-              <i class="bi bi-translate me-1"></i> <?php _e('svc_guide_time') ?>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card service-card h-100 text-center p-4">
-          <div class="service-icon-wrap">
-            <i class="bi bi-laptop-fill"></i>
-          </div>
-          <h5 class="fw-bold mb-2"><?php _e('svc_meeting') ?></h5>
-          <p class="text-muted"><?php _e('svc_meeting_desc') ?></p>
-          <div class="mt-auto pt-3">
-            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2">
-              <i class="bi bi-headset me-1"></i> <?php _e('svc_meeting_time') ?>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <div class="card service-card h-100 text-center p-4">
-          <div class="service-icon-wrap">
             <i class="bi bi-droplet-fill"></i>
           </div>
           <h5 class="fw-bold mb-2"><?php _e('svc_pool') ?></h5>

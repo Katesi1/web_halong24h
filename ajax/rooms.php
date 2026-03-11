@@ -208,7 +208,7 @@
               <div class='col-md-5'>
                 <div class='room-image-wrapper'>
                   <a href='$url'>
-                    <img src='{$r['room_thumb']}' alt='{$GLOBALS['_LANG']['image_of']} {$rd['name']}' class='img-fluid' loading='lazy' itemprop='image'>
+                    <img src='{$r['room_thumb']}' alt='{$GLOBALS['_LANG']['image_of']} {$rd['name']}' loading='lazy' itemprop='image'>
                   </a>
                   <div class='room-badge-overlay'>
                     {$r['type_badge']}
