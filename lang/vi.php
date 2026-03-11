@@ -166,6 +166,19 @@ return [
     'facilities_subtitle' => 'Trải nghiệm các tiện ích đẳng cấp tại khách sạn của chúng tôi',
 
     // ============================================================
+    // HOMEPAGE - CRUISES SECTION
+    // ============================================================
+    'cruises_title'       => 'Du Thuyền Hạ Long',
+    'cruises_subtitle'    => 'Khám phá vịnh Hạ Long huyền thoại trên những du thuyền sang trọng bậc nhất',
+    'cruise_from_price'   => 'Từ',
+    'cruise_per_person'   => '/người',
+    'cruise_stars'        => 'sao',
+    'cruise_view_detail'  => 'Tìm hiểu thêm',
+    'cruise_highlight'    => 'Điểm nổi bật',
+    'cruise_2d1n'         => '2 ngày 1 đêm',
+    'cruise_rating'       => 'đánh giá',
+
+    // ============================================================
     // HOMEPAGE - TESTIMONIALS SECTION
     // ============================================================
     'reviews_title'       => 'Đánh giá dịch vụ',

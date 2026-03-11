@@ -166,6 +166,19 @@ return [
     'facilities_subtitle' => 'Experience premium facilities at our hotel',
 
     // ============================================================
+    // HOMEPAGE - CRUISES SECTION
+    // ============================================================
+    'cruises_title'       => 'Ha Long Bay Cruises',
+    'cruises_subtitle'    => 'Discover the legendary Ha Long Bay on the finest luxury cruises',
+    'cruise_from_price'   => 'From',
+    'cruise_per_person'   => '/person',
+    'cruise_stars'        => 'stars',
+    'cruise_view_detail'  => 'Learn more',
+    'cruise_highlight'    => 'Highlights',
+    'cruise_2d1n'         => '2 days 1 night',
+    'cruise_rating'       => 'reviews',
+
+    // ============================================================
     // HOMEPAGE - TESTIMONIALS SECTION
     // ============================================================
     'reviews_title'       => 'Guest Reviews',

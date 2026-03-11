@@ -81,6 +81,28 @@
       background: #c05e1b;
       color: white;
     }
+    /* Sticky CTA bar */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1050;
+      background: linear-gradient(135deg, #7b3f00, #c05e1b);
+      padding: 12px 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .sticky-cta.show {
+      transform: translateY(0);
+    }
+    .sticky-cta .btn {
+      font-weight: 600;
+    }
+    @media (max-width: 576px) {
+      .sticky-cta .btn { font-size: 14px; padding: 8px 16px; }
+    }
   </style>
 </head>
 <body class="bg-light">
@@ -92,7 +114,15 @@
     <div class="container text-center">
       <span class="section-badge"><i class="bi bi-egg-fried me-1"></i> <?php _e('specialty_cuisine') ?></span>
       <h1 class="fw-bold display-5 mb-3"><?php _e('halong_specialties') ?></h1>
-      <p class="lead mb-0 opacity-75"><?php _e('specialties_hero_sub') ?></p>
+      <p class="lead mb-4 opacity-75"><?php _e('specialties_hero_sub') ?></p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-lg btn-light text-dark fw-bold px-4 rounded-pill shadow">
+          <i class="bi bi-telephone-fill me-2 text-danger"></i><?php _e('spec_order_call') ?>
+        </a>
+        <a href="#order-section" class="btn btn-lg btn-outline-light fw-bold px-4 rounded-pill">
+          <i class="bi bi-envelope-fill me-2"></i><?php _e('spec_order_contact') ?>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -417,7 +447,7 @@
   </div>
 
   <!-- Đặt mua / Tư vấn -->
-  <div class="container my-5">
+  <div id="order-section" class="container my-5">
     <div class="row g-4 align-items-center">
       <div class="col-lg-7">
         <h2 class="fw-bold h-font mb-2"><?php _e('spec_order_title') ?></h2>
@@ -558,7 +588,40 @@
     </div>
   </div>
 
+  <!-- Sticky CTA Bar -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="container d-flex justify-content-center align-items-center gap-3 flex-wrap">
+      <span class="text-white fw-semibold d-none d-md-inline"><i class="bi bi-fire me-1"></i> <?php _e('spec_order_title') ?></span>
+      <a href="tel:+<?php echo str_replace(' ', '', $contact_r['pn1']) ?>" class="btn btn-light btn-sm rounded-pill px-3 shadow-sm">
+        <i class="bi bi-telephone-fill text-danger me-1"></i><?php _e('spec_order_call') ?>
+      </a>
+      <?php if (!empty($contact_r['zalo'])): ?>
+      <a href="<?php echo htmlspecialchars($contact_r['zalo']) ?>" target="_blank" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">
+        <i class="bi bi-chat-dots-fill me-1"></i>Zalo
+      </a>
+      <?php endif; ?>
+      <a href="#order-section" class="btn btn-outline-light btn-sm rounded-pill px-3">
+        <i class="bi bi-envelope-fill me-1"></i><?php _e('spec_order_contact') ?>
+      </a>
+    </div>
+  </div>
+
   <?php require('inc/footer.php'); ?>
+
+  <script>
+    // Show sticky CTA after scrolling past hero
+    (function() {
+      var sticky = document.getElementById('stickyCta');
+      var hero = document.querySelector('.specialty-hero');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > hero.offsetHeight) {
+          sticky.classList.add('show');
+        } else {
+          sticky.classList.remove('show');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>

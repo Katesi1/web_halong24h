@@ -156,8 +156,8 @@
             $facilities_list[] = $fac_row['name'];
           }
 
-          // Build truncated facilities (max 6 items for ~3 lines)
-          $max_show = 6;
+          // Build truncated facilities (max 5 items)
+          $max_show = 5;
           $total_fac = count($facilities_list);
           $facilities_html = "";
           for ($i = 0; $i < min($max_show, $total_fac); $i++) {
@@ -379,66 +379,236 @@
     </div>
   </section>
 
-  <!-- Our Facilities -->
-  <section class="facilities-section py-5" aria-label="<?php _e('facilities_title') ?>">
+  <!-- Du Thuyền Hạ Long -->
+  <section class="cruises-section py-5" aria-label="<?php _e('cruises_title') ?>">
     <div class="container">
       <header class="section-header text-center mb-5">
-        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('facilities_title') ?></h2>
-        <p class="text-muted mb-0"><?php _e('facilities_subtitle') ?></p>
+        <h2 class="mt-5 pt-4 mb-3 fw-bold h-font"><?php _e('cruises_title') ?></h2>
+        <p class="text-muted mb-0"><?php _e('cruises_subtitle') ?></p>
         <div class="h-line bg-dark mx-auto mt-3"></div>
       </header>
 
-      <div class="row g-4 justify-content-center">
+      <div class="row g-4">
         <?php
-        $res = mysqli_query($con, "SELECT * FROM `facilities` ORDER BY `id` DESC LIMIT 5");
-        $facilities_data_json = [];
+        $cruises = [
+          [
+            'name'        => 'Ambassador Cruise',
+            'class'       => '5',
+            'slug'        => 'ambassador',
+            'image'       => 'images/cruises/ambassador.jpg',
+            'desc_vi'     => 'Du thuyền sang trọng bậc nhất vịnh Hạ Long với 46 cabin, ẩm thực Michelin Star do bếp trưởng John Burton-Race thiết kế. Hành trình qua hang Sửng Sốt, đảo Ti Tốp và làng chài Cửa Vạn.',
+            'desc_en'     => 'The most luxurious cruise on Ha Long Bay with 46 cabins and Michelin Star cuisine by Chef John Burton-Race. Itinerary includes Sung Sot Cave, Ti Top Island and Cua Van fishing village.',
+            'price_from'  => '3.800.000',
+            'highlights'  => ['Ẩm thực Michelin', 'Hang Sửng Sốt', 'Jacuzzi ngoài trời', 'Kayak', 'Câu mực đêm'],
+            'highlights_en' => ['Michelin cuisine', 'Sung Sot Cave', 'Outdoor Jacuzzi', 'Kayaking', 'Night squid fishing'],
+            'rating'      => 4.7,
+            'reviews'     => 2850,
+            'icon'        => 'bi-gem',
+            'color'       => '#C8A951',
+            'url'         => 'https://ambassadorcruise.com/',
+          ],
+          [
+            'name'        => 'Paradise Elegance',
+            'class'       => '5',
+            'slug'        => 'paradise',
+            'image'       => 'images/cruises/paradise.jpg',
+            'desc_vi'     => 'Kiệt tác du thuyền kết hợp phong cách hiện đại và truyền thống Việt Nam. Nổi bật với piano bar, trung tâm spa & wellness và dịch vụ butler riêng cho từng cabin.',
+            'desc_en'     => 'A masterpiece cruise blending modern and traditional Vietnamese style. Features a piano bar, spa & wellness center and private butler service for each cabin.',
+            'price_from'  => '3.600.000',
+            'highlights'  => ['Piano bar', 'Spa & Wellness', 'Butler riêng', 'Tai Chi sáng', 'Làng nổi Cửa Vạn'],
+            'highlights_en' => ['Piano bar', 'Spa & Wellness', 'Private butler', 'Morning Tai Chi', 'Cua Van floating village'],
+            'rating'      => 4.8,
+            'reviews'     => 3500,
+            'icon'        => 'bi-stars',
+            'color'       => '#8B5CF6',
+            'url'         => 'https://paradisecruise.com/',
+          ],
+          [
+            'name'        => 'Stellar of the Seas',
+            'class'       => '6',
+            'slug'        => 'stellar',
+            'image'       => 'images/cruises/stellar.jpg',
+            'desc_vi'     => 'Du thuyền 6 sao đẳng cấp với hồ bơi ngoài trời lớn nhất vịnh Hạ Long (50m²), sân mini golf, hầm rượu vang và phòng xì gà — trải nghiệm nghỉ dưỡng đỉnh cao trên mặt nước.',
+            'desc_en'     => 'A 6-star cruise featuring the largest outdoor pool in Ha Long Bay (50m²), mini golf, wine cellar and cigar lounge — the ultimate luxury experience on water.',
+            'price_from'  => '4.500.000',
+            'highlights'  => ['Hồ bơi 50m²', 'Mini golf', 'Hầm rượu vang', 'Phòng xì gà', 'Spa cao cấp'],
+            'highlights_en' => ['50m² pool', 'Mini golf', 'Wine cellar', 'Cigar lounge', 'Premium spa'],
+            'rating'      => 4.9,
+            'reviews'     => 742,
+            'icon'        => 'bi-trophy',
+            'color'       => '#D4AF37',
+            'url'         => 'https://stellaroftheseas.com/',
+          ],
+          [
+            'name'        => 'Athena Luxury',
+            'class'       => '5',
+            'slug'        => 'athena',
+            'image'       => 'images/cruises/athena.jpg',
+            'desc_vi'     => 'Du thuyền 5 sao thiết kế hiện đại 3 tầng với 21 cabin, sundeck mở cùng open bar và lounge cà phê. Lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và riêng tư.',
+            'desc_en'     => 'A modern 3-deck 5-star cruise with 21 cabins, open sundeck bar and coffee lounge. Perfect for those seeking elegance and privacy.',
+            'price_from'  => '2.800.000',
+            'highlights'  => ['Sundeck open bar', 'Café lounge', 'Sauna & Spa', 'Hang động', 'Kayak'],
+            'highlights_en' => ['Sundeck open bar', 'Café lounge', 'Sauna & Spa', 'Cave tour', 'Kayaking'],
+            'rating'      => 4.6,
+            'reviews'     => 1280,
+            'icon'        => 'bi-building',
+            'color'       => '#2D6A4F',
+            'url'         => 'https://athenacruise.com/',
+          ],
+          [
+            'name'        => 'Dragon Legend',
+            'class'       => '4',
+            'slug'        => 'dragon-legend',
+            'image'       => 'images/cruises/dragon-legend.jpg',
+            'desc_vi'     => 'Du thuyền chuyên khai thác tuyến Vịnh Bái Tử Long yên tĩnh, ít đông đúc. Không gian gần gũi thiên nhiên, dịch vụ thân thiện và phong cảnh hoang sơ chưa bị thương mại hóa.',
+            'desc_en'     => 'A cruise exploring the tranquil Bai Tu Long Bay, less crowded and commercialized. Intimate atmosphere, friendly service and pristine natural scenery.',
+            'price_from'  => '1.800.000',
+            'highlights'  => ['Vịnh Bái Tử Long', 'Hang Thiên Cảnh Sơn', 'Làng chài Vũng Viêng', 'Thuyền tre', 'Nấu ăn'],
+            'highlights_en' => ['Bai Tu Long Bay', 'Thien Canh Son Cave', 'Vung Vieng village', 'Bamboo boat', 'Cooking class'],
+            'rating'      => 4.5,
+            'reviews'     => 980,
+            'icon'        => 'bi-compass',
+            'color'       => '#0D9488',
+            'url'         => 'https://www.indochina-junk.com/dragon-legend-cruise/',
+          ],
+          [
+            'name'        => 'La Regina Legend',
+            'class'       => '5',
+            'slug'        => 'la-regina',
+            'image'       => 'images/cruises/la-regina.jpg',
+            'desc_vi'     => 'Du thuyền 5 sao phong cách cổ điển với tông gỗ ấm áp và chi tiết đồng thau tinh xảo. Sở hữu cabin siêu rộng từ 45m², hành trình khám phá vịnh Lan Hạ tuyệt đẹp.',
+            'desc_en'     => 'A classic-style 5-star cruise with warm wood tones and refined brass details. Features spacious cabins from 45m², exploring the stunning Lan Ha Bay.',
+            'price_from'  => '3.200.000',
+            'highlights'  => ['Cabin 45m²', 'Vịnh Lan Hạ', 'Lớp nấu ăn', 'Jacuzzi & Spa', 'Bãi Ba Trái Đào'],
+            'highlights_en' => ['45m² cabin', 'Lan Ha Bay', 'Cooking class', 'Jacuzzi & Spa', 'Ba Trai Dao beach'],
+            'rating'      => 4.7,
+            'reviews'     => 650,
+            'icon'        => 'bi-brightness-high',
+            'color'       => '#B45309',
+            'url'         => 'https://lareginalegend.com/',
+          ],
+        ];
 
-        while ($row = mysqli_fetch_assoc($res)) {
-          $facilities_data_json[] = [
-            "@type" => "LocationFeatureSpecification",
-            "name" => $row['name'],
-            "value" => true
+        $is_vi = current_lang() === 'vi';
+        $cruises_json_ld = [];
+
+        foreach ($cruises as $index => $cruise) {
+          $desc = $is_vi ? $cruise['desc_vi'] : $cruise['desc_en'];
+          $highlights = $is_vi ? $cruise['highlights'] : $cruise['highlights_en'];
+          $from_text = __('cruise_from_price');
+          $per_person = __('cruise_per_person');
+          $stars_text = __('cruise_stars');
+          $detail_text = __('cruise_view_detail');
+          $highlight_label = __('cruise_highlight');
+          $duration_text = __('cruise_2d1n');
+          $review_text = __('cruise_rating');
+
+          // Star icons
+          $star_icons = '';
+          for ($s = 0; $s < (int)$cruise['class']; $s++) {
+            $star_icons .= '<i class="bi bi-star-fill"></i>';
+          }
+
+          // Rating stars
+          $rating_stars = '';
+          $r = $cruise['rating'];
+          for ($s = 0; $s < 5; $s++) {
+            if ($s < floor($r)) {
+              $rating_stars .= '<i class="bi bi-star-fill text-warning"></i>';
+            } elseif ($s < $r) {
+              $rating_stars .= '<i class="bi bi-star-half text-warning"></i>';
+            } else {
+              $rating_stars .= '<i class="bi bi-star text-warning"></i>';
+            }
+          }
+
+          // Highlights badges
+          $highlights_html = '';
+          foreach ($highlights as $hl) {
+            $highlights_html .= "<span class='cruise-tag'><i class='bi bi-check2 me-1'></i>{$hl}</span>";
+          }
+
+          // JSON-LD
+          $cruises_json_ld[] = [
+            "@type" => "TouristTrip",
+            "name" => $cruise['name'],
+            "description" => $desc,
+            "touristType" => "Cruise",
+            "offers" => [
+              "@type" => "Offer",
+              "price" => str_replace('.', '', $cruise['price_from']),
+              "priceCurrency" => "VND",
+              "availability" => "https://schema.org/InStock"
+            ],
+            "aggregateRating" => [
+              "@type" => "AggregateRating",
+              "ratingValue" => $cruise['rating'],
+              "reviewCount" => $cruise['reviews'],
+              "bestRating" => 5
+            ]
           ];
 
-          echo <<<data
-            <div class="col-lg-2 col-md-4 col-sm-6 facility-item" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
-              <div class="facility-card h-100">
-                <div class="facility-icon-wrapper">
-                  <i class="fa-solid $row[icon]" style="font-size:2.5rem;" aria-hidden="true"></i>
+          $img = $cruise['image'];
+          echo <<<CARD
+            <article class="col-lg-4 col-md-6">
+              <div class="cruise-card h-100" style="--cruise-accent: {$cruise['color']}">
+                <div class="cruise-image-wrapper">
+                  <img src="{$img}" alt="{$cruise['name']} - Du thuyền Hạ Long" class="cruise-image" loading="lazy">
+                  <div class="cruise-image-overlay">
+                    <div class="cruise-class-badge">
+                      <span class="cruise-star-icons">{$star_icons}</span>
+                      <span class="cruise-class-text">{$cruise['class']} {$stars_text}</span>
+                    </div>
+                    <div class="cruise-price-badge">
+                      <span class="cruise-price-label">{$from_text}</span>
+                      <span class="cruise-price-value">{$cruise['price_from']}</span>
+                      <span class="cruise-price-unit">VNĐ{$per_person}</span>
+                    </div>
+                  </div>
                 </div>
-                <h5 class="facility-name mt-3" itemprop="name">$row[name]</h5>
-                <meta itemprop="value" content="true">
+                <div class="cruise-content">
+                  <div class="cruise-title-row">
+                    <h3 class="cruise-name">{$cruise['name']}</h3>
+                    <span class="cruise-duration"><i class="bi bi-clock me-1"></i>{$duration_text}</span>
+                  </div>
+                  <p class="cruise-desc">{$desc}</p>
+                  <div class="cruise-rating-row">
+                    <div class="cruise-rating-stars">{$rating_stars}</div>
+                    <span class="cruise-rating-score">{$cruise['rating']}</span>
+                    <span class="cruise-rating-count">({$cruise['reviews']} {$review_text})</span>
+                  </div>
+                  <div class="cruise-tags">
+                    {$highlights_html}
+                  </div>
+                  <a href="{$cruise['url']}" target="_blank" rel="noopener noreferrer"
+                     class="btn cruise-detail-btn"
+                     aria-label="{$detail_text} {$cruise['name']}">
+                    <i class="bi bi-arrow-right me-2"></i>{$detail_text}
+                  </a>
+                </div>
               </div>
-            </div>
-          data;
+            </article>
+          CARD;
         }
 
-        // Output JSON-LD structured data for facilities
-        if (!empty($facilities_data_json)) {
-          echo '<script type="application/ld+json">';
-          echo json_encode([
-            "@context" => "https://schema.org",
-            "@type" => "ItemList",
-            "name" => $GLOBALS['_LANG']['facilities_title'],
-            "itemListElement" => array_map(function ($facility, $index) {
-              return [
-                "@type" => "ListItem",
-                "position" => $index + 1,
-                "item" => $facility
-              ];
-            }, $facilities_data_json, array_keys($facilities_data_json))
-          ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-          echo '</script>';
-        }
+        // JSON-LD structured data for SEO
+        echo '<script type="application/ld+json">';
+        echo json_encode([
+          "@context" => "https://schema.org",
+          "@type" => "ItemList",
+          "name" => $GLOBALS['_LANG']['cruises_title'],
+          "description" => $GLOBALS['_LANG']['cruises_subtitle'],
+          "numberOfItems" => count($cruises_json_ld),
+          "itemListElement" => array_map(function ($item, $idx) {
+            return [
+              "@type" => "ListItem",
+              "position" => $idx + 1,
+              "item" => $item
+            ];
+          }, $cruises_json_ld, array_keys($cruises_json_ld))
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        echo '</script>';
         ?>
-
-        <div class="col-12 text-center mt-5">
-          <a href="facilities.php"
-            class="btn btn-outline-primary btn-lg facilities-view-more-btn"
-            aria-label="<?php echo __('view_details') . ' ' . __('facilities_title') ?>"
-            <i class="bi bi-arrow-right-circle me-2"></i><?php _e('learn_more') ?>
-          </a>
-        </div>
       </div>
     </div>
   </section>
