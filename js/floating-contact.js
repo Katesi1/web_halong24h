@@ -25,7 +25,7 @@
     // Lấy dữ liệu từ PHP (sẽ được inject vào)
     const contactData = window.floatingContactData || {
       phone: '0325992001',
-      facebook: 'https://www.facebook.com/DaiHocNguyenTatThanh',
+      facebook: 'https://www.facebook.com/nguyen.vu.nam.2001',
       zalo: 'https://zalo.me/0325992001'
     };
 

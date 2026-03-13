@@ -1,9 +1,9 @@
 <?php
 
 $hname = 'localhost';
-$uname = 'root';
-$pass = '';
-$db = 'halong24h_full';
+$uname = 'bakibkawhosting_admin';
+$pass = 'Abcd@1234';
+$db = 'bakibkawhosting_halong24h_full';
 
 $con = mysqli_connect($hname, $uname, $pass, $db);
 
