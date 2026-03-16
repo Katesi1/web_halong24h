@@ -29,6 +29,28 @@
     }
   }
 
+  if(isset($_POST['edit_review']))
+  {
+    $frm_data = filteration($_POST);
+    $sr_no  = (int)$frm_data['sr_no'];
+    $rating = (int)$frm_data['rating'];
+    $review = $frm_data['review'];
+
+    if($rating >= 1 && $rating <= 5 && $sr_no > 0){
+      $q = "UPDATE `rating_review` SET `rating`=?, `review`=? WHERE `sr_no`=?";
+      $values = [$rating, $review, $sr_no];
+      if(update($q,$values,'isi')){
+        alert('success',__('updated_review'));
+      }
+      else{
+        alert('error',__('action_failed'));
+      }
+    }
+    else{
+      alert('error',__('action_failed'));
+    }
+  }
+
   if(isset($_GET['del']))
   {
     $frm_data = filteration($_GET);
@@ -115,6 +137,8 @@
                       if($row['seen']!=1){
                         $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary mb-2'>{$GLOBALS['_LANG']['mark_read']}</a> <br>";
                       }
+                      $review_escaped = htmlspecialchars($row['review'], ENT_QUOTES);
+                      $seen.="<button type='button' class='btn btn-sm rounded-pill btn-warning mb-2' data-bs-toggle='modal' data-bs-target='#editReviewModal' data-id='$row[sr_no]' data-rating='$row[rating]' data-review='$review_escaped'>{$GLOBALS['_LANG']['edit_btn']}</button> <br>";
                       $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'>{$GLOBALS['_LANG']['delete_btn']}</a>";
 
                       echo<<<query
@@ -144,7 +168,51 @@
   </div>
   
 
+  <!-- Edit Review Modal -->
+  <div class="modal fade" id="editReviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="POST">
+          <input type="hidden" name="edit_review" value="1">
+          <input type="hidden" name="sr_no" id="editSrNo">
+          <div class="modal-header">
+            <h5 class="modal-title"><?php _e('edit_review') ?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label"><?php _e('rating') ?></label>
+              <select name="rating" id="editRating" class="form-select" required>
+                <option value="1">1 ★</option>
+                <option value="2">2 ★★</option>
+                <option value="3">3 ★★★</option>
+                <option value="4">4 ★★★★</option>
+                <option value="5">5 ★★★★★</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><?php _e('review') ?></label>
+              <textarea name="review" id="editReviewText" class="form-control" rows="4" maxlength="500" required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn btn-warning"><?php _e('update_btn') ?></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <?php require('inc/scripts.php'); ?>
+  <script>
+    document.getElementById('editReviewModal').addEventListener('show.bs.modal', function(e) {
+      var btn = e.relatedTarget;
+      document.getElementById('editSrNo').value       = btn.dataset.id;
+      document.getElementById('editRating').value     = btn.dataset.rating;
+      document.getElementById('editReviewText').value = btn.dataset.review;
+    });
+  </script>
 
 </body>
 </html>

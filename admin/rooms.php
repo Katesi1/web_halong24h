@@ -74,27 +74,25 @@
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
-                <select name="room_type_id" class="form-select shadow-none" required>
-                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
-                  <?php
-                    $res = selectAll('room_types');
-                    while($opt = mysqli_fetch_assoc($res)){
-                      echo"
-                        <option value='$opt[id]'>$opt[name]</option>
-                      ";
-                    }
-                  ?>
-                </select>
-              </div>
-              <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('property_type') ?></label>
-                <select name="property_type_id" class="form-select shadow-none">
+                <select name="property_type_id" id="add_property_type_id" class="form-select shadow-none">
                   <option value=""><?php _e('select_building') ?></option>
                   <?php
                     $res = selectAll('property_types');
                     while($opt = mysqli_fetch_assoc($res)){
                       echo"<option value='$opt[id]'>$opt[name]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
+                <select name="room_type_id" id="add_room_type_id" class="form-select shadow-none" required>
+                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
+                  <?php
+                    $res = selectAll('room_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]' data-prop='$opt[property_type_id]'>$opt[name]</option>";
                     }
                   ?>
                 </select>
@@ -117,7 +115,11 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('price_per_night') ?></label>
-                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="<?php _e('price_contact') ?>">
+                <div class="input-group">
+                  <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="VD: 500">
+                  <span class="input-group-text">× 1,000 VNĐ</span>
+                </div>
+                <small class="text-muted">Nhập số ngàn. VD: 500 → 500,000 VNĐ</small>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('adults_standard') ?></label>
@@ -211,27 +213,25 @@
                 <input type="text" name="name" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
-                <select name="room_type_id" class="form-select shadow-none" required>
-                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
-                  <?php
-                    $res = selectAll('room_types');
-                    while($opt = mysqli_fetch_assoc($res)){
-                      echo"
-                        <option value='$opt[id]'>$opt[name]</option>
-                      ";
-                    }
-                  ?>
-                </select>
-              </div>
-              <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('property_type') ?></label>
-                <select name="property_type_id" class="form-select shadow-none">
+                <select name="property_type_id" id="edit_property_type_id" class="form-select shadow-none">
                   <option value=""><?php _e('select_building') ?></option>
                   <?php
                     $res = selectAll('property_types');
                     while($opt = mysqli_fetch_assoc($res)){
                       echo"<option value='$opt[id]'>$opt[name]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('room_type') ?></label>
+                <select name="room_type_id" id="edit_room_type_id" class="form-select shadow-none" required>
+                  <option value="" selected disabled><?php _e('select_room_type') ?></option>
+                  <?php
+                    $res = selectAll('room_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]' data-prop='$opt[property_type_id]'>$opt[name]</option>";
                     }
                   ?>
                 </select>
@@ -254,7 +254,11 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('price_per_night') ?></label>
-                <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="<?php _e('price_contact') ?>">
+                <div class="input-group">
+                  <input type="number" min="0" name="price" class="form-control shadow-none" placeholder="VD: 500">
+                  <span class="input-group-text">× 1,000 VNĐ</span>
+                </div>
+                <small class="text-muted">Nhập số ngàn. VD: 500 → 500,000 VNĐ</small>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold"><?php _e('adults_standard') ?></label>

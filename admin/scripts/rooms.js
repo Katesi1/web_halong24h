@@ -1,3 +1,26 @@
+// Filter room_type options based on selected property_type
+function filterRoomTypes(propertySelectId, roomTypeSelectId) {
+  const propSel = document.getElementById(propertySelectId);
+  const rtSel = document.getElementById(roomTypeSelectId);
+  if (!propSel || !rtSel) return;
+
+  propSel.addEventListener('change', function () {
+    const selectedProp = this.value;
+    const currentVal = rtSel.value;
+    Array.from(rtSel.options).forEach(opt => {
+      if (!opt.value) return; // keep placeholder
+      opt.hidden = selectedProp && opt.dataset.prop !== selectedProp;
+    });
+    // Reset if current selection is now hidden
+    if (selectedProp && rtSel.options[rtSel.selectedIndex] && rtSel.options[rtSel.selectedIndex].hidden) {
+      rtSel.value = '';
+    }
+  });
+}
+
+filterRoomTypes('add_property_type_id', 'add_room_type_id');
+filterRoomTypes('edit_property_type_id', 'edit_room_type_id');
+
 let add_room_form = document.getElementById("add_room_form");
 
 add_room_form.addEventListener("submit", function (e) {
@@ -13,7 +36,7 @@ async function add_room() {
   data.append("property_type_id", add_room_form.elements["property_type_id"].value);
   data.append("building_id", add_room_form.elements["building_id"].value);
   data.append("area", add_room_form.elements["area"].value);
-  data.append("price", add_room_form.elements["price"].value);
+  data.append("price", add_room_form.elements["price"].value * 1000);
   data.append("adult", add_room_form.elements["adult"].value);
   data.append("children", add_room_form.elements["children"].value);
   data.append("desc", add_room_form.elements["desc"].value);
@@ -116,7 +139,7 @@ function edit_details(id) {
     edit_room_form.elements["property_type_id"].value = data.roomdata.property_type_id || "";
     edit_room_form.elements["building_id"].value = data.roomdata.building_id || "";
     edit_room_form.elements["area"].value = data.roomdata.area;
-    edit_room_form.elements["price"].value = data.roomdata.price;
+    edit_room_form.elements["price"].value = data.roomdata.price ? data.roomdata.price / 1000 : '';
     edit_room_form.elements["adult"].value = data.roomdata.adult;
     edit_room_form.elements["children"].value = data.roomdata.children;
     edit_room_form.elements["desc"].value = data.roomdata.description;
@@ -129,6 +152,10 @@ function edit_details(id) {
     edit_room_form.elements["facilities"].forEach((el) => {
       el.checked = data.facilities.includes(Number(el.value));
     });
+
+    // Trigger room type filter after loading property type
+    document.getElementById('edit_property_type_id').dispatchEvent(new Event('change'));
+    edit_room_form.elements["room_type_id"].value = data.roomdata.room_type_id;
   };
 
   xhr.send("get_room=" + id);
@@ -148,7 +175,7 @@ function submit_edit_room() {
   data.append("property_type_id", edit_room_form.elements["property_type_id"].value);
   data.append("building_id", edit_room_form.elements["building_id"].value);
   data.append("area", edit_room_form.elements["area"].value);
-  data.append("price", edit_room_form.elements["price"].value);
+  data.append("price", edit_room_form.elements["price"].value * 1000);
   data.append("adult", edit_room_form.elements["adult"].value);
   data.append("children", edit_room_form.elements["children"].value);
   data.append("desc", edit_room_form.elements["desc"].value);
@@ -333,3 +360,18 @@ function remove_room(room_id) {
 window.onload = function () {
   get_all_rooms();
 };
+
+// Default facilities to pre-check when opening Add Room modal
+const DEFAULT_FACILITIES = [
+  'Wi-Fi miễn phí', 'Điều hoà', 'Nước suối miễn phí', 'Đồ dùng phòng tắm',
+  'Máy sấy tóc', 'Bếp từ', 'Tủ lạnh', 'Lò vi sóng', 'Ấm siêu tốc',
+  'Nồi cơm điện', 'Bát đũa & dụng cụ', 'Nồi lẩu', 'Hút mùi', 'Smart TV', 'Khoá thẻ điện tử'
+];
+
+document.getElementById('add-room').addEventListener('show.bs.modal', function () {
+  add_room_form.reset();
+  add_room_form.querySelectorAll('input[name="facilities"]').forEach(function (cb) {
+    const labelText = cb.parentElement.textContent.trim().toLowerCase();
+    cb.checked = DEFAULT_FACILITIES.some(name => name.toLowerCase() === labelText);
+  });
+});

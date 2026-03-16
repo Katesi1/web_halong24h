@@ -142,14 +142,46 @@ function add_room_type() {
   data.append('add_room_type', '');
 
   postForm('ajax/features_facilities.php', data, function (res) {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('room-type-s'));
+    if (res === 'duplicate') {
+      toast.error('Loại căn hộ này đã tồn tại!');
+    } else {
+      var modal = bootstrap.Modal.getInstance(document.getElementById('room-type-s'));
+      modal.hide();
+      if (res == 1) {
+        toast.success('Đã thêm loại căn hộ mới!');
+        form.reset();
+        get_room_types();
+      } else {
+        toast.error('Thêm thất bại. Vui lòng thử lại!');
+      }
+    }
+  });
+}
+
+function edit_room_type(id, btn) {
+  var row = btn.closest('tr');
+  var name = row.querySelector('td:nth-child(2)').textContent.trim();
+  var form = document.getElementById('edit_room_type_form');
+  form.elements['room_type_id'].value = id;
+  form.elements['room_type_name'].value = name;
+  new bootstrap.Modal(document.getElementById('edit-room-type')).show();
+}
+
+function update_room_type() {
+  var form = document.getElementById('edit_room_type_form');
+  var data = new FormData();
+  data.append('id', form.elements['room_type_id'].value);
+  data.append('name', form.elements['room_type_name'].value);
+  data.append('update_room_type', '');
+
+  postForm('ajax/features_facilities.php', data, function (res) {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('edit-room-type'));
     modal.hide();
     if (res == 1) {
-      toast.success('Đã thêm loại căn hộ mới!');
-      form.reset();
+      toast.success('Đã cập nhật loại căn hộ!');
       get_room_types();
     } else {
-      toast.error('Thêm thất bại. Vui lòng thử lại!');
+      toast.error('Cập nhật thất bại!');
     }
   });
 }
@@ -186,14 +218,46 @@ function add_building() {
   data.append('add_building', '');
 
   postForm('ajax/features_facilities.php', data, function (res) {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('building-s'));
+    if (res === 'duplicate') {
+      toast.error('Tòa/Khu này đã tồn tại!');
+    } else {
+      var modal = bootstrap.Modal.getInstance(document.getElementById('building-s'));
+      modal.hide();
+      if (res == 1) {
+        toast.success('Đã thêm tòa/khu mới!');
+        form.reset();
+        get_buildings();
+      } else {
+        toast.error('Thêm thất bại. Vui lòng thử lại!');
+      }
+    }
+  });
+}
+
+function edit_building(id, btn) {
+  var row = btn.closest('tr');
+  var name = row.querySelector('td:nth-child(2)').textContent.trim();
+  var form = document.getElementById('edit_building_form');
+  form.elements['building_id'].value = id;
+  form.elements['building_name'].value = name;
+  new bootstrap.Modal(document.getElementById('edit-building')).show();
+}
+
+function update_building() {
+  var form = document.getElementById('edit_building_form');
+  var data = new FormData();
+  data.append('id', form.elements['building_id'].value);
+  data.append('name', form.elements['building_name'].value);
+  data.append('update_building', '');
+
+  postForm('ajax/features_facilities.php', data, function (res) {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('edit-building'));
     modal.hide();
     if (res == 1) {
-      toast.success('Đã thêm tòa nhà mới!');
-      form.reset();
+      toast.success('Đã cập nhật tòa/khu!');
       get_buildings();
     } else {
-      toast.error('Thêm thất bại. Vui lòng thử lại!');
+      toast.error('Cập nhật thất bại!');
     }
   });
 }
@@ -230,14 +294,46 @@ function add_feature() {
   data.append('add_feature', '');
 
   postForm('ajax/features_facilities.php', data, function (res) {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('feature-s'));
+    if (res === 'duplicate') {
+      toast.error('Không gian này đã tồn tại!');
+    } else {
+      var modal = bootstrap.Modal.getInstance(document.getElementById('feature-s'));
+      modal.hide();
+      if (res == 1) {
+        toast.success('Đã thêm không gian mới!');
+        form.elements['feature_name'].value = '';
+        get_features();
+      } else {
+        toast.error('Thêm thất bại. Vui lòng thử lại!');
+      }
+    }
+  });
+}
+
+function edit_feature(id, btn) {
+  var row = btn.closest('tr');
+  var name = row.querySelector('td:nth-child(2)').textContent.trim();
+  var form = document.getElementById('edit_feature_form');
+  form.elements['feature_id'].value = id;
+  form.elements['feature_name'].value = name;
+  new bootstrap.Modal(document.getElementById('edit-feature')).show();
+}
+
+function update_feature() {
+  var form = document.getElementById('edit_feature_form');
+  var data = new FormData();
+  data.append('id', form.elements['feature_id'].value);
+  data.append('name', form.elements['feature_name'].value);
+  data.append('update_feature', '');
+
+  postForm('ajax/features_facilities.php', data, function (res) {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('edit-feature'));
     modal.hide();
     if (res == 1) {
-      toast.success('Đã thêm không gian mới!');
-      form.elements['feature_name'].value = '';
+      toast.success('Đã cập nhật không gian!');
       get_features();
     } else {
-      toast.error('Thêm thất bại. Vui lòng thử lại!');
+      toast.error('Cập nhật thất bại!');
     }
   });
 }
@@ -276,15 +372,55 @@ function add_facility() {
   data.append('add_facility', '');
 
   postForm('ajax/features_facilities.php', data, function (res) {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('facility-s'));
+    if (res === 'duplicate') {
+      toast.error('Tiện ích này đã tồn tại!');
+    } else {
+      var modal = bootstrap.Modal.getInstance(document.getElementById('facility-s'));
+      modal.hide();
+      if (parseInt(res) > 0) {
+        toast.success('Đã thêm tiện ích mới!');
+        form.reset();
+        document.getElementById('icon-preview').innerHTML = '<i class="fa-solid fa-check" style="width:20px;text-align:center;"></i>';
+        get_facilities();
+      } else {
+        toast.error('Thêm thất bại. Vui lòng thử lại!');
+      }
+    }
+  });
+}
+
+function edit_facility(id, btn) {
+  var row = btn.closest('tr');
+  var form = document.getElementById('edit_facility_form');
+  form.elements['facility_id'].value = id;
+  form.elements['facility_name'].value = row.dataset.name || '';
+  form.elements['facility_icon'].value = row.dataset.icon || '';
+  form.elements['facility_desc'].value = row.dataset.desc || '';
+  var preview = document.getElementById('edit-icon-preview');
+  if (preview) {
+    var ic = row.dataset.icon || 'fa-check';
+    preview.innerHTML = '<i class="fa-solid ' + ic + '" style="width:20px;text-align:center;"></i>';
+  }
+  new bootstrap.Modal(document.getElementById('edit-facility')).show();
+}
+
+function update_facility() {
+  var form = document.getElementById('edit_facility_form');
+  var data = new FormData();
+  data.append('id', form.elements['facility_id'].value);
+  data.append('name', form.elements['facility_name'].value);
+  data.append('icon', form.elements['facility_icon'].value.trim());
+  data.append('desc', form.elements['facility_desc'].value);
+  data.append('update_facility', '');
+
+  postForm('ajax/features_facilities.php', data, function (res) {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('edit-facility'));
     modal.hide();
-    if (parseInt(res) > 0) {
-      toast.success('Đã thêm tiện ích mới!');
-      form.reset();
-      document.getElementById('icon-preview').innerHTML = '<i class="fa-solid fa-check" style="width:20px;text-align:center;"></i>';
+    if (res == 1) {
+      toast.success('Đã cập nhật tiện ích!');
       get_facilities();
     } else {
-      toast.error('Thêm thất bại. Vui lòng thử lại!');
+      toast.error('Cập nhật thất bại!');
     }
   });
 }
@@ -326,6 +462,37 @@ document.getElementById('feature_s_form').addEventListener('submit', function (e
 document.getElementById('facility_s_form').addEventListener('submit', function (e) {
   e.preventDefault();
   add_facility();
+});
+
+document.getElementById('edit_room_type_form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  update_room_type();
+});
+
+document.getElementById('edit_building_form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  update_building();
+});
+
+document.getElementById('edit_feature_form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  update_feature();
+});
+
+document.getElementById('edit_facility_form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  update_facility();
+});
+
+// Live preview icon trong edit modal
+document.getElementById('edit_facility_icon_input').addEventListener('input', function () {
+  var cls = this.value.trim();
+  var preview = document.getElementById('edit-icon-preview');
+  if (preview) {
+    preview.innerHTML = cls
+      ? '<i class="fa-solid ' + cls + '" style="width:20px;text-align:center;"></i>'
+      : '<i class="fa-solid fa-check" style="width:20px;text-align:center;"></i>';
+  }
 });
 
 /* ── Init ── */

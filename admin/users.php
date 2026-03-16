@@ -29,7 +29,7 @@
             </div>
 
             <div class="table-responsive">
-              <table class="table table-hover border text-center" style="min-width: 1300px;">
+              <table class="table table-hover border text-center">
                 <thead>
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
@@ -37,14 +37,10 @@
                     <th scope="col">Email</th>
                     <th scope="col"><?php _e('phone_number') ?></th>
                     <th scope="col"><?php _e('location') ?></th>
-                    <th scope="col"><?php _e('dob') ?></th>
-                    <th scope="col"><?php _e('verified') ?></th>
-                    <th scope="col"><?php _e('status') ?></th>
-                    <th scope="col"><?php _e('date') ?></th>
                     <th scope="col"><?php _e('action') ?></th>
                   </tr>
                 </thead>
-                <tbody id="users-data">                 
+                <tbody id="users-data">
                 </tbody>
               </table>
             </div>
@@ -57,9 +53,26 @@
   </div>
 
 
+  <!-- User Detail Modal -->
+  <div class="modal fade" id="user-detail-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><?php _e('user_details') ?></h5>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="user-detail-body">
+          <div class="text-center py-4"><div class="spinner-border text-secondary"></div></div>
+        </div>
+        <div class="modal-footer" id="user-detail-footer"></div>
+      </div>
+    </div>
+  </div>
+
+
   <?php require('inc/scripts.php'); ?>
 
-  <script src="scripts/users.js"></script>
+  <script src="scripts/users.js?v=3"></script>
 
 </body>
 </html>

@@ -8,19 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const modals = document.querySelectorAll('.modal');
   
   modals.forEach(function(modal) {
-    // Add fade-in animation when modal is shown
-    modal.addEventListener('show.bs.modal', function() {
-      this.style.opacity = '0';
-      setTimeout(() => {
-        this.style.transition = 'opacity 0.3s ease-in-out';
-        this.style.opacity = '1';
-      }, 10);
-    });
-
-    // Add fade-out animation when modal is hidden
-    modal.addEventListener('hide.bs.modal', function() {
-      this.style.transition = 'opacity 0.2s ease-in-out';
-      this.style.opacity = '0';
+    // Reset inline styles after modal is fully hidden so next show works correctly
+    modal.addEventListener('hidden.bs.modal', function() {
+      this.style.opacity = '';
+      this.style.transition = '';
     });
 
     // Enhance modal backdrop

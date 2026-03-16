@@ -65,7 +65,7 @@ adminLogin();
                     <tr>
                       <th style="width:60px;">#</th>
                       <th><?php _e('type_name') ?></th>
-                      <th style="width:100px;"><?php _e('actions') ?></th>
+                      <th style="width:130px;white-space:nowrap;"><?php _e('actions') ?></th>
                     </tr>
                   </thead>
                   <tbody id="room-type-data">
@@ -117,7 +117,7 @@ adminLogin();
                     <tr>
                       <th style="width:60px;">#</th>
                       <th><?php _e('feature_name') ?></th>
-                      <th style="width:100px;"><?php _e('actions') ?></th>
+                      <th style="width:130px;white-space:nowrap;"><?php _e('actions') ?></th>
                     </tr>
                   </thead>
                   <tbody id="features-data">
@@ -169,7 +169,7 @@ adminLogin();
                 <tr>
                   <th style="width:60px;">#</th>
                   <th><?php _e('member_name') ?></th>
-                  <th style="width:100px;"><?php _e('actions') ?></th>
+                  <th style="width:130px;white-space:nowrap;"><?php _e('actions') ?></th>
                 </tr>
               </thead>
               <tbody id="buildings-data">
@@ -221,7 +221,7 @@ adminLogin();
                   <th style="width:90px;">Icon</th>
                   <th><?php _e('facility_name') ?></th>
                   <th><?php _e('description') ?></th>
-                  <th style="width:100px;"><?php _e('actions') ?></th>
+                  <th style="width:130px;white-space:nowrap;"><?php _e('actions') ?></th>
                 </tr>
               </thead>
               <tbody id="facilities-data">
@@ -346,6 +346,113 @@ adminLogin();
     </div>
   </div>
 
+
+  <!-- Edit Room Type modal -->
+  <div class="modal fade" id="edit-room-type" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="edit_room_type_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cập nhật Loại căn hộ</h5>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="room_type_id">
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="room_type_name" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('save_changes') ?></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Building modal -->
+  <div class="modal fade" id="edit-building" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="edit_building_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cập nhật Tòa/Khu</h5>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="building_id">
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="building_name" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('save_changes') ?></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Feature modal -->
+  <div class="modal fade" id="edit-feature" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="edit_feature_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?php _e('update_btn') ?> Không gian</h5>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="feature_id">
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="feature_name" class="form-control" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('save_changes') ?></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Facility modal -->
+  <div class="modal fade" id="edit-facility" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="edit_facility_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?php _e('update_btn') ?> Tiện ích</h5>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="facility_id">
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="facility_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('icon_fa') ?></label>
+              <div class="input-group">
+                <span class="input-group-text" id="edit-icon-preview"><i class="fa-solid fa-check" style="width:20px;text-align:center;"></i></span>
+                <input type="text" name="facility_icon" class="form-control" id="edit_facility_icon_input" placeholder="<?php _e('icon_ph') ?>">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('description') ?></label>
+              <textarea name="facility_desc" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('save_changes') ?></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <?php require('inc/scripts.php'); ?>
   <script src="scripts/features_facilities.js"></script>
