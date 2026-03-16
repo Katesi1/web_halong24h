@@ -12,10 +12,13 @@
     $frm_data = filteration($_POST);
     $flag = 0;
 
-    $q1 = "INSERT INTO `rooms` (`name`, `room_type_id`, `area`, `price`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
-    $values = [$frm_data['name'],$frm_data['room_type_id'],$frm_data['area'],$frm_data['price'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
+    $building_id      = !empty($frm_data['building_id'])      ? (int)$frm_data['building_id']      : null;
+    $property_type_id = !empty($frm_data['property_type_id']) ? (int)$frm_data['property_type_id'] : null;
 
-    if(insert($q1,$values,'siiiiis')){
+    $q1 = "INSERT INTO `rooms` (`name`, `room_type_id`, `area`, `price`, `adult`, `children`, `description`, `building_id`, `property_type_id`) VALUES (?,?,?,?,?,?,?,?,?)";
+    $values = [$frm_data['name'],$frm_data['room_type_id'],$frm_data['area'],$frm_data['price'],$frm_data['adult'],$frm_data['children'],$frm_data['desc'],$building_id,$property_type_id];
+
+    if(insert($q1,$values,'siiiiisii')){
       $flag = 1;
     }
     
@@ -174,8 +177,11 @@
     $frm_data = filteration($_POST);
     $flag = 0;
 
+    $building_id      = !empty($frm_data['building_id'])      ? (int)$frm_data['building_id']      : null;
+    $property_type_id = !empty($frm_data['property_type_id']) ? (int)$frm_data['property_type_id'] : null;
+
     $q1 = "UPDATE `rooms` SET `name`=?,`room_type_id`=?,`area`=?,`price`=?,
-      `adult`=?,`children`=?,`description`=? WHERE `id`=?";
+      `adult`=?,`children`=?,`description`=?,`building_id`=?,`property_type_id`=? WHERE `id`=?";
     $values = [
       $frm_data['name'],
       $frm_data['room_type_id'],
@@ -184,10 +190,12 @@
       $frm_data['adult'],
       $frm_data['children'],
       $frm_data['desc'],
+      $building_id,
+      $property_type_id,
       $frm_data['room_id']
     ];
 
-    if(update($q1,$values,'siiiiisi')){
+    if(update($q1,$values,'siiiiiisii')){
       $flag = 1;
     }
 

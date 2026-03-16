@@ -110,6 +110,7 @@ TableManager.prototype._renderPagination = function () {
 var tmRoomType = new TableManager('room-type-data', 'search-room-type', 'pagination-room-type', 'count-room-type', 5);
 var tmFeature  = new TableManager('features-data',  'search-feature',   'pagination-feature',   'count-feature',   5);
 var tmFacility = new TableManager('facilities-data','search-facility',  'pagination-facility',  'count-facility',  5);
+var tmBuilding = new TableManager('buildings-data', 'search-building',  'pagination-building',  'count-building',  5);
 
 /* ── AJAX helpers ── */
 function post(url, data, onLoad) {
@@ -169,6 +170,50 @@ function rem_room_type(id) {
     }
   };
   xhr.send('rem_room_type=' + id);
+}
+
+/* ── Buildings ── */
+function get_buildings() {
+  post('ajax/features_facilities.php', 'get_buildings', function (html) {
+    tmBuilding.load(html);
+  });
+}
+
+function add_building() {
+  var form = document.getElementById('building_s_form');
+  var data = new FormData();
+  data.append('name', form.elements['building_name'].value);
+  data.append('add_building', '');
+
+  postForm('ajax/features_facilities.php', data, function (res) {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('building-s'));
+    modal.hide();
+    if (res == 1) {
+      toast.success('Đã thêm tòa nhà mới!');
+      form.reset();
+      get_buildings();
+    } else {
+      toast.error('Thêm thất bại. Vui lòng thử lại!');
+    }
+  });
+}
+
+function rem_building(id) {
+  if (!confirm('Xác nhận xoá tòa nhà này?')) return;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'ajax/features_facilities.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+    if (this.responseText == 1) {
+      toast.success('Đã xoá tòa nhà!');
+      get_buildings();
+    } else if (this.responseText === 'room_added') {
+      toast.error('Không thể xoá: tòa nhà này đang được sử dụng!');
+    } else {
+      toast.error('Xoá thất bại. Vui lòng thử lại!');
+    }
+  };
+  xhr.send('rem_building=' + id);
 }
 
 /* ── Features ── */
@@ -263,6 +308,11 @@ function rem_facility(id) {
 }
 
 /* ── Form submit bindings ── */
+document.getElementById('building_s_form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  add_building();
+});
+
 document.getElementById('room_type_s_form').addEventListener('submit', function (e) {
   e.preventDefault();
   add_room_type();
@@ -280,6 +330,7 @@ document.getElementById('facility_s_form').addEventListener('submit', function (
 
 /* ── Init ── */
 window.addEventListener('load', function () {
+  get_buildings();
   get_room_types();
   get_features();
   get_facilities();

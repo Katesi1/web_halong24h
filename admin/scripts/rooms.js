@@ -10,6 +10,8 @@ async function add_room() {
   data.append("add_room", "");
   data.append("name", add_room_form.elements["name"].value);
   data.append("room_type_id", add_room_form.elements["room_type_id"].value);
+  data.append("property_type_id", add_room_form.elements["property_type_id"].value);
+  data.append("building_id", add_room_form.elements["building_id"].value);
   data.append("area", add_room_form.elements["area"].value);
   data.append("price", add_room_form.elements["price"].value);
   data.append("adult", add_room_form.elements["adult"].value);
@@ -111,6 +113,8 @@ function edit_details(id) {
 
     edit_room_form.elements["name"].value = data.roomdata.name;
     edit_room_form.elements["room_type_id"].value = data.roomdata.room_type_id;
+    edit_room_form.elements["property_type_id"].value = data.roomdata.property_type_id || "";
+    edit_room_form.elements["building_id"].value = data.roomdata.building_id || "";
     edit_room_form.elements["area"].value = data.roomdata.area;
     edit_room_form.elements["price"].value = data.roomdata.price;
     edit_room_form.elements["adult"].value = data.roomdata.adult;
@@ -141,6 +145,8 @@ function submit_edit_room() {
   data.append("room_id", edit_room_form.elements["room_id"].value);
   data.append("name", edit_room_form.elements["name"].value);
   data.append("room_type_id", edit_room_form.elements["room_type_id"].value);
+  data.append("property_type_id", edit_room_form.elements["property_type_id"].value);
+  data.append("building_id", edit_room_form.elements["building_id"].value);
   data.append("area", edit_room_form.elements["area"].value);
   data.append("price", edit_room_form.elements["price"].value);
   data.append("adult", edit_room_form.elements["adult"].value);

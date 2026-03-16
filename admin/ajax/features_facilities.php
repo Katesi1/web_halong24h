@@ -53,6 +53,55 @@
     }
   }
 
+  if(isset($_POST['add_building']))
+  {
+    $frm_data = filteration($_POST);
+
+    $q = "INSERT INTO `buildings`(`name`) VALUES (?)";
+    $values = [$frm_data['name']];
+    $res = insert($q,$values,'s');
+    echo $res;
+  }
+
+  if(isset($_POST['get_buildings']))
+  {
+    $res = selectAll('buildings');
+    $i=1;
+
+    while($row = mysqli_fetch_assoc($res))
+    {
+      echo <<<data
+        <tr>
+          <td>$i</td>
+          <td>$row[name]</td>
+          <td>
+            <button type="button" onclick="rem_building($row[id])" class="btn btn-danger btn-sm shadow-none">
+              <i class="bi bi-trash"></i> Xoá
+            </button>
+          </td>
+        </tr>
+      data;
+      $i++;
+    }
+  }
+
+  if(isset($_POST['rem_building']))
+  {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['rem_building']];
+
+    $check_q = select('SELECT * FROM `rooms` WHERE `building_id`=?',[$frm_data['rem_building']],'i');
+
+    if(mysqli_num_rows($check_q)==0){
+      $q = "DELETE FROM `buildings` WHERE `id`=?";
+      $res = delete($q,$values,'i');
+      echo $res;
+    }
+    else{
+      echo 'room_added';
+    }
+  }
+
   if(isset($_POST['add_feature']))
   {
     $frm_data = filteration($_POST);

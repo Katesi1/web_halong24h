@@ -77,12 +77,36 @@
                 <label class="form-label fw-bold"><?php _e('room_type') ?></label>
                 <select name="room_type_id" class="form-select shadow-none" required>
                   <option value="" selected disabled><?php _e('select_room_type') ?></option>
-                  <?php 
+                  <?php
                     $res = selectAll('room_types');
                     while($opt = mysqli_fetch_assoc($res)){
                       echo"
                         <option value='$opt[id]'>$opt[name]</option>
                       ";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('property_type') ?></label>
+                <select name="property_type_id" class="form-select shadow-none">
+                  <option value=""><?php _e('select_building') ?></option>
+                  <?php
+                    $res = selectAll('property_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]'>$opt[name]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('buildings') ?></label>
+                <select name="building_id" class="form-select shadow-none">
+                  <option value=""><?php _e('select_building') ?></option>
+                  <?php
+                    $res = selectAll('buildings');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]'>$opt[name]</option>";
                     }
                   ?>
                 </select>
@@ -196,6 +220,30 @@
                       echo"
                         <option value='$opt[id]'>$opt[name]</option>
                       ";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('property_type') ?></label>
+                <select name="property_type_id" class="form-select shadow-none">
+                  <option value=""><?php _e('select_building') ?></option>
+                  <?php
+                    $res = selectAll('property_types');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]'>$opt[name]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold"><?php _e('buildings') ?></label>
+                <select name="building_id" class="form-select shadow-none">
+                  <option value=""><?php _e('select_building') ?></option>
+                  <?php
+                    $res = selectAll('buildings');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"<option value='$opt[id]'>$opt[name]</option>";
                     }
                   ?>
                 </select>

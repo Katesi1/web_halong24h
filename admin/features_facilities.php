@@ -136,6 +136,56 @@ adminLogin();
         </div>
       </div>
 
+      <!-- ── Tòa nhà / Chung cư ── -->
+      <div class="card mb-4">
+        <div class="card-body p-0">
+
+          <div class="d-flex align-items-center justify-content-between px-4 pt-4 pb-3"
+            style="border-bottom:1px solid rgba(129,140,248,.10);">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-buildings" style="font-size:18px;color:#34d399;"></i>
+              <h5 class="m-0" style="font-weight:700;color:#e2e8f0;"><?php _e('buildings') ?></h5>
+              <span id="count-building" class="badge ms-1"
+                style="background:rgba(52,211,153,.15);color:#34d399;font-size:11px;border:1px solid rgba(52,211,153,.25);">0</span>
+            </div>
+            <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#building-s"
+              style="background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35);color:#34d399;">
+              <i class="bi bi-plus-lg me-1"></i><?php _e('add_btn') ?>
+            </button>
+          </div>
+
+          <div class="px-4 py-3">
+            <div class="position-relative">
+              <i class="bi bi-search position-absolute"
+                style="left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px;pointer-events:none;"></i>
+              <input type="text" id="search-building" class="form-control"
+                style="padding-left:36px;" placeholder="<?php _e('search_building') ?>">
+            </div>
+          </div>
+
+          <div class="table-container" style="border-radius:0;border:none;box-shadow:none;">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th style="width:60px;">#</th>
+                  <th><?php _e('member_name') ?></th>
+                  <th style="width:100px;"><?php _e('actions') ?></th>
+                </tr>
+              </thead>
+              <tbody id="buildings-data">
+                <tr>
+                  <td colspan="3" class="text-center py-5" style="color:#64748b;"><?php _e('loading') ?></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="pagination-building"
+            class="d-flex align-items-center justify-content-between px-4 py-3"
+            style="border-top:1px solid rgba(129,140,248,.08);min-height:52px;"></div>
+        </div>
+      </div>
+
       <!-- ── Tiện ích ── -->
       <div class="card mb-4">
         <div class="card-body p-0">
@@ -204,6 +254,29 @@ adminLogin();
             <div class="mb-3">
               <label class="form-label fw-bold"><?php _e('member_name') ?></label>
               <input type="text" name="roomtype_name" class="form-control" placeholder="<?php _e('property_ph') ?>" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn text-secondary" data-bs-dismiss="modal"><?php _e('cancel_btn') ?></button>
+            <button type="submit" class="btn custom-bg"><?php _e('add_btn') ?></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Building modal -->
+  <div class="modal fade" id="building-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="building_s_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?php _e('add_building') ?></h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label fw-bold"><?php _e('member_name') ?></label>
+              <input type="text" name="building_name" class="form-control" placeholder="<?php _e('building_ph') ?>" required>
             </div>
           </div>
           <div class="modal-footer">
